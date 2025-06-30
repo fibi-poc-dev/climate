@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
 import { EsgMainReport } from '../../models/esg-main-report.model';
-import { EsgReportService } from '../../services/esg-report.service';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-main-report',
@@ -9,7 +9,7 @@ import { EsgReportService } from '../../services/esg-report.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainReportComponent implements OnInit {
-  private readonly esgReportService = inject(EsgReportService);
+  private readonly httpService = inject(HttpService);
   
   protected readonly reports = signal<EsgMainReport[]>([]);
   protected readonly isLoading = signal(false);
@@ -34,7 +34,7 @@ export class MainReportComponent implements OnInit {
   private loadReports(): void {
     this.isLoading.set(true);
     
-    this.esgReportService.getEsgReports().subscribe({
+    this.httpService.getEsgReports().subscribe({
       next: (reports) => {
         this.reports.set(reports);
         this.isLoading.set(false);

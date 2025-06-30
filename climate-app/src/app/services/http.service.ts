@@ -7,7 +7,7 @@ import { EsgMainReport } from '../models/esg-main-report.model';
 @Injectable({
   providedIn: 'root'
 })
-export class EsgReportService {
+export class HttpService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = '/api/esg-reports'; // Future API endpoint
 
