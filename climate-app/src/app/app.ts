@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MainReportComponent } from './components/main-report/main-report.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MainReportComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
