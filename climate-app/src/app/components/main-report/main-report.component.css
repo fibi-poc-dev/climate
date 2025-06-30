@@ -1,6 +1,6 @@
 .main-report-container {
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -37,75 +37,97 @@
   font-size: 1.1rem;
 }
 
-.reports-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
 .reports-list {
-  h2 {
-    color: #333;
-    margin-bottom: 1rem;
-  }
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.report-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.list-header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr 2fr 1.2fr;
+  gap: 1rem;
   padding: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: white;
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-cell {
+  padding: 0.5rem 0;
+  text-align: left;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr 2fr 1.2fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-color: #007bff;
+    background-color: #f8f9fa;
   }
 
-  &.selected {
-    border-color: #007bff;
-    background: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-  }
-
-  .report-basic-info {
-    margin-bottom: 0.5rem;
-
-    h3 {
-      margin: 0 0 0.5rem 0;
-      color: #333;
-      font-size: 1.1rem;
-    }
-
-    p {
-      margin: 0.25rem 0;
-      color: #666;
-      font-size: 0.9rem;
-    }
-  }
-
-  .report-climate-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
-
-    .climate-count {
-      font-size: 0.9rem;
-      color: #666;
-    }
+  &:last-child {
+    border-bottom: none;
   }
 }
 
-.climate-indicator,
+.list-cell {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 0.9rem;
+
+  &.account-name {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  &.rating {
+    font-weight: 600;
+    font-family: monospace;
+    font-size: 1rem;
+  }
+
+  &.classification {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+
+    .classification-code {
+      font-weight: 600;
+      font-family: monospace;
+      color: #495057;
+    }
+
+    .classification-desc {
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+  }
+
+  &.climate-status {
+    justify-content: center;
+  }
+}
+
 .climate-badge {
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
+  text-align: center;
+  min-width: 60px;
 
   &.green {
     background: #d4edda;
@@ -123,82 +145,34 @@
   }
 }
 
-.report-details {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: white;
-  height: fit-content;
-
-  .details-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-    background: #f8f9fa;
-
-    h2 {
-      margin: 0;
-      color: #333;
-      font-size: 1.3rem;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #666;
-      padding: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-
-      &:hover {
-        background: #e9ecef;
-        color: #333;
-      }
-    }
-  }
-
-  .details-content {
-    padding: 1rem;
-
-    .detail-group {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #f0f0f0;
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      label {
-        font-weight: 600;
-        color: #555;
-        flex: 0 0 40%;
-      }
-
-      span {
-        color: #333;
-        text-align: right;
+@media (max-width: 1200px) {
+  .list-header,
+  .list-row {
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1.5fr 1fr;
+    
+    .classification {
+      .classification-desc {
+        display: none;
       }
     }
   }
 }
 
-@media (max-width: 768px) {
-  .reports-content {
-    grid-template-columns: 1fr;
-  }
-
+@media (max-width: 992px) {
   .main-report-container {
     padding: 1rem;
+  }
+
+  .list-header,
+  .list-row {
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    
+    .list-cell:nth-child(3),
+    .list-cell:nth-child(4),
+    .list-cell:nth-child(7) {
+      display: none;
+    }
   }
 
   .report-header {
@@ -208,6 +182,50 @@
 
     h1 {
       font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .list-header,
+  .list-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .list-header {
+    display: none;
+  }
+  
+  .list-row {
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: white;
+    
+    .list-cell {
+      padding: 0.25rem 0;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6c757d;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }
+      
+      &.account-name::before { content: "Account Name:"; }
+      &:nth-child(2)::before { content: "Account:"; }
+      &:nth-child(3)::before { content: "Bank:"; }
+      &:nth-child(4)::before { content: "Branch:"; }
+      &:nth-child(5)::before { content: "Rating:"; }
+      &:nth-child(6)::before { content: "Climate Count:"; }
+      &:nth-child(7)::before { content: "Classification:"; }
+      &:nth-child(8)::before { content: "Climate Status:"; }
     }
   }
 }

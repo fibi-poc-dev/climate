@@ -13,7 +13,6 @@ export class MainReportComponent implements OnInit {
   
   protected readonly reports = signal<EsgMainReport[]>([]);
   protected readonly isLoading = signal(false);
-  protected readonly selectedReport = signal<EsgMainReport | null>(null);
 
   // Computed values
   protected readonly totalReports = computed(() => this.reports().length);
@@ -21,14 +20,6 @@ export class MainReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReports();
-  }
-
-  protected selectReport(report: EsgMainReport): void {
-    this.selectedReport.set(report);
-  }
-
-  protected clearSelection(): void {
-    this.selectedReport.set(null);
   }
 
   private loadReports(): void {
