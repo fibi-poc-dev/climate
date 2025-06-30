@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
 import { EsgMainReport } from '../../models/esg-main-report.model';
+import { EsgReportService } from '../../services/esg-report.service';
 
 @Component({
   selector: 'app-main-report',
@@ -7,7 +8,9 @@ import { EsgMainReport } from '../../models/esg-main-report.model';
   styleUrl: './main-report.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainReportComponent {
+export class MainReportComponent implements OnInit {
+  private readonly esgReportService = inject(EsgReportService);
+  
   protected readonly reports = signal<EsgMainReport[]>([]);
   protected readonly isLoading = signal(false);
   protected readonly selectedReport = signal<EsgMainReport | null>(null);
@@ -16,8 +19,8 @@ export class MainReportComponent {
   protected readonly totalReports = computed(() => this.reports().length);
   protected readonly hasReports = computed(() => this.reports().length > 0);
 
-  constructor() {
-    this.loadMockData();
+  ngOnInit(): void {
+    this.loadReports();
   }
 
   protected selectReport(report: EsgMainReport): void {
@@ -28,33 +31,19 @@ export class MainReportComponent {
     this.selectedReport.set(null);
   }
 
-  private loadMockData(): void {
-    // Mock data for demonstration
-    const mockReports: EsgMainReport[] = [
-      {
-        bank: 1001,
-        branch: 2001,
-        account: 123456789,
-        accountName: 'Green Energy Corp',
-        customerRating: 'AAA',
-        climateCount: 85,
-        branchClassification: 1,
-        branchClassificationDescription: 'Sustainable Banking',
-        climateColor: 'green'
+  private loadReports(): void {
+    this.isLoading.set(true);
+    
+    this.esgReportService.getEsgReports().subscribe({
+      next: (reports) => {
+        this.reports.set(reports);
+        this.isLoading.set(false);
       },
-      {
-        bank: 1002,
-        branch: 2002,
-        account: 987654321,
-        accountName: 'Industrial Manufacturing Ltd',
-        customerRating: 'BBB',
-        climateCount: 45,
-        branchClassification: 2,
-        branchClassificationDescription: 'Traditional Banking',
-        climateColor: 'yellow'
+      error: (error) => {
+        console.error('Error loading ESG reports:', error);
+        this.isLoading.set(false);
+        // Could set an error signal here for user feedback
       }
-    ];
-
-    this.reports.set(mockReports);
+    });
   }
 }
