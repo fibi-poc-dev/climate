@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
-import { EsgMainReport } from '../../models/esg-main-report.model';
+import { EsgMainReportRow, getClimateColorString, getCustomerRatingString } from '../../models/climate-response.model';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -11,12 +11,16 @@ import { HttpService } from '../../services/http.service';
 export class MainReportComponent implements OnInit {
   private readonly httpService = inject(HttpService);
   
-  protected readonly reports = signal<EsgMainReport[]>([]);
+  protected readonly reports = signal<EsgMainReportRow[]>([]);
   protected readonly isLoading = signal(false);
 
   // Computed values
   protected readonly totalReports = computed(() => this.reports().length);
   protected readonly hasReports = computed(() => this.reports().length > 0);
+
+  // Helper functions for template
+  protected getClimateColorString = getClimateColorString;
+  protected getCustomerRatingString = getCustomerRatingString;
 
   ngOnInit(): void {
     this.loadReports();

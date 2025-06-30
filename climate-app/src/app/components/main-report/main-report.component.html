@@ -18,7 +18,7 @@
         <div class="header-cell">Bank</div>
         <div class="header-cell">Branch</div>
         <div class="header-cell">Rating</div>
-        <div class="header-cell">Climate Count</div>
+        <div class="header-cell">Total Credit Risk</div>
         <div class="header-cell">Branch Classification</div>
         <div class="header-cell">Climate Status</div>
       </div>
@@ -29,19 +29,19 @@
           <div class="list-cell">{{ report.account }}</div>
           <div class="list-cell">{{ report.bank }}</div>
           <div class="list-cell">{{ report.branch }}</div>
-          <div class="list-cell rating">{{ report.customerRating }}</div>
-          <div class="list-cell">{{ report.climateCount }}</div>
+          <div class="list-cell rating">{{ getCustomerRatingString(report.customerRating) }}</div>
+          <div class="list-cell">{{ report.totalCreditRisk }}</div>
           <div class="list-cell classification">
-            <span class="classification-code">{{ report.branchClassification }}</span>
-            <span class="classification-desc">{{ report.branchClassificationDescription }}</span>
+            <span class="classification-code">{{ report.branchClassificationCode }}</span>
+            <span class="classification-desc">{{ report.branchClassificatonDescription }}</span>
           </div>
           <div class="list-cell climate-status">
             <span 
               class="climate-badge"
-              [class.green]="report.climateColor === 'green'"
-              [class.yellow]="report.climateColor === 'yellow'"
-              [class.red]="report.climateColor === 'red'">
-              {{ report.climateColor }}
+              [class.green]="getClimateColorString(report.climateColor) === 'green'"
+              [class.yellow]="getClimateColorString(report.climateColor) === 'yellow'"
+              [class.red]="getClimateColorString(report.climateColor) === 'red'">
+              {{ getClimateColorString(report.climateColor) }}
             </span>
           </div>
         </div>
