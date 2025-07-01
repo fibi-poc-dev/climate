@@ -319,24 +319,4 @@ export class HttpService {
     // Future implementation:
     // return this.http.get<ClimateResponse>(this.apiUrl);
   }
-
-  /**
-   * Gets all ESG main report rows from the climate response
-   * Returns the main report data in a simplified format for the list view
-   */
-  getEsgReports(): Observable<EsgMainReportRow[]> {
-    return this.getClimateResponse().pipe(
-      map(response => response.esg.esgMainReport.esgMainReportRows)
-    );
-  }
-
-  /**
-   * Gets a specific ESG report by account number
-   * Returns a single report row or null if not found
-   */
-  getEsgReportByAccount(accountNumber: number): Observable<EsgMainReportRow | null> {
-    return this.getEsgReports().pipe(
-      map(reports => reports.find(r => r.account === accountNumber) || null)
-    );
-  }
 }
