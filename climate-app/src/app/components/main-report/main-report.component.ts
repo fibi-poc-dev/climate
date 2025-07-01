@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
 import { EsgMainReportRow, getClimateColorString, getCustomerRatingString } from '../../models/climate-response.model';
 import { ClimateDataService } from '../../services/climate-data.service';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-main-report',
   templateUrl: './main-report.component.html',
   styleUrl: './main-report.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, DecimalPipe]
 })
 export class MainReportComponent implements OnInit {
   private readonly climateDataService = inject(ClimateDataService);

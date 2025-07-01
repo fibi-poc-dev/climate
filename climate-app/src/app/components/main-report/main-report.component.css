@@ -1,53 +1,426 @@
-.main-report-container {
+/* ESG Dashboard Styles - Modern Financial Interface */
+.esg-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
-.report-header {
+/* Header Section */
+.dashboard-header {
+  background: linear-gradient(135deg, rgba(24, 40, 95, 1) 0%, rgba(24, 40, 95, 0.9) 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(24, 40, 95, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 193, 14, 0.1);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 1rem;
-
-  h1 {
-    color: #333;
-    margin: 0;
-    font-size: 2rem;
-  }
-
-  .report-stats {
-    .total-reports {
-      background: #f5f5f5;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-weight: 600;
-      color: #666;
-    }
-  }
+  position: relative;
+  z-index: 1;
 }
 
-.loading-state,
-.empty-state,
-.error-state {
+.title-section {
+  color: white;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: white;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stats-section {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
   text-align: center;
-  padding: 3rem;
-  color: #666;
+  color: white;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(255, 193, 14, 1);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid rgba(24, 40, 95, 1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: rgba(24, 40, 95, 1);
+  font-weight: 600;
+}
+
+.error-container {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-text {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.empty-container {
+  background: white;
+  border-radius: 16px;
+  padding: 4rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-text {
+  color: #64748b;
   font-size: 1.1rem;
 }
 
-.error-state {
-  color: #d32f2f;
-  background-color: #ffebee;
-  border: 1px solid #ffcdd2;
-  border-radius: 4px;
+/* Data Section */
+.data-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-.reports-list {
+.table-container {
+  overflow: hidden;
+}
+
+.table-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(24, 40, 95, 1);
+  margin: 0;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
   background: white;
   border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #f1f5f9;
+  border-color: rgba(24, 40, 95, 0.3);
+}
+
+.filter-btn.active {
+  background: rgba(24, 40, 95, 1);
+  color: white;
+  border-color: rgba(24, 40, 95, 1);
+}
+
+/* Table Styles */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.data-table thead th {
+  background: rgba(24, 40, 95, 0.05);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  border-bottom: 2px solid rgba(24, 40, 95, 0.1);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.data-table tbody tr[data-climate="red"] {
+  border-left: 4px solid #ef4444;
+}
+
+.data-table tbody tr[data-climate="yellow"] {
+  border-left: 4px solid rgba(255, 193, 14, 1);
+}
+
+.data-table tbody tr[data-climate="green"] {
+  border-left: 4px solid #10b981;
+}
+
+.data-table td {
+  padding: 1.25rem 1rem;
+  vertical-align: top;
+}
+
+/* Cell Specific Styles */
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.account-name {
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  font-size: 0.9rem;
+}
+
+.account-id {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+}
+
+.bank-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bank-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.branch-name {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.rating-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rating-badge[data-rating="1"], 
+.rating-badge[data-rating="2"] {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.rating-badge[data-rating="3"] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.rating-badge[data-rating="4"], 
+.rating-badge[data-rating="5"] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.rating-badge:not([data-rating]) {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.risk-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(24, 40, 95, 1);
+}
+
+.classification-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.classification-code {
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+}
+
+.classification-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.climate-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.climate-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.climate-indicator[data-climate="green"] .climate-dot {
+  background: #10b981;
+}
+
+.climate-indicator[data-climate="yellow"] .climate-dot {
+  background: rgba(255, 193, 14, 1);
+}
+
+.climate-indicator[data-climate="red"] .climate-dot {
+  background: #ef4444;
+}
+
+.climate-indicator:not([data-climate]) .climate-dot {
+  background: #94a3b8;
+}
+
+.climate-text {
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .table-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .esg-dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    padding: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .data-table {
+    font-size: 0.8rem;
+  }
+
+  .data-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }

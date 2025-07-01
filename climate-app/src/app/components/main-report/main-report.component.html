@@ -1,59 +1,101 @@
-<div class="main-report-container">
-  <header class="report-header">
-    <h1>ESG Main Report</h1>
-    <div class="report-stats">
-      <span class="total-reports">Total Reports: {{ totalReports() }}</span>
+<div class="esg-dashboard">
+  <!-- Header Section -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1 class="main-title">ESG Main Report</h1>
+        <p class="subtitle">Environmental, Social & Governance Analysis</p>
+      </div>
+      <div class="stats-section">
+        <div class="stat-card">
+          <div class="stat-number">{{ totalReports() }}</div>
+          <div class="stat-label">Total Reports</div>
+        </div>
+      </div>
     </div>
   </header>
 
   @if (isLoading()) {
-    <div class="loading-state">
-      <p>Loading reports...</p>
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading ESG Reports...</p>
     </div>
   } @else if (error()) {
-    <div class="error-state">
-      <p>Error loading reports: {{ error() }}</p>
+    <div class="error-container">
+      <div class="error-icon">⚠</div>
+      <p class="error-text">{{ error() }}</p>
     </div>
   } @else if (hasReports()) {
-    <div class="reports-list">
-      <div class="list-header">
-        <div class="header-cell">Account Name</div>
-        <div class="header-cell">Account</div>
-        <div class="header-cell">Bank</div>
-        <div class="header-cell">Branch</div>
-        <div class="header-cell">Rating</div>
-        <div class="header-cell">Total Credit Risk</div>
-        <div class="header-cell">Branch Classification</div>
-        <div class="header-cell">Climate Status</div>
-      </div>
-      
-      @for (report of reports(); track report.account) {
-        <div class="list-row">
-          <div class="list-cell account-name">{{ report.accountName }}</div>
-          <div class="list-cell">{{ report.account }}</div>
-          <div class="list-cell">{{ report.bank }}</div>
-          <div class="list-cell">{{ report.branch }}</div>
-          <div class="list-cell rating">{{ getCustomerRatingString(report.customerRating) }}</div>
-          <div class="list-cell">{{ report.totalCreditRisk }}</div>
-          <div class="list-cell classification">
-            <span class="classification-code">{{ report.branchClassificationCode }}</span>
-            <span class="classification-desc">{{ report.branchClassificatonDescription }}</span>
-          </div>
-          <div class="list-cell climate-status">
-            <span 
-              class="climate-badge"
-              [class.green]="getClimateColorString(report.climateColor) === 'green'"
-              [class.yellow]="getClimateColorString(report.climateColor) === 'yellow'"
-              [class.red]="getClimateColorString(report.climateColor) === 'red'">
-              {{ getClimateColorString(report.climateColor) }}
-            </span>
+    <!-- Data Table Section -->
+    <div class="data-section">
+      <div class="table-container">
+        <div class="table-header">
+          <h2 class="section-title">Investment Portfolio Overview</h2>
+          <div class="filter-controls">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">High Risk</button>
+            <button class="filter-btn">Green</button>
           </div>
         </div>
-      }
+        
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th class="col-account">Account Information</th>
+                <th class="col-bank">Bank Details</th>
+                <th class="col-rating">Credit Rating</th>
+                <th class="col-risk">Total Risk</th>
+                <th class="col-classification">Classification</th>
+                <th class="col-climate">Climate Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (report of reports(); track report.account) {
+                <tr class="data-row" [attr.data-climate]="getClimateColorString(report.climateColor)">
+                  <td class="cell-account">
+                    <div class="account-info">
+                      <div class="account-name">{{ report.accountName }}</div>
+                      <div class="account-id">#{{ report.account }}</div>
+                    </div>
+                  </td>
+                  <td class="cell-bank">
+                    <div class="bank-info">
+                      <div class="bank-name">Bank {{ report.bank }}</div>
+                      <div class="branch-name">Branch {{ report.branch }}</div>
+                    </div>
+                  </td>
+                  <td class="cell-rating">
+                    <div class="rating-badge" [attr.data-rating]="report.customerRating">
+                      {{ getCustomerRatingString(report.customerRating) }}
+                    </div>
+                  </td>
+                  <td class="cell-risk">
+                    <div class="risk-value">{{ report.totalCreditRisk | number:'1.0-0' }}</div>
+                  </td>
+                  <td class="cell-classification">
+                    <div class="classification-info">
+                      <div class="classification-code">{{ report.branchClassificationCode }}</div>
+                      <div class="classification-desc">{{ report.branchClassificatonDescription }}</div>
+                    </div>
+                  </td>
+                  <td class="cell-climate">
+                    <div class="climate-indicator" [attr.data-climate]="getClimateColorString(report.climateColor)">
+                      <div class="climate-dot"></div>
+                      <span class="climate-text">{{ getClimateColorString(report.climateColor) }}</span>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   } @else {
-    <div class="empty-state">
-      <p>No reports available</p>
+    <div class="empty-container">
+      <div class="empty-icon">📊</div>
+      <p class="empty-text">No ESG reports available</p>
     </div>
   }
 </div>
