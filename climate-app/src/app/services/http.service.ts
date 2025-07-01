@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { ClimateResponse, EsgMainReportRow, getClimateColorString, getCustomerRatingString } from '../models/climate-response.model';
+import { delay } from 'rxjs/operators';
+import { ClimateResponse } from '../models/climate-response.model';
 
 @Injectable({
   providedIn: 'root'

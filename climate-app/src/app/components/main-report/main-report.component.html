@@ -10,6 +10,10 @@
     <div class="loading-state">
       <p>Loading reports...</p>
     </div>
+  } @else if (error()) {
+    <div class="error-state">
+      <p>Error loading reports: {{ error() }}</p>
+    </div>
   } @else if (hasReports()) {
     <div class="reports-list">
       <div class="list-header">

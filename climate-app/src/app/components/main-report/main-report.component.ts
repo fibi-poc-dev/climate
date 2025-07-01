@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
 import { EsgMainReportRow, getClimateColorString, getCustomerRatingString } from '../../models/climate-response.model';
-import { HttpService } from '../../services/http.service';
+import { ClimateDataService } from '../../services/climate-data.service';
 
 @Component({
   selector: 'app-main-report',
@@ -9,12 +9,17 @@ import { HttpService } from '../../services/http.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainReportComponent implements OnInit {
-  private readonly httpService = inject(HttpService);
+  private readonly climateDataService = inject(ClimateDataService);
   
-  protected readonly reports = signal<EsgMainReportRow[]>([]);
-  protected readonly isLoading = signal(false);
-
-  // Computed values
+  // Use the shared service signals
+  protected readonly isLoading = this.climateDataService.loading;
+  protected readonly error = this.climateDataService.error;
+  
+  // Computed signals for ESG main report data
+  protected readonly reports = computed(() => 
+    this.climateDataService.esgMainReport()?.esgMainReportRows || []
+  );
+  
   protected readonly totalReports = computed(() => this.reports().length);
   protected readonly hasReports = computed(() => this.reports().length > 0);
 
@@ -27,17 +32,10 @@ export class MainReportComponent implements OnInit {
   }
 
   private loadReports(): void {
-    this.isLoading.set(true);
-    
-    this.httpService.getEsgReports().subscribe({
-      next: (reports) => {
-        this.reports.set(reports);
-        this.isLoading.set(false);
-      },
+    // Use the shared service to load data
+    this.climateDataService.loadClimateData().subscribe({
       error: (error) => {
-        console.error('Error loading ESG reports:', error);
-        this.isLoading.set(false);
-        // Could set an error signal here for user feedback
+        console.error('Error loading climate data:', error);
       }
     });
   }

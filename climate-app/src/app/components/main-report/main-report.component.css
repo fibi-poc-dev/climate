@@ -30,11 +30,19 @@
 }
 
 .loading-state,
-.empty-state {
+.empty-state,
+.error-state {
   text-align: center;
   padding: 3rem;
   color: #666;
   font-size: 1.1rem;
+}
+
+.error-state {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
 }
 
 .reports-list {

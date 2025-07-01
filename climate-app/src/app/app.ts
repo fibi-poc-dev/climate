@@ -2,6 +2,7 @@ import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { ClimateDataService } from './services/climate-data.service';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,12 @@ export class App implements OnInit {
   ];
 
   private router = inject(Router);
+  private climateDataService = inject(ClimateDataService);
 
   ngOnInit(): void {
+    // Initialize climate data when the app starts
+    this.initializeData();
+    
     // Set initial active tab based on current route
     this.updateActiveTabFromRoute(this.router.url);
     
@@ -49,5 +54,18 @@ export class App implements OnInit {
     if (matchingTab) {
       this.activeTab.set(matchingTab.id);
     }
+  }
+
+  private initializeData(): void {
+    // Load climate data on app initialization
+    // This ensures data is available for all tabs without additional HTTP calls
+    this.climateDataService.loadClimateData().subscribe({
+      next: () => {
+        console.log('Climate data loaded successfully');
+      },
+      error: (error) => {
+        console.error('Failed to load climate data on app initialization:', error);
+      }
+    });
   }
 }
