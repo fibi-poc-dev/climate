@@ -1,9 +1,16 @@
-/* ESG Dashboard Styles - Modern Financial Interface */
+/* ESG Dashboard Styles - Modern Financial Interface with RTL Support */
 .esg-dashboard {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL specific font stack for Hebrew */
+.esg-dashboard[dir="rtl"] {
+  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
 }
 
 /* Header Section */
@@ -21,12 +28,12 @@
   content: '';
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0; /* Changed from right to left for RTL */
   width: 200px;
   height: 200px;
   background: rgba(255, 193, 14, 0.1);
   border-radius: 50%;
-  transform: translate(50%, -50%);
+  transform: translate(-50%, -50%); /* Changed from translate(50%, -50%) */
 }
 
 .header-content {
@@ -35,10 +42,12 @@
   align-items: center;
   position: relative;
   z-index: 1;
+  direction: rtl;
 }
 
 .title-section {
   color: white;
+  text-align: right;
 }
 
 .main-title {
@@ -46,6 +55,7 @@
   font-weight: 700;
   margin: 0 0 0.5rem 0;
   color: white;
+  text-align: right;
 }
 
 .subtitle {
@@ -53,6 +63,7 @@
   opacity: 0.9;
   margin: 0;
   color: rgba(255, 255, 255, 0.8);
+  text-align: right;
 }
 
 .stats-section {
@@ -153,16 +164,18 @@
   font-size: 1.1rem;
 }
 
-/* Data Section */
+/* Data Section - RTL Updates */
 .data-section {
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  direction: rtl;
 }
 
 .table-container {
   overflow: hidden;
+  direction: rtl;
 }
 
 .table-header {
@@ -172,6 +185,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e2e8f0;
+  direction: rtl;
 }
 
 .section-title {
@@ -179,6 +193,7 @@
   font-weight: 700;
   color: rgba(24, 40, 95, 1);
   margin: 0;
+  text-align: right;
 }
 
 .filter-controls {
@@ -209,21 +224,23 @@
   border-color: rgba(24, 40, 95, 1);
 }
 
-/* Table Styles */
+/* Table Styles - RTL Enhanced */
 .table-wrapper {
   overflow-x: auto;
+  direction: rtl;
 }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  direction: rtl;
 }
 
 .data-table thead th {
   background: rgba(24, 40, 95, 0.05);
   padding: 1rem;
-  text-align: left;
+  text-align: right;
   font-weight: 600;
   color: rgba(24, 40, 95, 1);
   text-transform: uppercase;
@@ -242,55 +259,64 @@
 }
 
 .data-table tbody tr[data-climate="red"] {
-  border-left: 4px solid #ef4444;
+  border-right: 4px solid #ef4444; /* Changed from border-left to border-right for RTL */
 }
 
 .data-table tbody tr[data-climate="yellow"] {
-  border-left: 4px solid rgba(255, 193, 14, 1);
+  border-right: 4px solid rgba(255, 193, 14, 1); /* Changed from border-left to border-right for RTL */
 }
 
 .data-table tbody tr[data-climate="green"] {
-  border-left: 4px solid #10b981;
+  border-right: 4px solid #10b981; /* Changed from border-left to border-right for RTL */
 }
 
 .data-table td {
   padding: 1.25rem 1rem;
   vertical-align: top;
+  text-align: right; /* Added for RTL */
 }
 
-/* Cell Specific Styles */
+/* Cell Specific Styles - RTL Enhanced */
 .account-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  text-align: right;
 }
 
 .account-name {
   font-weight: 600;
   color: rgba(24, 40, 95, 1);
   font-size: 0.9rem;
+  text-align: right;
 }
 
 .account-id {
   font-size: 0.75rem;
   color: #64748b;
   font-family: 'Courier New', monospace;
+  text-align: right;
+  direction: ltr; /* Keep account numbers left-to-right */
+  unicode-bidi: embed;
 }
 
 .bank-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  text-align: right;
 }
 
 .bank-name {
   font-weight: 500;
   color: #1e293b;
+  text-align: right;
 }
 
 .branch-name {
   font-size: 0.75rem;
   color: #64748b;
+  text-align: right;
 }
 
 .rating-badge {
@@ -329,12 +355,16 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: rgba(24, 40, 95, 1);
+  direction: ltr; /* Keep numbers left-to-right even in RTL context */
+  text-align: right;
+  unicode-bidi: embed;
 }
 
 .classification-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  text-align: right;
 }
 
 .classification-code {
@@ -342,18 +372,24 @@
   color: rgba(24, 40, 95, 1);
   font-family: 'Courier New', monospace;
   font-size: 0.8rem;
+  text-align: right;
+  direction: ltr; /* Keep codes left-to-right */
+  unicode-bidi: embed;
 }
 
 .classification-desc {
   font-size: 0.75rem;
   color: #64748b;
   line-height: 1.4;
+  text-align: right;
 }
 
 .climate-indicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: flex-end; /* Right align for RTL */
+  flex-direction: row-reverse; /* Reverse order for RTL - dot comes after text */
 }
 
 .climate-dot {
@@ -385,7 +421,7 @@
   text-transform: capitalize;
 }
 
-/* Responsive Design */
+/* Responsive Design - RTL Enhanced */
 @media (max-width: 1024px) {
   .header-content {
     flex-direction: column;
@@ -396,7 +432,12 @@
   .table-header {
     flex-direction: column;
     gap: 1rem;
-    align-items: flex-start;
+    align-items: flex-end; /* Changed from flex-start to flex-end for RTL */
+  }
+
+  .filter-controls {
+    align-self: stretch;
+    justify-content: center;
   }
 }
 
@@ -421,8 +462,18 @@
     padding: 0.75rem 0.5rem;
   }
 }
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+
+/* RTL Table Styles */
+.data-table[dir="rtl"] {
+  direction: rtl;
+}
+
+.data-table[dir="rtl"] th {
+  text-align: right;
+}
+
+.data-table[dir="rtl"] td {
+  text-align: right;
 }
 
 .list-header {

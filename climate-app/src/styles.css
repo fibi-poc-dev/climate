@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* RTL Global Styles */
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Text alignment utilities */
+.text-right-rtl {
+  text-align: right;
+}
+
+.text-left-rtl {
+  text-align: left;
+}
+
+/* RTL Margin and Padding utilities */
+html[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* RTL Float utilities */
+html[dir="rtl"] .float-left {
+  float: right;
+}
+
+html[dir="rtl"] .float-right {
+  float: left;
+}

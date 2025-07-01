@@ -1,15 +1,15 @@
-<div class="esg-dashboard">
+<div class="esg-dashboard" dir="rtl">
   <!-- Header Section -->
   <header class="dashboard-header">
     <div class="header-content">
       <div class="title-section">
-        <h1 class="main-title">ESG Main Report</h1>
-        <p class="subtitle">Environmental, Social & Governance Analysis</p>
+        <h1 class="main-title">דוח ESG ראשי</h1>
+        <p class="subtitle">ניתוח סביבתי, חברתי וממשל תאגידי</p>
       </div>
       <div class="stats-section">
         <div class="stat-card">
           <div class="stat-number">{{ totalReports() }}</div>
-          <div class="stat-label">Total Reports</div>
+          <div class="stat-label">סך הכל דוחות</div>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
   @if (isLoading()) {
     <div class="loading-container">
       <div class="loading-spinner"></div>
-      <p class="loading-text">Loading ESG Reports...</p>
+      <p class="loading-text">טוען דוחות ESG...</p>
     </div>
   } @else if (error()) {
     <div class="error-container">
@@ -30,11 +30,11 @@
     <div class="data-section">
       <div class="table-container">
         <div class="table-header">
-          <h2 class="section-title">Investment Portfolio Overview</h2>
+          <h2 class="section-title">סקירת תיק השקעות</h2>
           <div class="filter-controls">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">High Risk</button>
-            <button class="filter-btn">Green</button>
+            <button class="filter-btn active">הכל</button>
+            <button class="filter-btn">סיכון גבוה</button>
+            <button class="filter-btn">ירוק</button>
           </div>
         </div>
         
@@ -42,12 +42,12 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th class="col-account">Account Information</th>
-                <th class="col-bank">Bank Details</th>
-                <th class="col-rating">Credit Rating</th>
-                <th class="col-risk">Total Risk</th>
-                <th class="col-classification">Classification</th>
-                <th class="col-climate">Climate Status</th>
+                <th class="col-account">מידע חשבון</th>
+                <th class="col-bank">פרטי בנק</th>
+                <th class="col-rating">דרוג אשראי</th>
+                <th class="col-risk">סיכון כולל</th>
+                <th class="col-classification">סיווג</th>
+                <th class="col-climate">מצב אקלימי</th>
               </tr>
             </thead>
             <tbody>
@@ -56,22 +56,22 @@
                   <td class="cell-account">
                     <div class="account-info">
                       <div class="account-name">{{ report.accountName }}</div>
-                      <div class="account-id">#{{ report.account }}</div>
+                      <div class="account-id">חשבון #{{ report.account }}</div>
                     </div>
                   </td>
                   <td class="cell-bank">
                     <div class="bank-info">
-                      <div class="bank-name">Bank {{ report.bank }}</div>
-                      <div class="branch-name">Branch {{ report.branch }}</div>
+                      <div class="bank-name">בנק {{ report.bank }}</div>
+                      <div class="branch-name">סניף {{ report.branch }}</div>
                     </div>
                   </td>
                   <td class="cell-rating">
                     <div class="rating-badge" [attr.data-rating]="report.customerRating">
-                      {{ getCustomerRatingString(report.customerRating) }}
+                      {{ getHebrewRating(report.customerRating) }}
                     </div>
                   </td>
                   <td class="cell-risk">
-                    <div class="risk-value">{{ report.totalCreditRisk | number:'1.0-0' }}</div>
+                    <div class="risk-value">{{ formatHebrewNumber(report.totalCreditRisk) }}</div>
                   </td>
                   <td class="cell-classification">
                     <div class="classification-info">
@@ -82,7 +82,7 @@
                   <td class="cell-climate">
                     <div class="climate-indicator" [attr.data-climate]="getClimateColorString(report.climateColor)">
                       <div class="climate-dot"></div>
-                      <span class="climate-text">{{ getClimateColorString(report.climateColor) }}</span>
+                      <span class="climate-text">{{ getHebrewClimateStatus(report.climateColor) }}</span>
                     </div>
                   </td>
                 </tr>
@@ -95,7 +95,7 @@
   } @else {
     <div class="empty-container">
       <div class="empty-icon">📊</div>
-      <p class="empty-text">No ESG reports available</p>
+      <p class="empty-text">אין דוחות ESG זמינים</p>
     </div>
   }
 </div>
