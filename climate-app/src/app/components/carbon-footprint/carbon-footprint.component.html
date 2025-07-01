@@ -1,0 +1,256 @@
+<div class="carbon-footprint-container">
+  <header class="section-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1>
+          <svg class="header-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.66 8L12 2.35 6.34 8C4.78 8.58 4 9.94 4 12c0 4.42 3.58 8 8 8s8-3.58 8-8c0-2.06-.78-3.42-2.34-4z"/>
+          </svg>
+          Carbon Footprint Report
+        </h1>
+        <p>Comprehensive climate risk analysis and carbon emission tracking across financial portfolios</p>
+      </div>
+      <div class="status-indicators">
+        @if (climateDataService.loading()) {
+          <div class="status-badge loading">
+            <div class="spinner"></div>
+            Loading
+          </div>
+        } @else if (climateDataService.error()) {
+          <div class="status-badge error">
+            <span class="status-icon">⚠</span>
+            Error
+          </div>
+        } @else if (hasData()) {
+          <div class="status-badge success">
+            <span class="status-icon">✓</span>
+            Data Loaded
+          </div>
+        }
+      </div>
+    </div>
+  </header>
+
+  @if (climateDataService.loading()) {
+    <div class="loading-state">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Loading Carbon Footprint Data</h3>
+        <p>Analyzing climate risk metrics and environmental impact...</p>
+      </div>
+    </div>
+  } @else if (climateDataService.error()) {
+    <div class="error-state">
+      <div class="error-content">
+        <div class="error-icon">⚠</div>
+        <h3>Data Loading Error</h3>
+        <p>{{ climateDataService.error() }}</p>
+        <button class="retry-button" (click)="retryDataLoad()">Retry Loading</button>
+      </div>
+    </div>
+  } @else if (hasData()) {
+    <div class="data-sections">
+      <!-- Overview Cards -->
+      <section class="overview-section">
+        <div class="overview-grid">
+          <div class="overview-card primary">
+            <div class="card-icon">🌍</div>
+            <div class="card-content">
+              <h3>Climate Risk Score</h3>
+              <div class="metric-value">{{ getOverallRiskScore() }}</div>
+              <div class="metric-label">Composite Risk Rating</div>
+            </div>
+          </div>
+          <div class="overview-card secondary">
+            <div class="card-icon">📊</div>
+            <div class="card-content">
+              <h3>Portfolio Exposure</h3>
+              <div class="metric-value">{{ getTotalExposure() | number:'1.0-0' }}</div>
+              <div class="metric-label">Total Credit Risk</div>
+            </div>
+          </div>
+          <div class="overview-card accent">
+            <div class="card-icon">🌱</div>
+            <div class="card-content">
+              <h3>Green vs Black</h3>
+              <div class="metric-value">{{ getGreenBlackRatio() }}%</div>
+              <div class="metric-label">Green Credit Ratio</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Heat Map Analysis -->
+      @if (heatMapData()) {
+        <section class="data-section">
+          <div class="section-header-content">
+            <h2>
+              <span class="section-icon">🗺️</span>
+              Climate Risk Heat Map
+            </h2>
+            <p class="section-description">Sector-based risk analysis and exposure mapping</p>
+          </div>
+          <div class="heat-map-container">
+            @for (row of heatMapData()!.heatMapRows; track row.redCluster) {
+              <div class="heat-map-card" [class]="getHeatMapCardClass(row)">
+                <div class="card-header">
+                  <h4>{{ row.redClusterDescription }}</h4>
+                  <div class="risk-badge" [class]="getRiskLevelClass(row.rootPhysicalRisk, row.rootTransferRisk)">
+                    {{ getRiskLevel(row.rootPhysicalRisk, row.rootTransferRisk) }}
+                  </div>
+                </div>
+                <div class="risk-metrics-grid">
+                  <div class="metric-item physical-risk">
+                    <div class="metric-header">
+                      <span class="metric-icon">🌡️</span>
+                      <span class="metric-title">Physical Risk</span>
+                    </div>
+                    <div class="metric-value-container">
+                      <span class="metric-value">{{ row.rootPhysicalRisk }}</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="(row.rootPhysicalRisk / 5) * 100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="metric-item transition-risk">
+                    <div class="metric-header">
+                      <span class="metric-icon">🔄</span>
+                      <span class="metric-title">Transition Risk</span>
+                    </div>
+                    <div class="metric-value-container">
+                      <span class="metric-value">{{ row.rootTransferRisk }}</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="(row.rootTransferRisk / 100) * 100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="metric-item credit-risk">
+                    <div class="metric-header">
+                      <span class="metric-icon">💰</span>
+                      <span class="metric-title">Credit Risk</span>
+                    </div>
+                    <div class="metric-value-container">
+                      <span class="metric-value">{{ row.totalCreditRisk | number:'1.0-0' }}</span>
+                      <span class="metric-unit">Total Exposure</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      <!-- Risk Analysis Grid -->
+      <div class="analysis-grid">
+        <!-- Black Credit Analysis -->
+        @if (blackCreditData()) {
+          <section class="data-section dark-section">
+            <div class="section-header-content">
+              <h2>
+                <span class="section-icon">⚫</span>
+                High-Risk Sectors
+              </h2>
+              <p class="section-description">Carbon-intensive and environmentally challenging investments</p>
+            </div>
+            <div class="credit-analysis">
+              <div class="summary-card-enhanced black-card">
+                <div class="card-visual">
+                  <div class="risk-indicator high-risk"></div>
+                </div>
+                <div class="card-data">
+                  <div class="primary-metric">
+                    <span class="metric-label">Total Black Credit Risk</span>
+                    <span class="metric-value-large">{{ blackCreditData()!.totalBlackCredit.totalCreditRisk | number:'1.0-0' }}</span>
+                  </div>
+                  <div class="secondary-metrics">
+                    <div class="metric-pair">
+                      <span class="label">Balance Sheet</span>
+                      <span class="value">{{ blackCreditData()!.totalBlackCredit.creditBalanceSheetRisk | number:'1.0-0' }}</span>
+                    </div>
+                    <div class="metric-pair">
+                      <span class="label">Off Balance</span>  
+                      <span class="value">{{ blackCreditData()!.totalBlackCredit.creditOffBalanceSheetRisk | number:'1.0-0' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @for (row of blackCreditData()!.blackCreditRows; track row.blackCluster) {
+                <div class="sector-card black-sector">
+                  <div class="sector-header">
+                    <h4>{{ row.blackClusterDescription }}</h4>
+                    <span class="cluster-id">Cluster {{ row.blackCluster }}</span>
+                  </div>
+                  <div class="sector-metrics">
+                    <div class="metric">
+                      <span class="value">{{ row.totalCreditRisk | number:'1.0-0' }}</span>
+                      <span class="label">Total Risk</span>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- Green Credit Analysis -->
+        @if (greenCreditData()) {
+          <section class="data-section green-section">
+            <div class="section-header-content">
+              <h2>
+                <span class="section-icon">🟢</span>
+                Sustainable Investments
+              </h2>
+              <p class="section-description">Environmentally beneficial and climate-positive investments</p>
+            </div>
+            <div class="credit-analysis">
+              <div class="summary-card-enhanced green-card">
+                <div class="card-visual">
+                  <div class="risk-indicator low-risk"></div>
+                </div>
+                <div class="card-data">
+                  <div class="primary-metric">
+                    <span class="metric-label">Total Green Credit Risk</span>
+                    <span class="metric-value-large">{{ greenCreditData()!.totalGreenCredit.totalCreditRisk | number:'1.0-0' }}</span>
+                  </div>
+                  <div class="secondary-metrics">
+                    <div class="metric-pair">
+                      <span class="label">Balance Sheet</span>
+                      <span class="value">{{ greenCreditData()!.totalGreenCredit.creditBalanceSheetRisk | number:'1.0-0' }}</span>
+                    </div>
+                    <div class="metric-pair">
+                      <span class="label">Off Balance</span>
+                      <span class="value">{{ greenCreditData()!.totalGreenCredit.creditOffBalanceSheetRisk | number:'1.0-0' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @for (row of greenCreditData()!.greenCreditRows; track row.greenCluster) {
+                <div class="sector-card green-sector">
+                  <div class="sector-header">
+                    <h4>{{ row.greenClusterDescription }}</h4>
+                    <span class="cluster-id">Cluster {{ row.greenCluster }}</span>
+                  </div>
+                  <div class="sector-metrics">
+                    <div class="metric">
+                      <span class="value">{{ (row.totalCreditRisk || 0) | number:'1.0-0' }}</span>
+                      <span class="label">Total Risk</span>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <div class="empty-content">
+        <div class="empty-icon">📊</div>
+        <h3>No Carbon Footprint Data Available</h3>
+        <p>Climate risk data is currently unavailable. Please check back later or contact support.</p>
+      </div>
+    </div>
+  }
+</div>
