@@ -1,2 +1,23 @@
 
-<router-outlet></router-outlet>
+<div class="app-container">
+  <header class="app-header">
+    <h1>{{ title }}</h1>
+  </header>
+  
+  <nav class="tab-navigation">
+    <div class="tab-container">
+      @for (tab of tabs; track tab.id) {
+        <button 
+          class="tab-button"
+          [class.active]="activeTab() === tab.id"
+          (click)="selectTab(tab.id)">
+          {{ tab.label }}
+        </button>
+      }
+    </div>
+  </nav>
+  
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
