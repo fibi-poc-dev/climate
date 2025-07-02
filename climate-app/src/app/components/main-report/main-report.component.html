@@ -72,7 +72,7 @@
     @if (hasHeatMapData()) {
       <div class="collapsible-section">
         <div class="collapsible-header" (click)="toggleHeatMapSection()">
-          <h2 class="section-title">מפת חום סיכונים</h2>
+          <h2 class="section-title">מפת חום</h2>
           <button class="toggle-btn" [class.expanded]="isHeatMapExpanded()">
             <span class="toggle-icon">▼</span>
           </button>
@@ -127,21 +127,6 @@
               </tbody>
             </table>
           </div>
-
-          <!-- Total Heat Map Summary -->
-          @if (totalHeatMap(); as total) {
-            <div class="heatmap-summary">
-              <div class="summary-header">
-                <h3 class="summary-title">סיכום מפת חום</h3>
-              </div>
-              <div class="summary-stats">
-                <div class="summary-stat">
-                  <div class="stat-label">סה"כ שיעור סיכון אשראי</div>
-                  <div class="stat-value">{{ formatHebrewNumber(total.totalCreditRiskRate) }}%</div>
-                </div>
-              </div>
-            </div>
-          }
             </div>
           </div>
         </div>
