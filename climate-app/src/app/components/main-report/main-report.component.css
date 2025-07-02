@@ -431,6 +431,43 @@
   text-align: right;
 }
 
+/* Sub-Classification Column Styles */
+.sub-classification-value {
+  font-weight: 500;
+  color: rgba(24, 40, 95, 0.8);
+  font-size: 0.85rem;
+  text-align: right;
+  line-height: 1.4;
+  padding: 0.25rem 0;
+}
+
+.sub-classification-value:empty:before,
+.sub-classification-value:contains("לא זמין") {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Credit Authority Column Styles */
+.credit-authority-value {
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  font-size: 0.9rem;
+  text-align: right;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Handling Unit Column Styles */
+.handling-unit-code {
+  font-weight: 500;
+  color: rgba(24, 40, 95, 0.8);
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  text-align: right;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
 /* Regulated Sector Column Styles */
 .regulated-sector-info {
   display: flex;

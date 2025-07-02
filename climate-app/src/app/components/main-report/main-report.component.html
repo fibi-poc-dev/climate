@@ -23,8 +23,9 @@
                 <th class="col-credit-authority">סמכות אשראי נוכחית</th>
                 <th class="col-handling-unit">יחידה מטפלת</th>
                 <th class="col-regulated-sector">מגזר פיקוחי</th>
-                <th class="col-risk">סיכון כולל</th>
-                <th class="col-classification">סיווג</th>
+                <th class="col-classification">סיווג ענפי</th>
+                <th class="col-sub-classification">תת סיווג ענפי</th>
+                <th class="col-risk">סיכון כולל</th>                
                 <th class="col-climate">מצב אקלימי</th>
               </tr>
             </thead>
@@ -70,15 +71,20 @@
                       }
                     </div>
                   </td>
-                  <td class="cell-risk">
-                    <div class="risk-value">{{ formatHebrewNumber(report.totalCreditRisk) }}</div>
-                  </td>
                   <td class="cell-classification">
                     <div class="classification-info">
                       <div class="classification-code">{{ report.branchClassificationCode }}</div>
                       <div class="classification-desc">{{ report.branchClassificatonDescription }}</div>
                     </div>
                   </td>
+                  <td class="cell-sub-classification">
+                    <div class="sub-classification-value">
+                      {{ report.subClassification || 'לא זמין' }}
+                    </div>
+                  </td>
+                  <td class="cell-risk">
+                    <div class="risk-value">{{ formatHebrewNumber(report.totalCreditRisk) }}</div>
+                  </td>                  
                   <td class="cell-climate">
                     <div class="climate-indicator" [attr.data-climate]="getClimateColorString(report.climateColor)">
                       <div class="climate-dot"></div>
