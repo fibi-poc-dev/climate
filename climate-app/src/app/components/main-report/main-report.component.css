@@ -237,6 +237,42 @@
   direction: rtl;
 }
 
+/* Main data table scrollable container */
+.data-section:not(.heatmap-section) .table-wrapper {
+  max-height: 400px; /* Fixed height to show approximately 8-10 rows */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: auto; /* Keep horizontal scrolling for wide tables */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+/* Custom scrollbar for main data table */
+.data-section:not(.heatmap-section) .table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.data-section:not(.heatmap-section) .table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.data-section:not(.heatmap-section) .table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(24, 40, 95, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.data-section:not(.heatmap-section) .table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 40, 95, 0.5);
+}
+
+/* Firefox scrollbar styling for table */
+.data-section:not(.heatmap-section) .table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24, 40, 95, 0.3) #f1f5f9;
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -245,7 +281,8 @@
 }
 
 .data-table thead th {
-  background: rgba(24, 40, 95, 0.05);
+  background: #ffffff;
+  background-image: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   padding: 1rem;
   text-align: right;
   font-weight: 600;
@@ -254,6 +291,10 @@
   letter-spacing: 0.5px;
   font-size: 0.75rem;
   border-bottom: 2px solid rgba(24, 40, 95, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .data-table tbody tr {
