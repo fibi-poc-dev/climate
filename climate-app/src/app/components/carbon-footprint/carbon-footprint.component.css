@@ -14,9 +14,38 @@
 }
 
 .carbon-footprint-container {
-  min-height: 100vh;
+  height: 100%; /* Take full height of parent */
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   padding: 1.5rem;
+  overflow-y: auto; /* Enable vertical scrolling within the tab */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Custom Scrollbar Styling */
+.carbon-footprint-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.carbon-footprint-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.carbon-footprint-container::-webkit-scrollbar-thumb {
+  background: rgba(24, 40, 95, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.carbon-footprint-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 40, 95, 0.5);
+}
+
+/* Firefox scrollbar styling */
+.carbon-footprint-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24, 40, 95, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 /* Header Styles */

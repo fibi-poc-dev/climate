@@ -1,11 +1,14 @@
 /* ESG Dashboard Styles - Modern Financial Interface with RTL Support */
 .esg-dashboard {
-  min-height: 100vh;
+  height: 100%; /* Take full height of parent */
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
   direction: rtl;
   text-align: right;
+  overflow-y: auto; /* Enable vertical scrolling within the tab */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 /* RTL specific font stack for Hebrew */
@@ -443,7 +446,8 @@
 
 @media (max-width: 768px) {
   .esg-dashboard {
-    padding: 1rem;
+    padding: 1rem; /* Reduced padding for mobile */
+    height: 100%; /* Maintain full height */
   }
 
   .dashboard-header {
@@ -617,4 +621,30 @@
   color: rgba(255, 193, 14, 1);
   direction: ltr;
   unicode-bidi: embed;
+}
+
+/* Custom Scrollbar Styling */
+.esg-dashboard::-webkit-scrollbar {
+  width: 8px;
+}
+
+.esg-dashboard::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.esg-dashboard::-webkit-scrollbar-thumb {
+  background: rgba(24, 40, 95, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.esg-dashboard::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 40, 95, 0.5);
+}
+
+/* Firefox scrollbar styling */
+.esg-dashboard {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24, 40, 95, 0.3) rgba(255, 255, 255, 0.1);
 }
