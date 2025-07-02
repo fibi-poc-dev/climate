@@ -36,6 +36,15 @@ export class MainReportComponent implements OnInit {
   
   protected readonly hasHeatMapData = computed(() => this.heatMapRows().length > 0);
 
+  // Collapsible section state
+  private readonly heatMapExpanded = signal(false); // Minimized by default
+  protected readonly isHeatMapExpanded = computed(() => this.heatMapExpanded());
+
+  // Toggle method for collapsible section
+  protected toggleHeatMapSection(): void {
+    this.heatMapExpanded.update(current => !current);
+  }
+
   // Helper functions for template
   protected getClimateColorString = getClimateColorString;
   protected getCustomerRatingString = getCustomerRatingString;

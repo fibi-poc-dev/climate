@@ -70,13 +70,18 @@
 
     <!-- Heat Map Table Section -->
     @if (hasHeatMapData()) {
-      <div class="data-section heatmap-section">
-        <div class="table-container">
-          <div class="table-header">
-            <h2 class="section-title">מפת חום סיכונים</h2>
-          </div>
-          
-          <div class="table-wrapper">
+      <div class="collapsible-section">
+        <div class="collapsible-header" (click)="toggleHeatMapSection()">
+          <h2 class="section-title">מפת חום סיכונים</h2>
+          <button class="toggle-btn" [class.expanded]="isHeatMapExpanded()">
+            <span class="toggle-icon">▼</span>
+          </button>
+        </div>
+        
+        <div class="collapsible-content" [class.expanded]="isHeatMapExpanded()">
+          <div class="data-section heatmap-section">
+            <div class="table-container">
+              <div class="table-wrapper">
             <table class="data-table heatmap-table">
               <thead>
                 <tr>
@@ -137,6 +142,8 @@
               </div>
             </div>
           }
+            </div>
+          </div>
         </div>
       </div>
     }

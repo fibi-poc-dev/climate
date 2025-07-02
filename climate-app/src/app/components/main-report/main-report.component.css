@@ -627,6 +627,93 @@
   unicode-bidi: embed;
 }
 
+/* Collapsible Section Styles */
+.collapsible-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  direction: rtl;
+  margin-top: 2rem;
+}
+
+.collapsible-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  direction: rtl;
+  text-align: right;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.collapsible-header:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+}
+
+.collapsible-header .section-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(24, 40, 95, 1);
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.toggle-btn:hover {
+  background: rgba(24, 40, 95, 0.1);
+}
+
+.toggle-icon {
+  font-size: 1rem;
+  color: rgba(24, 40, 95, 1);
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.toggle-btn.expanded .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+}
+
+.collapsible-content.expanded {
+  max-height: 2000px; /* Large enough to accommodate content */
+}
+
+.collapsible-content .data-section {
+  margin-top: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border-top: none;
+}
+
+.collapsible-content .heatmap-section {
+  margin-top: 0;
+}
+
 /* Custom Scrollbar Styling */
 .esg-dashboard::-webkit-scrollbar {
   width: 8px;
