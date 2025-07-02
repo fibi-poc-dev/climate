@@ -447,6 +447,25 @@
   font-style: italic;
 }
 
+/* Credit Report Description Column Styles */
+.credit-report-desc-value {
+  font-weight: 500;
+  color: rgba(24, 40, 95, 0.85);
+  font-size: 0.9rem;
+  text-align: right;
+  line-height: 1.4;
+  padding: 0.25rem 0;
+  max-width: 200px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.credit-report-desc-value:empty:before,
+.credit-report-desc-value:contains("לא זמין") {
+  color: #94a3b8;
+  font-style: italic;
+}
+
 /* Credit Authority Column Styles */
 .credit-authority-value {
   font-weight: 600;

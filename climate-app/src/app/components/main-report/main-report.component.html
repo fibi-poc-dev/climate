@@ -25,6 +25,7 @@
                 <th class="col-regulated-sector">מגזר פיקוחי</th>
                 <th class="col-classification">סיווג ענפי</th>
                 <th class="col-sub-classification">תת סיווג ענפי</th>
+                <th class="col-credit-report-desc">תיאור בדוח האשראי</th>
                 <th class="col-risk">סיכון כולל</th>                
                 <th class="col-climate">מצב אקלימי</th>
               </tr>
@@ -80,6 +81,11 @@
                   <td class="cell-sub-classification">
                     <div class="sub-classification-value">
                       {{ report.subClassification || 'לא זמין' }}
+                    </div>
+                  </td>
+                  <td class="cell-credit-report-desc">
+                    <div class="credit-report-desc-value">
+                      {{ report.creditReportDescription || 'לא זמין' }}
                     </div>
                   </td>
                   <td class="cell-risk">
