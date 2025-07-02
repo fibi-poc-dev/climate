@@ -281,8 +281,8 @@
 }
 
 .data-table thead th {
-  background: #ffffff;
-  background-image: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: #f8fafc;
+  border-bottom: 3px solid rgba(24, 40, 95, 0.2);
   padding: 1rem;
   text-align: right;
   font-weight: 600;
@@ -290,11 +290,10 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 0.75rem;
-  border-bottom: 2px solid rgba(24, 40, 95, 0.1);
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(24, 40, 95, 0.15);
 }
 
 .data-table tbody tr {
