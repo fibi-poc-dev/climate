@@ -19,7 +19,8 @@
               <tr>
                 <th class="col-account">מידע חשבון</th>
                 <th class="col-bank">פרטי בנק</th>
-                <th class="col-rating">דרוג אשראי</th>
+                <th class="col-rating">דרוג לקוח</th>
+                <th class="col-credit-authority">סמכות אשראי נוכחית</th>
                 <th class="col-risk">סיכון כולל</th>
                 <th class="col-classification">סיווג</th>
                 <th class="col-climate">מצב אקלימי</th>
@@ -43,6 +44,11 @@
                   <td class="cell-rating">
                     <div class="rating-badge" [attr.data-rating]="report.customerRating">
                       {{ getHebrewRating(report.customerRating) }}
+                    </div>
+                  </td>
+                  <td class="cell-credit-authority">
+                    <div class="credit-authority-value">
+                      {{ formatHebrewNumber(report.currentCreditAuthority) }}
                     </div>
                   </td>
                   <td class="cell-risk">
