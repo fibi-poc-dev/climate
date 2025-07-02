@@ -127,6 +127,21 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Heat Map Summary - Total Credit Risk Only -->
+          @if (totalHeatMap(); as total) {
+            <div class="heatmap-summary">
+              <div class="summary-header">
+                <h3 class="summary-title">סיכום מפת חום</h3>
+              </div>
+              <div class="summary-stats">
+                <div class="summary-stat">
+                  <div class="stat-label">סה"כ שיעור סיכון אשראי</div>
+                  <div class="stat-value primary">{{ formatHebrewNumber(total.totalCreditRiskRate) }}%</div>
+                </div>
+              </div>
+            </div>
+          }
             </div>
           </div>
         </div>
