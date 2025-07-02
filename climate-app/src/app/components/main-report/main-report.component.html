@@ -1,20 +1,4 @@
 <div class="esg-dashboard" dir="rtl">
-  <!-- Header Section -->
-  <header class="dashboard-header">
-    <div class="header-content">
-      <div class="title-section">
-        <h1 class="main-title">דוח ESG ראשי</h1>
-        <p class="subtitle">ניתוח סביבתי, חברתי וממשל תאגידי</p>
-      </div>
-      <div class="stats-section">
-        <div class="stat-card">
-          <div class="stat-number">{{ totalReports() }}</div>
-          <div class="stat-label">סך הכל דוחות</div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   @if (isLoading()) {
     <div class="loading-container">
       <div class="loading-spinner"></div>
@@ -29,15 +13,6 @@
     <!-- Data Table Section -->
     <div class="data-section">
       <div class="table-container">
-        <div class="table-header">
-          <h2 class="section-title">סקירת תיק השקעות</h2>
-          <div class="filter-controls">
-            <button class="filter-btn active">הכל</button>
-            <button class="filter-btn">סיכון גבוה</button>
-            <button class="filter-btn">ירוק</button>
-          </div>
-        </div>
-        
         <div class="table-wrapper">
           <table class="data-table">
             <thead>

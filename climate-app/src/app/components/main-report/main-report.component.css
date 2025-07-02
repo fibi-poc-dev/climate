@@ -185,10 +185,11 @@
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   padding: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Changed to flex-end for RTL */
   align-items: center;
   border-bottom: 1px solid #e2e8f0;
   direction: rtl;
+  text-align: right;
 }
 
 .section-title {
@@ -197,6 +198,9 @@
   color: rgba(24, 40, 95, 1);
   margin: 0;
   text-align: right;
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
 }
 
 .filter-controls {
