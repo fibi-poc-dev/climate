@@ -25,6 +25,17 @@ export class MainReportComponent implements OnInit {
   protected readonly totalReports = computed(() => this.reports().length);
   protected readonly hasReports = computed(() => this.reports().length > 0);
 
+  // Heat Map data
+  protected readonly heatMapRows = computed(() => 
+    this.climateDataService.heatMapData()?.heatMapRows || []
+  );
+  
+  protected readonly totalHeatMap = computed(() => 
+    this.climateDataService.heatMapData()?.totalHeatMap
+  );
+  
+  protected readonly hasHeatMapData = computed(() => this.heatMapRows().length > 0);
+
   // Helper functions for template
   protected getClimateColorString = getClimateColorString;
   protected getCustomerRatingString = getCustomerRatingString;

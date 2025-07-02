@@ -92,6 +92,80 @@
         </div>
       </div>
     </div>
+
+    <!-- Heat Map Table Section -->
+    @if (hasHeatMapData()) {
+      <div class="data-section heatmap-section">
+        <div class="table-container">
+          <div class="table-header">
+            <h2 class="section-title">מפת חום סיכונים</h2>
+          </div>
+          
+          <div class="table-wrapper">
+            <table class="data-table heatmap-table">
+              <thead>
+                <tr>
+                  <th class="col-cluster">קבוצה אדומה</th>
+                  <th class="col-description">תיאור</th>
+                  <th class="col-physical-risk">סיכון פיזי שורשי</th>
+                  <th class="col-transfer-risk">סיכון מעבר שורשי</th>
+                  <th class="col-risk-weight">משקל רמת סיכון</th>
+                  <th class="col-residual-risk">ממוצע סיכון שיורי</th>
+                  <th class="col-total-risk">סיכון אשראי כולל</th>
+                  <th class="col-risk-rate">שיעור סיכון אשראי</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (heatMapRow of heatMapRows(); track heatMapRow.redCluster) {
+                  <tr class="data-row heatmap-row">
+                    <td class="cell-cluster">
+                      <div class="cluster-badge">{{ heatMapRow.redCluster }}</div>
+                    </td>
+                    <td class="cell-description">
+                      <div class="description-text">{{ heatMapRow.redClusterDescription }}</div>
+                    </td>
+                    <td class="cell-physical-risk">
+                      <div class="risk-value">{{ formatHebrewNumber(heatMapRow.rootPhysicalRisk) }}</div>
+                    </td>
+                    <td class="cell-transfer-risk">
+                      <div class="risk-value">{{ formatHebrewNumber(heatMapRow.rootTransferRisk) }}</div>
+                    </td>
+                    <td class="cell-risk-weight">
+                      <div class="risk-value">{{ formatHebrewNumber(heatMapRow.rootRiskLevelWeight) }}</div>
+                    </td>
+                    <td class="cell-residual-risk">
+                      <div class="risk-value">{{ formatHebrewNumber(heatMapRow.residualRiskAverage) }}</div>
+                    </td>
+                    <td class="cell-total-risk">
+                      <div class="risk-value primary">{{ formatHebrewNumber(heatMapRow.totalCreditRisk) }}</div>
+                    </td>
+                    <td class="cell-risk-rate">
+                      <div class="risk-percentage">{{ formatHebrewNumber(heatMapRow.totalCreditRiskRate) }}%</div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total Heat Map Summary -->
+          @if (totalHeatMap(); as total) {
+            <div class="heatmap-summary">
+              <div class="summary-header">
+                <h3 class="summary-title">סיכום מפת חום</h3>
+              </div>
+              <div class="summary-stats">
+                <div class="summary-stat">
+                  <div class="stat-label">סה"כ שיעור סיכון אשראי</div>
+                  <div class="stat-value">{{ formatHebrewNumber(total.totalCreditRiskRate) }}%</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
   } @else {
     <div class="empty-container">
       <div class="empty-icon">📊</div>

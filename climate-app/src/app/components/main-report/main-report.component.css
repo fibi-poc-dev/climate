@@ -461,203 +461,160 @@
   .data-table td {
     padding: 0.75rem 0.5rem;
   }
-}
 
-/* RTL Table Styles */
-.data-table[dir="rtl"] {
-  direction: rtl;
-}
-
-.data-table[dir="rtl"] th {
-  text-align: right;
-}
-
-.data-table[dir="rtl"] td {
-  text-align: right;
-}
-
-.list-header {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr 2fr 1.2fr;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
-  font-weight: 600;
-  color: #495057;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.header-cell {
-  padding: 0.5rem 0;
-  text-align: left;
-}
-
-.list-row {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr 2fr 1.2fr;
-  gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #f8f9fa;
+  /* Heat Map Mobile */
+  .heatmap-table {
+    font-size: 0.75rem;
   }
 
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.list-cell {
-  padding: 0.5rem 0;
-  display: flex;
-  align-items: center;
-  color: #333;
-  font-size: 0.9rem;
-
-  &.account-name {
-    font-weight: 600;
-    color: #2c3e50;
+  .cluster-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    min-width: 50px;
   }
 
-  &.rating {
-    font-weight: 600;
-    font-family: monospace;
+  .description-text {
+    font-size: 0.75rem;
+    max-width: 150px;
+  }
+
+  .risk-value {
+    font-size: 0.85rem;
+  }
+
+  .risk-value.primary {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  .heatmap-summary {
+    padding: 1rem;
+  }
+
+  .summary-title {
     font-size: 1rem;
   }
 
-  &.classification {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-
-    .classification-code {
-      font-weight: 600;
-      font-family: monospace;
-      color: #495057;
-    }
-
-    .classification-desc {
-      font-size: 0.8rem;
-      color: #6c757d;
-    }
-  }
-
-  &.climate-status {
-    justify-content: center;
+  .stat-value {
+    font-size: 1.2rem;
   }
 }
 
-.climate-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
+/* Heat Map Table Specific Styles */
+.heatmap-section {
+  margin-top: 2rem;
+}
+
+.heatmap-table {
+  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+}
+
+.heatmap-table thead th {
+  background: rgba(255, 193, 14, 0.1);
+  color: rgba(24, 40, 95, 1);
+  border-bottom: 2px solid rgba(255, 193, 14, 0.3);
+}
+
+.heatmap-row {
+  transition: all 0.3s ease;
+}
+
+.heatmap-row:hover {
+  background: rgba(255, 193, 14, 0.05);
+  transform: translateX(-2px);
+}
+
+.cluster-badge {
+  background: rgba(255, 193, 14, 1);
+  color: rgba(24, 40, 95, 1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
   text-align: center;
   min-width: 60px;
-
-  &.green {
-    background: #d4edda;
-    color: #155724;
-  }
-
-  &.yellow {
-    background: #fff3cd;
-    color: #856404;
-  }
-
-  &.red {
-    background: #f8d7da;
-    color: #721c24;
-  }
+  display: inline-block;
 }
 
-@media (max-width: 1200px) {
-  .list-header,
-  .list-row {
-    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1.5fr 1fr;
-    
-    .classification {
-      .classification-desc {
-        display: none;
-      }
-    }
-  }
+.description-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #1e293b;
+  text-align: right;
+  max-width: 200px;
 }
 
-@media (max-width: 992px) {
-  .main-report-container {
-    padding: 1rem;
-  }
-
-  .list-header,
-  .list-row {
-    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
-    gap: 0.5rem;
-    
-    .list-cell:nth-child(3),
-    .list-cell:nth-child(4),
-    .list-cell:nth-child(7) {
-      display: none;
-    }
-  }
-
-  .report-header {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
+.risk-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  text-align: right;
+  direction: ltr;
+  unicode-bidi: embed;
 }
 
-@media (max-width: 768px) {
-  .list-header,
-  .list-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  
-  .list-header {
-    display: none;
-  }
-  
-  .list-row {
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    background: white;
-    
-    .list-cell {
-      padding: 0.25rem 0;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1rem;
-      
-      &::before {
-        content: attr(data-label);
-        font-weight: 600;
-        color: #6c757d;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-      }
-      
-      &.account-name::before { content: "Account Name:"; }
-      &:nth-child(2)::before { content: "Account:"; }
-      &:nth-child(3)::before { content: "Bank:"; }
-      &:nth-child(4)::before { content: "Branch:"; }
-      &:nth-child(5)::before { content: "Rating:"; }
-      &:nth-child(6)::before { content: "Climate Count:"; }
-      &:nth-child(7)::before { content: "Classification:"; }
-      &:nth-child(8)::before { content: "Climate Status:"; }
-    }
-  }
+.risk-value.primary {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 193, 14, 1);
+  background: rgba(255, 193, 14, 0.1);
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.risk-percentage {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  text-align: right;
+  direction: ltr;
+  unicode-bidi: embed;
+  background: rgba(24, 40, 95, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
+
+/* Heat Map Summary */
+.heatmap-summary {
+  background: linear-gradient(135deg, rgba(24, 40, 95, 0.05) 0%, rgba(255, 193, 14, 0.05) 100%);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 193, 14, 0.2);
+}
+
+.summary-header {
+  margin-bottom: 1rem;
+}
+
+.summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgba(24, 40, 95, 1);
+  margin: 0;
+  text-align: right;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.summary-stat {
+  text-align: right;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 193, 14, 1);
+  direction: ltr;
+  unicode-bidi: embed;
 }
