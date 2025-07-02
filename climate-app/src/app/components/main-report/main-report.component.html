@@ -21,6 +21,7 @@
                 <th class="col-bank">פרטי בנק</th>
                 <th class="col-rating">דרוג לקוח</th>
                 <th class="col-credit-authority">סמכות אשראי נוכחית</th>
+                <th class="col-handling-unit">יחידה מטפלת</th>
                 <th class="col-risk">סיכון כולל</th>
                 <th class="col-classification">סיווג</th>
                 <th class="col-climate">מצב אקלימי</th>
@@ -49,6 +50,11 @@
                   <td class="cell-credit-authority">
                     <div class="credit-authority-value">
                       {{ formatHebrewNumber(report.currentCreditAuthority) }}
+                    </div>
+                  </td>
+                  <td class="cell-handling-unit">
+                    <div class="handling-unit-code">
+                      {{ report.handlingUnitCode || 'לא זמין' }}
                     </div>
                   </td>
                   <td class="cell-risk">
