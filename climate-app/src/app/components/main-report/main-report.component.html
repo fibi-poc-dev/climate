@@ -133,6 +133,82 @@
       </div>
     }
 
+    <!-- Green Credit Table Section -->
+    @if (hasGreenCreditData()) {
+      <div class="collapsible-section">
+        <div class="collapsible-header" (click)="toggleGreenCreditSection()">
+          <h2 class="section-title">אשראי ירוק</h2>
+          <button class="toggle-btn" [class.expanded]="isGreenCreditExpanded()">
+            <span class="toggle-icon">▼</span>
+          </button>
+        </div>
+        
+        <div class="collapsible-content" [class.expanded]="isGreenCreditExpanded()">
+          <div class="data-section greencredit-section">
+            <div class="table-container">
+              <div class="table-wrapper">
+                <table class="data-table greencredit-table">
+                  <thead>
+                    <tr>
+                      <th class="col-green-cluster">קבוצה ירוקה</th>
+                      <th class="col-description">תיאור</th>
+                      <th class="col-balance-risk">סיכון אשראי מאזני</th>
+                      <th class="col-off-balance-risk">סיכון אשראי חוץ מאזני</th>
+                      <th class="col-total-risk">סיכון אשראי כולל</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (greenCreditRow of greenCreditRows(); track greenCreditRow.greenCluster) {
+                      <tr class="data-row greencredit-row">
+                        <td class="cell-green-cluster">
+                          <div class="green-cluster-badge">{{ greenCreditRow.greenCluster }}</div>
+                        </td>
+                        <td class="cell-description">
+                          <div class="description-text">{{ greenCreditRow.greenClusterDescription }}</div>
+                        </td>
+                        <td class="cell-balance-risk">
+                          <div class="risk-value">{{ formatHebrewNumber(greenCreditRow.creditBalanceSheetRisk) }}</div>
+                        </td>
+                        <td class="cell-off-balance-risk">
+                          <div class="risk-value">{{ formatHebrewNumber(greenCreditRow.creditOffBalanceSheetRisk) }}</div>
+                        </td>
+                        <td class="cell-total-risk">
+                          <div class="risk-value primary">{{ formatHebrewNumber(greenCreditRow.totalCreditRisk) }}</div>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Total Green Credit Summary -->
+              @if (totalGreenCredit(); as total) {
+                <div class="greencredit-summary">
+                  <div class="summary-header">
+                    <h3 class="summary-title">סיכום אשראי ירוק</h3>
+                  </div>
+                  <div class="summary-stats">
+                    <div class="summary-stat">
+                      <div class="stat-label">סה"כ סיכון אשראי מאזני</div>
+                      <div class="stat-value">{{ formatHebrewNumber(total.creditBalanceSheetRisk) }}</div>
+                    </div>
+                    <div class="summary-stat">
+                      <div class="stat-label">סה"כ סיכון אשראי חוץ מאזני</div>
+                      <div class="stat-value">{{ formatHebrewNumber(total.creditOffBalanceSheetRisk) }}</div>
+                    </div>
+                    <div class="summary-stat">
+                      <div class="stat-label">סה"כ סיכון אשראי כולל</div>
+                      <div class="stat-value primary">{{ formatHebrewNumber(total.totalCreditRisk) }}</div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
   } @else {
     <div class="empty-container">
       <div class="empty-icon">📊</div>

@@ -36,13 +36,31 @@ export class MainReportComponent implements OnInit {
   
   protected readonly hasHeatMapData = computed(() => this.heatMapRows().length > 0);
 
+  // Green Credit data
+  protected readonly greenCreditRows = computed(() => 
+    this.climateDataService.greenCreditData()?.greenCreditRows || []
+  );
+  
+  protected readonly totalGreenCredit = computed(() => 
+    this.climateDataService.greenCreditData()?.totalGreenCredit
+  );
+  
+  protected readonly hasGreenCreditData = computed(() => this.greenCreditRows().length > 0);
+
   // Collapsible section state
   private readonly heatMapExpanded = signal(false); // Minimized by default
   protected readonly isHeatMapExpanded = computed(() => this.heatMapExpanded());
 
-  // Toggle method for collapsible section
+  private readonly greenCreditExpanded = signal(false); // Minimized by default
+  protected readonly isGreenCreditExpanded = computed(() => this.greenCreditExpanded());
+
+  // Toggle method for collapsible sections
   protected toggleHeatMapSection(): void {
     this.heatMapExpanded.update(current => !current);
+  }
+
+  protected toggleGreenCreditSection(): void {
+    this.greenCreditExpanded.update(current => !current);
   }
 
   // Helper functions for template
