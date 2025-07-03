@@ -146,8 +146,7 @@
                   <th class="col-sub-classification">תת סיווג ענפי</th>
                   <th class="col-credit-report-desc">תיאור בדוח האשראי</th>
                   <th class="col-total-collateral">סך בטחונות</th>
-                  <th class="col-risk">סה"כ סיכון אשראי באש"ח ללא משכנתאות</th>                
-                  <th class="col-climate">מצב אקלימי</th>
+                  <th class="col-risk">סה"כ סיכון אשראי באש"ח ללא משכנתאות</th>
                 </tr>
               </thead>
               <tbody>
@@ -218,12 +217,6 @@
                     </td>
                     <td class="cell-risk">
                       <div class="risk-value">{{ formatHebrewNumber(report.totalCreditRisk) }}</div>
-                    </td>                  
-                    <td class="cell-climate">
-                      <div class="climate-indicator" [attr.data-climate]="getClimateColorString(report.climateColor)">
-                        <div class="climate-dot"></div>
-                        <span class="climate-text">{{ getHebrewClimateStatus(report.climateColor) }}</span>
-                      </div>
                     </td>
                   </tr>
                 }

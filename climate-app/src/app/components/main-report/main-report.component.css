@@ -239,7 +239,7 @@
 
 /* Main data table scrollable container */
 .data-section:not(.heatmap-section) .table-wrapper {
-  max-height: 400px; /* Fixed height to show approximately 8-10 rows */
+  max-height: var(--panel-content-height); /* Match details panel height */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: auto; /* Keep horizontal scrolling for wide tables */
   border: 1px solid #e2e8f0;
@@ -573,13 +573,15 @@
   gap: 1.5rem;
   min-height: 600px;
   margin-bottom: 2rem;
-  direction: rtl;
+  direction: ltr; /* Changed to LTR to control flex order */
+  --panel-content-height: 500px; /* Consistent height for both panel and table */
 }
 
 /* Details Panel (Left Side) */
 .details-panel-container {
   flex: 0 0 400px;
   min-width: 400px;
+  order: 1; /* Ensure it appears first (left) */
 }
 
 .details-panel {
@@ -590,6 +592,7 @@
   height: fit-content;
   position: sticky;
   top: 1rem;
+  direction: rtl; /* Restore RTL for content inside */
 }
 
 .details-panel-header {
@@ -616,7 +619,7 @@
 
 .details-panel-content {
   padding: 1.5rem;
-  max-height: 500px;
+  max-height: var(--panel-content-height);
   overflow-y: auto;
 }
 
@@ -642,6 +645,8 @@
 .master-details-container .data-section {
   flex: 1;
   min-width: 0; /* Allow shrinking */
+  order: 2; /* Ensure it appears second (right) */
+  direction: rtl; /* Restore RTL for table content */
 }
 
 /* Table Row Selection */
@@ -743,19 +748,20 @@
 
 /* Responsive Design for Master-Details */
 @media (max-width: 1200px) {
+  .master-details-container {
+    --panel-content-height: 400px; /* Smaller height for medium screens */
+  }
+  
   .details-panel-container {
     flex: 0 0 350px;
     min-width: 350px;
-  }
-  
-  .details-panel-content {
-    max-height: 400px;
   }
 }
 
 @media (max-width: 1024px) {
   .master-details-container {
     flex-direction: column;
+    --panel-content-height: 300px; /* Smaller height for smaller screens */
   }
   
   .details-panel-container {
@@ -770,10 +776,6 @@
   
   .details-panel {
     position: static;
-  }
-  
-  .details-panel-content {
-    max-height: 300px;
   }
 }
 
