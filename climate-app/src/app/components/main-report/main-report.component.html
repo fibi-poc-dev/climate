@@ -17,8 +17,8 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th class="col-account">מידע חשבון</th>
                 <th class="col-bank">פרטי בנק</th>
+                <th class="col-account">פרטי לקוח</th>
                 <th class="col-rating">דרוג לקוח</th>
                 <th class="col-credit-authority">סמכות אשראי נוכחית</th>
                 <th class="col-handling-unit">יחידה מטפלת</th>
@@ -33,16 +33,16 @@
             <tbody>
               @for (report of reports(); track report.account) {
                 <tr class="data-row" [attr.data-climate]="getClimateColorString(report.climateColor)">
-                  <td class="cell-account">
-                    <div class="account-info">
-                      <div class="account-name">{{ report.accountName }}</div>
-                      <div class="account-id">חשבון #{{ report.account }}</div>
-                    </div>
-                  </td>
                   <td class="cell-bank">
                     <div class="bank-info">
                       <div class="bank-name">בנק {{ report.bank }}</div>
                       <div class="branch-name">סניף {{ report.branch }}</div>
+                    </div>
+                  </td>
+                  <td class="cell-account">
+                    <div class="account-info">
+                      <div class="account-name">{{ report.accountName }}</div>
+                      <div class="account-id">חשבון #{{ report.account }}</div>
                     </div>
                   </td>
                   <td class="cell-rating">
