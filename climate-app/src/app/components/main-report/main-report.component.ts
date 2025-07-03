@@ -25,6 +25,16 @@ export class MainReportComponent implements OnInit {
   protected readonly totalReports = computed(() => this.reports().length);
   protected readonly hasReports = computed(() => this.reports().length > 0);
 
+  // Auto-select first row when data loads
+  protected readonly autoSelectFirst = computed(() => {
+    const reportsData = this.reports();
+    if (reportsData.length > 0 && this.selectedRowIndex() === null) {
+      // Use setTimeout to avoid circular dependency
+      setTimeout(() => this.selectedRowIndex.set(0), 0);
+    }
+    return reportsData;
+  });
+
   // Heat Map data
   protected readonly heatMapRows = computed(() => 
     this.climateDataService.heatMapData()?.heatMapRows || []
@@ -54,6 +64,18 @@ export class MainReportComponent implements OnInit {
   private readonly greenCreditExpanded = signal(false); // Minimized by default
   protected readonly isGreenCreditExpanded = computed(() => this.greenCreditExpanded());
 
+  private readonly detailsExpanded = signal(false); // Minimized by default
+  protected readonly isDetailsExpanded = computed(() => this.detailsExpanded());
+
+  // Selected row state for master-details
+  private readonly selectedRowIndex = signal<number | null>(null);
+  protected readonly selectedReport = computed(() => {
+    const index = this.selectedRowIndex();
+    const reportsData = this.reports();
+    return index !== null && reportsData[index] ? reportsData[index] : null;
+  });
+  protected readonly hasSelectedReport = computed(() => this.selectedReport() !== null);
+
   // Toggle method for collapsible sections
   protected toggleHeatMapSection(): void {
     this.heatMapExpanded.update(current => !current);
@@ -61,6 +83,19 @@ export class MainReportComponent implements OnInit {
 
   protected toggleGreenCreditSection(): void {
     this.greenCreditExpanded.update(current => !current);
+  }
+
+  protected toggleDetailsSection(): void {
+    this.detailsExpanded.update(current => !current);
+  }
+
+  // Row selection methods for master-details
+  protected selectRow(index: number): void {
+    this.selectedRowIndex.set(index);
+  }
+
+  protected isRowSelected(index: number): boolean {
+    return this.selectedRowIndex() === index;
   }
 
   // Helper functions for template
@@ -74,6 +109,21 @@ export class MainReportComponent implements OnInit {
   protected formatHebrewNumber(value: number | null): string {
     if (value === null || value === undefined) return 'לא זמין';
     return new Intl.NumberFormat('he-IL').format(value);
+  }
+  
+  // Hebrew date formatting
+  protected formatDate(dateValue: string | null): string {
+    if (!dateValue) return 'לא זמין';
+    try {
+      const date = new Date(dateValue);
+      return new Intl.DateTimeFormat('he-IL', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).format(date);
+    } catch {
+      return 'תאריך לא תקין';
+    }
   }
   
   // Hebrew rating translation

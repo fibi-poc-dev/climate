@@ -567,7 +567,226 @@
   text-transform: capitalize;
 }
 
-/* Responsive Design - RTL Enhanced */
+/* Master-Details Layout */
+.master-details-container {
+  display: flex;
+  gap: 1.5rem;
+  min-height: 600px;
+  margin-bottom: 2rem;
+  direction: rtl;
+}
+
+/* Details Panel (Left Side) */
+.details-panel-container {
+  flex: 0 0 400px;
+  min-width: 400px;
+}
+
+.details-panel {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: fit-content;
+  position: sticky;
+  top: 1rem;
+}
+
+.details-panel-header {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-bottom: 3px solid #fbbf24;
+}
+
+.details-panel-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.details-panel-content {
+  padding: 1.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.details-panel-empty {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state-text {
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Data Section (Right Side) */
+.master-details-container .data-section {
+  flex: 1;
+  min-width: 0; /* Allow shrinking */
+}
+
+/* Table Row Selection */
+.data-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.data-row:hover {
+  background-color: #f8fafc !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-row.selected {
+  background-color: #dbeafe !important;
+  border-left: 4px solid #2563eb;
+  font-weight: 500;
+}
+
+.data-row.selected:hover {
+  background-color: #bfdbfe !important;
+}
+
+/* Detail Card in Panel */
+.details-panel .detail-card {
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.details-panel .detail-card-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.details-panel .detail-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.details-panel .detail-card-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.details-panel .detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.details-panel .detail-section-group {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 1rem;
+  border-right: 3px solid #e5e7eb;
+}
+
+.details-panel .detail-group-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.details-panel .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.details-panel .detail-row:not(:last-child) {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.details-panel .detail-label {
+  font-weight: 500;
+  color: #4b5563;
+  flex: 1;
+}
+
+.details-panel .detail-value {
+  font-weight: 600;
+  color: #1f2937;
+  text-align: left;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* Responsive Design for Master-Details */
+@media (max-width: 1200px) {
+  .details-panel-container {
+    flex: 0 0 350px;
+    min-width: 350px;
+  }
+  
+  .details-panel-content {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .master-details-container {
+    flex-direction: column;
+  }
+  
+  .details-panel-container {
+    flex: none;
+    min-width: auto;
+    order: 2;
+  }
+  
+  .data-section {
+    order: 1;
+  }
+  
+  .details-panel {
+    position: static;
+  }
+  
+  .details-panel-content {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .master-details-container {
+    gap: 1rem;
+  }
+  
+  .details-panel-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .details-panel-content {
+    padding: 1rem;
+  }
+  
+  .details-panel .detail-section-group {
+    padding: 0.75rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .header-content {
     flex-direction: column;
@@ -962,14 +1181,6 @@
   unicode-bidi: embed;
 }
 
-.greencredit-summary .stat-value.primary {
-  font-size: 1.5rem;
-  color: rgba(34, 197, 94, 1);
-  background: rgba(34, 197, 94, 0.1);
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-
 /* Responsive adjustments for Green Credit */
 @media (max-width: 768px) {
   .greencredit-summary .summary-stats {
@@ -985,5 +1196,130 @@
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
     min-width: 50px;
+  }
+}
+
+/* ESG Details Panel Styles */
+.details-section {
+  padding: 1rem;
+  direction: rtl;
+}
+
+.detail-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.detail-card-header {
+  background: linear-gradient(135deg, rgba(24, 40, 95, 0.05) 0%, rgba(24, 40, 95, 0.1) 100%);
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(24, 40, 95, 1);
+  margin: 0 0 0.5rem 0;
+  text-align: right;
+}
+
+.detail-card-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: right;
+}
+
+.detail-card-content {
+  padding: 1.5rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  direction: rtl;
+}
+
+.detail-section-group {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+.detail-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  margin: 0 0 1rem 0;
+  text-align: right;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(24, 40, 95, 0.1);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: right;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: right;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  font-size: 0.9rem;
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: left;
+  min-width: 120px;
+}
+
+/* Responsive design for details panel */
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .detail-card-content {
+    padding: 1rem;
+  }
+  
+  .detail-section-group {
+    padding: 1rem;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  
+  .detail-label {
+    text-align: right;
+  }
+  
+  .detail-value {
+    text-align: right;
+    min-width: auto;
   }
 }
