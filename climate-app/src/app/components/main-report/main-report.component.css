@@ -450,8 +450,8 @@
 /* Credit Report Description Column Styles */
 .credit-report-desc-value {
   font-weight: 500;
-  color: rgba(24, 40, 95, 0.85);
-  font-size: 0.9rem;
+  color: #64748b; /* Changed to match classification-desc */
+  font-size: 0.75rem; /* Changed to match classification-desc */
   text-align: right;
   line-height: 1.4;
   padding: 0.25rem 0;
