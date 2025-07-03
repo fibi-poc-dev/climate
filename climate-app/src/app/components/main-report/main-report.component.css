@@ -239,7 +239,7 @@
 
 /* Main data table scrollable container */
 .data-section:not(.heatmap-section) .table-wrapper {
-  max-height: var(--panel-content-height); /* Match details panel height */
+  height: 100%; /* Take full height of container */
   overflow-y: auto; /* Enable vertical scrolling */
   overflow-x: auto; /* Keep horizontal scrolling for wide tables */
   border: 1px solid #e2e8f0;
@@ -571,7 +571,7 @@
 .master-details-container {
   display: flex;
   gap: 1.5rem;
-  min-height: 600px;
+  height: 100%; /* Take full height instead of min-height */
   margin-bottom: 2rem;
   direction: ltr; /* Changed to LTR to control flex order */
   --panel-content-height: 500px; /* Consistent height for both panel and table */
@@ -647,6 +647,9 @@
   min-width: 0; /* Allow shrinking */
   order: 2; /* Ensure it appears second (right) */
   direction: rtl; /* Restore RTL for table content */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Allow the section to shrink and grow */
 }
 
 /* Table Row Selection */
