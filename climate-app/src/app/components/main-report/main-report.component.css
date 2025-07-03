@@ -598,7 +598,7 @@
 .details-panel-header {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: white;
-  padding: 1.5rem 2rem;
+  padding: 0.75rem 1rem;
   border-bottom: 3px solid #fbbf24;
 }
 
@@ -618,7 +618,7 @@
 }
 
 .details-panel-content {
-  padding: 1.5rem;
+  padding: 0.5rem; /* Reduced from 1rem */
   max-height: var(--panel-content-height);
   overflow-y: auto;
 }
@@ -704,13 +704,13 @@
 .details-panel .detail-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced from 1.5rem */
 }
 
 .details-panel .detail-section-group {
   background: #f9fafb;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 0.75rem; /* Reduced from 1rem */
   border-right: 3px solid #e5e7eb;
 }
 
@@ -727,7 +727,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0; /* Reduced from 0.5rem 0 */
   font-size: 0.9rem;
 }
 
@@ -1248,30 +1248,30 @@
 }
 
 .detail-card-content {
-  padding: 1.5rem;
+  padding: 0.75rem; /* Reduced from 1.5rem */
 }
 
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 1rem; /* Reduced from 2rem */
   direction: rtl;
 }
 
 .detail-section-group {
   background: #f8fafc;
   border-radius: 8px;
-  padding: 1.25rem;
+  padding: 0.75rem; /* Reduced from 1.25rem */
   border: 1px solid #e2e8f0;
 }
 
 .detail-group-title {
-  font-size: 1rem;
+  font-size: 0.875rem; /* Reduced from 1rem */
   font-weight: 600;
   color: rgba(24, 40, 95, 1);
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0; /* Reduced from 1rem */
   text-align: right;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem; /* Reduced from 0.5rem */
   border-bottom: 2px solid rgba(24, 40, 95, 0.1);
 }
 
@@ -1279,9 +1279,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 0.375rem 0; /* Reduced from 0.75rem */
   border-bottom: 1px solid #e2e8f0;
   text-align: right;
+  font-size: 0.875rem; /* Added smaller font size */
 }
 
 .detail-row:last-child {
