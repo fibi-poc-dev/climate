@@ -18,7 +18,6 @@
           <div class="details-panel-header">
             @if (hasSelectedReport()) {
               <h2 class="details-panel-title">{{ selectedReport()!.accountName }} - חשבון #{{ selectedReport()!.account }}</h2>
-              <div class="details-panel-subtitle">בנק {{ selectedReport()!.bank }}, סניף {{ selectedReport()!.branch }}</div>
             } @else {
               <h2 class="details-panel-title">פרטים נוספים - דוח ESG</h2>
             }
