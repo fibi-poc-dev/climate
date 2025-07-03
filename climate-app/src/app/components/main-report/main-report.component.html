@@ -26,7 +26,8 @@
                 <th class="col-classification">סיווג ענפי</th>
                 <th class="col-sub-classification">תת סיווג ענפי</th>
                 <th class="col-credit-report-desc">תיאור בדוח האשראי</th>
-                <th class="col-risk">סיכון כולל</th>                
+                <th class="col-total-collateral">סך בטחונות</th>
+                <th class="col-risk">סה"כ סיכון אשראי באש"ח ללא משכנתאות</th>                
                 <th class="col-climate">מצב אקלימי</th>
               </tr>
             </thead>
@@ -86,6 +87,11 @@
                   <td class="cell-credit-report-desc">
                     <div class="credit-report-desc-value">
                       {{ report.creditReportDescription || 'לא זמין' }}
+                    </div>
+                  </td>
+                  <td class="cell-total-collateral">
+                    <div class="total-collateral-value">
+                      {{ formatHebrewNumber(report.totalCollateral) }}
                     </div>
                   </td>
                   <td class="cell-risk">

@@ -466,6 +466,17 @@
   font-style: italic;
 }
 
+/* Total Collateral Column Styles */
+.total-collateral-value {
+  font-weight: 600;
+  color: rgba(24, 40, 95, 1);
+  font-size: 1rem;
+  text-align: right;
+  direction: ltr;
+  unicode-bidi: embed;
+  padding: 0.25rem 0;
+}
+
 /* Credit Authority Column Styles */
 .credit-authority-value {
   font-weight: 600;
