@@ -606,6 +606,14 @@
   text-align: center;
 }
 
+.details-panel-subtitle {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-weight: 400;
+}
+
 .details-panel-content {
   padding: 1.5rem;
   max-height: 500px;

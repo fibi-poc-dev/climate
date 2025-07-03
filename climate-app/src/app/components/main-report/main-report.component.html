@@ -16,17 +16,17 @@
       <div class="details-panel-container">
         <div class="details-panel">
           <div class="details-panel-header">
-            <h2 class="details-panel-title">פרטים נוספים - דוח ESG</h2>
+            @if (hasSelectedReport()) {
+              <h2 class="details-panel-title">{{ selectedReport()!.accountName }} - חשבון #{{ selectedReport()!.account }}</h2>
+              <div class="details-panel-subtitle">בנק {{ selectedReport()!.bank }}, סניף {{ selectedReport()!.branch }}</div>
+            } @else {
+              <h2 class="details-panel-title">פרטים נוספים - דוח ESG</h2>
+            }
           </div>
           
           @if (hasSelectedReport()) {
             <div class="details-panel-content">
-              <div class="detail-card">
-                <div class="detail-card-header">
-                  <h3 class="detail-card-title">{{ selectedReport()!.accountName }} - חשבון #{{ selectedReport()!.account }}</h3>
-                  <div class="detail-card-subtitle">בנק {{ selectedReport()!.bank }}, סניף {{ selectedReport()!.branch }}</div>
-                </div>
-                
+              <div class="detail-card">                
                 <div class="detail-card-content">
                   <div class="detail-grid">
                     <!-- Risk Information -->
