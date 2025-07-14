@@ -582,6 +582,7 @@
   flex: 0 0 400px;
   min-width: 400px;
   order: 1; /* Ensure it appears first (left) */
+  height: 100%; /* Match container height */
 }
 
 .details-panel {
@@ -589,9 +590,9 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  height: fit-content;
-  position: sticky;
-  top: 1rem;
+  height: 100%; /* Take full height of container */
+  display: flex;
+  flex-direction: column;
   direction: rtl; /* Restore RTL for content inside */
 }
 
@@ -619,7 +620,7 @@
 
 .details-panel-content {
   padding: 0.5rem; /* Reduced from 1rem */
-  max-height: var(--panel-content-height);
+  flex: 1; /* Take remaining space */
   overflow-y: auto;
 }
 
