@@ -3,7 +3,7 @@
   height: 100%;
   /* Take full height of parent */
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
   padding: 2rem;
   direction: rtl;
   text-align: right;
@@ -17,7 +17,7 @@
 
 /* RTL specific font stack for Hebrew */
 .esg-dashboard[dir="rtl"] {
-  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
+  font-family: Arial, 'David', 'Narkisim', 'Arial Hebrew', sans-serif;
 }
 
 /* Header Section */
@@ -212,7 +212,7 @@
   text-align: right;
   direction: rtl;
   unicode-bidi: isolate;
-  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
+  font-family: Arial, 'David', 'Narkisim', 'Arial Hebrew', sans-serif;
 }
 
 .filter-controls {
@@ -304,7 +304,8 @@
   color: rgba(24, 40, 95, 1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
+  font-family: Arial, sans-serif;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -339,6 +340,8 @@
   padding: 1.25rem 1rem;
   vertical-align: top;
   text-align: right;
+  font-family: Arial, sans-serif;
+  font-size: 0.875rem;
   /* Added for RTL */
 }
 
@@ -353,7 +356,8 @@
 .account-name {
   font-weight: 600;
   color: rgba(24, 40, 95, 1);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  font-family: Arial, sans-serif;
   text-align: right;
   display: flex;
   align-items: center;
@@ -658,12 +662,14 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
+  font-family: Arial, sans-serif;
   text-align: center;
 }
 
 .details-panel-subtitle {
   margin: 0.5rem 0 0 0;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
+  font-family: Arial, sans-serif;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-weight: 400;
@@ -747,14 +753,16 @@
 }
 
 .details-panel .detail-card-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
+  font-family: Arial, sans-serif;
   color: #1f2937;
   margin: 0 0 0.5rem 0;
 }
 
 .details-panel .detail-card-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  font-family: Arial, sans-serif;
   color: #6b7280;
   margin: 0;
 }
@@ -798,12 +806,16 @@
 
 .details-panel .detail-label {
   font-weight: 500;
+  font-family: Arial, sans-serif;
+  font-size: 0.875rem;
   color: #4b5563;
   flex: 1;
 }
 
 .details-panel .detail-value {
   font-weight: 600;
+  font-family: Arial, sans-serif;
+  font-size: 0.875rem;
   color: #1f2937;
   text-align: left;
   flex-shrink: 0;
@@ -1098,7 +1110,7 @@
   color: rgba(24, 40, 95, 1);
   direction: rtl;
   unicode-bidi: isolate;
-  font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
+  font-family: Arial, 'David', 'Narkisim', 'Arial Hebrew', sans-serif;
 }
 
 .toggle-btn {

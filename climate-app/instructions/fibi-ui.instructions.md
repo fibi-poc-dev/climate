@@ -12,5 +12,7 @@ You are a working with the angular material theme in mind
 ## Icons
 --use icons from the angular material icon set
 
-
+## Fonts
+--Use the font family Arial for general text.
+--Use the default font size 14px for body text.
 
