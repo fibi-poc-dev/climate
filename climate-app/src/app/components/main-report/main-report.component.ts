@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } from '@angular/core';
-import { EsgMainReportRow, getClimateColorString, getCustomerRatingString, SourceData } from '../../models/climate-response.model';
+import { EsgMainReportRow, getClimateColorString, getCustomerRatingString, SourceData, TypeRow } from '../../models/climate-response.model';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { CommonModule } from '@angular/common';
 
@@ -105,6 +105,21 @@ export class MainReportComponent implements OnInit {
   // Helper functions for template
   protected getClimateColorString = getClimateColorString;
   protected getCustomerRatingString = getCustomerRatingString;
+
+  // Get Material Icon for type row
+  protected getTypeRowIcon(typeRow: number | null): string {
+    if (typeRow === null) return '';
+    switch (typeRow) {
+      case TypeRow.LOAN:
+        return 'account_balance'; // Bank building icon for loans
+      case TypeRow.ACCOUNT:
+        return 'account_circle'; // Account circle icon for accounts
+      case TypeRow.TOTAL:
+        return 'calculate'; // Calculator icon for totals
+      default:
+        return 'description'; // Default document icon
+    }
+  }
 
   // RTL support
   protected isRtl = true; // Set to true for Hebrew RTL layout

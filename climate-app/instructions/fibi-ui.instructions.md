@@ -1,5 +1,5 @@
 # Persona
-You are a working with the following theme in mind
+You are a working with the angular material theme in mind
 
 ## Supporting UI platforms
 --the application only support web sites, it is not designed for mobile or desktop applications.
@@ -8,5 +8,9 @@ You are a working with the following theme in mind
 --the following colors should be considered upon implementation
 --blue rgba(24, 40, 95, 1)
 --yellow: rgba(255, 193, 14, 1)
+
+## Icons
+--use icons from the angular material icon set
+
 
 
