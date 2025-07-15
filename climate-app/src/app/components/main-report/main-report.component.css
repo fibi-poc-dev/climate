@@ -360,16 +360,18 @@
   gap: 0.5rem;
   justify-content: flex-end;
   /* Align to right for RTL */
+  flex-direction: row;
+  /* Normal order - icon to the right of text */
 }
 
 .type-row-icon {
   font-size: 18px !important;
   /* Material Icons optimal size */
   color: #64748b;
-  margin-left: 0.25rem;
-  /* Space between icon and text in RTL */
   opacity: 0.8;
   vertical-align: middle;
+  flex-shrink: 0;
+  /* Prevent icon from shrinking */
 }
 
 .account-id {
