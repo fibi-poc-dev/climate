@@ -358,7 +358,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   /* Align to right for RTL */
   flex-direction: row;
   /* Normal order - icon to the right of text */
