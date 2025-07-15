@@ -251,17 +251,17 @@ export const CustomerRatingMap = {
  * Type Row enum for different row types
  */
 export enum TypeRow {
-  SUMMARY = 0,
-  DETAIL = 1,
-  AGGREGATE = 2
+  TOTAL = 0,
+  ACCOUNT = 1,
+  LOAN = 2,
 }
 
 /**
  * Source Data enum for different data sources
  */
 export enum SourceData {
-  PRIMARY = 1,
-  SECONDARY = 2,
+  ORIGINAL = 1,
+  COPY = 2,
   USER_ADDED = 3
 }
 
