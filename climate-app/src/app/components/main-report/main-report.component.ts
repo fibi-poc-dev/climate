@@ -2,16 +2,28 @@ import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit } 
 import { EsgMainReportRow, getClimateColorString, getCustomerRatingString, SourceData, TypeRow } from '../../models/climate-response.model';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+// Interface for editable fields
+interface EditableField {
+  originalValue: number | null;
+  currentValue: number | null;
+  isEditing: boolean;
+  isDirty: boolean;
+}
 
 @Component({
   selector: 'app-main-report',
   templateUrl: './main-report.component.html',
   styleUrl: './main-report.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule]
+  imports: [CommonModule, FormsModule]
 })
 export class MainReportComponent implements OnInit {
   private readonly climateDataService = inject(ClimateDataService);
+
+  // Editable fields map
+  private readonly editableFields = signal(new Map<string, EditableField>());
 
   // Use the shared service signals
   protected readonly isLoading = this.climateDataService.loading;
@@ -72,7 +84,7 @@ export class MainReportComponent implements OnInit {
   protected readonly isDetailsExpanded = computed(() => this.detailsExpanded());
 
   // Selected row state for master-details
-  private readonly selectedRowIndex = signal<number | null>(null);
+  protected readonly selectedRowIndex = signal<number | null>(null);
   protected readonly selectedReport = computed(() => {
     const index = this.selectedRowIndex();
     const reportsData = this.reports();
@@ -100,6 +112,77 @@ export class MainReportComponent implements OnInit {
 
   protected isRowSelected(index: number): boolean {
     return this.selectedRowIndex() === index;
+  }
+
+  // Editable field methods
+  protected getField(fieldKey: string): EditableField | undefined {
+    return this.editableFields().get(fieldKey);
+  }
+
+  protected startEdit(fieldKey: string, originalValue: number | null): void {
+    const currentFields = this.editableFields();
+    currentFields.set(fieldKey, {
+      originalValue,
+      currentValue: originalValue,
+      isEditing: true,
+      isDirty: false
+    });
+    this.editableFields.set(new Map(currentFields));
+  }
+
+  protected saveEdit(fieldKey: string): void {
+    const currentFields = this.editableFields();
+    const field = currentFields.get(fieldKey);
+    if (field) {
+      field.isEditing = false;
+      field.isDirty = field.currentValue !== field.originalValue;
+
+      // Update the actual data model if needed
+      this.updateFieldValue(fieldKey, field.currentValue);
+
+      this.editableFields.set(new Map(currentFields));
+    }
+  }
+
+  protected cancelEdit(fieldKey: string): void {
+    const currentFields = this.editableFields();
+    const field = currentFields.get(fieldKey);
+    if (field) {
+      field.currentValue = field.originalValue;
+      field.isEditing = false;
+      field.isDirty = false;
+      this.editableFields.set(new Map(currentFields));
+    }
+  }
+
+  protected updateFieldValue(fieldKey: string, newValue: number | null): void {
+    // Get the current selected report and field key
+    const reportIndex = this.selectedRowIndex();
+    if (reportIndex === null) return;
+
+    const currentReports = [...this.reports()];
+    const report = currentReports[reportIndex];
+
+    if (fieldKey === 'creditBalanceSheetRisk' && report) {
+      // Update the specific field
+      report.creditBalanceSheetRisk = newValue;
+      // You might want to emit this change to a service or parent component
+      console.log('Updated creditBalanceSheetRisk:', newValue);
+    }
+  }
+
+  protected getEditableValue(fieldKey: string, defaultValue: number | null): number | null {
+    const field = this.getField(fieldKey);
+    return field?.isEditing ? field.currentValue : (field?.isDirty ? field.currentValue : defaultValue);
+  }
+
+  protected getSelectedRowIndex(): number | null {
+    return this.selectedRowIndex();
+  }
+
+  protected formatHebrewNumberSafe(value: number | null | undefined): string {
+    if (value === null || value === undefined) return 'לא זמין';
+    return new Intl.NumberFormat('he-IL').format(value);
   }
 
   // Helper functions for template

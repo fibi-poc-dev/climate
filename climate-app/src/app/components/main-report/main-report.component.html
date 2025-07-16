@@ -60,10 +60,59 @@
                 <!-- Financial Information -->
                 <div class="detail-section-group">
                   <h4 class="detail-group-title">מידע פיננסי</h4>
+
+                  <!-- Editable Credit Balance Sheet Risk Field -->
                   <div class="detail-row">
                     <span class="detail-label">סיכון אשראי מאזני:</span>
-                    <span class="detail-value">{{ formatHebrewNumber(selectedReport()!.creditBalanceSheetRisk) }}</span>
+                    <div class="editable-field"
+                      [class.editing]="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isEditing">
+
+                      <!-- Display Mode -->
+                      <div *ngIf="!getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isEditing"
+                        class="display-mode">
+                        <span class="current-value"
+                          [class.modified]="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isDirty">
+                          {{ formatHebrewNumber(getEditableValue('creditBalanceSheetRisk-' + getSelectedRowIndex(),
+                          selectedReport()!.creditBalanceSheetRisk)) }}
+                        </span>
+                        <span *ngIf="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isDirty"
+                          class="original-indicator">
+                          (מקורי: {{ formatHebrewNumberSafe(getField('creditBalanceSheetRisk-' +
+                          getSelectedRowIndex())?.originalValue) }})
+                        </span>
+                        <button class="edit-btn"
+                          (click)="startEdit('creditBalanceSheetRisk-' + getSelectedRowIndex(), selectedReport()!.creditBalanceSheetRisk)">
+                          ✏️
+                        </button>
+                      </div>
+
+                      <!-- Edit Mode -->
+                      <div *ngIf="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isEditing"
+                        class="edit-mode">
+                        <input type="number" class="edit-input"
+                          [(ngModel)]="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())!.currentValue"
+                          placeholder="הזן ערך חדש">
+
+                        <div class="original-value-hint">
+                          <span class="info-icon">ℹ️</span>
+                          <span>ערך מקורי: {{ formatHebrewNumberSafe(getField('creditBalanceSheetRisk-' +
+                            getSelectedRowIndex())?.originalValue) }}</span>
+                        </div>
+
+                        <div class="edit-actions">
+                          <button class="action-btn save"
+                            (click)="saveEdit('creditBalanceSheetRisk-' + getSelectedRowIndex())">
+                            ✓
+                          </button>
+                          <button class="action-btn cancel"
+                            (click)="cancelEdit('creditBalanceSheetRisk-' + getSelectedRowIndex())">
+                            ✕
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
                   <div class="detail-row">
                     <span class="detail-label">סיכון אשראי חוץ מאזני:</span>
                     <span class="detail-value">{{ formatHebrewNumber(selectedReport()!.creditOffBalanceSheetRisk)
