@@ -1383,7 +1383,7 @@
 }
 
 .edit-input {
-  width: 100%;
+  /* width: 100%; */
   padding: 0.5rem;
   border: 2px solid rgba(24, 40, 95, 0.3);
   border-radius: 6px;

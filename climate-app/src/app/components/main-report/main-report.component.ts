@@ -228,6 +228,94 @@ export class MainReportComponent implements OnInit {
     }
   }
 
+  // Number formatting methods for digit grouping
+  protected formatNumberWithCommas(value: number | null): string {
+    if (value === null || value === undefined) return '';
+    return value.toLocaleString('en-US');
+  }
+
+  protected removeCommasFromNumber(value: string): number | null {
+    if (!value || value.trim() === '') return null;
+    const cleanedValue = value.replace(/[^\d]/g, '');
+    if (cleanedValue === '') return null;
+    const numericValue = parseInt(cleanedValue, 10);
+    return isNaN(numericValue) ? null : numericValue;
+  }
+
+  protected onNumberInput(event: Event, fieldKey: string): void {
+    const input = event.target as HTMLInputElement;
+    const cursorPosition = input.selectionStart || 0;
+    const inputValue = input.value;
+
+    // Remove all commas and non-numeric characters except digits
+    const cleanedValue = inputValue.replace(/[^\d]/g, '');
+
+    // Convert to number or null if empty
+    const numericValue = cleanedValue === '' ? null : parseInt(cleanedValue, 10);
+
+    // Update the field value
+    const currentFields = this.editableFields();
+    const field = currentFields.get(fieldKey);
+    if (field) {
+      field.currentValue = numericValue;
+      this.editableFields.set(new Map(currentFields));
+    }
+
+    // Format the cleaned value with commas
+    let formattedValue = '';
+    if (numericValue !== null && !isNaN(numericValue)) {
+      formattedValue = numericValue.toLocaleString('en-US');
+    }
+
+    // Calculate new cursor position
+    const originalCommaCount = (inputValue.substring(0, cursorPosition).match(/,/g) || []).length;
+    const newCommaCount = (formattedValue.substring(0, cursorPosition).match(/,/g) || []).length;
+    const cursorOffset = newCommaCount - originalCommaCount;
+    let newCursorPosition = Math.max(0, cursorPosition + cursorOffset);
+
+    // Ensure cursor doesn't go beyond the formatted value length
+    newCursorPosition = Math.min(newCursorPosition, formattedValue.length);
+
+    // Set the formatted value and restore cursor position
+    input.value = formattedValue;
+
+    // Use setTimeout to ensure the cursor position is set after the value update
+    setTimeout(() => {
+      input.setSelectionRange(newCursorPosition, newCursorPosition);
+    }, 0);
+  }
+
+  protected onNumberKeypress(event: KeyboardEvent): void {
+    // Allow: backspace, delete, tab, escape, enter
+    if ([8, 9, 27, 13, 46].indexOf(event.keyCode) !== -1 ||
+      // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+      (event.ctrlKey === true && [65, 67, 86, 88, 90].indexOf(event.keyCode) !== -1) ||
+      // Allow home, end, left, right arrows
+      (event.keyCode >= 35 && event.keyCode <= 39)) {
+      return;
+    }
+
+    // Ensure that it is a number and stop the keypress if not
+    if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+      event.preventDefault();
+    }
+  }
+
+  protected getFormattedFieldValue(fieldKey: string): string {
+    const field = this.getField(fieldKey);
+    if (!field?.isEditing) {
+      return '';
+    }
+
+    // If current value is null or undefined, return empty string
+    if (field.currentValue === null || field.currentValue === undefined) {
+      return '';
+    }
+
+    // Format the number with commas
+    return this.formatNumberWithCommas(field.currentValue);
+  }
+
   // Hebrew rating translation
   protected getHebrewRating(rating: number | null): string {
     if (!rating) return 'לא מדורג';

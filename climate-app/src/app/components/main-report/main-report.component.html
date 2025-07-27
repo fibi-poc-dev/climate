@@ -89,9 +89,10 @@
                       <!-- Edit Mode -->
                       <div *ngIf="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())?.isEditing"
                         class="edit-mode">
-                        <input type="number" class="edit-input"
-                          [(ngModel)]="getField('creditBalanceSheetRisk-' + getSelectedRowIndex())!.currentValue"
-                          placeholder="הזן ערך חדש">
+                        <input type="text" class="edit-input"
+                          [value]="getFormattedFieldValue('creditBalanceSheetRisk-' + getSelectedRowIndex())"
+                          (input)="onNumberInput($event, 'creditBalanceSheetRisk-' + getSelectedRowIndex())"
+                          (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
 
                         <div class="original-value-hint">
                           <span class="info-icon">ℹ️</span>
