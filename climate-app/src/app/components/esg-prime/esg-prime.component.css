@@ -77,6 +77,62 @@
 .table-section {
     flex: 1;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Table Container Scrolling */
+.table-section ::ng-deep .p-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.table-section ::ng-deep .p-card .p-card-body {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-section ::ng-deep .p-datatable {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-wrapper {
+    max-height: calc(100vh - 300px);
+    overflow: auto;
+    width: 100%;
+}
+
+/* Enhanced Horizontal Scrolling */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-header {
+    overflow: hidden;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 350px);
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-table {
+    min-width: max-content;
+}
+
+/* Ensure table maintains minimum width for all columns */
+.table-section ::ng-deep .p-datatable table {
+    min-width: 1800px;
+    /* Minimum width to force horizontal scroll */
+    width: max-content;
 }
 
 /* Details Panel Styles */
@@ -384,6 +440,33 @@
 .p-datatable {
     font-size: 0.8rem;
     line-height: 1.4;
+}
+
+/* Table Scrolling Enhancement */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+/* Custom Scrollbar for Table */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    background: rgba(24, 40, 95, 0.6);
+    border-radius: 4px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(24, 40, 95, 0.8);
 }
 
 .p-datatable .p-datatable-header {

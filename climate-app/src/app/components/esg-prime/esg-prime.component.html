@@ -42,9 +42,9 @@
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null" header="נתוני דוח ESG ראשי">
                 <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10"
-                    [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="horizontal"
-                    styleClass="p-datatable-striped p-datatable-sm" selectionMode="single"
-                    (onRowSelect)="onRowSelect($event)">
+                    [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
+                    scrollHeight="calc(100vh - 350px)" styleClass="p-datatable-striped p-datatable-sm"
+                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
 
                     <ng-template pTemplate="header">
                         <tr>
