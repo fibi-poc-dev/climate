@@ -314,7 +314,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     }
 
     protected formatHebrewNumberSafe(value: number | null | undefined): string {
-        if (value === null || value === undefined) return 'לא זמין';
+        if (value === null || value === undefined) return '';
         return new Intl.NumberFormat('he-IL').format(value);
     }
 
@@ -423,7 +423,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             case ClimateColor.RED:
                 return 'אדום';
             default:
-                return 'לא ידוע';
+                return '';
         }
     }
 
@@ -437,16 +437,16 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             [CustomerRating.B]: 'B',
             [CustomerRating.CCC]: 'CCC'
         };
-        return rating !== null ? ratingMap[rating] || 'לא ידוע' : 'לא ידוע';
+        return rating !== null ? ratingMap[rating] || '' : '';
     }
 
     protected formatPercentage(value: number | null): string {
-        if (value === null || value === undefined) return '0%';
+        if (value === null || value === undefined) return '';
         return `${value.toFixed(2)}%`;
     }
 
     protected formatDate(value: string | null | undefined): string {
-        if (!value) return 'לא זמין';
+        if (!value) return '';
         try {
             return new Date(value).toLocaleDateString('he-IL');
         } catch {
@@ -455,12 +455,12 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     }
 
     protected formatNumber(value: number | null | undefined): string {
-        if (value === null || value === undefined) return '0';
+        if (value === null || value === undefined) return '';
         return new Intl.NumberFormat('he-IL').format(value);
     }
 
     protected formatCurrency(value: number | null | undefined): string {
-        if (value === null || value === undefined) return '0';
+        if (value === null || value === undefined) return '';
         return new Intl.NumberFormat('he-IL', {
             style: 'currency',
             currency: 'ILS',

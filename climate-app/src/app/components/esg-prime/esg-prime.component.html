@@ -117,20 +117,20 @@
                             <td>{{ row.bank }}</td>
                             <td>{{ row.branch }}</td>
                             <td>{{ row.account }}</td>
-                            <td>{{ row.accountName || 'לא ידוע' }}</td>
+                            <td>{{ row.accountName || '' }}</td>
                             <td>
                                 <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
                                 </p-tag>
                             </td>
                             <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
-                            <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
-                            <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
-                            <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
-                            <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
-                            <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.handlingUnitCode || '' }}</td>
+                            <td>{{ row.regualatedSectorCode || '' }}</td>
+                            <td>{{ row.regualatedSectorDescription || '' }}</td>
+                            <td>{{ row.branchClassificatonCode || '' }}</td>
+                            <td>{{ row.branchClassificatonDescription || '' }}</td>
+                            <td>{{ row.subbranchClassificationCode || '' }}</td>
+                            <td>{{ row.subbranchClassificationDescription || '' }}</td>
+                            <td>{{ row.creditReportDescription || '' }}</td>
                             <td>{{ formatCurrency(row.totalCollateral) }}</td>
                             <td>{{ formatCurrency(row.totalSolo) }}</td>
                             <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
