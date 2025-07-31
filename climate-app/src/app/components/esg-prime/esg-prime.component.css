@@ -78,11 +78,11 @@
 
 .detail-item {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid #f0f0f0;
-    align-items: center;
+    align-items: start;
 }
 
 .detail-item label {
@@ -90,7 +90,7 @@
     color: rgba(24, 40, 95, 1);
     font-size: 0.875rem;
     text-align: right;
-    justify-self: end;
+    justify-self: start;
 }
 
 .detail-item span {
@@ -103,7 +103,7 @@
 .detail-item p-tag {
     justify-self: start;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .no-selection {
