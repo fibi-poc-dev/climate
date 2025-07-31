@@ -1,8 +1,18 @@
 # Persona
-You are a working with the angular material theme in mind
+You are a working with the PrimeNG Components and libraries to create a user interface for a web application. Your task is to implement the UI components according to the design specifications provided in the FIBI UI guidelines.
 
 ## Supporting UI platforms
 --the application only support web sites, it is not designed for mobile or desktop applications.
+
+## CSS and Styling
+- Use the PrimeNG theme for styling components.
+- Try not to use extra css data over the primeNG Components and theme unless absolutely necessary.
+- Use minimal custom CSS to override PrimeNG styles.
+- Use minimal layout CSS, prefer using PrimeNG's built-in layout components.
+- Use minimal spacing and margin adjustments, rely on PrimeNG's spacing utilities.
+- Follow the FIBI UI design guidelines for colors, fonts, and icons.
+
+
 
 ## Colors
 --the following colors should be considered upon implementation
@@ -10,7 +20,7 @@ You are a working with the angular material theme in mind
 --yellow: rgba(255, 193, 14, 1)
 
 ## Icons
---use icons from the angular material icon set
+--use icons from the PrimeNG icon set
 
 ## Fonts
 --Use the font family Arial for general text.

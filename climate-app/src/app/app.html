@@ -1,4 +1,3 @@
-
 <div class="app-container" dir="rtl">
   <div class="main-header">
     <div class="header-content">
@@ -12,20 +11,17 @@
       </div>
     </div>
   </div>
-  
+
   <nav class="tab-navigation">
     <div class="tab-container">
       @for (tab of tabs; track tab.id) {
-        <button 
-          class="tab-button"
-          [class.active]="activeTab() === tab.id"
-          (click)="selectTab(tab.id)">
-          {{ tab.label }}
-        </button>
+      <button class="tab-button" [class.active]="activeTab() === tab.id" (click)="selectTab(tab.id)">
+        {{ tab.label }}
+      </button>
       }
     </div>
   </nav>
-  
+
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { ClimateDataService } from './services/climate-data.service';
 
+
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule],
@@ -19,8 +21,9 @@ export class App implements OnInit {
     { id: 0, label: 'דוח ESG ראשי', route: '/esg' },
     { id: 1, label: 'טביעת רגל פחמנית', route: '/carbon-footprint' },
     { id: 2, label: 'אשראי ירוק חדש', route: '/green-credit' },
-    { id: 3, label: 'מגבלות', route: '/limitations' },
-    { id: 4, label: 'שאלוני סיכון שיורי', route: '/risk-questionnaires' }
+    { id: 3, label: 'ESG Prime', route: '/esg-prime' },
+    { id: 4, label: 'מגבלות', route: '/limitations' },
+    { id: 5, label: 'שאלוני סיכון שיורי', route: '/risk-questionnaires' }
   ];
 
   private router = inject(Router);
