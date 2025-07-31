@@ -161,12 +161,17 @@
     padding: 0.25rem;
     border-radius: 3px;
     font-size: 0.875rem;
-    opacity: 0.7;
+    opacity: 0;
     transition: opacity 0.2s ease;
 }
 
+.current-value-row:hover .edit-btn,
+.editable-field:hover .edit-btn {
+    opacity: 0.7;
+}
+
 .edit-btn:hover {
-    opacity: 1;
+    opacity: 1 !important;
     background-color: rgba(24, 40, 95, 0.1);
 }
 

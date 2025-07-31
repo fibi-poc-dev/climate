@@ -12,6 +12,32 @@ interface EditableField {
     isDirty: boolean;
 }
 
+// Define all editable numeric fields
+interface EditableFieldDefinition {
+    key: string;
+    label: string;
+    formatType: 'number' | 'currency' | 'percentage';
+    getValue: (row: EsgMainReportRow) => number | null | undefined;
+}
+
+const EDITABLE_FIELDS: EditableFieldDefinition[] = [
+    { key: 'creditRedCluster', label: 'קלאסטר אשראי אדום', formatType: 'number', getValue: (row) => row.creditRedCluster },
+    { key: 'rootPhysicalRisk', label: 'סיכון פיזי שורשי', formatType: 'number', getValue: (row) => row.rootPhysicalRisk },
+    { key: 'rootTransferRisk', label: 'סיכון מעבר שורשי', formatType: 'number', getValue: (row) => row.rootTransferRisk },
+    { key: 'rootPhysicalRiskScale', label: 'משקל סיכון פיזי שורשי', formatType: 'number', getValue: (row) => row.rootPhysicalRiskScale },
+    { key: 'rootTransferRiskScale', label: 'משקל סיכון מעבר שורשי', formatType: 'number', getValue: (row) => row.rootTransferRiskScale },
+    { key: 'rootRiskLevelWeight', label: 'שקלול רמת הסיכון השורשי', formatType: 'number', getValue: (row) => row.rootRiskLevelWeight },
+    { key: 'residualRisk', label: 'סיכון שיורי', formatType: 'number', getValue: (row) => row.residualRisk },
+    { key: 'qualityManagement', label: 'איכות ניהול', formatType: 'number', getValue: (row) => row.qualityManagement },
+    { key: 'blackCluster', label: 'קלאסטר שחור', formatType: 'number', getValue: (row) => row.blackCluster },
+    { key: 'greenCluster', label: 'קלאסטר ירוק', formatType: 'number', getValue: (row) => row.greenCluster },
+    { key: 'totalCollateral', label: 'סך בטחונות', formatType: 'currency', getValue: (row) => row.totalCollateral },
+    { key: 'totalSolo', label: 'סך סולו', formatType: 'currency', getValue: (row) => row.totalSolo },
+    { key: 'creditBalanceSheetRisk', label: 'סיכון אשראי מאזני', formatType: 'currency', getValue: (row) => row.creditBalanceSheetRisk },
+    { key: 'creditOffBalanceSheetRisk', label: 'סיכון אשראי חוץ מאזני', formatType: 'currency', getValue: (row) => row.creditOffBalanceSheetRisk },
+    { key: 'totalCreditRisk', label: 'סה"כ סיכון אשראי', formatType: 'currency', getValue: (row) => row.totalCreditRisk }
+];
+
 // PrimeNG imports
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -202,8 +228,24 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     }
 
     // Editable field methods
-    protected getField(fieldKey: string): EditableField | undefined {
-        return this.editableFields().get(fieldKey);
+    protected getFieldDefinition(fieldKey: string): EditableFieldDefinition | undefined {
+        return EDITABLE_FIELDS.find(field => field.key === fieldKey);
+    }
+
+    protected formatValueByType(value: number | null | undefined, formatType: 'number' | 'currency' | 'percentage'): string {
+        switch (formatType) {
+            case 'currency':
+                return this.formatCurrency(value);
+            case 'percentage':
+                return this.formatPercentage(value ?? null);
+            case 'number':
+            default:
+                return this.formatNumber(value);
+        }
+    }
+
+    protected getField(fieldKey: string): EditableField | null {
+        return this.editableFields().get(fieldKey) ?? null;
     }
 
     protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {
@@ -247,11 +289,22 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         const currentSelection = this.selectedRow();
         if (!currentSelection) return;
 
-        if (fieldKey === 'totalSolo') {
-            // Update the specific field
-            currentSelection.totalSolo = newValue;
-            console.log('Updated totalSolo:', newValue);
+        // Update the specific field dynamically
+        const fieldDef = this.getFieldDefinition(fieldKey);
+        if (fieldDef) {
+            // In a real application, you would update the backend and refresh the data
+            // For now, we'll just update the local object
+            (currentSelection as any)[fieldKey] = newValue;
+            console.log(`Updated ${fieldKey}:`, newValue);
         }
+    }
+
+    protected isFieldEditable(fieldKey: string): boolean {
+        return EDITABLE_FIELDS.some(field => field.key === fieldKey);
+    }
+
+    protected getEditableFields(): EditableFieldDefinition[] {
+        return EDITABLE_FIELDS;
     }
 
     protected getEditableValue(fieldKey: string, defaultValue: number | null | undefined): number | null {
