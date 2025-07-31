@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
+
+// Interface for editable fields
+interface EditableField {
+    originalValue: number | null;
+    currentValue: number | null;
+    isEditing: boolean;
+    isDirty: boolean;
+}
 
 // PrimeNG imports
 import { TableModule } from 'primeng/table';
@@ -20,6 +29,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     selector: 'app-esg-prime',
     imports: [
         CommonModule,
+        FormsModule,
         TableModule,
         ButtonModule,
         CardModule,
@@ -39,6 +49,9 @@ import { FieldsetModule } from 'primeng/fieldset';
 export class EsgPrimeComponent implements OnInit, OnDestroy {
     private climateDataService = inject(ClimateDataService);
     private elementRef = inject(ElementRef);
+
+    // Editable fields map
+    private readonly editableFields = signal(new Map<string, EditableField>());
 
     // Signals for reactive state management
     protected readonly climateData = this.climateDataService.data;
@@ -186,6 +199,149 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     protected clearSelection(): void {
         this.selectedRow.set(null);
+    }
+
+    // Editable field methods
+    protected getField(fieldKey: string): EditableField | undefined {
+        return this.editableFields().get(fieldKey);
+    }
+
+    protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {
+        const currentFields = this.editableFields();
+        const safeOriginalValue = originalValue ?? null;
+        currentFields.set(fieldKey, {
+            originalValue: safeOriginalValue,
+            currentValue: safeOriginalValue,
+            isEditing: true,
+            isDirty: false
+        });
+        this.editableFields.set(new Map(currentFields));
+    }
+
+    protected saveEdit(fieldKey: string): void {
+        const currentFields = this.editableFields();
+        const field = currentFields.get(fieldKey);
+        if (field) {
+            field.isEditing = false;
+            field.isDirty = field.currentValue !== field.originalValue;
+
+            // Update the actual data model if needed
+            this.updateFieldValue(fieldKey, field.currentValue);
+
+            this.editableFields.set(new Map(currentFields));
+        }
+    }
+
+    protected cancelEdit(fieldKey: string): void {
+        const currentFields = this.editableFields();
+        const field = currentFields.get(fieldKey);
+        if (field) {
+            field.currentValue = field.originalValue;
+            field.isEditing = false;
+            field.isDirty = false;
+            this.editableFields.set(new Map(currentFields));
+        }
+    }
+
+    protected updateFieldValue(fieldKey: string, newValue: number | null): void {
+        const currentSelection = this.selectedRow();
+        if (!currentSelection) return;
+
+        if (fieldKey === 'totalSolo') {
+            // Update the specific field
+            currentSelection.totalSolo = newValue;
+            console.log('Updated totalSolo:', newValue);
+        }
+    }
+
+    protected getEditableValue(fieldKey: string, defaultValue: number | null | undefined): number | null {
+        const field = this.getField(fieldKey);
+        const safeDefaultValue = defaultValue ?? null;
+        return field?.isEditing ? field.currentValue : (field?.isDirty ? field.currentValue : safeDefaultValue);
+    }
+
+    protected formatHebrewNumberSafe(value: number | null | undefined): string {
+        if (value === null || value === undefined) return 'לא זמין';
+        return new Intl.NumberFormat('he-IL').format(value);
+    }
+
+    protected getFormattedFieldValue(fieldKey: string): string {
+        const field = this.getField(fieldKey);
+        if (!field?.isEditing) {
+            return '';
+        }
+
+        // If current value is null or undefined, return empty string
+        if (field.currentValue === null || field.currentValue === undefined) {
+            return '';
+        }
+
+        // Format the number with commas
+        return this.formatNumberWithCommas(field.currentValue);
+    }
+
+    protected formatNumberWithCommas(value: number | null): string {
+        if (value === null || value === undefined) return '';
+        return value.toLocaleString('en-US');
+    }
+
+    protected onNumberInput(event: Event, fieldKey: string): void {
+        const input = event.target as HTMLInputElement;
+        const cursorPosition = input.selectionStart || 0;
+        const inputValue = input.value;
+
+        // Remove all commas and non-numeric characters except digits
+        const cleanedValue = inputValue.replace(/[^\d]/g, '');
+
+        // Convert to number or null if empty
+        const numericValue = cleanedValue === '' ? null : parseInt(cleanedValue, 10);
+
+        // Update the field value
+        const currentFields = this.editableFields();
+        const field = currentFields.get(fieldKey);
+        if (field) {
+            field.currentValue = numericValue;
+            this.editableFields.set(new Map(currentFields));
+        }
+
+        // Format the cleaned value with commas
+        let formattedValue = '';
+        if (numericValue !== null && !isNaN(numericValue)) {
+            formattedValue = numericValue.toLocaleString('en-US');
+        }
+
+        // Calculate new cursor position
+        const originalCommaCount = (inputValue.substring(0, cursorPosition).match(/,/g) || []).length;
+        const newCommaCount = (formattedValue.substring(0, cursorPosition).match(/,/g) || []).length;
+        const cursorOffset = newCommaCount - originalCommaCount;
+        let newCursorPosition = Math.max(0, cursorPosition + cursorOffset);
+
+        // Ensure cursor doesn't go beyond the formatted value length
+        newCursorPosition = Math.min(newCursorPosition, formattedValue.length);
+
+        // Set the formatted value and restore cursor position
+        input.value = formattedValue;
+
+        // Use setTimeout to ensure the cursor position is set after the value update
+        setTimeout(() => {
+            input.setSelectionRange(newCursorPosition, newCursorPosition);
+        }, 0);
+    }
+
+    protected onNumberKeypress(event: KeyboardEvent): void {
+        // Allow: backspace, delete, tab, escape, enter
+        if ([8, 9, 27, 13, 46].indexOf(event.keyCode) !== -1 ||
+            // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+            (event.ctrlKey === true && [65, 67, 86, 88, 90].indexOf(event.keyCode) !== -1) ||
+            // Allow home, end, left, right arrows
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+            return;
+        }
+
+        // Ensure that it is a number and stop the keypress if not
+        if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+            event.preventDefault();
+        }
     } protected exportData(): void {
         const data = this.filteredData();
         const csv = this.convertToCSV(data);

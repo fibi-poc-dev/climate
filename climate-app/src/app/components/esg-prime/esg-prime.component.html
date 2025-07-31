@@ -147,7 +147,7 @@
                 <div class="detail-sections-horizontal">
                     <!-- Left Column - Risk and Physical Information -->
                     <div class="detail-column">
-                        <h4 class="column-title">מידע על סיכונים ופיזיות</h4>
+                        <h4 class="column-title">מידע על סיכונים</h4>
                         <div class="detail-grid">
                             <div class="detail-item">
                                 <label>קלאסטר אשראי אדום:</label>
@@ -212,7 +212,46 @@
                             </div>
                             <div class="detail-item">
                                 <label>סך סולו:</label>
-                                <span>{{ formatCurrency(selectedRow()?.totalSolo) }}</span>
+                                <div class="editable-field" [class.editing]="getField('totalSolo')?.isEditing">
+
+                                    <!-- Display Mode -->
+                                    <div *ngIf="!getField('totalSolo')?.isEditing" class="display-mode">
+                                        <span class="current-value" [class.modified]="getField('totalSolo')?.isDirty">
+                                            {{ formatCurrency(getEditableValue('totalSolo', selectedRow()?.totalSolo))
+                                            }}
+                                        </span>
+                                        <span *ngIf="getField('totalSolo')?.isDirty" class="original-indicator">
+                                            (מקורי: {{ formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }})
+                                        </span>
+                                        <button class="edit-btn"
+                                            (click)="startEdit('totalSolo', selectedRow()?.totalSolo)">
+                                            ✏️
+                                        </button>
+                                    </div>
+
+                                    <!-- Edit Mode -->
+                                    <div *ngIf="getField('totalSolo')?.isEditing" class="edit-mode">
+                                        <input type="text" class="edit-input"
+                                            [value]="getFormattedFieldValue('totalSolo')"
+                                            (input)="onNumberInput($event, 'totalSolo')"
+                                            (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
+
+                                        <div class="original-value-hint">
+                                            <span class="info-icon">ℹ️</span>
+                                            <span>ערך מקורי: {{
+                                                formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }}</span>
+                                        </div>
+
+                                        <div class="edit-actions">
+                                            <button class="action-btn save" (click)="saveEdit('totalSolo')">
+                                                ✓
+                                            </button>
+                                            <button class="action-btn cancel" (click)="cancelEdit('totalSolo')">
+                                                ✕
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="detail-item">
                                 <label>סיכון אשראי מאזני:</label>
