@@ -13,7 +13,6 @@
     <!-- Main Content -->
     @if (!isLoading() && climateData()) {
 
-
     <!-- Filters and Actions Toolbar -->
     <p-toolbar>
         <div class="p-toolbar-group-start">
@@ -22,6 +21,11 @@
             </p-button>
             <p-button label="יצא לקובץ" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
             </p-button>
+            @if (selectedRow()) {
+            <p-button label="נקה בחירה" icon="pi pi-times" severity="danger" size="small"
+                (onClick)="clearSelection()">
+            </p-button>
+            }
         </div>
         <div class="p-toolbar-group-end">
             <span class="p-input-icon-left">
@@ -32,106 +36,238 @@
         </div>
     </p-toolbar>
 
-    <!-- Data Table -->
-    <p-card header="נתוני דוח ESG ראשי">
-        <p-table [value]="filteredData()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
-            [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped p-datatable-sm">
-
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="bank">
-                        בנק
-                        <p-sortIcon field="bank"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="branch">
-                        סניף
-                        <p-sortIcon field="branch"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="account">
-                        חשבון
-                        <p-sortIcon field="account"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="accountName">
-                        שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="customerRating">
-                        דירוג לקוח
-                        <p-sortIcon field="customerRating"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="currentCreditAuthority">
-                        סמכות אשראי נוכחי
-                        <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="handlingUnitCode">
-                        יחידה מטפלת
-                        <p-sortIcon field="handlingUnitCode"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="regualatedSectorCode">
-                        קוד מגזר פיקוחי
-                        <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="regualatedSectorDescription">
-                        תיאור מגזר פיקוחי
-                        <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="branchClassificatonCode">
-                        קוד סיווג ענפי
-                        <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="branchClassificatonDescription">
-                        תיאור סיווג ענפי
-                        <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="subClassificationDescription">
-                        קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="subbranchClassificationDescription">
-                        תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="creditReportDescription">
-                        תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
-                    </th>
-
-
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-row>
-                <tr>
-                    <td>{{ row.bank }}</td>
-                    <td>{{ row.branch }}</td>
-                    <td>{{ row.account }}</td>
-                    <td>{{ row.accountName || 'לא ידוע' }}</td>
-                    <td>
-                        <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
-                        </p-tag>
-                    </td>
-                    <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
-                    <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
-                    <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
-                    <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
-                    <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
-                    <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
-                    <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
-                    <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
-                    <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
-
-
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="11" class="text-center">
-                        <div class="empty-message">
-                            <i class="pi pi-info-circle"></i>
-                            <p>לא נמצאו נתונים להצגה</p>
+    <!-- Main Layout Container -->
+    <div class="main-layout">
+        <!-- Details Panel -->
+        <div class="details-panel">
+            @if (selectedRow()) {
+            <p-panel header="פרטי השורה הנבחרת" [toggleable]="true">
+                <div class="detail-sections">
+                    <!-- Basic Information -->
+                    <p-fieldset legend="מידע בסיסי" [toggleable]="true">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>תאריך נכונות נתונים:</label>
+                                <span>{{ formatDate(selectedRow()?.dataCorrectnessDate) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>מקור נתונים:</label>
+                                <span>{{ formatNumber(selectedRow()?.sourceData) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סוג שורה:</label>
+                                <span>{{ formatNumber(selectedRow()?.typeRow) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סטטוס שורה:</label>
+                                <span>{{ formatNumber(selectedRow()?.statusRow) }}</span>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </p-card>
+                    </p-fieldset>
+
+                    <!-- Risk Information -->
+                    <p-fieldset legend="מידע על סיכונים" [toggleable]="true">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>צבע אקלים:</label>
+                                <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)" 
+                                       [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                                </p-tag>
+                            </div>
+                            <div class="detail-item">
+                                <label>אשכול קרדיט אדום:</label>
+                                <span>{{ formatNumber(selectedRow()?.creditRedCluster) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון פיזי שורש:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootPhysicalRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון מעבר שורש:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootTransferRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סקלת סיכון פיזי שורש:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootPhysicalRiskScale) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סקלת סיכון מעבר שורש:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootTransferRiskScale) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>משקל רמת סיכון שורש:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootRiskLevelWeight) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון שיורי:</label>
+                                <span>{{ formatNumber(selectedRow()?.residualRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>תאריך סיכון שיורי:</label>
+                                <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
+                            </div>
+                        </div>
+                    </p-fieldset>
+
+                    <!-- Credit and Financial Information -->
+                    <p-fieldset legend="מידע פיננסי ואשראי" [toggleable]="true">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>סיכון אשראי מאזני:</label>
+                                <span>{{ formatCurrency(selectedRow()?.creditBalanceSheetRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון אשראי חוץ מאזני:</label>
+                                <span>{{ formatCurrency(selectedRow()?.creditOffBalanceSheetRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון אשראי כולל:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalCreditRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סה"כ בטחונות:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalCollateral) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סה"כ סולו:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalSolo) }}</span>
+                            </div>
+                        </div>
+                    </p-fieldset>
+
+                    <!-- Classification Information -->
+                    <p-fieldset legend="מידע סיווג" [toggleable]="true">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>תת סיווג:</label>
+                                <span>{{ formatNumber(selectedRow()?.subClassification) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>ניהול איכות:</label>
+                                <span>{{ formatNumber(selectedRow()?.qualityManagement) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>אשכול שחור:</label>
+                                <span>{{ formatNumber(selectedRow()?.blackCluster) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>אשכול ירוק:</label>
+                                <span>{{ formatNumber(selectedRow()?.greenCluster) }}</span>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </div>
+            </p-panel>
+            } @else {
+            <p-panel header="פרטי השורה">
+                <div class="no-selection">
+                    <i class="pi pi-info-circle"></i>
+                    <p>בחר שורה מהטבלה כדי לראות פרטים</p>
+                </div>
+            </p-panel>
+            }
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <p-card header="נתוני דוח ESG ראשי">
+                <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+                    [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped p-datatable-sm"
+                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="bank">
+                                בנק
+                                <p-sortIcon field="bank"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branch">
+                                סניף
+                                <p-sortIcon field="branch"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="account">
+                                חשבון
+                                <p-sortIcon field="account"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="accountName">
+                                שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="customerRating">
+                                דירוג לקוח
+                                <p-sortIcon field="customerRating"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="currentCreditAuthority">
+                                סמכות אשראי נוכחי
+                                <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="handlingUnitCode">
+                                יחידה מטפלת
+                                <p-sortIcon field="handlingUnitCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="regualatedSectorCode">
+                                קוד מגזר פיקוחי
+                                <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="regualatedSectorDescription">
+                                תיאור מגזר פיקוחי
+                                <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branchClassificatonCode">
+                                קוד סיווג ענפי
+                                <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branchClassificatonDescription">
+                                תיאור סיווג ענפי
+                                <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="subClassificationDescription">
+                                קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="subbranchClassificationDescription">
+                                תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="creditReportDescription">
+                                תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-row>
+                        <tr [class.selected-row]="selectedRow() === row" (click)="selectRow(row)">
+                            <td>{{ row.bank }}</td>
+                            <td>{{ row.branch }}</td>
+                            <td>{{ row.account }}</td>
+                            <td>{{ row.accountName || 'לא ידוע' }}</td>
+                            <td>
+                                <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
+                                </p-tag>
+                            </td>
+                            <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
+                            <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
+                            <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
+                            <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
+                            <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
+                            <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="14" class="text-center">
+                                <div class="empty-message">
+                                    <i class="pi pi-info-circle"></i>
+                                    <p>לא נמצאו נתונים להצגה</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+    </div>
     }
 
     <!-- No Data State -->

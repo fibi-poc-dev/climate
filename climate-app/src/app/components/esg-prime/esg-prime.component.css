@@ -15,6 +15,100 @@
     position: relative;
 }
 
+/* Main Layout */
+.main-layout {
+    display: flex;
+    gap: 1rem;
+    height: calc(100vh - 200px);
+    /* Adjust based on toolbar height */
+}
+
+.details-panel {
+    flex: 0 0 400px;
+    /* Fixed width for details panel */
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.table-section {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Details Panel Styles */
+.detail-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-item label {
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+    font-size: 0.875rem;
+}
+
+.detail-item span {
+    color: #333;
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+}
+
+.no-selection {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-selection i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.no-selection p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Selected Row Styling */
+.selected-row {
+    background-color: rgba(24, 40, 95, 0.1) !important;
+    border-left: 4px solid rgba(24, 40, 95, 1) !important;
+}
+
+/* Panel and Fieldset Customization */
+.p-panel .p-panel-header {
+    background-color: rgba(24, 40, 95, 0.05);
+    color: rgba(24, 40, 95, 1);
+    border-bottom: 1px solid rgba(24, 40, 95, 0.2);
+}
+
+.p-fieldset .p-fieldset-legend {
+    background-color: rgba(24, 40, 95, 1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.p-fieldset .p-fieldset-content {
+    padding: 1rem;
+}
+
 /* Scroll fade indicators */
 .esg-prime-container::before {
     content: '';
@@ -148,8 +242,6 @@
     padding-left: 2.5rem;
     width: 250px;
 }
-
-/
 
 /* Empty Message */
 .empty-message {
@@ -292,12 +384,32 @@
         padding: 0.5rem;
     }
 
+    .main-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .details-panel {
+        flex: none;
+        order: 2;
+        max-height: 400px;
+    }
+
+    .table-section {
+        flex: none;
+        order: 1;
+    }
+
     .p-toolbar-group-end input {
         width: 200px;
     }
 
     .p-datatable {
         font-size: 0.9rem;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -314,5 +426,18 @@
 
     .p-toolbar-group-end input {
         width: 100%;
+    }
+
+    .details-panel {
+        flex: none;
+        max-height: 300px;
+    }
+
+    .detail-item label {
+        font-size: 0.8rem;
+    }
+
+    .detail-item span {
+        font-size: 0.8rem;
     }
 }

@@ -13,6 +13,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DividerModule } from 'primeng/divider';
+import { PanelModule } from 'primeng/panel';
+import { FieldsetModule } from 'primeng/fieldset';
 
 @Component({
     selector: 'app-esg-prime',
@@ -26,7 +28,9 @@ import { DividerModule } from 'primeng/divider';
         ToolbarModule,
         TooltipModule,
         ProgressBarModule,
-        DividerModule
+        DividerModule,
+        PanelModule,
+        FieldsetModule
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
@@ -43,6 +47,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly selectedClimateColor = signal<number | null>(null);
     protected readonly selectedCustomerRating = signal<number | null>(null);
     protected readonly scrollY = signal(0);
+    protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
     // Scroll to top visibility
     protected readonly showScrollToTop = computed(() => this.scrollY() > 300);
@@ -146,13 +151,27 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.filterText.set('');
         this.selectedClimateColor.set(null);
         this.selectedCustomerRating.set(null);
+    }
+
+    protected selectRow(row: EsgMainReportRow): void {
+        this.selectedRow.set(row);
+    }
+
+    protected onRowSelect(event: any): void {
+        if (event && event.data) {
+            this.selectRow(event.data);
+        }
+    }
+
+    protected clearSelection(): void {
+        this.selectedRow.set(null);
     } protected exportData(): void {
         const data = this.filteredData();
         const csv = this.convertToCSV(data);
         this.downloadCSV(csv, 'esg-main-report.csv');
     }
 
-    protected getClimateColorSeverity(climateColor: number | null): string {
+    protected getClimateColorSeverity(climateColor: number | null | undefined): string {
         switch (climateColor) {
             case ClimateColor.GREEN:
                 return 'success';
@@ -165,7 +184,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         }
     }
 
-    protected getClimateColorLabel(climateColor: number | null): string {
+    protected getClimateColorLabel(climateColor: number | null | undefined): string {
         switch (climateColor) {
             case ClimateColor.GREEN:
                 return 'ירוק';
@@ -191,7 +210,26 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         return rating !== null ? ratingMap[rating] || 'לא ידוע' : 'לא ידוע';
     }
 
-    protected formatCurrency(value: number | null): string {
+    protected formatPercentage(value: number | null): string {
+        if (value === null || value === undefined) return '0%';
+        return `${value.toFixed(2)}%`;
+    }
+
+    protected formatDate(value: string | null | undefined): string {
+        if (!value) return 'לא זמין';
+        try {
+            return new Date(value).toLocaleDateString('he-IL');
+        } catch {
+            return value;
+        }
+    }
+
+    protected formatNumber(value: number | null | undefined): string {
+        if (value === null || value === undefined) return '0';
+        return new Intl.NumberFormat('he-IL').format(value);
+    }
+
+    protected formatCurrency(value: number | null | undefined): string {
         if (value === null || value === undefined) return '0';
         return new Intl.NumberFormat('he-IL', {
             style: 'currency',
@@ -199,11 +237,6 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(value);
-    }
-
-    protected formatPercentage(value: number | null): string {
-        if (value === null || value === undefined) return '0%';
-        return `${value.toFixed(2)}%`;
     }
 
     private convertToCSV(data: EsgMainReportRow[]): string {
