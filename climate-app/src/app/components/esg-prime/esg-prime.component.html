@@ -216,17 +216,25 @@
 
                                     <!-- Display Mode -->
                                     <div *ngIf="!getField('totalSolo')?.isEditing" class="display-mode">
-                                        <span class="current-value" [class.modified]="getField('totalSolo')?.isDirty">
-                                            {{ formatCurrency(getEditableValue('totalSolo', selectedRow()?.totalSolo))
-                                            }}
-                                        </span>
-                                        <span *ngIf="getField('totalSolo')?.isDirty" class="original-indicator">
-                                            (מקורי: {{ formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }})
-                                        </span>
-                                        <button class="edit-btn"
-                                            (click)="startEdit('totalSolo', selectedRow()?.totalSolo)">
-                                            ✏️
-                                        </button>
+                                        <div class="value-container">
+                                            <div class="current-value-row">
+                                                <span class="current-value"
+                                                    [class.modified]="getField('totalSolo')?.isDirty">
+                                                    {{ formatCurrency(getEditableValue('totalSolo',
+                                                    selectedRow()?.totalSolo)) }}
+                                                </span>
+                                                <button class="edit-btn"
+                                                    (click)="startEdit('totalSolo', selectedRow()?.totalSolo)">
+                                                    ✏️
+                                                </button>
+                                            </div>
+                                            <div *ngIf="getField('totalSolo')?.isDirty" class="original-value-row">
+                                                <span class="original-indicator">
+                                                    מקורי: {{
+                                                    formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- Edit Mode -->
