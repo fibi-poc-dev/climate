@@ -58,33 +58,44 @@
                         דירוג לקוח
                         <p-sortIcon field="customerRating"></p-sortIcon>
                     </th>
-
-                    <th pSortableColumn="dataCorrectnessDate">
-                        תאריך נכונות
-                        <p-sortIcon field="dataCorrectnessDate"></p-sortIcon>
-                    </th>
-
-
                     <th pSortableColumn="currentCreditAuthority">
-                        סמך אשראי נוכחי
+                        סמכות אשראי נוכחי
                         <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="handlingUnitCode">
+                        יחידה מטפלת
+                        <p-sortIcon field="handlingUnitCode"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="regualatedSectorCode">
+                        קוד מגזר פיקוחי
+                        <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="regualatedSectorDescription">
-                        תיאור מגזר מוסדר
+                        תיאור מגזר פיקוחי
                         <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="branchClassificatonCode">
+                        קוד סיווג ענפי
+                        <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="branchClassificatonDescription">
-                        תיאור סיווג ענף
+                        תיאור סיווג ענפי
                         <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="subClassificationDescription">
+                        קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="subbranchClassificationDescription">
+                        תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="creditReportDescription">
+                        תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
                     </th>
                     <th pSortableColumn="climateColor">
                         צבע אקלים
                         <p-sortIcon field="climateColor"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="totalCreditRisk">
-                        סיכון אשראי כולל
-                        <p-sortIcon field="totalCreditRisk"></p-sortIcon>
-                    </th>
+
                 </tr>
             </ng-template>
 
@@ -98,18 +109,21 @@
                         <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
                         </p-tag>
                     </td>
-                    <td>{{ row.dataCorrectnessDate | date:'dd/MM/yyyy' }}</td>
-
-
                     <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
+                    <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
+                    <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
                     <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
+                    <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
                     <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
+                    <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
+                    <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
+                    <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
                     <td>
                         <p-tag [value]="getClimateColorLabel(row.climateColor)"
                             [severity]="getClimateColorSeverity(row.climateColor)">
                         </p-tag>
                     </td>
-                    <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
+
                 </tr>
             </ng-template>
 
