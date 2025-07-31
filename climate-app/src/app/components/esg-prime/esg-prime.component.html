@@ -144,80 +144,91 @@
         <div class="details-panel">
             @if (selectedRow()) {
             <p-panel header="{{selectedRow()?.accountName}}">
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>קלאסטר אשראי אדום:</label>
-                        <span>{{ formatNumber(selectedRow()?.creditRedCluster) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>סיכון פיזי שורשי:</label>
-                        <span>{{ formatNumber(selectedRow()?.rootPhysicalRisk) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>סיכון מעבר שורשי:</label>
-                        <span>{{ formatNumber(selectedRow()?.rootTransferRisk) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>משקל סיכון פיזי שורשי:</label>
-                        <span>{{ formatNumber(selectedRow()?.rootPhysicalRiskScale) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>משקל סיכון מעבר שורשי:</label>
-                        <span>{{ formatNumber(selectedRow()?.rootTransferRiskScale) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>שקלול רמת הסיכון השורשי</label>
-                        <span>{{ formatNumber(selectedRow()?.rootRiskLevelWeight) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>סיכון שיורי:</label>
-                        <span>{{ formatNumber(selectedRow()?.residualRisk) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>תאריך תוקף סיכון שיורי:</label>
-                        <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>איכות ניהול:</label>
-                        <span>{{ formatNumber(selectedRow()?.qualityManagement) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>קלאסטר שחור:</label>
-                        <span>{{ formatNumber(selectedRow()?.blackCluster) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>קלאסטר ירוק:</label>
-                        <span>{{ formatNumber(selectedRow()?.greenCluster) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>צבע אקלים:</label>
-                        <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
-                            [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
-                        </p-tag>
-                    </div>
-                    <div class="detail-item">
-                        <label>סך בטחונות:</label>
-                        <span>{{ formatNumber(selectedRow()?.totalCollateral) }}</span>                        
-                </div>
-                    <div class="detail-item">
-                        <label>סך סולו:</label>
-                        <span>{{ formatNumber(selectedRow()?.totalSolo) }}</span>
-                </div>
-                    <div class="detail-item">
-                        <label>סיכון אשראי מאזני באש"ח ללא משכנתאות:</label>
-                        <span>{{ formatNumber(selectedRow()?.creditBalanceSheetRisk) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>סיכון אשראי חוץ מאזני באש"ח ללא משכנתאות:</label>
-                        <span>{{ formatNumber(selectedRow()?.creditOffBalanceSheetRisk) }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <label>סה"כ סיכון אשראי באש"ח ללא משכנתאות:</label>
-                        <span>{{ formatNumber(selectedRow()?.totalCreditRisk) }}</span>
+                <div class="detail-sections-horizontal">
+                    <!-- Left Column - Risk and Physical Information -->
+                    <div class="detail-column">
+                        <h4 class="column-title">מידע על סיכונים ופיזיות</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>קלאסטר אשראי אדום:</label>
+                                <span>{{ formatNumber(selectedRow()?.creditRedCluster) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון פיזי שורשי:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootPhysicalRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון מעבר שורשי:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootTransferRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>משקל סיכון פיזי שורשי:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootPhysicalRiskScale) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>משקל סיכון מעבר שורשי:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootTransferRiskScale) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>שקלול רמת הסיכון השורשי:</label>
+                                <span>{{ formatNumber(selectedRow()?.rootRiskLevelWeight) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון שיורי:</label>
+                                <span>{{ formatNumber(selectedRow()?.residualRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>תאריך תוקף סיכון שיורי:</label>
+                                <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- Right Column - Financial and Classification Information -->
+                    <div class="detail-column">
+                        <h4 class="column-title">מידע פיננסי וסיווג</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>איכות ניהול:</label>
+                                <span>{{ formatNumber(selectedRow()?.qualityManagement) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>קלאסטר שחור:</label>
+                                <span>{{ formatNumber(selectedRow()?.blackCluster) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>קלאסטר ירוק:</label>
+                                <span>{{ formatNumber(selectedRow()?.greenCluster) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>צבע אקלים:</label>
+                                <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
+                                    [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                                </p-tag>
+                            </div>
+                            <div class="detail-item">
+                                <label>סך בטחונות:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalCollateral) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סך סולו:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalSolo) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון אשראי מאזני:</label>
+                                <span>{{ formatCurrency(selectedRow()?.creditBalanceSheetRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סיכון אשראי חוץ מאזני:</label>
+                                <span>{{ formatCurrency(selectedRow()?.creditOffBalanceSheetRisk) }}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>סה"כ סיכון אשראי:</label>
+                                <span>{{ formatCurrency(selectedRow()?.totalCreditRisk) }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </p-panel>
 
             } @else {
