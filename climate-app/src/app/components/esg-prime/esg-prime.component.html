@@ -22,8 +22,7 @@
             <p-button label="יצא לקובץ" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
             </p-button>
             @if (selectedRow()) {
-            <p-button label="נקה בחירה" icon="pi pi-times" severity="danger" size="small"
-                (onClick)="clearSelection()">
+            <p-button label="נקה בחירה" icon="pi pi-times" severity="danger" size="small" (onClick)="clearSelection()">
             </p-button>
             }
         </div>
@@ -38,10 +37,113 @@
 
     <!-- Main Layout Container -->
     <div class="main-layout">
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <p-card header="נתוני דוח ESG ראשי">
+                <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10"
+                    [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="horizontal"
+                    styleClass="p-datatable-striped p-datatable-sm" selectionMode="single"
+                    (onRowSelect)="onRowSelect($event)">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="bank">
+                                בנק
+                                <p-sortIcon field="bank"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branch">
+                                סניף
+                                <p-sortIcon field="branch"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="account">
+                                חשבון
+                                <p-sortIcon field="account"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="accountName">
+                                שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="customerRating">
+                                דירוג לקוח
+                                <p-sortIcon field="customerRating"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="currentCreditAuthority">
+                                סמכות אשראי נוכחי
+                                <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="handlingUnitCode">
+                                יחידה מטפלת
+                                <p-sortIcon field="handlingUnitCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="regualatedSectorCode">
+                                קוד מגזר פיקוחי
+                                <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="regualatedSectorDescription">
+                                תיאור מגזר פיקוחי
+                                <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branchClassificatonCode">
+                                קוד סיווג ענפי
+                                <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="branchClassificatonDescription">
+                                תיאור סיווג ענפי
+                                <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="subClassificationDescription">
+                                קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="subbranchClassificationDescription">
+                                תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="creditReportDescription">
+                                תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-row>
+                        <tr [class.selected-row]="selectedRow() === row" (click)="selectRow(row)">
+                            <td>{{ row.bank }}</td>
+                            <td>{{ row.branch }}</td>
+                            <td>{{ row.account }}</td>
+                            <td>{{ row.accountName || 'לא ידוע' }}</td>
+                            <td>
+                                <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
+                                </p-tag>
+                            </td>
+                            <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
+                            <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
+                            <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
+                            <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
+                            <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
+                            <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
+                            <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="14" class="text-center">
+                                <div class="empty-message">
+                                    <i class="pi pi-info-circle"></i>
+                                    <p>לא נמצאו נתונים להצגה</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-card>
+        </div>
+
+
         <!-- Details Panel -->
         <div class="details-panel">
             @if (selectedRow()) {
-            <p-panel header="פרטי השורה הנבחרת" [toggleable]="true">
+            <p-panel header="{{selectedRow()?.accountName}}" [toggleable]="true">
                 <div class="detail-sections">
                     <!-- Basic Information -->
                     <p-fieldset legend="מידע בסיסי" [toggleable]="true">
@@ -70,8 +172,8 @@
                         <div class="detail-grid">
                             <div class="detail-item">
                                 <label>צבע אקלים:</label>
-                                <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)" 
-                                       [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                                <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
+                                    [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
                                 </p-tag>
                             </div>
                             <div class="detail-item">
@@ -166,106 +268,6 @@
                 </div>
             </p-panel>
             }
-        </div>
-
-        <!-- Table Section -->
-        <div class="table-section">
-            <p-card header="נתוני דוח ESG ראשי">
-                <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
-                    [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped p-datatable-sm"
-                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
-
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th pSortableColumn="bank">
-                                בנק
-                                <p-sortIcon field="bank"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branch">
-                                סניף
-                                <p-sortIcon field="branch"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="account">
-                                חשבון
-                                <p-sortIcon field="account"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="accountName">
-                                שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="customerRating">
-                                דירוג לקוח
-                                <p-sortIcon field="customerRating"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="currentCreditAuthority">
-                                סמכות אשראי נוכחי
-                                <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="handlingUnitCode">
-                                יחידה מטפלת
-                                <p-sortIcon field="handlingUnitCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="regualatedSectorCode">
-                                קוד מגזר פיקוחי
-                                <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="regualatedSectorDescription">
-                                תיאור מגזר פיקוחי
-                                <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branchClassificatonCode">
-                                קוד סיווג ענפי
-                                <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branchClassificatonDescription">
-                                תיאור סיווג ענפי
-                                <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="subClassificationDescription">
-                                קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="subbranchClassificationDescription">
-                                תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="creditReportDescription">
-                                תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
-                            </th>
-                        </tr>
-                    </ng-template>
-
-                    <ng-template pTemplate="body" let-row>
-                        <tr [class.selected-row]="selectedRow() === row" (click)="selectRow(row)">
-                            <td>{{ row.bank }}</td>
-                            <td>{{ row.branch }}</td>
-                            <td>{{ row.account }}</td>
-                            <td>{{ row.accountName || 'לא ידוע' }}</td>
-                            <td>
-                                <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
-                                </p-tag>
-                            </td>
-                            <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
-                            <td>{{ row.handlingUnitCode || 'לא ידוע' }}</td>
-                            <td>{{ row.regualatedSectorCode || 'לא ידוע' }}</td>
-                            <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.branchClassificatonCode || 'לא ידוע' }}</td>
-                            <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
-                            <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
-                            <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
-                        </tr>
-                    </ng-template>
-
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="14" class="text-center">
-                                <div class="empty-message">
-                                    <i class="pi pi-info-circle"></i>
-                                    <p>לא נמצאו נתונים להצגה</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </p-card>
         </div>
     </div>
     }
