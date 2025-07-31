@@ -1,189 +1,144 @@
 <div class="esg-prime-container" dir="rtl">
-  <!-- Header Section -->
-  <div class="page-header">
-    <h2>דוח ESG ראשי - PrimeNG</h2>
-    <p class="subtitle">מידע מפורט על דיווח ESG עם רכיבי PrimeNG</p>
-  </div>
 
-  <!-- Loading State -->
-  @if (isLoading()) {
+    <!-- Loading State -->
+    @if (isLoading()) {
     <p-card>
-      <div class="loading-container">
-        <p-progressBar mode="indeterminate"></p-progressBar>
-        <p>טוען נתונים...</p>
-      </div>
+        <div class="loading-container">
+            <p-progressBar mode="indeterminate"></p-progressBar>
+            <p>טוען נתונים...</p>
+        </div>
     </p-card>
-  }
+    }
 
-  <!-- Main Content -->
-  @if (!isLoading() && climateData()) {
-    <!-- Statistics Cards -->
-    <div class="statistics-grid">
-      <p-card header="סך הכל רשומות">
-        <div class="stat-content">
-          <div class="stat-value">{{ totalRows() }}</div>
-          <div class="stat-label">רשומות</div>
-        </div>
-      </p-card>
+    <!-- Main Content -->
+    @if (!isLoading() && climateData()) {
 
-      <p-card header="סך אשראי">
-        <div class="stat-content">
-          <div class="stat-value">{{ formatCurrency(totalCredit()) }}</div>
-          <div class="stat-label">₪</div>
-        </div>
-      </p-card>
-
-      <p-card header="ממוצע רמת סיכון">
-        <div class="stat-content">
-          <div class="stat-value">{{ formatPercentage(avgRisk()) }}</div>
-          <div class="stat-label">ממוצע</div>
-        </div>
-      </p-card>
-
-      <p-card header="התפלגות צבעים">
-        <div class="color-distribution">
-          <div class="color-item">
-            <p-tag severity="success" value="ירוק"></p-tag>
-            <span>{{ colorDistribution().green }}</span>
-          </div>
-          <div class="color-item">
-            <p-tag severity="warning" value="צהוב"></p-tag>
-            <span>{{ colorDistribution().yellow }}</span>
-          </div>
-          <div class="color-item">
-            <p-tag severity="danger" value="אדום"></p-tag>
-            <span>{{ colorDistribution().red }}</span>
-          </div>
-        </div>
-      </p-card>
-    </div>
-
-    <p-divider></p-divider>
 
     <!-- Filters and Actions Toolbar -->
     <p-toolbar>
-      <div class="p-toolbar-group-start">
-        <p-button 
-          label="נקה מסננים" 
-          icon="pi pi-filter-slash" 
-          severity="secondary" 
-          size="small"
-          (onClick)="clearFilters()">
-        </p-button>
-        <p-button 
-          label="יצא לקובץ" 
-          icon="pi pi-download" 
-          severity="info" 
-          size="small"
-          (onClick)="exportData()">
-        </p-button>
-      </div>
-      <div class="p-toolbar-group-end">
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input 
-            type="text" 
-            pInputText 
-            placeholder="חיפוש..." 
-            [value]="filterText()"
-            (input)="filterText.set($any($event.target).value)">
-        </span>
-      </div>
+        <div class="p-toolbar-group-start">
+            <p-button label="נקה מסננים" icon="pi pi-filter-slash" severity="secondary" size="small"
+                (onClick)="clearFilters()">
+            </p-button>
+            <p-button label="יצא לקובץ" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
+            </p-button>
+        </div>
+        <div class="p-toolbar-group-end">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="חיפוש..." [value]="filterText()"
+                    (input)="filterText.set($any($event.target).value)">
+            </span>
+        </div>
     </p-toolbar>
 
     <!-- Data Table -->
     <p-card header="נתוני דוח ESG ראשי">
-      <p-table 
-        [value]="filteredData()" 
-        [paginator]="true" 
-        [rows]="10" 
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [scrollable]="true"
-        scrollDirection="horizontal"
-        styleClass="p-datatable-striped">
-        
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="dataCorrectnessDate">
-              תאריך נכונות
-              <p-sortIcon field="dataCorrectnessDate"></p-sortIcon>
-            </th>
-            <th pSortableColumn="accountName">
-              שם חשבון
-              <p-sortIcon field="accountName"></p-sortIcon>
-            </th>
-            <th pSortableColumn="customerRating">
-              דירוג לקוח
-              <p-sortIcon field="customerRating"></p-sortIcon>
-            </th>
-            <th pSortableColumn="currentCreditAuthority">
-              סמך אשראי נוכחי
-              <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
-            </th>
-            <th pSortableColumn="regualatedSectorDescription">
-              תיאור מגזר מוסדר
-              <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
-            </th>
-            <th pSortableColumn="branchClassificatonDescription">
-              תיאור סיווג ענף
-              <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
-            </th>
-            <th pSortableColumn="climateColor">
-              צבע אקלים
-              <p-sortIcon field="climateColor"></p-sortIcon>
-            </th>
-            <th pSortableColumn="totalCreditRisk">
-              סיכון אשראי כולל
-              <p-sortIcon field="totalCreditRisk"></p-sortIcon>
-            </th>
-          </tr>
-        </ng-template>
-        
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td>{{ row.dataCorrectnessDate }}</td>
-            <td>{{ row.accountName || 'לא ידוע' }}</td>
-            <td>
-              <p-tag 
-                [value]="getCustomerRatingLabel(row.customerRating)"
-                severity="info">
-              </p-tag>
-            </td>
-            <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
-            <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
-            <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
-            <td>
-              <p-tag 
-                [value]="getClimateColorLabel(row.climateColor)"
-                [severity]="getClimateColorSeverity(row.climateColor)">
-              </p-tag>
-            </td>
-            <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
-          </tr>
-        </ng-template>
-        
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="8" class="text-center">
-              <div class="empty-message">
-                <i class="pi pi-info-circle"></i>
-                <p>לא נמצאו נתונים להצגה</p>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </p-card>
-  }
+        <p-table [value]="filteredData()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+            [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped">
 
-  <!-- No Data State -->
-  @if (!isLoading() && !climateData()) {
-    <p-card>
-      <div class="no-data-container">
-        <i class="pi pi-exclamation-triangle"></i>
-        <h3>אין נתונים זמינים</h3>
-        <p>לא נמצאו נתוני ESG להצגה</p>
-      </div>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="bank">
+                        בנק
+                        <p-sortIcon field="bank"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="branch">
+                        סניף
+                        <p-sortIcon field="branch"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="account">
+                        חשבון
+                        <p-sortIcon field="account"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="accountName">
+                        שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
+                    </th>
+
+                    <th pSortableColumn="dataCorrectnessDate">
+                        תאריך נכונות
+                        <p-sortIcon field="dataCorrectnessDate"></p-sortIcon>
+                    </th>
+
+                    <th pSortableColumn="customerRating">
+                        דירוג לקוח
+                        <p-sortIcon field="customerRating"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="currentCreditAuthority">
+                        סמך אשראי נוכחי
+                        <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="regualatedSectorDescription">
+                        תיאור מגזר מוסדר
+                        <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="branchClassificatonDescription">
+                        תיאור סיווג ענף
+                        <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="climateColor">
+                        צבע אקלים
+                        <p-sortIcon field="climateColor"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="totalCreditRisk">
+                        סיכון אשראי כולל
+                        <p-sortIcon field="totalCreditRisk"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td>{{ row.bank }}</td>
+                    <td>{{ row.branch }}</td>
+                    <td>{{ row.account }}</td>
+                    <td>{{ row.accountName || 'לא ידוע' }}</td>
+                    <td>{{ row.dataCorrectnessDate | date:'dd/MM/yyyy' }}</td>
+
+                    <td>
+                        <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
+                        </p-tag>
+                    </td>
+                    <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
+                    <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
+                    <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
+                    <td>
+                        <p-tag [value]="getClimateColorLabel(row.climateColor)"
+                            [severity]="getClimateColorSeverity(row.climateColor)">
+                        </p-tag>
+                    </td>
+                    <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" class="text-center">
+                        <div class="empty-message">
+                            <i class="pi pi-info-circle"></i>
+                            <p>לא נמצאו נתונים להצגה</p>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
     </p-card>
-  }
+    }
+
+    <!-- No Data State -->
+    @if (!isLoading() && !climateData()) {
+    <p-card>
+        <div class="no-data-container">
+            <i class="pi pi-exclamation-triangle"></i>
+            <h3>אין נתונים זמינים</h3>
+            <p>לא נמצאו נתוני ESG להצגה</p>
+        </div>
+    </p-card>
+    }
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top-btn" (click)="scrollToTop()" [class.visible]="showScrollToTop()" pTooltip="חזור למעלה"
+        tooltipPosition="left">
+        <i class="pi pi-angle-up"></i>
+    </button>
 </div>

@@ -14,9 +14,9 @@ import { ClimateDataService } from './services/climate-data.service';
 })
 export class App implements OnInit {
   protected title = 'דוחות ESG ואקלים';
-  
+
   protected activeTab = signal(0);
-  
+
   protected tabs = [
     { id: 0, label: 'דוח ESG ראשי', route: '/esg' },
     { id: 1, label: 'טביעת רגל פחמנית', route: '/carbon-footprint' },
@@ -32,10 +32,10 @@ export class App implements OnInit {
   ngOnInit(): void {
     // Initialize climate data when the app starts
     this.initializeData();
-    
+
     // Set initial active tab based on current route
     this.updateActiveTabFromRoute(this.router.url);
-    
+
     // Listen to route changes to update active tab
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
