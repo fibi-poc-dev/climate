@@ -54,16 +54,17 @@
                     <th pSortableColumn="accountName">
                         שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="customerRating">
+                        דירוג לקוח
+                        <p-sortIcon field="customerRating"></p-sortIcon>
+                    </th>
 
                     <th pSortableColumn="dataCorrectnessDate">
                         תאריך נכונות
                         <p-sortIcon field="dataCorrectnessDate"></p-sortIcon>
                     </th>
 
-                    <th pSortableColumn="customerRating">
-                        דירוג לקוח
-                        <p-sortIcon field="customerRating"></p-sortIcon>
-                    </th>
+
                     <th pSortableColumn="currentCreditAuthority">
                         סמך אשראי נוכחי
                         <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
@@ -93,12 +94,13 @@
                     <td>{{ row.branch }}</td>
                     <td>{{ row.account }}</td>
                     <td>{{ row.accountName || 'לא ידוע' }}</td>
-                    <td>{{ row.dataCorrectnessDate | date:'dd/MM/yyyy' }}</td>
-
                     <td>
                         <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
                         </p-tag>
                     </td>
+                    <td>{{ row.dataCorrectnessDate | date:'dd/MM/yyyy' }}</td>
+
+
                     <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
                     <td>{{ row.regualatedSectorDescription || 'לא ידוע' }}</td>
                     <td>{{ row.branchClassificatonDescription || 'לא ידוע' }}</td>
@@ -113,7 +115,7 @@
 
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="8" class="text-center">
+                    <td colspan="11" class="text-center">
                         <div class="empty-message">
                             <i class="pi pi-info-circle"></i>
                             <p>לא נמצאו נתונים להצגה</p>
