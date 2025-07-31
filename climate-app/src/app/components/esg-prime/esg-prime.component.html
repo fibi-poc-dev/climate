@@ -100,6 +100,15 @@
                             <th pSortableColumn="creditReportDescription">
                                 תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
                             </th>
+                            <th pSortableColumn="totalCollateral">
+                                סך בטחונות <p-sortIcon field="totalCollateral"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="totalSolo">
+                                סך סולו <p-sortIcon field="totalSolo"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="totalCreditRisk">
+                                סך סיכון אשראי באש"ח ללא משכנתאות <p-sortIcon field="totalCreditRisk"></p-sortIcon>
+                            </th>
                         </tr>
                     </ng-template>
 
@@ -122,6 +131,9 @@
                             <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
                             <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
                             <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
+                            <td>{{ formatCurrency(row.totalCollateral) }}</td>
+                            <td>{{ formatCurrency(row.totalSolo) }}</td>
+                            <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
                         </tr>
                     </ng-template>
 
