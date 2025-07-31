@@ -35,7 +35,7 @@
     <!-- Data Table -->
     <p-card header="נתוני דוח ESG ראשי">
         <p-table [value]="filteredData()" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
-            [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped">
+            [scrollable]="true" scrollDirection="horizontal" styleClass="p-datatable-striped p-datatable-sm">
 
             <ng-template pTemplate="header">
                 <tr>
@@ -91,10 +91,7 @@
                     <th pSortableColumn="creditReportDescription">
                         תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="climateColor">
-                        צבע אקלים
-                        <p-sortIcon field="climateColor"></p-sortIcon>
-                    </th>
+
 
                 </tr>
             </ng-template>
@@ -118,11 +115,7 @@
                     <td>{{ row.subbranchClassificationCode || 'לא ידוע' }}</td>
                     <td>{{ row.subbranchClassificationDescription || 'לא ידוע' }}</td>
                     <td>{{ row.creditReportDescription || 'לא ידוע' }}</td>
-                    <td>
-                        <p-tag [value]="getClimateColorLabel(row.climateColor)"
-                            [severity]="getClimateColorSeverity(row.climateColor)">
-                        </p-tag>
-                    </td>
+
 
                 </tr>
             </ng-template>
