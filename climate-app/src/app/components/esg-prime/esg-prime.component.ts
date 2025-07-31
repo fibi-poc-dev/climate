@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
@@ -52,7 +52,28 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     // Scroll to top visibility
     protected readonly showScrollToTop = computed(() => this.scrollY() > 300);
 
-    // Computed signals for filtered and processed data
+    constructor() {
+        // Effect to auto-select first row when data changes
+        effect(() => {
+            const data = this.filteredData();
+            const currentSelection = this.selectedRow();
+            const isLoading = this.isLoading();
+
+            // Auto-select first row if:
+            // 1. Data is not loading
+            // 2. There's data available
+            // 3. No row is currently selected OR the currently selected row is not in the filtered data
+            if (!isLoading && data.length > 0 && (!currentSelection || !data.includes(currentSelection))) {
+                // Use setTimeout to ensure the selection happens after the view updates
+                setTimeout(() => {
+                    this.selectedRow.set(data[0]);
+                }, 0);
+            } else if (data.length === 0 && !isLoading) {
+                // Clear selection if no data and not loading
+                this.selectedRow.set(null);
+            }
+        });
+    }    // Computed signals for filtered and processed data
     protected readonly esgMainReportData = computed(() => {
         const data = this.climateData();
         return data?.esg?.esgMainReport?.esgMainReportRows || [];
