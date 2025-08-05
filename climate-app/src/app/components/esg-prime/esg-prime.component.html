@@ -40,7 +40,7 @@
 
         <!-- Table Section -->
         <div class="table-section">
-            <p-card [class.selected-card]="selectedRow() !== null" header="נתוני דוח ESG ראשי">
+            <p-card [class.selected-card]="selectedRow() !== null">
                 <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10"
                     [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
                     scrollHeight="calc(100vh - 350px)" styleClass="p-datatable-striped p-datatable-sm"
@@ -48,67 +48,23 @@
 
                     <ng-template pTemplate="header">
                         <tr>
-                            <th pSortableColumn="bank">
-                                בנק
-                                <p-sortIcon field="bank"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branch">
-                                סניף
-                                <p-sortIcon field="branch"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="account">
-                                חשבון
-                                <p-sortIcon field="account"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="accountName">
-                                שם לקוח <p-sortIcon field="accountName"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="customerRating">
-                                דירוג לקוח
-                                <p-sortIcon field="customerRating"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="currentCreditAuthority">
-                                סמכות אשראי נוכחי
-                                <p-sortIcon field="currentCreditAuthority"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="handlingUnitCode">
-                                יחידה מטפלת
-                                <p-sortIcon field="handlingUnitCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="regualatedSectorCode">
-                                קוד מגזר פיקוחי
-                                <p-sortIcon field="regualatedSectorCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="regualatedSectorDescription">
-                                תיאור מגזר פיקוחי
-                                <p-sortIcon field="regualatedSectorDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branchClassificatonCode">
-                                קוד סיווג ענפי
-                                <p-sortIcon field="branchClassificatonCode"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="branchClassificatonDescription">
-                                תיאור סיווג ענפי
-                                <p-sortIcon field="branchClassificatonDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="subClassificationDescription">
-                                קוד תת סיווג ענפי <p-sortIcon field="subClassificationDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="subbranchClassificationDescription">
-                                תיאור תת סיווג ענפי <p-sortIcon field="subbranchClassificationDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="creditReportDescription">
-                                תיאור בדוח האשראי <p-sortIcon field="creditReportDescription"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="totalCollateral">
-                                סך בטחונות <p-sortIcon field="totalCollateral"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="totalSolo">
-                                סך סולו <p-sortIcon field="totalSolo"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="totalCreditRisk">
-                                סך סיכון אשראי באש"ח ללא משכנתאות <p-sortIcon field="totalCreditRisk"></p-sortIcon>
-                            </th>
+                            <th>בנק</th>
+                            <th>סניף</th>
+                            <th>חשבון</th>
+                            <th>שם לקוח</th>
+                            <th>דירוג לקוח</th>
+                            <th>סמכות אשראי נוכחי</th>
+                            <th>יחידה מטפלת</th>
+                            <th>קוד מגזר פיקוחי</th>
+                            <th>תיאור מגזר פיקוחי</th>
+                            <th>קוד סיווג ענפי</th>
+                            <th>תיאור סיווג ענפי</th>
+                            <th>קוד תת סיווג ענפי</th>
+                            <th>תיאור תת סיווג ענפי</th>
+                            <th>תיאור בדוח האשראי</th>
+                            <th>סך בטחונות</th>
+                            <th>סך סולו</th>
+                            <th>סך סיכון אשראי באש"ח ללא משכנתאות</th>
                         </tr>
                     </ng-template>
 
