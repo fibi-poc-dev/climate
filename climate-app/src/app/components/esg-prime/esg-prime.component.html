@@ -21,6 +21,11 @@
             </p-button>
             <p-button label="יצא לקובץ" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
             </p-button>
+            @if (esgRequestFilters().length > 0) {
+            <p-button label="שלח מסננים לשרת" icon="pi pi-send" severity="success" size="small"
+                (onClick)="sendFiltersToServer()">
+            </p-button>
+            }
             @if (selectedRow()) {
             <p-button label="נקה בחירה" icon="pi pi-times" severity="danger" size="small" (onClick)="clearSelection()">
             </p-button>
@@ -34,6 +39,22 @@
             </span>
         </div>
     </p-toolbar>
+
+    <!-- Debug Display for Active Filters -->
+    @if (esgRequestFilters().length > 0) {
+    <div class="filter-debug-display">
+        <p-card>
+            <div class="debug-content">
+                <h5>מסננים פעילים:</h5>
+                @for (filter of esgRequestFilters(); track filter.filterFieldName) {
+                <div class="filter-item">
+                    <strong>{{filter.filterFieldName}}</strong> {{filter.filterType}} "{{filter.filterFieldValue}}"
+                </div>
+                }
+            </div>
+        </p-card>
+    </div>
+    }
 
     <!-- Main Layout Container -->
     <div class="main-layout">
@@ -65,6 +86,29 @@
                             <th>סך בטחונות</th>
                             <th>סך סולו</th>
                             <th>סך סיכון אשראי באש"ח ללא משכנתאות</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <input type="text" pInputText placeholder="סנן לפי שם לקוח..."
+                                    [value]="accountNameFilter()"
+                                    (input)="onAccountNameFilterChange($any($event.target).value)" class="filter-input">
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </ng-template>
 

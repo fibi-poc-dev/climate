@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
+import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 
 // Interface for editable fields
 interface EditableField {
@@ -88,6 +89,43 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly scrollY = signal(0);
     protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
+    // Account name filter signal
+    protected readonly accountNameFilter = signal('');
+
+    // ESG Request filter array computed signal
+    protected readonly esgRequestFilters = computed(() => {
+        const filters: Filter[] = [];
+
+        // Add account name filter if value exists
+        const accountNameValue = this.accountNameFilter().trim();
+        if (accountNameValue) {
+            filters.push({
+                filterFieldName: 'accountName',
+                filterFieldValue: accountNameValue,
+                filterType: '='
+            });
+        }
+
+        return filters;
+    });
+
+    // ESG Request section computed signal
+    protected readonly esgRequest = computed((): RequestSection => ({
+        page: 1,
+        filter: this.esgRequestFilters()
+    }));
+
+    // Complete Climate Request computed signal
+    protected readonly climateRequest = computed((): ClimateRequest => ({
+        month: new Date().getMonth() + 1,
+        year: new Date().getFullYear(),
+        esgRequest: this.esgRequest(),
+        carbonFootprintRequest: { page: 1, filter: [] },
+        withoutProjects: { page: 1, filter: [] },
+        projectInfrastructureFinancing: { page: 1, filter: [] },
+        projectConstructionFinancing: { page: 1, filter: [] }
+    }));
+
     // Scroll to top visibility
     protected readonly showScrollToTop = computed(() => this.scrollY() > 300);
 
@@ -110,6 +148,14 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             } else if (data.length === 0 && !isLoading) {
                 // Clear selection if no data and not loading
                 this.selectedRow.set(null);
+            }
+        });
+
+        // Effect to log filter changes for debugging
+        effect(() => {
+            const request = this.climateRequest();
+            if (request.esgRequest.filter.length > 0) {
+                console.log('ESG Request Filters updated:', request.esgRequest.filter);
             }
         });
     }    // Computed signals for filtered and processed data
@@ -211,6 +257,21 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.filterText.set('');
         this.selectedClimateColor.set(null);
         this.selectedCustomerRating.set(null);
+        this.accountNameFilter.set('');
+    }
+
+    // Filter management methods
+    protected onAccountNameFilterChange(value: string): void {
+        this.accountNameFilter.set(value);
+        // Log the current climate request for debugging
+        console.log('Climate Request updated:', this.climateRequest());
+    }
+
+    protected sendFiltersToServer(): void {
+        const request = this.climateRequest();
+        console.log('Sending filters to server:', request);
+        // Here you would typically call a service method to send the request to the server
+        // this.climateDataService.sendFilterRequest(request);
     }
 
     protected selectRow(row: EsgMainReportRow): void {
