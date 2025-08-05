@@ -92,14 +92,17 @@
                             <th></th>
                             <th></th>
                             <th>
-                                <input type="text" pInputText placeholder="סנן לפי שם לקוח..."
-                                    [value]="accountNameFilter()"
-                                    (input)="onAccountNameFilterChange($any($event.target).value)" class="filter-input">
+                                <!-- Account Name Filter - Text Only -->
+                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('accountName')"
+                                    [value]="getFilterValue('accountName')"
+                                    (input)="updateFilterValue('accountName', $any($event.target).value)"
+                                    class="filter-input">
                             </th>
                             <th></th>
                             <th>
+                                <!-- Current Credit Authority Filter - Numeric with Operator -->
                                 <div class="filter-controls">
-                                    <select [value]="currentCreditAuthorityFilterTypeDisplay()"
+                                    <select [value]="getFilterOperatorDisplay('currentCreditAuthority')"
                                         (change)="onCurrentCreditAuthorityFilterTypeChange($any($event.target).value)"
                                         class="filter-type-select">
                                         <option value="=">=</option>
@@ -108,9 +111,10 @@
                                         <option value="gte">&gt;=</option>
                                         <option value="lte">&lt;=</option>
                                     </select>
-                                    <input type="text" pInputText placeholder="סכום..."
-                                        [value]="currentCreditAuthorityFilter()"
-                                        (input)="onCurrentCreditAuthorityFilterChange($any($event.target).value)"
+                                    <input type="text" pInputText
+                                        [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
+                                        [value]="getFilterValue('currentCreditAuthority')"
+                                        (input)="updateFilterValue('currentCreditAuthority', $any($event.target).value)"
                                         class="filter-input filter-amount">
                                 </div>
                             </th>

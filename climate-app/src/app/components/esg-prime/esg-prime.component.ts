@@ -13,6 +13,21 @@ interface EditableField {
     isDirty: boolean;
 }
 
+// Interface for filter field definition
+interface FilterFieldDefinition {
+    fieldName: string;
+    displayName: string;
+    filterType: 'text' | 'numeric';
+    defaultOperator: string;
+    availableOperators: string[];
+}
+
+// Interface for filter state
+interface FilterState {
+    value: string;
+    operator: string;
+}
+
 // Define all editable numeric fields
 interface EditableFieldDefinition {
     key: string;
@@ -37,6 +52,32 @@ const EDITABLE_FIELDS: EditableFieldDefinition[] = [
     { key: 'creditBalanceSheetRisk', label: 'סיכון אשראי מאזני', formatType: 'currency', getValue: (row) => row.creditBalanceSheetRisk },
     { key: 'creditOffBalanceSheetRisk', label: 'סיכון אשראי חוץ מאזני', formatType: 'currency', getValue: (row) => row.creditOffBalanceSheetRisk },
     { key: 'totalCreditRisk', label: 'סה"כ סיכון אשראי', formatType: 'currency', getValue: (row) => row.totalCreditRisk }
+];
+
+// Define filter field configurations
+const FILTER_FIELDS: FilterFieldDefinition[] = [
+    {
+        fieldName: 'accountName',
+        displayName: 'שם לקוח',
+        filterType: 'text',
+        defaultOperator: '=',
+        availableOperators: ['=']
+    },
+    {
+        fieldName: 'currentCreditAuthority',
+        displayName: 'סמכות אשראי נוכחי',
+        filterType: 'numeric',
+        defaultOperator: '=',
+        availableOperators: ['=', '>', '<', '>=', '<=']
+    }
+    // To add a new filter field, simply add a new entry here:
+    // {
+    //     fieldName: 'totalSolo',
+    //     displayName: 'סך סולו',
+    //     filterType: 'numeric',
+    //     defaultOperator: '=',
+    //     availableOperators: ['=', '>', '<', '>=', '<=']
+    // }
 ];
 
 // PrimeNG imports
@@ -89,12 +130,21 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly scrollY = signal(0);
     protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
-    // Account name filter signal
-    protected readonly accountNameFilter = signal('');
+    // Generic filter states - one signal for all filters
+    protected readonly filterStates = signal<Map<string, FilterState>>(new Map());
 
-    // Current Credit Authority filter signals
-    protected readonly currentCreditAuthorityFilter = signal('');
-    protected readonly currentCreditAuthorityFilterType = signal('=');
+    // Helper computed signals for easy access to specific filters
+    protected readonly accountNameFilter = computed(() =>
+        this.filterStates().get('accountName')?.value || ''
+    );
+
+    protected readonly currentCreditAuthorityFilter = computed(() =>
+        this.filterStates().get('currentCreditAuthority')?.value || ''
+    );
+
+    protected readonly currentCreditAuthorityFilterType = computed(() =>
+        this.filterStates().get('currentCreditAuthority')?.operator || '='
+    );
 
     // Convert filter type for display in select element
     protected readonly currentCreditAuthorityFilterTypeDisplay = computed(() => {
@@ -108,29 +158,21 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         }
     });
 
-    // ESG Request filter array computed signal
+    // ESG Request filter array computed signal - now generic
     protected readonly esgRequestFilters = computed(() => {
         const filters: Filter[] = [];
+        const filterStates = this.filterStates();
 
-        // Add account name filter if value exists
-        const accountNameValue = this.accountNameFilter().trim();
-        if (accountNameValue) {
-            filters.push({
-                filterFieldName: 'accountName',
-                filterFieldValue: accountNameValue,
-                filterType: '='
-            });
-        }
-
-        // Add current credit authority filter if value exists
-        const creditAuthorityValue = this.currentCreditAuthorityFilter().trim();
-        if (creditAuthorityValue) {
-            filters.push({
-                filterFieldName: 'currentCreditAuthority',
-                filterFieldValue: creditAuthorityValue,
-                filterType: this.currentCreditAuthorityFilterType()
-            });
-        }
+        // Iterate through all filter states and create Filter objects
+        filterStates.forEach((state, fieldName) => {
+            if (state.value.trim()) {
+                filters.push({
+                    filterFieldName: fieldName,
+                    filterFieldValue: state.value.trim(),
+                    filterType: state.operator
+                });
+            }
+        });
 
         return filters;
     });
@@ -283,21 +325,60 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.filterText.set('');
         this.selectedClimateColor.set(null);
         this.selectedCustomerRating.set(null);
-        this.accountNameFilter.set('');
-        this.currentCreditAuthorityFilter.set('');
-        this.currentCreditAuthorityFilterType.set('=');
+        // Clear all generic filters
+        this.filterStates.set(new Map());
     }
 
-    // Filter management methods
+    // Generic filter management methods
+    protected updateFilterValue(fieldName: string, value: string): void {
+        const currentStates = this.filterStates();
+        const newStates = new Map(currentStates);
+
+        if (value.trim()) {
+            const existing = newStates.get(fieldName);
+            const operator = existing?.operator || this.getDefaultOperator(fieldName);
+            newStates.set(fieldName, { value: value.trim(), operator });
+        } else {
+            newStates.delete(fieldName);
+        }
+
+        this.filterStates.set(newStates);
+        console.log(`Filter ${fieldName} updated:`, this.climateRequest());
+    }
+
+    protected updateFilterOperator(fieldName: string, operator: string): void {
+        const currentStates = this.filterStates();
+        const newStates = new Map(currentStates);
+        const existing = newStates.get(fieldName);
+
+        if (existing) {
+            newStates.set(fieldName, { ...existing, operator });
+            this.filterStates.set(newStates);
+            console.log(`Filter operator ${fieldName} updated:`, this.climateRequest());
+        }
+    }
+
+    protected getDefaultOperator(fieldName: string): string {
+        const fieldDef = FILTER_FIELDS.find(f => f.fieldName === fieldName);
+        return fieldDef?.defaultOperator || '=';
+    }
+
+    protected getAvailableOperators(fieldName: string): string[] {
+        const fieldDef = FILTER_FIELDS.find(f => f.fieldName === fieldName);
+        return fieldDef?.availableOperators || ['='];
+    }
+
+    protected getFilterFieldDefinition(fieldName: string): FilterFieldDefinition | undefined {
+        return FILTER_FIELDS.find(f => f.fieldName === fieldName);
+    }
+
+    // Specific methods that use the generic approach
     protected onAccountNameFilterChange(value: string): void {
-        this.accountNameFilter.set(value);
-        // Log the current climate request for debugging
-        console.log('Climate Request updated:', this.climateRequest());
+        this.updateFilterValue('accountName', value);
     }
 
     protected onCurrentCreditAuthorityFilterChange(value: string): void {
-        this.currentCreditAuthorityFilter.set(value);
-        console.log('Current Credit Authority Filter updated:', this.climateRequest());
+        this.updateFilterValue('currentCreditAuthority', value);
     }
 
     protected onCurrentCreditAuthorityFilterTypeChange(value: string): void {
@@ -319,8 +400,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             default:
                 actualValue = '=';
         }
-        this.currentCreditAuthorityFilterType.set(actualValue);
-        console.log('Current Credit Authority Filter Type updated:', this.climateRequest());
+        this.updateFilterOperator('currentCreditAuthority', actualValue);
     }
 
     protected sendFiltersToServer(): void {
@@ -328,6 +408,84 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         console.log('Sending filters to server:', request);
         // Here you would typically call a service method to send the request to the server
         // this.climateDataService.sendFilterRequest(request);
+    }
+
+    // Helper methods for template
+    protected getFilterValue(fieldName: string): string {
+        return this.filterStates().get(fieldName)?.value || '';
+    }
+
+    protected getFilterOperator(fieldName: string): string {
+        return this.filterStates().get(fieldName)?.operator || this.getDefaultOperator(fieldName);
+    }
+
+    protected getFilterOperatorDisplay(fieldName: string): string {
+        const operator = this.getFilterOperator(fieldName);
+        switch (operator) {
+            case '>': return 'gt';
+            case '<': return 'lt';
+            case '>=': return 'gte';
+            case '<=': return 'lte';
+            default: return '=';
+        }
+    }
+
+    protected isNumericFilter(fieldName: string): boolean {
+        const fieldDef = this.getFilterFieldDefinition(fieldName);
+        return fieldDef?.filterType === 'numeric';
+    }
+
+    protected isTextFilter(fieldName: string): boolean {
+        const fieldDef = this.getFilterFieldDefinition(fieldName);
+        return fieldDef?.filterType === 'text';
+    }
+
+    protected getFilterPlaceholder(fieldName: string): string {
+        const fieldDef = this.getFilterFieldDefinition(fieldName);
+        if (!fieldDef) return '';
+
+        switch (fieldDef.filterType) {
+            case 'numeric':
+                return 'סכום...';
+            case 'text':
+                return `סנן לפי ${fieldDef.displayName}...`;
+            default:
+                return '';
+        }
+    }
+
+    // Generic filter change handler that can handle both value and operator changes
+    protected onGenericFilterChange(fieldName: string, value: string, changeType: 'value' | 'operator' = 'value'): void {
+        if (changeType === 'value') {
+            this.updateFilterValue(fieldName, value);
+        } else {
+            // Handle operator conversion for numeric fields
+            let actualOperator = value;
+            if (this.isNumericFilter(fieldName)) {
+                switch (value) {
+                    case 'gt': actualOperator = '>'; break;
+                    case 'lt': actualOperator = '<'; break;
+                    case 'gte': actualOperator = '>='; break;
+                    case 'lte': actualOperator = '<='; break;
+                    default: actualOperator = '=';
+                }
+            }
+            this.updateFilterOperator(fieldName, actualOperator);
+        }
+    }
+
+    // Get all configured filter fields
+    protected getFilterFieldDefinitions(): FilterFieldDefinition[] {
+        return FILTER_FIELDS;
+    }
+
+    // Get the column index for a filter field (useful for dynamic template generation)
+    protected getFilterColumnIndex(fieldName: string): number {
+        const columnMap: { [key: string]: number } = {
+            'accountName': 3,        // 4th column (0-indexed)
+            'currentCreditAuthority': 5  // 6th column (0-indexed)
+        };
+        return columnMap[fieldName] ?? -1;
     }
 
     protected selectRow(row: EsgMainReportRow): void {
