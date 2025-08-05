@@ -97,7 +97,23 @@
                                     (input)="onAccountNameFilterChange($any($event.target).value)" class="filter-input">
                             </th>
                             <th></th>
-                            <th></th>
+                            <th>
+                                <div class="filter-controls">
+                                    <select [value]="currentCreditAuthorityFilterTypeDisplay()"
+                                        (change)="onCurrentCreditAuthorityFilterTypeChange($any($event.target).value)"
+                                        class="filter-type-select">
+                                        <option value="=">=</option>
+                                        <option value="gt">&gt;</option>
+                                        <option value="lt">&lt;</option>
+                                        <option value="gte">&gt;=</option>
+                                        <option value="lte">&lt;=</option>
+                                    </select>
+                                    <input type="text" pInputText placeholder="סכום..."
+                                        [value]="currentCreditAuthorityFilter()"
+                                        (input)="onCurrentCreditAuthorityFilterChange($any($event.target).value)"
+                                        class="filter-input filter-amount">
+                                </div>
+                            </th>
                             <th></th>
                             <th></th>
                             <th></th>

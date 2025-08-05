@@ -92,6 +92,22 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     // Account name filter signal
     protected readonly accountNameFilter = signal('');
 
+    // Current Credit Authority filter signals
+    protected readonly currentCreditAuthorityFilter = signal('');
+    protected readonly currentCreditAuthorityFilterType = signal('=');
+
+    // Convert filter type for display in select element
+    protected readonly currentCreditAuthorityFilterTypeDisplay = computed(() => {
+        const actualType = this.currentCreditAuthorityFilterType();
+        switch (actualType) {
+            case '>': return 'gt';
+            case '<': return 'lt';
+            case '>=': return 'gte';
+            case '<=': return 'lte';
+            default: return '=';
+        }
+    });
+
     // ESG Request filter array computed signal
     protected readonly esgRequestFilters = computed(() => {
         const filters: Filter[] = [];
@@ -103,6 +119,16 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                 filterFieldName: 'accountName',
                 filterFieldValue: accountNameValue,
                 filterType: '='
+            });
+        }
+
+        // Add current credit authority filter if value exists
+        const creditAuthorityValue = this.currentCreditAuthorityFilter().trim();
+        if (creditAuthorityValue) {
+            filters.push({
+                filterFieldName: 'currentCreditAuthority',
+                filterFieldValue: creditAuthorityValue,
+                filterType: this.currentCreditAuthorityFilterType()
             });
         }
 
@@ -258,6 +284,8 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.selectedClimateColor.set(null);
         this.selectedCustomerRating.set(null);
         this.accountNameFilter.set('');
+        this.currentCreditAuthorityFilter.set('');
+        this.currentCreditAuthorityFilterType.set('=');
     }
 
     // Filter management methods
@@ -265,6 +293,34 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.accountNameFilter.set(value);
         // Log the current climate request for debugging
         console.log('Climate Request updated:', this.climateRequest());
+    }
+
+    protected onCurrentCreditAuthorityFilterChange(value: string): void {
+        this.currentCreditAuthorityFilter.set(value);
+        console.log('Current Credit Authority Filter updated:', this.climateRequest());
+    }
+
+    protected onCurrentCreditAuthorityFilterTypeChange(value: string): void {
+        // Convert display values back to actual operators
+        let actualValue = value;
+        switch (value) {
+            case 'gt':
+                actualValue = '>';
+                break;
+            case 'lt':
+                actualValue = '<';
+                break;
+            case 'gte':
+                actualValue = '>=';
+                break;
+            case 'lte':
+                actualValue = '<=';
+                break;
+            default:
+                actualValue = '=';
+        }
+        this.currentCreditAuthorityFilterType.set(actualValue);
+        console.log('Current Credit Authority Filter Type updated:', this.climateRequest());
     }
 
     protected sendFiltersToServer(): void {

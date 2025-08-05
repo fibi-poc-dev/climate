@@ -836,6 +836,65 @@
     font-style: italic;
 }
 
+/* Filter Controls Container */
+.filter-controls {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    width: 100%;
+}
+
+.filter-type-select {
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.filter-amount {
+    flex: 1;
+    min-width: 80px;
+}
+
+/* Responsive design for filter controls */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .filter-type-select {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .filter-amount {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* Filter Type Select Styling */
+.filter-type-select {
+    font-size: 12px;
+    padding: 0.4rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.filter-type-select:focus {
+    outline: none;
+    border-color: rgba(24, 40, 95, 0.5);
+    background-color: white;
+    box-shadow: 0 0 4px rgba(24, 40, 95, 0.3);
+}
+
+.filter-type-select:hover {
+    border-color: rgba(24, 40, 95, 0.5);
+}
+
 /* Debug Filter Display */
 .filter-debug-display {
     margin-bottom: 1rem;
