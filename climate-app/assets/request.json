@@ -1,0 +1,54 @@
+{
+    "month": 0,
+    "year": 0,
+    "esgRequest": {
+        "page": 0,
+        "filter": [
+            {
+                "filterFieldName": "string",
+                "filterFieldValue": "string",
+                "filterType": "string"
+            }
+        ]
+    },
+    "carbonFootprintRequest": {
+        "page": 0,
+        "filter": [
+            {
+                "filterFieldName": "string",
+                "filterFieldValue": "string",
+                "filterType": "string"
+            }
+        ]
+    },
+    "withoutProjects": {
+        "page": 0,
+        "filter": [
+            {
+                "filterFieldName": "string",
+                "filterFieldValue": "string",
+                "filterType": "string"
+            }
+        ]
+    },
+    "projectInfrastructureFinancing": {
+        "page": 0,
+        "filter": [
+            {
+                "filterFieldName": "string",
+                "filterFieldValue": "string",
+                "filterType": "string"
+            }
+        ]
+    },
+    "projectConstructionFinancing": {
+        "page": 0,
+        "filter": [
+            {
+                "filterFieldName": "string",
+                "filterFieldValue": "string",
+                "filterType": "string"
+            }
+        ]
+    }
+}
