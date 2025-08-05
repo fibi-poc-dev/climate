@@ -58,7 +58,7 @@
     position: relative;
 }
 
-/* Main Layout */
+/* Main Layout - 75% Table, 25% Details */
 .main-layout {
     display: flex;
     gap: 1rem;
@@ -67,15 +67,16 @@
 }
 
 .details-panel {
-    flex: 0 0 400px;
-    /* Fixed width for details panel */
+    flex: 0 0 25%;
+    /* Fixed 25% width for details panel */
     overflow-y: auto;
     max-height: 100%;
     /* Full height */
 }
 
 .table-section {
-    flex: 1;
+    flex: 0 0 75%;
+    /* Fixed 75% width for table section (masterESG) */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -708,6 +709,20 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+
+    /* Medium screens - maintain proportions but allow slight flexibility */
+    .table-section {
+        flex: 0 1 73%;
+        /* Slightly more flexible for medium screens */
+    }
+
+    .details-panel {
+        flex: 0 1 27%;
+        /* Slightly more flexible for medium screens */
+    }
+}
+
 @media (max-width: 768px) {
     .esg-prime-container {
         padding: 0.5rem;
