@@ -102,6 +102,11 @@
                             <th>
                                 <!-- Current Credit Authority Filter - Numeric with Operator -->
                                 <div class="filter-controls">
+                                    <input type="text" pInputText
+                                        [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
+                                        [value]="getFilterValue('currentCreditAuthority')"
+                                        (input)="updateFilterValue('currentCreditAuthority', $any($event.target).value)"
+                                        class="filter-input filter-amount">
                                     <select [value]="getFilterOperatorDisplay('currentCreditAuthority')"
                                         (change)="onCurrentCreditAuthorityFilterTypeChange($any($event.target).value)"
                                         class="filter-type-select">
@@ -111,11 +116,6 @@
                                         <option value="gte">&gt;=</option>
                                         <option value="lte">&lt;=</option>
                                     </select>
-                                    <input type="text" pInputText
-                                        [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
-                                        [value]="getFilterValue('currentCreditAuthority')"
-                                        (input)="updateFilterValue('currentCreditAuthority', $any($event.target).value)"
-                                        class="filter-input filter-amount">
                                 </div>
                             </th>
                             <th></th>
