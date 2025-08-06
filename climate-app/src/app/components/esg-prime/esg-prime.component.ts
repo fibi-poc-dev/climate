@@ -911,17 +911,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }
-
-    // Filter Display Methods
-    protected hasActiveFilters(): boolean {
-        const filters = this.esgRequestFilters();
-        return filters.length > 0;
-    }
-
-    protected getActiveFilters(): Filter[] {
-        return this.esgRequestFilters();
-    }
+    }    
 
     protected getFilterDisplayName(fieldName: string): string {
         const field = FILTER_FIELDS.find((f: FilterFieldDefinition) => f.fieldName === fieldName);

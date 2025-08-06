@@ -39,18 +39,20 @@
 
     <!-- Debug Display for Active Filters -->
     @if (esgRequestFilters().length > 0) {
-    <div class="filter-debug-display">
-        <p-card>
-            <div class="debug-content">
-                <h5>מסננים פעילים:</h5>
-                @for (filter of esgRequestFilters(); track filter.filterFieldName) {
-                <div class="filter-item">
-                    <strong>{{filter.filterFieldName}}</strong> {{filter.filterType}} "{{filter.filterFieldValue}}"
-                </div>
-                }
-            </div>
-        </p-card>
-    </div>
+    <p-card header="מסננים פעילים" styleClass="active-filters-panel">
+                    <div class="active-filters-container">
+                        @for (filter of esgRequestFilters(); track filter.filterFieldName) {
+                            <div class="filter-chip">
+                                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
+                                <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
+                                <button class="remove-filter-btn" 
+                                        (click)="removeFilter(filter.filterFieldName)"
+                                        title="הסר מסנן">✕</button>
+                            </div>
+                        }
+                    </div>
+                </p-card>
     }
     <!-- Main Layout Container -->
     <div class="main-layout">
@@ -186,23 +188,7 @@
         <!-- Details Panel -->
         <div class="details-panel">
             @if (selectedRow()) {
-            <!-- Active Filters Display Card -->
-            @if (hasActiveFilters()) {
-                <p-panel header="מסננים פעילים" styleClass="active-filters-panel">
-                    <div class="active-filters-container">
-                        @for (filter of getActiveFilters(); track filter.filterFieldName) {
-                            <div class="filter-chip">
-                                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
-                                <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
-                                <button class="remove-filter-btn" 
-                                        (click)="removeFilter(filter.filterFieldName)"
-                                        title="הסר מסנן">✕</button>
-                            </div>
-                        }
-                    </div>
-                </p-panel>
-            }
+            
             
             <p-panel header="{{selectedRow()?.accountName}}">
                 <div class="detail-sections-horizontal">
