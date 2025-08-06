@@ -203,8 +203,8 @@
 
 .detail-item {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
     padding: 0.25rem 0;
     border-bottom: 1px solid #f0f0f0;
     align-items: start;
@@ -216,6 +216,7 @@
     font-size: 0.875rem;
     text-align: right;
     justify-self: start;
+    align-self: center;
 }
 
 .detail-item span {
@@ -223,10 +224,12 @@
     font-size: 0.875rem;
     text-align: right;
     justify-self: start;
+    align-self: center;
 }
 
 .detail-item p-tag {
     justify-self: start;
+    align-self: center;
     display: flex;
     justify-content: flex-end;
 }
@@ -234,6 +237,7 @@
 /* Editable Field Styles */
 .editable-field {
     width: 100%;
+    align-self: center;
 }
 
 .editable-field.editing {
