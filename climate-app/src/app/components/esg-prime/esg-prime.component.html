@@ -186,6 +186,24 @@
         <!-- Details Panel -->
         <div class="details-panel">
             @if (selectedRow()) {
+            <!-- Active Filters Display Card -->
+            @if (hasActiveFilters()) {
+                <p-panel header="מסננים פעילים" styleClass="active-filters-panel">
+                    <div class="active-filters-container">
+                        @for (filter of getActiveFilters(); track filter.filterFieldName) {
+                            <div class="filter-chip">
+                                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
+                                <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
+                                <button class="remove-filter-btn" 
+                                        (click)="removeFilter(filter.filterFieldName)"
+                                        title="הסר מסנן">✕</button>
+                            </div>
+                        }
+                    </div>
+                </p-panel>
+            }
+            
             <p-panel header="{{selectedRow()?.accountName}}">
                 <div class="detail-sections-horizontal">
 
@@ -815,16 +833,8 @@
                         <div class="detail-item">
                             <label>סה"כ סיכון אשראי:</label>
                             <div class="inline-filter-field" [class.filtering]="getInlineFilter('totalCreditRisk')?.isActive">
-                                <!-- Display Mode -->
+                                <!-- Display Mode - Only Icon -->
                                 <div *ngIf="!getInlineFilter('totalCreditRisk')?.isActive" class="filter-display-mode">
-                                    <span class="filter-value" 
-                                          [class.has-filter]="getFilterValue('totalCreditRisk')"
-                                          (click)="startInlineFilter('totalCreditRisk')">
-                                        {{ getFilterValue('totalCreditRisk') || 'לחץ להוספת מסנן' }}
-                                        @if (getFilterValue('totalCreditRisk')) {
-                                            <span class="filter-operator-display">({{ getFilterOperatorDisplay('totalCreditRisk') }})</span>
-                                        }
-                                    </span>
                                     <button class="filter-btn" 
                                             (click)="startInlineFilter('totalCreditRisk')"
                                             title="הוסף מסנן">🔍</button>

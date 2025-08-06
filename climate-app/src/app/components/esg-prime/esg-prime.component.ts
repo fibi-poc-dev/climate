@@ -912,4 +912,38 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         link.click();
         document.body.removeChild(link);
     }
+
+    // Filter Display Methods
+    protected hasActiveFilters(): boolean {
+        const filters = this.esgRequestFilters();
+        return filters.length > 0;
+    }
+
+    protected getActiveFilters(): Filter[] {
+        return this.esgRequestFilters();
+    }
+
+    protected getFilterDisplayName(fieldName: string): string {
+        const field = FILTER_FIELDS.find((f: FilterFieldDefinition) => f.fieldName === fieldName);
+        return field?.displayName || fieldName;
+    }
+
+    protected getOperatorSymbol(filterType: string): string {
+        switch (filterType) {
+            case '=': return '=';
+            case '>': return '>';
+            case '<': return '<';
+            case '>=': return '>=';
+            case '<=': return '<=';
+            default: return filterType;
+        }
+    }
+
+    protected removeFilter(fieldName: string): void {
+        this.filterStates.update(states => {
+            const updatedStates = new Map(states);
+            updatedStates.delete(fieldName);
+            return updatedStates;
+        });
+    }
 }

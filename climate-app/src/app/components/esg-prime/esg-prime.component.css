@@ -396,7 +396,7 @@
 .filter-display-mode {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     width: 100%;
 }
 
@@ -429,18 +429,21 @@
 
 .filter-btn {
     background: none;
-    border: none;
+    border: 1px solid #ddd;
     cursor: pointer;
-    padding: 4px;
-    border-radius: 3px;
-    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 16px;
     opacity: 0.7;
     transition: all 0.2s ease;
+    background-color: #f8f9fa;
 }
 
 .filter-btn:hover {
     opacity: 1;
     background-color: rgba(0,123,255,0.1);
+    border-color: rgba(0,123,255,0.3);
+    transform: scale(1.05);
 }
 
 /* Filter Edit Mode */
@@ -519,6 +522,67 @@
 
 .action-btn.cancel:hover {
     background-color: #c82333;
+}
+
+/* Active Filters Display */
+.active-filters-panel {
+    margin-bottom: 1rem;
+}
+
+.active-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.filter-chip {
+    display: flex;
+    align-items: center;
+    background-color: rgba(24, 40, 95, 0.1);
+    border: 1px solid rgba(24, 40, 95, 0.3);
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    gap: 4px;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+}
+
+.filter-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.filter-operator {
+    color: #666;
+    font-size: 0.8em;
+}
+
+.remove-filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 0 2px;
+    margin-left: 4px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remove-filter-btn:hover {
+    background-color: #dc3545;
+    color: white;
 }
 
 .no-selection {
