@@ -19,7 +19,6 @@ interface FilterFieldDefinition {
     displayName: string;
     filterType: 'text' | 'numeric';
     defaultOperator: string;
-    availableOperators: string[];
 }
 
 // Interface for filter state
@@ -60,24 +59,22 @@ const FILTER_FIELDS: FilterFieldDefinition[] = [
         fieldName: 'accountName',
         displayName: 'שם לקוח',
         filterType: 'text',
-        defaultOperator: '=',
-        availableOperators: ['=']
+        defaultOperator: '='
     },
     {
         fieldName: 'currentCreditAuthority',
         displayName: 'סמכות אשראי נוכחי',
         filterType: 'numeric',
-        defaultOperator: '=',
-        availableOperators: ['=', '>', '<', '>=', '<=']
+        defaultOperator: '='
+    },
+    {
+        fieldName: 'totalSolo',
+        displayName: 'סך סולו',
+        filterType: 'numeric',
+        defaultOperator: '='
     }
-    // To add a new filter field, simply add a new entry here:
-    // {
-    //     fieldName: 'totalSolo',
-    //     displayName: 'סך סולו',
-    //     filterType: 'numeric',
-    //     defaultOperator: '=',
-    //     availableOperators: ['=', '>', '<', '>=', '<=']
-    // }
+    // Adding new filters is now easy - just specify fieldName, displayName, and filterType
+    // The availableOperators will be automatically determined based on filterType
 ];
 
 // PrimeNG imports
@@ -365,11 +362,36 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     protected getAvailableOperators(fieldName: string): string[] {
         const fieldDef = FILTER_FIELDS.find(f => f.fieldName === fieldName);
-        return fieldDef?.availableOperators || ['='];
+        if (!fieldDef) return ['='];
+        
+        // Use the generic helper method
+        return this.getAvailableOperatorsForType(fieldDef.filterType);
     }
 
     protected getFilterFieldDefinition(fieldName: string): FilterFieldDefinition | undefined {
         return FILTER_FIELDS.find(f => f.fieldName === fieldName);
+    }
+
+    // Helper method to get available operators for any filter type
+    protected getAvailableOperatorsForType(filterType: 'text' | 'numeric'): string[] {
+        switch (filterType) {
+            case 'text':
+                return ['='];
+            case 'numeric':
+                return ['=', '>', '<', '>=', '<='];
+            default:
+                return ['='];
+        }
+    }
+
+    // Helper method to create a filter field definition easily
+    protected createFilterField(fieldName: string, displayName: string, filterType: 'text' | 'numeric'): FilterFieldDefinition {
+        return {
+            fieldName,
+            displayName,
+            filterType,
+            defaultOperator: '='
+        };
     }
 
     // Specific methods that use the generic approach
@@ -381,26 +403,34 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.updateFilterValue('currentCreditAuthority', value);
     }
 
-    protected onCurrentCreditAuthorityFilterTypeChange(value: string): void {
-        // Convert display values back to actual operators
-        let actualValue = value;
-        switch (value) {
+    // Helper method to convert display operator values to actual operators
+    protected convertDisplayOperatorToActual(displayValue: string): string {
+        switch (displayValue) {
             case 'gt':
-                actualValue = '>';
-                break;
+                return '>';
             case 'lt':
-                actualValue = '<';
-                break;
+                return '<';
             case 'gte':
-                actualValue = '>=';
-                break;
+                return '>=';
             case 'lte':
-                actualValue = '<=';
-                break;
+                return '<=';
             default:
-                actualValue = '=';
+                return '=';
         }
-        this.updateFilterOperator('currentCreditAuthority', actualValue);
+    }
+
+    // Generic method to handle operator changes for any numeric filter
+    protected onFilterOperatorChange(fieldName: string, displayValue: string): void {
+        const actualValue = this.convertDisplayOperatorToActual(displayValue);
+        this.updateFilterOperator(fieldName, actualValue);
+    }
+
+    protected onCurrentCreditAuthorityFilterTypeChange(value: string): void {
+        this.onFilterOperatorChange('currentCreditAuthority', value);
+    }
+
+    protected onTotalSoloFilterTypeChange(value: string): void {
+        this.onFilterOperatorChange('totalSolo', value);
     }
 
     protected sendFiltersToServer(): void {
