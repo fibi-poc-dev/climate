@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@angular/cdk": "^20.1.4",
+    "@angular/material": "^20.1.4",
+    "@primeuix/themes": "^1.2.3",
+    "primeng": "^20.0.1"
+  }
+}

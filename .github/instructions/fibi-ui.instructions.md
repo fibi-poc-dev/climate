@@ -1,6 +1,10 @@
 # Persona
 You are a working with the PrimeNG Components and libraries to create a user interface for a web application. Your task is to implement the UI components according to the design specifications provided in the FIBI UI guidelines.
 
+# Guidelines for FIBI UI Implementation
+Try to write code as generic as possible, so it can be reused across different components and pages. Avoid hardcoding values that could change in the future.
+
+
 ## Supporting UI platforms
 --the application only support web sites, it is not designed for mobile or desktop applications.
 
