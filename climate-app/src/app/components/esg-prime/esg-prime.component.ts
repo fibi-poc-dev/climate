@@ -27,6 +27,15 @@ interface FilterState {
     operator: string;
 }
 
+// Interface for inline filter (edit-field like filter)
+interface InlineFilterState {
+    fieldName: string;
+    isActive: boolean;
+    value: string;
+    operator: string;
+    displayName: string;
+}
+
 // Define all editable numeric fields
 interface EditableFieldDefinition {
     key: string;
@@ -70,6 +79,12 @@ const FILTER_FIELDS: FilterFieldDefinition[] = [
     {
         fieldName: 'totalSolo',
         displayName: 'סך סולו',
+        filterType: 'numeric',
+        defaultOperator: '='
+    },
+    {
+        fieldName: 'totalCreditRisk',
+        displayName: 'סך סיכון אשראי',
         filterType: 'numeric',
         defaultOperator: '='
     }
@@ -129,6 +144,9 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     // Generic filter states - one signal for all filters
     protected readonly filterStates = signal<Map<string, FilterState>>(new Map());
+
+    // Inline filter states for edit-field like filters
+    protected readonly inlineFilterStates = signal<Map<string, InlineFilterState>>(new Map());
 
     // Helper computed signals for easy access to specific filters
     protected readonly accountNameFilter = computed(() =>
@@ -283,6 +301,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     // Methods
     ngOnInit(): void {
         this.setupScrollListener();
+        this.initializeInlineFilters();
     }
 
     ngOnDestroy(): void {
@@ -457,6 +476,84 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             case '>=': return 'gte';
             case '<=': return 'lte';
             default: return '=';
+        }
+    }
+
+    // Inline filter methods
+    private initializeInlineFilters(): void {
+        const inlineFilters = new Map<string, InlineFilterState>();
+        
+        // Initialize totalCreditRisk inline filter
+        inlineFilters.set('totalCreditRisk', {
+            fieldName: 'totalCreditRisk',
+            isActive: false,
+            value: '',
+            operator: '=',
+            displayName: 'סך סיכון אשראי'
+        });
+        
+        this.inlineFilterStates.set(inlineFilters);
+    }
+
+    protected getInlineFilter(fieldName: string): InlineFilterState | undefined {
+        return this.inlineFilterStates().get(fieldName);
+    }
+
+    protected startInlineFilter(fieldName: string): void {
+        const currentFilters = new Map(this.inlineFilterStates());
+        const filter = currentFilters.get(fieldName);
+        if (filter) {
+            filter.isActive = true;
+            currentFilters.set(fieldName, filter);
+            this.inlineFilterStates.set(currentFilters);
+        }
+    }
+
+    protected cancelInlineFilter(fieldName: string): void {
+        const currentFilters = new Map(this.inlineFilterStates());
+        const filter = currentFilters.get(fieldName);
+        if (filter) {
+            filter.isActive = false;
+            filter.value = '';
+            currentFilters.set(fieldName, filter);
+            this.inlineFilterStates.set(currentFilters);
+        }
+    }
+
+    protected saveInlineFilter(fieldName: string): void {
+        const filter = this.inlineFilterStates().get(fieldName);
+        if (filter && filter.value.trim()) {
+            // Add to the main filter states
+            const currentFilters = new Map(this.filterStates());
+            currentFilters.set(fieldName, {
+                value: filter.value,
+                operator: filter.operator
+            });
+            this.filterStates.set(currentFilters);
+            
+            // Deactivate inline filter
+            this.cancelInlineFilter(fieldName);
+        }
+    }
+
+    protected onInlineFilterInput(event: Event, fieldName: string): void {
+        const input = event.target as HTMLInputElement;
+        const currentFilters = new Map(this.inlineFilterStates());
+        const filter = currentFilters.get(fieldName);
+        if (filter) {
+            filter.value = input.value;
+            currentFilters.set(fieldName, filter);
+            this.inlineFilterStates.set(currentFilters);
+        }
+    }
+
+    protected onInlineFilterOperatorChange(fieldName: string, operator: string): void {
+        const currentFilters = new Map(this.inlineFilterStates());
+        const filter = currentFilters.get(fieldName);
+        if (filter) {
+            filter.operator = operator;
+            currentFilters.set(fieldName, filter);
+            this.inlineFilterStates.set(currentFilters);
         }
     }
 

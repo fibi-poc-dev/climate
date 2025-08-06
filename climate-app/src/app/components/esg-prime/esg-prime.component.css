@@ -372,6 +372,155 @@
     background-color: #c82333;
 }
 
+/* Inline Filter Styles */
+.inline-filter-field {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    transition: all 0.2s ease;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    align-self: center;
+}
+
+.inline-filter-field.filtering {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Filter Display Mode */
+.filter-display-mode {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.filter-value {
+    flex: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+    color: #666;
+    font-size: 0.875rem;
+    text-align: right;
+}
+
+.filter-value:hover {
+    background-color: rgba(0,123,255,0.1);
+}
+
+.filter-value.has-filter {
+    color: #0056b3;
+    font-weight: 500;
+    background-color: rgba(0,123,255,0.05);
+}
+
+.filter-operator-display {
+    font-size: 0.85em;
+    color: #666;
+    margin-right: 4px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    opacity: 1;
+    background-color: rgba(0,123,255,0.1);
+}
+
+/* Filter Edit Mode */
+.filter-edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.filter-inputs {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    direction: rtl;
+}
+
+.operator-select {
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    min-width: 50px;
+    background: white;
+    text-align: center;
+}
+
+.filter-input {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    min-width: 0;
+    text-align: right;
+    direction: rtl;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    direction: ltr;
+}
+
+.action-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    min-width: 28px;
+}
+
+.action-btn.save {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn.save:hover {
+    background-color: #218838;
+}
+
+.action-btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn.cancel:hover {
+    background-color: #c82333;
+}
+
 .no-selection {
     text-align: center;
     padding: 1rem;

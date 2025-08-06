@@ -814,42 +814,42 @@
                         </div>
                         <div class="detail-item">
                             <label>סה"כ סיכון אשראי:</label>
-                            <div class="editable-field" [class.editing]="getField('totalCreditRisk')?.isEditing">
+                            <div class="inline-filter-field" [class.filtering]="getInlineFilter('totalCreditRisk')?.isActive">
                                 <!-- Display Mode -->
-                                <div *ngIf="!getField('totalCreditRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('totalCreditRisk')?.isDirty">
-                                                {{ formatCurrency(getEditableValue('totalCreditRisk',
-                                                selectedRow()?.totalCreditRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('totalCreditRisk', selectedRow()?.totalCreditRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('totalCreditRisk')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('totalCreditRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
+                                <div *ngIf="!getInlineFilter('totalCreditRisk')?.isActive" class="filter-display-mode">
+                                    <span class="filter-value" 
+                                          [class.has-filter]="getFilterValue('totalCreditRisk')"
+                                          (click)="startInlineFilter('totalCreditRisk')">
+                                        {{ getFilterValue('totalCreditRisk') || 'לחץ להוספת מסנן' }}
+                                        @if (getFilterValue('totalCreditRisk')) {
+                                            <span class="filter-operator-display">({{ getFilterOperatorDisplay('totalCreditRisk') }})</span>
+                                        }
+                                    </span>
+                                    <button class="filter-btn" 
+                                            (click)="startInlineFilter('totalCreditRisk')"
+                                            title="הוסף מסנן">🔍</button>
                                 </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('totalCreditRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('totalCreditRisk')"
-                                        (input)="onNumberInput($event, 'totalCreditRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('totalCreditRisk')?.originalValue)
-                                            }}</span>
+                                <!-- Filter Mode -->
+                                <div *ngIf="getInlineFilter('totalCreditRisk')?.isActive" class="filter-edit-mode">
+                                    <div class="filter-inputs">
+                                        <select class="operator-select" 
+                                                [value]="getInlineFilter('totalCreditRisk')?.operator"
+                                                (change)="onInlineFilterOperatorChange('totalCreditRisk', $any($event.target).value)">
+                                            <option value="=">=</option>
+                                            <option value=">">></option>
+                                            <option value="<"><</option>
+                                            <option value=">=">=</option>
+                                            <option value="<="><=</option>
+                                        </select>
+                                        <input type="text" 
+                                               class="filter-input"
+                                               [value]="getInlineFilter('totalCreditRisk')?.value"
+                                               (input)="onInlineFilterInput($event, 'totalCreditRisk')"
+                                               placeholder="הזן ערך לסינון">
                                     </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('totalCreditRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('totalCreditRisk')">✕</button>
+                                    <div class="filter-actions">
+                                        <button class="action-btn save" (click)="saveInlineFilter('totalCreditRisk')">✓</button>
+                                        <button class="action-btn cancel" (click)="cancelInlineFilter('totalCreditRisk')">✕</button>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,7 @@
 ## Build
---no need to build the project, it is already built and ready to run.
+--use the climate-app folder as the starting folder of the build
+cd climate-app
+
 
 
 
