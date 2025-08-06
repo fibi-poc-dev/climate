@@ -1,5 +1,4 @@
 <div class="esg-prime-container" dir="rtl">
-
     <!-- Loading State -->
     @if (isLoading()) {
     <p-card>
@@ -9,10 +8,8 @@
         </div>
     </p-card>
     }
-
     <!-- Main Content -->
     @if (!isLoading() && climateData()) {
-
     <!-- Filters and Actions Toolbar -->
     <p-toolbar>
         <div class="p-toolbar-group-start">
@@ -55,16 +52,14 @@
         </p-card>
     </div>
     }
-
     <!-- Main Layout Container -->
     <div class="main-layout">
-
         <!-- Table Section -->
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null">
                 <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10"
                     [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
-                    scrollHeight="calc(100vh - 350px)" styleClass="p-datatable-striped p-datatable-sm"
+                    scrollHeight="calc(100vh - 250px)" styleClass="p-datatable-striped p-datatable-sm"
                     selectionMode="single" (onRowSelect)="onRowSelect($event)">
 
                     <ng-template pTemplate="header">
@@ -178,8 +173,7 @@
             <p-panel header="{{selectedRow()?.accountName}}">
                 <div class="detail-sections-horizontal">
                     <!-- Left Column - Risk and Physical Information -->
-                    <div class="detail-column">
-                        <h4 class="column-title">מידע על סיכונים</h4>
+                    <div class="detail-column">                        
                         <div class="detail-grid">
                             <div class="detail-item">
                                 <label>קלאסטר אשראי אדום:</label>
@@ -499,8 +493,7 @@
                     </div>
 
                     <!-- Right Column - Financial and Classification Information -->
-                    <div class="detail-column">
-                        <h4 class="column-title">מידע פיננסי וסיווג</h4>
+                    <div class="detail-column">                        
                         <div class="detail-grid">
                             <div class="detail-item">
                                 <label>איכות ניהול:</label>
