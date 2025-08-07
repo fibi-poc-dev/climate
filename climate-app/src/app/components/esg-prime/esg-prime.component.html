@@ -84,9 +84,27 @@
                             <th>סך סיכון אשראי באש"ח ללא משכנתאות</th>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>
+                                <!-- Bank Filter - Text Only -->
+                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('bank')"
+                                    [value]="getFilterValue('bank')"
+                                    (input)="updateFilterValue('bank', $any($event.target).value)"
+                                    class="filter-input">
+                            </th>
+                            <th>
+                                <!-- Branch Filter - Text Only -->
+                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('branch')"
+                                    [value]="getFilterValue('branch')"
+                                    (input)="updateFilterValue('branch', $any($event.target).value)"
+                                    class="filter-input">
+                            </th>
+                            <th>
+                                <!-- Account Filter - Text Only -->
+                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('account')"
+                                    [value]="getFilterValue('account')"
+                                    (input)="updateFilterValue('account', $any($event.target).value)"
+                                    class="filter-input">
+                            </th>
                             <th>
                                 <!-- Account Name Filter - Text Only -->
                                 <input type="text" pInputText [placeholder]="getFilterPlaceholder('accountName')"
