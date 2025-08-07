@@ -706,6 +706,279 @@
     line-height: 1.4;
 }
 
+/* Responsive Table Layout - Column Width Optimization */
+::ng-deep .p-datatable table {
+    table-layout: auto;
+    width: 100%;
+    min-width: 1200px;
+}
+
+/* Specific Column Width Optimizations */
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(1), /* Bank */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(1) {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(2), /* Branch */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(2) {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(3), /* Account */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(3) {
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+    width: 150px;
+    min-width: 120px;
+    max-width: 180px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(5), /* Customer Rating */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(5) {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(6), /* Current Credit Authority */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(6) {
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(7), /* Handling Unit Code */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(7) {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(8), /* Regulated Sector Code */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(8) {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9) {
+    width: 120px;
+    min-width: 100px;
+    max-width: 150px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(10), /* Branch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(10) {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11) {
+    width: 120px;
+    min-width: 100px;
+    max-width: 150px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(12), /* Subbranch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(12) {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13) {
+    width: 120px;
+    min-width: 100px;
+    max-width: 150px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
+    width: 120px;
+    min-width: 100px;
+    max-width: 150px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(15), /* Total Collateral */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(15) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(16), /* Total Solo */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(16) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(17), /* Total Credit Risk */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(17) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+/* Text overflow handling for all table cells */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    position: relative;
+}
+
+/* Allow text wrapping for specific description columns */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4), /* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9), /* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11), /* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13), /* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) { /* Credit Report Description */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.2;
+    padding: 0.25rem 0.4rem;
+}
+
+/* Header text optimization */
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.4rem;
+    vertical-align: top;
+}
+
+/* Filter input optimization for compact layout */
+::ng-deep .p-datatable .filter-input {
+    width: 100%;
+    font-size: 11px;
+    padding: 0.2rem 0.3rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+::ng-deep .p-datatable .filter-controls {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    width: 100%;
+}
+
+::ng-deep .p-datatable .filter-type-select {
+    font-size: 10px;
+    padding: 0.2rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    min-width: 35px;
+    flex-shrink: 0;
+}
+
+::ng-deep .p-datatable .filter-amount {
+    flex: 1;
+    min-width: 40px;
+}
+
+/* Compact row height */
+::ng-deep .p-datatable .p-datatable-tbody > tr {
+    height: auto;
+    min-height: 32px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1400px) {
+    ::ng-deep .p-datatable table {
+        min-width: 1100px;
+    }
+    
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+        width: 130px;
+        min-width: 100px;
+        max-width: 130px;
+    }
+    
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
+        width: 100px;
+        min-width: 80px;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 1200px) {
+    ::ng-deep .p-datatable table {
+        min-width: 1000px;
+    }
+    
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+        width: 110px;
+        min-width: 90px;
+        max-width: 110px;
+    }
+    
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
+        width: 85px;
+        min-width: 70px;
+        max-width: 85px;
+    }
+}
+
 /* Table Scrolling Enhancement */
 .table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
     max-height: calc(100vh - 350px);
