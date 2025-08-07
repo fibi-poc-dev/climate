@@ -132,22 +132,41 @@
                                 </div>
                             </th>
                             <th>
-                                <!-- Current Credit Authority Filter - Numeric with Operator -->
-                                <div class="filter-controls">
+                                <!-- Current Credit Authority Filter - Numeric with Button Operators -->
+                                <div class="filter-controls-buttons">
+                                    <div class="operator-buttons" 
+                                         [class.visible]="getFilterValue('currentCreditAuthority') || false">
+                                        <button type="button" 
+                                                class="operator-btn"
+                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === '='"
+                                                (click)="onCurrentCreditAuthorityFilterTypeChange('=')"
+                                                title="שווה ל">=</button>
+                                        <button type="button" 
+                                                class="operator-btn"
+                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'gt'"
+                                                (click)="onCurrentCreditAuthorityFilterTypeChange('gt')"
+                                                title="גדול מ">&gt;</button>
+                                        <button type="button" 
+                                                class="operator-btn"
+                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'lt'"
+                                                (click)="onCurrentCreditAuthorityFilterTypeChange('lt')"
+                                                title="קטן מ">&lt;</button>
+                                        <button type="button" 
+                                                class="operator-btn"
+                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'gte'"
+                                                (click)="onCurrentCreditAuthorityFilterTypeChange('gte')"
+                                                title="גדול או שווה ל">&gt;=</button>
+                                        <button type="button" 
+                                                class="operator-btn"
+                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'lte'"
+                                                (click)="onCurrentCreditAuthorityFilterTypeChange('lte')"
+                                                title="קטן או שווה ל">&lt;=</button>
+                                    </div>
                                     <input type="text" pInputText
                                         [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
                                         [value]="getFilterValue('currentCreditAuthority')"
                                         (input)="updateFilterValue('currentCreditAuthority', $any($event.target).value)"
                                         class="filter-input filter-amount">
-                                    <select [value]="getFilterOperatorDisplay('currentCreditAuthority')"
-                                        (change)="onCurrentCreditAuthorityFilterTypeChange($any($event.target).value)"
-                                        class="filter-type-select">
-                                        <option value="=">=</option>
-                                        <option value="gt">&gt;</option>
-                                        <option value="lt">&lt;</option>
-                                        <option value="gte">&gt;=</option>
-                                        <option value="lte">&lt;=</option>
-                                    </select>
                                 </div>
                             </th>
                             <th></th>
