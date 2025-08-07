@@ -67,9 +67,33 @@ const EDITABLE_FIELDS: EditableFieldDefinition[] = [
 // Define filter field configurations
 const FILTER_FIELDS: FilterFieldDefinition[] = [
     {
+        fieldName: 'bank',
+        displayName: 'בנק',
+        filterType: 'text',
+        defaultOperator: '='
+    },
+    {
+        fieldName: 'branch',
+        displayName: 'סניף',
+        filterType: 'text',
+        defaultOperator: '='
+    },
+    {
+        fieldName: 'account',
+        displayName: 'חשבון',
+        filterType: 'text',
+        defaultOperator: '='
+    },
+    {
         fieldName: 'accountName',
         displayName: 'שם לקוח',
         filterType: 'text',
+        defaultOperator: '='
+    },
+    {
+        fieldName: 'customerRating',
+        displayName: 'דירוג לקוח',
+        filterType: 'numeric',
         defaultOperator: '='
     },
     {
@@ -466,6 +490,10 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     protected onCurrentCreditAuthorityFilterTypeChange(value: string): void {
         this.onFilterOperatorChange('currentCreditAuthority', value);
+    }
+
+    protected onCustomerRatingFilterTypeChange(value: string): void {
+        this.onFilterOperatorChange('customerRating', value);
     }
 
     protected onTotalSoloFilterTypeChange(value: string): void {
