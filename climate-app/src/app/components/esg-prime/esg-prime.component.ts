@@ -6,6 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
+import { FilterFieldComponent, FilterChangeEvent, FilterOperator } from '../../form-controls/filter-field.component';
 
 // Interface for editable fields
 interface EditableField {
@@ -147,7 +148,8 @@ import { FieldsetModule } from 'primeng/fieldset';
         DividerModule,
         PanelModule,
         FieldsetModule,
-        EditableFieldComponent
+        EditableFieldComponent,
+        FilterFieldComponent
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
@@ -500,6 +502,14 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.onFilterOperatorChange('totalSolo', value);
     }
 
+    // Filter change handler for FilterFieldComponent
+    protected onFilterFieldChange(event: FilterChangeEvent): void {
+        this.updateFilterValue(event.fieldName, event.value);
+        if (event.operator !== '=') {
+            this.updateFilterOperator(event.fieldName, event.operator);
+        }
+    }
+
     protected sendFiltersToServer(): void {
         const request = this.climateRequest();
         console.log('Sending filters to server:', request);
@@ -525,6 +535,12 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             case '<=': return 'lte';
             default: return '=';
         }
+    }
+
+    protected getFilterOperatorForComponent(fieldName: string): FilterOperator {
+        const operatorDisplay = this.getFilterOperatorDisplay(fieldName);
+        // Ensure type safety by casting to FilterOperator
+        return operatorDisplay as FilterOperator;
     }
 
     // Inline filter methods

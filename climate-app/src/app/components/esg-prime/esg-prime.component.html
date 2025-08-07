@@ -113,61 +113,26 @@
                                     class="filter-input">
                             </th>
                             <th>
-                                <!-- Customer Rating Filter - Numeric with Operator -->
-                                <div class="filter-controls">
-                                    <input type="text" pInputText
-                                        [placeholder]="getFilterPlaceholder('customerRating')"
-                                        [value]="getFilterValue('customerRating')"
-                                        (input)="updateFilterValue('customerRating', $any($event.target).value)"
-                                        class="filter-input filter-amount">
-                                    <select [value]="getFilterOperatorDisplay('customerRating')"
-                                        (change)="onCustomerRatingFilterTypeChange($any($event.target).value)"
-                                        class="filter-type-select">
-                                        <option value="=">=</option>
-                                        <option value="gt">&gt;</option>
-                                        <option value="lt">&lt;</option>
-                                        <option value="gte">&gt;=</option>
-                                        <option value="lte">&lt;=</option>
-                                    </select>
-                                </div>
+                                <!-- Customer Rating Filter - Using Generic FilterFieldComponent -->
+                                <app-filter-field
+                                    fieldName="customerRating"
+                                    filterType="numeric"
+                                    [placeholder]="getFilterPlaceholder('customerRating')"
+                                    [value]="getFilterValue('customerRating')"
+                                    [operator]="getFilterOperatorForComponent('customerRating')"
+                                    (filterChange)="onFilterFieldChange($event)">
+                                </app-filter-field>
                             </th>
                             <th>
-                                <!-- Current Credit Authority Filter - Numeric with Button Operators -->
-                                <div class="filter-controls-buttons">
-                                    <div class="operator-buttons" 
-                                         [class.visible]="getFilterValue('currentCreditAuthority') || false">
-                                        <button type="button" 
-                                                class="operator-btn"
-                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === '='"
-                                                (click)="onCurrentCreditAuthorityFilterTypeChange('=')"
-                                                title="שווה ל">=</button>
-                                        <button type="button" 
-                                                class="operator-btn"
-                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'gt'"
-                                                (click)="onCurrentCreditAuthorityFilterTypeChange('gt')"
-                                                title="גדול מ">&gt;</button>
-                                        <button type="button" 
-                                                class="operator-btn"
-                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'lt'"
-                                                (click)="onCurrentCreditAuthorityFilterTypeChange('lt')"
-                                                title="קטן מ">&lt;</button>
-                                        <button type="button" 
-                                                class="operator-btn"
-                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'gte'"
-                                                (click)="onCurrentCreditAuthorityFilterTypeChange('gte')"
-                                                title="גדול או שווה ל">&gt;=</button>
-                                        <button type="button" 
-                                                class="operator-btn"
-                                                [class.active]="getFilterOperatorDisplay('currentCreditAuthority') === 'lte'"
-                                                (click)="onCurrentCreditAuthorityFilterTypeChange('lte')"
-                                                title="קטן או שווה ל">&lt;=</button>
-                                    </div>
-                                    <input type="text" pInputText
-                                        [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
-                                        [value]="getFilterValue('currentCreditAuthority')"
-                                        (input)="updateFilterValue('currentCreditAuthority', $any($event.target).value)"
-                                        class="filter-input filter-amount">
-                                </div>
+                                <!-- Current Credit Authority Filter - Using Generic FilterFieldComponent -->
+                                <app-filter-field
+                                    fieldName="currentCreditAuthority"
+                                    filterType="numeric"
+                                    [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
+                                    [value]="getFilterValue('currentCreditAuthority')"
+                                    [operator]="getFilterOperatorForComponent('currentCreditAuthority')"
+                                    (filterChange)="onFilterFieldChange($event)">
+                                </app-filter-field>
                             </th>
                             <th></th>
                             <th></th>
@@ -178,22 +143,15 @@
                             <th></th>
                             <th></th>
                             <th>
-                                <!-- Total Solo Filter - Numeric with Operator -->
-                                <div class="filter-controls">
-                                    <input type="text" pInputText [placeholder]="getFilterPlaceholder('totalSolo')"
-                                        [value]="getFilterValue('totalSolo')"
-                                        (input)="updateFilterValue('totalSolo', $any($event.target).value)"
-                                        class="filter-input filter-amount">
-                                    <select [value]="getFilterOperatorDisplay('totalSolo')"
-                                        (change)="onTotalSoloFilterTypeChange($any($event.target).value)"
-                                        class="filter-type-select">
-                                        <option value="=">=</option>
-                                        <option value="gt">&gt;</option>
-                                        <option value="lt">&lt;</option>
-                                        <option value="gte">&gt;=</option>
-                                        <option value="lte">&lt;=</option>
-                                    </select>
-                                </div>
+                                <!-- Total Solo Filter - Using Generic FilterFieldComponent -->
+                                <app-filter-field
+                                    fieldName="totalSolo"
+                                    filterType="numeric"
+                                    [placeholder]="getFilterPlaceholder('totalSolo')"
+                                    [value]="getFilterValue('totalSolo')"
+                                    [operator]="getFilterOperatorForComponent('totalSolo')"
+                                    (filterChange)="onFilterFieldChange($event)">
+                                </app-filter-field>
                             </th>
                             <th></th>
                         </tr>
