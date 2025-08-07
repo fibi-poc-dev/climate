@@ -192,306 +192,80 @@
                     <div class="detail-grid">
                         <div class="detail-item">
                             <label>קלאסטר אשראי אדום:</label>
-                            <div class="editable-field" [class.editing]="getField('creditRedCluster')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('creditRedCluster')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('creditRedCluster')?.isDirty">
-                                                {{ formatNumber(getEditableValue('creditRedCluster',
-                                                selectedRow()?.creditRedCluster)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('creditRedCluster', selectedRow()?.creditRedCluster)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('creditRedCluster')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('creditRedCluster')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('creditRedCluster')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('creditRedCluster')"
-                                        (input)="onNumberInput($event, 'creditRedCluster')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('creditRedCluster')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('creditRedCluster')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('creditRedCluster')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.creditRedCluster ?? null"
+                                [fieldName]="'creditRedCluster'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('creditRedCluster', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון פיזי שורשי:</label>
-                            <div class="editable-field" [class.editing]="getField('rootPhysicalRisk')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('rootPhysicalRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('rootPhysicalRisk')?.isDirty">
-                                                {{ formatNumber(getEditableValue('rootPhysicalRisk',
-                                                selectedRow()?.rootPhysicalRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('rootPhysicalRisk', selectedRow()?.rootPhysicalRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('rootPhysicalRisk')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('rootPhysicalRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('rootPhysicalRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('rootPhysicalRisk')"
-                                        (input)="onNumberInput($event, 'rootPhysicalRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('rootPhysicalRisk')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('rootPhysicalRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('rootPhysicalRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.rootPhysicalRisk ?? null"
+                                [fieldName]="'rootPhysicalRisk'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון מעבר שורשי:</label>
-                            <div class="editable-field" [class.editing]="getField('rootTransferRisk')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('rootTransferRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('rootTransferRisk')?.isDirty">
-                                                {{ formatNumber(getEditableValue('rootTransferRisk',
-                                                selectedRow()?.rootTransferRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('rootTransferRisk', selectedRow()?.rootTransferRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('rootTransferRisk')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('rootTransferRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('rootTransferRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('rootTransferRisk')"
-                                        (input)="onNumberInput($event, 'rootTransferRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('rootTransferRisk')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('rootTransferRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('rootTransferRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.rootTransferRisk ?? null"
+                                [fieldName]="'rootTransferRisk'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('rootTransferRisk', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>משקל סיכון פיזי שורשי:</label>
-                            <div class="editable-field" [class.editing]="getField('rootPhysicalRiskScale')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('rootPhysicalRiskScale')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('rootPhysicalRiskScale')?.isDirty">
-                                                {{ formatNumber(getEditableValue('rootPhysicalRiskScale',
-                                                selectedRow()?.rootPhysicalRiskScale)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('rootPhysicalRiskScale', selectedRow()?.rootPhysicalRiskScale)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('rootPhysicalRiskScale')?.isDirty"
-                                            class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('rootPhysicalRiskScale')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('rootPhysicalRiskScale')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('rootPhysicalRiskScale')"
-                                        (input)="onNumberInput($event, 'rootPhysicalRiskScale')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('rootPhysicalRiskScale')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('rootPhysicalRiskScale')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('rootPhysicalRiskScale')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
+                                [fieldName]="'rootPhysicalRiskScale'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>משקל סיכון מעבר שורשי:</label>
-                            <div class="editable-field" [class.editing]="getField('rootTransferRiskScale')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('rootTransferRiskScale')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('rootTransferRiskScale')?.isDirty">
-                                                {{ formatNumber(getEditableValue('rootTransferRiskScale',
-                                                selectedRow()?.rootTransferRiskScale)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('rootTransferRiskScale', selectedRow()?.rootTransferRiskScale)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('rootTransferRiskScale')?.isDirty"
-                                            class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('rootTransferRiskScale')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('rootTransferRiskScale')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('rootTransferRiskScale')"
-                                        (input)="onNumberInput($event, 'rootTransferRiskScale')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('rootTransferRiskScale')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('rootTransferRiskScale')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('rootTransferRiskScale')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.rootTransferRiskScale ?? null"
+                                [fieldName]="'rootTransferRiskScale'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>שקלול רמת הסיכון השורשי:</label>
-                            <div class="editable-field" [class.editing]="getField('rootRiskLevelWeight')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('rootRiskLevelWeight')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('rootRiskLevelWeight')?.isDirty">
-                                                {{ formatNumber(getEditableValue('rootRiskLevelWeight',
-                                                selectedRow()?.rootRiskLevelWeight)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('rootRiskLevelWeight', selectedRow()?.rootRiskLevelWeight)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('rootRiskLevelWeight')?.isDirty"
-                                            class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('rootRiskLevelWeight')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('rootRiskLevelWeight')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('rootRiskLevelWeight')"
-                                        (input)="onNumberInput($event, 'rootRiskLevelWeight')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('rootRiskLevelWeight')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('rootRiskLevelWeight')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('rootRiskLevelWeight')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.rootRiskLevelWeight ?? null"
+                                [fieldName]="'rootRiskLevelWeight'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון שיורי:</label>
-                            <div class="editable-field" [class.editing]="getField('residualRisk')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('residualRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('residualRisk')?.isDirty">
-                                                {{ formatNumber(getEditableValue('residualRisk',
-                                                selectedRow()?.residualRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('residualRisk', selectedRow()?.residualRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('residualRisk')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('residualRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('residualRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('residualRisk')"
-                                        (input)="onNumberInput($event, 'residualRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('residualRisk')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('residualRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('residualRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.residualRisk ?? null"
+                                [fieldName]="'residualRisk'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('residualRisk', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>תאריך תוקף סיכון שיורי:</label>
@@ -499,130 +273,36 @@
                         </div>
                         <div class="detail-item">
                             <label>איכות ניהול:</label>
-                            <div class="editable-field" [class.editing]="getField('qualityManagement')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('qualityManagement')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('qualityManagement')?.isDirty">
-                                                {{ formatNumber(getEditableValue('qualityManagement',
-                                                selectedRow()?.qualityManagement)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('qualityManagement', selectedRow()?.qualityManagement)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('qualityManagement')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('qualityManagement')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('qualityManagement')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('qualityManagement')"
-                                        (input)="onNumberInput($event, 'qualityManagement')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('qualityManagement')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('qualityManagement')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('qualityManagement')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.qualityManagement ?? null"
+                                [fieldName]="'qualityManagement'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('qualityManagement', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>קלאסטר שחור:</label>
-                            <div class="editable-field" [class.editing]="getField('blackCluster')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('blackCluster')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('blackCluster')?.isDirty">
-                                                {{ formatNumber(getEditableValue('blackCluster',
-                                                selectedRow()?.blackCluster)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('blackCluster', selectedRow()?.blackCluster)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('blackCluster')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('blackCluster')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('blackCluster')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('blackCluster')"
-                                        (input)="onNumberInput($event, 'blackCluster')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('blackCluster')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('blackCluster')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('blackCluster')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.blackCluster ?? null"
+                                [fieldName]="'blackCluster'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('blackCluster', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>קלאסטר ירוק:</label>
-                            <div class="editable-field" [class.editing]="getField('greenCluster')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('greenCluster')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('greenCluster')?.isDirty">
-                                                {{ formatNumber(getEditableValue('greenCluster',
-                                                selectedRow()?.greenCluster)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('greenCluster', selectedRow()?.greenCluster)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('greenCluster')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('greenCluster')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('greenCluster')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('greenCluster')"
-                                        (input)="onNumberInput($event, 'greenCluster')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('greenCluster')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('greenCluster')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('greenCluster')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.greenCluster ?? null"
+                                [fieldName]="'greenCluster'"
+                                [fieldType]="'number'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('greenCluster', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>צבע אקלים:</label>
@@ -632,212 +312,60 @@
                         </div>
                         <div class="detail-item">
                             <label>סך בטחונות:</label>
-                            <div class="editable-field" [class.editing]="getField('totalCollateral')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('totalCollateral')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('totalCollateral')?.isDirty">
-                                                {{ formatCurrency(getEditableValue('totalCollateral',
-                                                selectedRow()?.totalCollateral)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('totalCollateral', selectedRow()?.totalCollateral)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('totalCollateral')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('totalCollateral')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('totalCollateral')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('totalCollateral')"
-                                        (input)="onNumberInput($event, 'totalCollateral')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('totalCollateral')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('totalCollateral')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('totalCollateral')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <label>סך סולו:</label>
-                            <div class="editable-field" [class.editing]="getField('totalSolo')?.isEditing">
-
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('totalSolo')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('totalSolo')?.isDirty">
-                                                {{ formatCurrency(getEditableValue('totalSolo',
-                                                selectedRow()?.totalSolo)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('totalSolo', selectedRow()?.totalSolo)">
-                                                ✏️
-                                            </button>
-                                        </div>
-                                        <div *ngIf="getField('totalSolo')?.isDirty" class="original-value-row">
-                                            <span class="original-indicator">
-                                                מקורי: {{
-                                                formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('totalSolo')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input" [value]="getFormattedFieldValue('totalSolo')"
-                                        (input)="onNumberInput($event, 'totalSolo')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('totalSolo')?.originalValue) }}</span>
-                                    </div>
-
-                                    <div class="edit-actions">
-                                        <button class="action-btn save" (click)="saveEdit('totalSolo')">
-                                            ✓
-                                        </button>
-                                        <button class="action-btn cancel" (click)="cancelEdit('totalSolo')">
-                                            ✕
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <label>שם לקוח:</label>
                             <app-editable-field
-                                [value]="selectedRow()?.accountName ?? null"
-                                [fieldName]="'accountName'"
-                                [fieldType]="'text'"
+                                [value]="selectedRow()?.totalCollateral ?? null"
+                                [fieldName]="'totalCollateral'"
+                                [fieldType]="'currency'"
                                 [enableFilter]="true"
-                                (valueChange)="onFieldValueChange('accountName', $event)"
+                                (valueChange)="onFieldValueChange('totalCollateral', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
-                            <label>סיכון אשראי מאזני:</label>
+                            <label>סך סולו:</label>
                             <app-editable-field
-                                [value]="selectedRow()?.creditBalanceSheetRisk ?? null"
-                                [fieldName]="'creditBalanceSheetRisk'"
+                                [value]="selectedRow()?.totalSolo ?? null"
+                                [fieldName]="'totalSolo'"
                                 [fieldType]="'currency'"
                                 [enableFilter]="true"
-                                (valueChange)="onFieldValueChange('creditBalanceSheetRisk', $event)"
+                                (valueChange)="onFieldValueChange('totalSolo', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון אשראי חוץ מאזני:</label>
-                            <div class="editable-field"
-                                [class.editing]="getField('creditOffBalanceSheetRisk')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('creditOffBalanceSheetRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('creditOffBalanceSheetRisk')?.isDirty">
-                                                {{ formatCurrency(getEditableValue('creditOffBalanceSheetRisk',
-                                                selectedRow()?.creditOffBalanceSheetRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('creditOffBalanceSheetRisk', selectedRow()?.creditOffBalanceSheetRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('creditOffBalanceSheetRisk')?.isDirty"
-                                            class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('creditOffBalanceSheetRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('creditOffBalanceSheetRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('creditOffBalanceSheetRisk')"
-                                        (input)="onNumberInput($event, 'creditOffBalanceSheetRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('creditOffBalanceSheetRisk')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('creditOffBalanceSheetRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('creditOffBalanceSheetRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
+                                [fieldName]="'creditOffBalanceSheetRisk'"
+                                [fieldType]="'currency'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סה"כ סיכון אשראי:</label>
-                            <div class="inline-filter-field"
-                                [class.filtering]="getInlineFilter('totalCreditRisk')?.isActive">
-                                <!-- Display Mode - Only Icon -->
-                                <div *ngIf="!getInlineFilter('totalCreditRisk')?.isActive" class="filter-display-mode">
-                                    <button class="filter-btn" (click)="startInlineFilter('totalCreditRisk')"
-                                        title="הוסף מסנן">🔍</button>
-                                </div>
-                                <!-- Filter Mode -->
-                                <div *ngIf="getInlineFilter('totalCreditRisk')?.isActive" class="filter-edit-mode">
-                                    <div class="filter-inputs">
-                                        <select class="operator-select"
-                                            [value]="getInlineFilter('totalCreditRisk')?.operator"
-                                            (change)="onInlineFilterOperatorChange('totalCreditRisk', $any($event.target).value)">
-                                            <option value="=">=</option>
-                                            <option value=">">></option>
-                                            <option value="<">
-                                                << /option>
-                                            <option value=">=">=</option>
-                                            <option value="<=">
-                                                <=< /option>
-                                        </select>
-                                        <input type="text" class="filter-input"
-                                            [value]="getInlineFilter('totalCreditRisk')?.value"
-                                            (input)="onInlineFilterInput($event, 'totalCreditRisk')"
-                                            placeholder="הזן ערך לסינון">
-                                    </div>
-                                    <div class="filter-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveInlineFilter('totalCreditRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelInlineFilter('totalCreditRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.totalCreditRisk ?? null"
+                                [fieldName]="'totalCreditRisk'"
+                                [fieldType]="'currency'"
+                                [enableFilter]="true"
+                                [disabled]="true"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
                         </div>
                     </div>
                 </div>
             </p-panel>
 
-            } @else {
+        } @else {
             <p-panel header="פרטי השורה">
                 <div class="no-selection">
                     <i class="pi pi-info-circle"></i>
                     <p>בחר שורה מהטבלה כדי לראות פרטים</p>
                 </div>
             </p-panel>
-            }
+        }
         </div>
     </div>
     }
