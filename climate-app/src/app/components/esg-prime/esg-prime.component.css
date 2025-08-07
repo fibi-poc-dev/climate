@@ -875,14 +875,21 @@
     padding: 0.25rem 0.4rem;
 }
 
-/* Header text optimization */
+/* Header text optimization - always show full text with word wrapping */
 ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
     font-size: 0.75rem;
     padding: 0.25rem 0.4rem;
     vertical-align: top;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    line-height: 1.2;
+    height: auto;
+    min-height: 40px;
 }
 
 /* Filter input optimization for compact layout */
