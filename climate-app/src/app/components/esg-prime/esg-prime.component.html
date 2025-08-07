@@ -725,6 +725,7 @@
                         <div class="detail-item">
                             <label>שם לקוח:</label>
                             <app-editable-field
+                                #accountNameField
                                 [value]="selectedRow()?.accountName ?? null"
                                 [fieldName]="'accountName'"
                                 [fieldType]="'text'"
@@ -736,6 +737,7 @@
                         <div class="detail-item">
                             <label>סיכון אשראי מאזני:</label>
                             <app-editable-field
+                                #creditBalanceSheetRiskField
                                 [value]="selectedRow()?.creditBalanceSheetRisk ?? null"
                                 [fieldName]="'creditBalanceSheetRisk'"
                                 [fieldType]="'currency'"

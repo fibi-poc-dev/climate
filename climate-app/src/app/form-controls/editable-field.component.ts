@@ -205,6 +205,14 @@ export class EditableFieldComponent<T extends number | string | null> {
     this.filterChange.emit(null);
   }
 
+  // Method to externally clear filter state (called from parent)
+  public clearFilterState(): void {
+    this.isFilterMode.set(false);
+    this.filterValue.set('');
+    this.filterOperator.set('=');
+    this.activeFilter.set(null);
+  }
+
   protected onFilterInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.filterValue.set(target.value);

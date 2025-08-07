@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
@@ -131,6 +131,10 @@ import { FieldsetModule } from 'primeng/fieldset';
 export class EsgPrimeComponent implements OnInit, OnDestroy {
     private climateDataService = inject(ClimateDataService);
     private elementRef = inject(ElementRef);
+
+    // ViewChild references for editable field components
+    @ViewChild('accountNameField') accountNameField!: EditableFieldComponent<string>;
+    @ViewChild('creditBalanceSheetRiskField') creditBalanceSheetRiskField!: EditableFieldComponent<number>;
 
     // Editable fields map
     private readonly editableFields = signal(new Map<string, EditableField>());
@@ -672,15 +676,10 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                 value: filter.filterFieldValue,
                 operator: filter.filterType
             });
-        } else {
-            // Remove filter if null (clear filter)
-            newStates.delete('creditBalanceSheetRisk');
         }
+        // Note: Filter removal is handled by the removeFilter method when clicking the X button
         
         this.filterStates.set(newStates);
-        
-        // Optionally trigger data refresh
-        // this.climateDataService.sendFilterRequest(this.buildClimateRequest());
     }
 
     protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {
@@ -968,5 +967,15 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             updatedStates.delete(fieldName);
             return updatedStates;
         });
+
+        // Clear the corresponding editable field component
+        switch (fieldName) {
+            case 'accountName':
+                this.accountNameField?.clearFilterState();
+                break;
+            case 'creditBalanceSheetRisk':
+                this.creditBalanceSheetRiskField?.clearFilterState();
+                break;
+        }
     }
 }
