@@ -10,8 +10,8 @@ export interface EditableFieldState {
 }
 
 @Component({
-  selector: 'app-editable-field',
-  template: './editable-field.component.html',
+  selector: 'app-editable-field',  
+  templateUrl: './editable-field.component.html',
   styleUrls: ['./editable-field.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule]
