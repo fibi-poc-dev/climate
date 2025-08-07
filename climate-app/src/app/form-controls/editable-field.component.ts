@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, input, output, signal, computed, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Filter } from '../models/climate-request.model';
+import { SharedService } from '../services/shared.service';
 
 export interface EditableFieldState {
   isEditing: boolean;
@@ -18,6 +19,8 @@ export interface EditableFieldState {
   imports: [CommonModule, FormsModule]
 })
 export class EditableFieldComponent<T extends number | string | null> {
+  private sharedService = inject(SharedService);
+
   // Inputs
   readonly value = input.required<T>();
   readonly fieldName = input.required<string>();
@@ -118,6 +121,15 @@ export class EditableFieldComponent<T extends number | string | null> {
         this.originalValue.set(newValue);
       }
     });
+
+    // Listen for filter clearing signals from shared service
+    effect(() => {
+      const fieldName = this.fieldName();
+      if (this.sharedService.shouldClearFilter(fieldName)) {
+        this.clearFilterState();
+        this.sharedService.acknowledgeFilterCleared(fieldName);
+      }
+    });
   }
 
   protected startEdit(): void {
@@ -205,8 +217,8 @@ export class EditableFieldComponent<T extends number | string | null> {
     this.filterChange.emit(null);
   }
 
-  // Method to externally clear filter state (called from parent)
-  public clearFilterState(): void {
+  // Method to clear filter state (now called internally via shared service)
+  private clearFilterState(): void {
     this.isFilterMode.set(false);
     this.filterValue.set('');
     this.filterOperator.set('=');

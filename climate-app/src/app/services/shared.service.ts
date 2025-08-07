@@ -1,4 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
+import { Filter } from '../models/climate-request.model';
 
 export interface EditableField {
     originalValue: number | null;
@@ -279,5 +280,47 @@ export class SharedService {
     calculatePercentage(value: number, total: number): number {
         if (total === 0) return 0;
         return (value / total) * 100;
+    }
+
+    // ===== FILTER STATE MANAGEMENT =====
+
+    /**
+     * Central filter state management using signals
+     * This allows both parent and child components to share filter state
+     */
+    private readonly clearedFilters = signal<Set<string>>(new Set());
+
+    /**
+     * Get the set of fields that should have their filters cleared
+     */
+    readonly getClearedFilters = computed(() => this.clearedFilters());
+
+    /**
+     * Clear a specific filter field - called by parent component
+     */
+    clearFilterForField(fieldName: string): void {
+        this.clearedFilters.update(cleared => {
+            const newSet = new Set(cleared);
+            newSet.add(fieldName);
+            return newSet;
+        });
+    }
+
+    /**
+     * Acknowledge that a filter has been cleared - called by child component
+     */
+    acknowledgeFilterCleared(fieldName: string): void {
+        this.clearedFilters.update(cleared => {
+            const newSet = new Set(cleared);
+            newSet.delete(fieldName);
+            return newSet;
+        });
+    }
+
+    /**
+     * Check if a specific field should clear its filter
+     */
+    shouldClearFilter(fieldName: string): boolean {
+        return this.clearedFilters().has(fieldName);
     }
 }

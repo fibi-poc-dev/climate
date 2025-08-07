@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
+import { SharedService } from '../../services/shared.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
@@ -130,11 +131,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 })
 export class EsgPrimeComponent implements OnInit, OnDestroy {
     private climateDataService = inject(ClimateDataService);
+    private sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
-
-    // ViewChild references for editable field components
-    @ViewChild('accountNameField') accountNameField!: EditableFieldComponent<string>;
-    @ViewChild('creditBalanceSheetRiskField') creditBalanceSheetRiskField!: EditableFieldComponent<number>;
 
     // Editable fields map
     private readonly editableFields = signal(new Map<string, EditableField>());
@@ -968,14 +966,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             return updatedStates;
         });
 
-        // Clear the corresponding editable field component
-        switch (fieldName) {
-            case 'accountName':
-                this.accountNameField?.clearFilterState();
-                break;
-            case 'creditBalanceSheetRisk':
-                this.creditBalanceSheetRiskField?.clearFilterState();
-                break;
-        }
+        // Use shared service to signal that this field's filter should be cleared
+        this.sharedService.clearFilterForField(fieldName);
     }
 }
