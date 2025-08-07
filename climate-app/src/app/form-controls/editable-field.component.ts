@@ -11,47 +11,7 @@ export interface EditableFieldState {
 
 @Component({
   selector: 'app-editable-field',
-  template: `
-    <div class="editable-field" [class.editing]="fieldState().isEditing">
-      <!-- Display Mode -->
-      <div *ngIf="!fieldState().isEditing" class="display-mode">
-        <div class="value-container">
-          <div class="current-value-row">
-            <span class="current-value" [class.modified]="fieldState().isDirty">
-              {{ displayValue() }}
-            </span>
-            <button class="edit-btn" (click)="startEdit()" title="ערוך ערך">✏️</button>
-          </div>
-          <div *ngIf="fieldState().isDirty" class="original-value-row">
-            <span class="original-indicator">מקורי: {{ formatValue(fieldState().originalValue) }}</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Edit Mode -->
-      <div *ngIf="fieldState().isEditing" class="edit-mode">
-        <input 
-          type="text" 
-          class="edit-input"
-          [value]="editValue()"
-          (input)="onInput($event)"
-          (keypress)="onKeypress($event)"
-          (keydown)="onKeydown($event)"
-          placeholder="הזן ערך חדש"
-          #editInput>
-        
-        <div class="original-value-hint">
-          <span class="info-icon">ℹ️</span>
-          <span>ערך מקורי: {{ formatValue(fieldState().originalValue) }}</span>
-        </div>
-        
-        <div class="edit-actions">
-          <button class="action-btn save" (click)="saveEdit()" [disabled]="!hasValidInput()">✓</button>
-          <button class="action-btn cancel" (click)="cancelEdit()">✕</button>
-        </div>
-      </div>
-    </div>
-  `,
+  template: './editable-field.component.html',
   styleUrls: ['./editable-field.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule]
