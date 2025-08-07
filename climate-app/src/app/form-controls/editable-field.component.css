@@ -1,0 +1,253 @@
+/* Editable Field Component Styles */
+.editable-field {
+    width: 100%;
+    align-self: center;
+    position: relative;
+}
+
+.editable-field.editing {
+    background-color: rgba(255, 243, 205, 0.3);
+    border-radius: 4px;
+    padding: 0.25rem;
+}
+
+/* Display Mode */
+.display-mode {
+    width: 100%;
+}
+
+.value-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.current-value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.original-value-row {
+    display: flex;
+    align-items: center;
+}
+
+.current-value {
+    flex: 1;
+    font-size: 0.875rem;
+    color: #333;
+    text-align: right;
+    word-break: break-word;
+}
+
+.current-value.modified {
+    color: rgba(24, 40, 95, 1);
+    font-weight: 600;
+    background-color: rgba(24, 40, 95, 0.05);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.original-indicator {
+    font-size: 0.75rem;
+    color: #666;
+    font-style: italic;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: rgba(24, 40, 95, 0.7);
+}
+
+.current-value-row:hover .edit-btn,
+.editable-field:hover .edit-btn {
+    opacity: 0.7;
+}
+
+.edit-btn:hover {
+    opacity: 1 !important;
+    background-color: rgba(24, 40, 95, 0.1);
+}
+
+.edit-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Edit Mode */
+.edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid rgba(24, 40, 95, 0.3);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: Arial, sans-serif;
+    text-align: right;
+    direction: rtl;
+    background-color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: rgba(24, 40, 95, 1);
+    box-shadow: 0 0 0 0.2rem rgba(24, 40, 95, 0.25);
+}
+
+.edit-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.original-value-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #666;
+    padding: 0.25rem;
+    background-color: rgba(24, 40, 95, 0.05);
+    border-radius: 3px;
+}
+
+.info-icon {
+    font-size: 0.875rem;
+    color: rgba(24, 40, 95, 0.7);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    direction: ltr;
+}
+
+.action-btn {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.action-btn.save {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn.save:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.action-btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn.cancel:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .current-value-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+    
+    .edit-btn {
+        opacity: 0.7;
+        align-self: flex-end;
+    }
+    
+    .edit-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .action-btn {
+        width: 100%;
+    }
+}
+
+/* Animation for smooth transitions */
+.editable-field {
+    transition: background-color 0.2s ease, padding 0.2s ease;
+}
+
+.display-mode,
+.edit-mode {
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus states for accessibility */
+.edit-btn:focus,
+.action-btn:focus {
+    outline: 2px solid rgba(24, 40, 95, 0.5);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .current-value.modified {
+        border: 2px solid rgba(24, 40, 95, 1);
+    }
+    
+    .edit-input {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .editable-field,
+    .action-btn,
+    .edit-input {
+        transition: none;
+    }
+    
+    .display-mode,
+    .edit-mode {
+        animation: none;
+    }
+}

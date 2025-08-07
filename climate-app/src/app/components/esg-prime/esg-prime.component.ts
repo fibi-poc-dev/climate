@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
+import { EditableFieldComponent } from '../../form-controls/editable-field.component';
 
 // Interface for editable fields
 interface EditableField {
@@ -120,7 +121,8 @@ import { FieldsetModule } from 'primeng/fieldset';
         ProgressBarModule,
         DividerModule,
         PanelModule,
-        FieldsetModule
+        FieldsetModule,
+        EditableFieldComponent
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
@@ -648,6 +650,15 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     protected getField(fieldKey: string): EditableField | null {
         return this.editableFields().get(fieldKey) ?? null;
+    }
+
+    // Generic field value change handler for the new component
+    protected onFieldValueChange(fieldName: keyof EsgMainReportRow, value: number | string | null): void {
+        const currentSelection = this.selectedRow();
+        if (!currentSelection) return;
+        
+        // Update the specific field dynamically (same pattern as updateFieldValue)
+        (currentSelection as any)[fieldName] = value;
     }
 
     protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {

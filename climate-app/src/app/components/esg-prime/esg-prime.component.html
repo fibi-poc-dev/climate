@@ -40,19 +40,18 @@
     <!-- Debug Display for Active Filters -->
     @if (esgRequestFilters().length > 0) {
     <p-card header="מסננים פעילים" styleClass="active-filters-panel">
-                    <div class="active-filters-container">
-                        @for (filter of esgRequestFilters(); track filter.filterFieldName) {
-                            <div class="filter-chip">
-                                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
-                                <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
-                                <button class="remove-filter-btn" 
-                                        (click)="removeFilter(filter.filterFieldName)"
-                                        title="הסר מסנן">✕</button>
-                            </div>
-                        }
-                    </div>
-                </p-card>
+        <div class="active-filters-container">
+            @for (filter of esgRequestFilters(); track filter.filterFieldName) {
+            <div class="filter-chip">
+                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
+                <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
+                <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)"
+                    title="הסר מסנן">✕</button>
+            </div>
+            }
+        </div>
+    </p-card>
     }
     <!-- Main Layout Container -->
     <div class="main-layout">
@@ -187,13 +186,9 @@
 
         <!-- Details Panel -->
         <div class="details-panel">
-            @if (selectedRow()) {
-            
-            
+            @if (selectedRow()) {                
             <p-panel header="{{selectedRow()?.accountName}}">
                 <div class="detail-sections-horizontal">
-
-
                     <div class="detail-grid">
                         <div class="detail-item">
                             <label>קלאסטר אשראי אדום:</label>
@@ -729,47 +724,12 @@
                         </div>
                         <div class="detail-item">
                             <label>סיכון אשראי מאזני:</label>
-                            <div class="editable-field" [class.editing]="getField('creditBalanceSheetRisk')?.isEditing">
-                                <!-- Display Mode -->
-                                <div *ngIf="!getField('creditBalanceSheetRisk')?.isEditing" class="display-mode">
-                                    <div class="value-container">
-                                        <div class="current-value-row">
-                                            <span class="current-value"
-                                                [class.modified]="getField('creditBalanceSheetRisk')?.isDirty">
-                                                {{ formatCurrency(getEditableValue('creditBalanceSheetRisk',
-                                                selectedRow()?.creditBalanceSheetRisk)) }}
-                                            </span>
-                                            <button class="edit-btn"
-                                                (click)="startEdit('creditBalanceSheetRisk', selectedRow()?.creditBalanceSheetRisk)">✏️</button>
-                                        </div>
-                                        <div *ngIf="getField('creditBalanceSheetRisk')?.isDirty"
-                                            class="original-value-row">
-                                            <span class="original-indicator">מקורי: {{
-                                                formatHebrewNumberSafe(getField('creditBalanceSheetRisk')?.originalValue)
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Edit Mode -->
-                                <div *ngIf="getField('creditBalanceSheetRisk')?.isEditing" class="edit-mode">
-                                    <input type="text" class="edit-input"
-                                        [value]="getFormattedFieldValue('creditBalanceSheetRisk')"
-                                        (input)="onNumberInput($event, 'creditBalanceSheetRisk')"
-                                        (keypress)="onNumberKeypress($event)" placeholder="הזן ערך חדש">
-                                    <div class="original-value-hint">
-                                        <span class="info-icon">ℹ️</span>
-                                        <span>ערך מקורי: {{
-                                            formatHebrewNumberSafe(getField('creditBalanceSheetRisk')?.originalValue)
-                                            }}</span>
-                                    </div>
-                                    <div class="edit-actions">
-                                        <button class="action-btn save"
-                                            (click)="saveEdit('creditBalanceSheetRisk')">✓</button>
-                                        <button class="action-btn cancel"
-                                            (click)="cancelEdit('creditBalanceSheetRisk')">✕</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <app-editable-field
+                                [value]="selectedRow()?.creditBalanceSheetRisk ?? null"
+                                [fieldName]="'creditBalanceSheetRisk'"
+                                [fieldType]="'currency'"
+                                (valueChange)="onFieldValueChange('creditBalanceSheetRisk', $event)">
+                            </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון אשראי חוץ מאזני:</label>
@@ -818,39 +778,42 @@
                         </div>
                         <div class="detail-item">
                             <label>סה"כ סיכון אשראי:</label>
-                            <div class="inline-filter-field" [class.filtering]="getInlineFilter('totalCreditRisk')?.isActive">
+                            <div class="inline-filter-field"
+                                [class.filtering]="getInlineFilter('totalCreditRisk')?.isActive">
                                 <!-- Display Mode - Only Icon -->
                                 <div *ngIf="!getInlineFilter('totalCreditRisk')?.isActive" class="filter-display-mode">
-                                    <button class="filter-btn" 
-                                            (click)="startInlineFilter('totalCreditRisk')"
-                                            title="הוסף מסנן">🔍</button>
+                                    <button class="filter-btn" (click)="startInlineFilter('totalCreditRisk')"
+                                        title="הוסף מסנן">🔍</button>
                                 </div>
                                 <!-- Filter Mode -->
                                 <div *ngIf="getInlineFilter('totalCreditRisk')?.isActive" class="filter-edit-mode">
                                     <div class="filter-inputs">
-                                        <select class="operator-select" 
-                                                [value]="getInlineFilter('totalCreditRisk')?.operator"
-                                                (change)="onInlineFilterOperatorChange('totalCreditRisk', $any($event.target).value)">
+                                        <select class="operator-select"
+                                            [value]="getInlineFilter('totalCreditRisk')?.operator"
+                                            (change)="onInlineFilterOperatorChange('totalCreditRisk', $any($event.target).value)">
                                             <option value="=">=</option>
                                             <option value=">">></option>
-                                            <option value="<"><</option>
+                                            <option value="<">
+                                                << /option>
                                             <option value=">=">=</option>
-                                            <option value="<="><=</option>
+                                            <option value="<=">
+                                                <=< /option>
                                         </select>
-                                        <input type="text" 
-                                               class="filter-input"
-                                               [value]="getInlineFilter('totalCreditRisk')?.value"
-                                               (input)="onInlineFilterInput($event, 'totalCreditRisk')"
-                                               placeholder="הזן ערך לסינון">
+                                        <input type="text" class="filter-input"
+                                            [value]="getInlineFilter('totalCreditRisk')?.value"
+                                            (input)="onInlineFilterInput($event, 'totalCreditRisk')"
+                                            placeholder="הזן ערך לסינון">
                                     </div>
                                     <div class="filter-actions">
-                                        <button class="action-btn save" (click)="saveInlineFilter('totalCreditRisk')">✓</button>
-                                        <button class="action-btn cancel" (click)="cancelInlineFilter('totalCreditRisk')">✕</button>
+                                        <button class="action-btn save"
+                                            (click)="saveInlineFilter('totalCreditRisk')">✓</button>
+                                        <button class="action-btn cancel"
+                                            (click)="cancelInlineFilter('totalCreditRisk')">✕</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
             </p-panel>
 
