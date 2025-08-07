@@ -728,7 +728,9 @@
                                 [value]="selectedRow()?.creditBalanceSheetRisk ?? null"
                                 [fieldName]="'creditBalanceSheetRisk'"
                                 [fieldType]="'currency'"
-                                (valueChange)="onFieldValueChange('creditBalanceSheetRisk', $event)">
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('creditBalanceSheetRisk', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">

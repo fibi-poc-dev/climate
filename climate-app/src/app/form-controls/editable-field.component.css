@@ -83,6 +83,81 @@
     cursor: not-allowed;
 }
 
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+/* Filter button */
+.filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: rgba(24, 40, 95, 0.7);
+}
+
+.current-value-row:hover .filter-btn,
+.editable-field:hover .filter-btn {
+    opacity: 0.7;
+}
+
+.filter-btn:hover {
+    opacity: 1 !important;
+    background-color: rgba(24, 40, 95, 0.1);
+}
+
+.filter-btn.active {
+    opacity: 1;
+    background-color: rgba(255, 193, 14, 0.2);
+    color: rgba(24, 40, 95, 1);
+}
+
+.filter-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Filter indicator */
+.filter-indicator-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.filter-indicator {
+    font-size: 0.75rem;
+    color: rgba(255, 193, 14, 0.8);
+    background-color: rgba(255, 193, 14, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex: 1;
+}
+
+.clear-filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.125rem 0.25rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: rgba(255, 193, 14, 0.8);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+    opacity: 1;
+    background-color: rgba(255, 193, 14, 0.1);
+}
+
 /* Edit Mode */
 .edit-mode {
     display: flex;
@@ -173,6 +248,71 @@
 
 .action-btn.cancel:hover {
     background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* Filter Mode */
+.editable-field.filtering {
+    background-color: rgba(255, 193, 14, 0.1);
+    border-radius: 4px;
+    padding: 0.25rem;
+}
+
+.filter-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid rgba(255, 193, 14, 0.5);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: Arial, sans-serif;
+    text-align: right;
+    direction: rtl;
+    background-color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: rgba(255, 193, 14, 1);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 14, 0.25);
+}
+
+.filter-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.filter-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #666;
+    padding: 0.25rem;
+    background-color: rgba(255, 193, 14, 0.05);
+    border-radius: 3px;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    direction: ltr;
+}
+
+.action-btn.apply {
+    background-color: rgba(255, 193, 14, 1);
+    color: rgba(24, 40, 95, 1);
+}
+
+.action-btn.apply:hover:not(:disabled) {
+    background-color: rgba(255, 193, 14, 0.8);
     transform: translateY(-1px);
 }
 

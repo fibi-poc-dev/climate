@@ -661,6 +661,28 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         (currentSelection as any)[fieldName] = value;
     }
 
+    // Generic field filter change handler
+    protected onFieldFilterChange(filter: Filter | null): void {
+        const currentStates = this.filterStates();
+        const newStates = new Map(currentStates);
+        
+        if (filter) {
+            // Add or update the filter state
+            newStates.set(filter.filterFieldName, {
+                value: filter.filterFieldValue,
+                operator: filter.filterType
+            });
+        } else {
+            // Remove filter if null (clear filter)
+            newStates.delete('creditBalanceSheetRisk');
+        }
+        
+        this.filterStates.set(newStates);
+        
+        // Optionally trigger data refresh
+        // this.climateDataService.sendFilterRequest(this.buildClimateRequest());
+    }
+
     protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {
         const currentFields = this.editableFields();
         const safeOriginalValue = originalValue ?? null;

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Filter } from '../models/climate-request.model';
 
 export interface EditableFieldState {
   isEditing: boolean;
@@ -24,11 +25,13 @@ export class EditableFieldComponent<T extends number | string | null> {
   readonly fieldType = input<'number' | 'currency' | 'text'>('number');
   readonly placeholder = input<string>('הזן ערך');
   readonly disabled = input<boolean>(false);
+  readonly enableFilter = input<boolean>(false);
 
   // Outputs
   readonly valueChange = output<T>();
   readonly editStart = output<string>();
   readonly editEnd = output<{ fieldName: string; oldValue: T; newValue: T }>();
+  readonly filterChange = output<Filter | null>();
 
   // Internal state
   private readonly internalValue = signal<T>(null as T);
@@ -36,6 +39,11 @@ export class EditableFieldComponent<T extends number | string | null> {
   private readonly isDirty = signal(false);
   private readonly originalValue = signal<T>(null as T);
   private readonly tempEditValue = signal<string>('');
+  
+  // Filter state
+  protected readonly isFilterMode = signal(false);
+  protected readonly filterValue = signal<string>('');
+  protected readonly activeFilter = signal<Filter | null>(null);
 
   // Computed properties
   readonly fieldState = computed((): EditableFieldState => ({
@@ -66,6 +74,25 @@ export class EditableFieldComponent<T extends number | string | null> {
     // For number/currency fields, check if it's a valid number
     const numVal = this.parseNumber(val);
     return !isNaN(numVal);
+  });
+
+  readonly hasValidFilterInput = computed(() => {
+    const val = this.filterValue().trim();
+    if (!val) return false;
+    
+    if (this.fieldType() === 'text') return true;
+    
+    // For number/currency fields, check if it's a valid number
+    const numVal = this.parseNumber(val);
+    return !isNaN(numVal);
+  });
+
+  readonly showFilterIcon = computed(() => {
+    return this.enableFilter() && !this.isEditing() && !this.isFilterMode();
+  });
+
+  readonly hasActiveFilter = computed(() => {
+    return this.activeFilter() !== null;
   });
 
   constructor() {
@@ -117,6 +144,87 @@ export class EditableFieldComponent<T extends number | string | null> {
   protected cancelEdit(): void {
     this.isEditing.set(false);
     this.tempEditValue.set('');
+  }
+
+  // Filter methods
+  protected startFilter(): void {
+    if (this.disabled()) return;
+    
+    this.isFilterMode.set(true);
+    this.filterValue.set('');
+    
+    // Focus filter input after view update
+    setTimeout(() => {
+      const input = document.querySelector('.filter-input') as HTMLInputElement;
+      if (input) {
+        input.focus();
+      }
+    }, 0);
+  }
+
+  protected applyFilter(): void {
+    if (!this.hasValidFilterInput()) return;
+
+    const filterValueStr = this.filterValue().trim();
+    
+    const filter: Filter = {
+      filterFieldName: this.fieldName(),
+      filterFieldValue: filterValueStr,
+      filterType: this.getFilterType()
+    };
+
+    this.activeFilter.set(filter);
+    this.isFilterMode.set(false);
+    this.filterChange.emit(filter);
+  }
+
+  protected cancelFilter(): void {
+    this.isFilterMode.set(false);
+    this.filterValue.set('');
+  }
+
+  protected clearFilter(): void {
+    this.activeFilter.set(null);
+    this.filterChange.emit(null);
+  }
+
+  protected onFilterInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.filterValue.set(target.value);
+  }
+
+  protected onFilterKeypress(event: KeyboardEvent): void {
+    if (this.fieldType() === 'text') return;
+
+    // Allow numbers, decimal point, minus sign, and control keys for numeric filters
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'];
+    const controlKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight'];
+    
+    if (!allowedKeys.includes(event.key) && !controlKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  protected onFilterKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.applyFilter();
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      this.cancelFilter();
+    }
+  }
+
+  private getFilterType(): string {
+    switch (this.fieldType()) {
+      case 'currency':
+      case 'number':
+        return 'number';
+      case 'text':
+        return 'string';
+      default:
+        return 'string';
+    }
   }
 
   protected onInput(event: Event): void {

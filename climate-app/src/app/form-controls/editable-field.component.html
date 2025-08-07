@@ -1,15 +1,23 @@
-<div class="editable-field" [class.editing]="fieldState().isEditing">
+<div class="editable-field" [class.editing]="fieldState().isEditing" [class.filtering]="isFilterMode()">
     <!-- Display Mode -->
-    <div *ngIf="!fieldState().isEditing" class="display-mode">
+    <div *ngIf="!fieldState().isEditing && !isFilterMode()" class="display-mode">
         <div class="value-container">
             <div class="current-value-row">
                 <span class="current-value" [class.modified]="fieldState().isDirty">
                     {{ displayValue() }}
                 </span>
-                <button class="edit-btn" (click)="startEdit()" title="ערוך ערך">✏️</button>
+                <div class="action-buttons">
+                    <button class="edit-btn" (click)="startEdit()" title="ערוך ערך">✏️</button>
+                    <button *ngIf="showFilterIcon()" class="filter-btn" (click)="startFilter()" 
+                            [class.active]="hasActiveFilter()" title="סנן לפי ערך">🔍</button>
+                </div>
             </div>
             <div *ngIf="fieldState().isDirty" class="original-value-row">
                 <span class="original-indicator">מקורי: {{ formatValue(fieldState().originalValue) }}</span>
+            </div>
+            <div *ngIf="hasActiveFilter()" class="filter-indicator-row">
+                <span class="filter-indicator">מסונן: {{ activeFilter()?.filterFieldValue }}</span>
+                <button class="clear-filter-btn" (click)="clearFilter()" title="הסר סינון">✕</button>
             </div>
         </div>
     </div>
@@ -27,6 +35,23 @@
         <div class="edit-actions">
             <button class="action-btn save" (click)="saveEdit()" [disabled]="!hasValidInput()">✓</button>
             <button class="action-btn cancel" (click)="cancelEdit()">✕</button>
+        </div>
+    </div>
+
+    <!-- Filter Mode -->
+    <div *ngIf="isFilterMode()" class="filter-mode">
+        <input type="text" class="filter-input" [value]="filterValue()" (input)="onFilterInput($event)"
+            (keypress)="onFilterKeypress($event)" (keydown)="onFilterKeydown($event)" 
+            placeholder="הזן ערך לסינון" #filterInput>
+
+        <div class="filter-hint">
+            <span class="info-icon">🔍</span>
+            <span>סנן רשומות לפי ערך זה</span>
+        </div>
+
+        <div class="filter-actions">
+            <button class="action-btn apply" (click)="applyFilter()" [disabled]="!hasValidFilterInput()">✓</button>
+            <button class="action-btn cancel" (click)="cancelFilter()">✕</button>
         </div>
     </div>
 </div>
