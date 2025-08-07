@@ -723,6 +723,17 @@
                             </div>
                         </div>
                         <div class="detail-item">
+                            <label>שם לקוח:</label>
+                            <app-editable-field
+                                [value]="selectedRow()?.accountName ?? null"
+                                [fieldName]="'accountName'"
+                                [fieldType]="'text'"
+                                [enableFilter]="true"
+                                (valueChange)="onFieldValueChange('accountName', $event)"
+                                (filterChange)="onFieldFilterChange($event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
                             <label>סיכון אשראי מאזני:</label>
                             <app-editable-field
                                 [value]="selectedRow()?.creditBalanceSheetRisk ?? null"

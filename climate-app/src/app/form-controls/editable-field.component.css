@@ -264,8 +264,37 @@
     gap: 0.5rem;
 }
 
+.filter-input-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.filter-operator-selector {
+    flex-shrink: 0;
+}
+
+.filter-operator-select {
+    padding: 0.5rem;
+    border: 2px solid rgba(255, 193, 14, 0.5);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: rgba(24, 40, 95, 1);
+    min-width: 60px;
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-operator-select:focus {
+    outline: none;
+    border-color: rgba(255, 193, 14, 1);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 14, 0.25);
+}
+
 .filter-input {
-    width: 100%;
+    flex: 1;
     padding: 0.5rem;
     border: 2px solid rgba(255, 193, 14, 0.5);
     border-radius: 4px;

@@ -16,7 +16,7 @@
                 <span class="original-indicator">מקורי: {{ formatValue(fieldState().originalValue) }}</span>
             </div>
             <div *ngIf="hasActiveFilter()" class="filter-indicator-row">
-                <span class="filter-indicator">מסונן: {{ activeFilter()?.filterFieldValue }}</span>
+                <span class="filter-indicator">מסונן: {{ activeFilter()?.filterType }} {{ activeFilter()?.filterFieldValue }}</span>
                 <button class="clear-filter-btn" (click)="clearFilter()" title="הסר סינון">✕</button>
             </div>
         </div>
@@ -40,9 +40,18 @@
 
     <!-- Filter Mode -->
     <div *ngIf="isFilterMode()" class="filter-mode">
-        <input type="text" class="filter-input" [value]="filterValue()" (input)="onFilterInput($event)"
-            (keypress)="onFilterKeypress($event)" (keydown)="onFilterKeydown($event)" 
-            placeholder="הזן ערך לסינון" #filterInput>
+        <div class="filter-input-group">
+            <div *ngIf="shouldShowOperatorSelector()" class="filter-operator-selector">
+                <select class="filter-operator-select" [value]="filterOperator()" (change)="onFilterOperatorChange($event)">
+                    <option *ngFor="let operator of availableOperators()" [value]="operator">
+                        {{ operator }}
+                    </option>
+                </select>
+            </div>
+            <input type="text" class="filter-input" [value]="filterValue()" (input)="onFilterInput($event)"
+                (keypress)="onFilterKeypress($event)" (keydown)="onFilterKeydown($event)" 
+                placeholder="הזן ערך לסינון" #filterInput>
+        </div>
 
         <div class="filter-hint">
             <span class="info-icon">🔍</span>

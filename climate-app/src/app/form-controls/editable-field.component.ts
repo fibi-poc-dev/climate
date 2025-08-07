@@ -43,6 +43,7 @@ export class EditableFieldComponent<T extends number | string | null> {
   // Filter state
   protected readonly isFilterMode = signal(false);
   protected readonly filterValue = signal<string>('');
+  protected readonly filterOperator = signal<string>('=');
   protected readonly activeFilter = signal<Filter | null>(null);
 
   // Computed properties
@@ -93,6 +94,19 @@ export class EditableFieldComponent<T extends number | string | null> {
 
   readonly hasActiveFilter = computed(() => {
     return this.activeFilter() !== null;
+  });
+
+  readonly availableOperators = computed(() => {
+    if (this.fieldType() === 'text') {
+      return ['='];
+    } else {
+      // For numeric fields (number and currency)
+      return ['=', '>', '<', '>=', '<='];
+    }
+  });
+
+  readonly shouldShowOperatorSelector = computed(() => {
+    return this.fieldType() !== 'text' && this.availableOperators().length > 1;
   });
 
   constructor() {
@@ -152,6 +166,8 @@ export class EditableFieldComponent<T extends number | string | null> {
     
     this.isFilterMode.set(true);
     this.filterValue.set('');
+    // Reset operator to default based on field type
+    this.filterOperator.set('=');
     
     // Focus filter input after view update
     setTimeout(() => {
@@ -170,7 +186,7 @@ export class EditableFieldComponent<T extends number | string | null> {
     const filter: Filter = {
       filterFieldName: this.fieldName(),
       filterFieldValue: filterValueStr,
-      filterType: this.getFilterType()
+      filterType: this.filterOperator() // Use the selected operator instead of getFilterType()
     };
 
     this.activeFilter.set(filter);
@@ -181,6 +197,7 @@ export class EditableFieldComponent<T extends number | string | null> {
   protected cancelFilter(): void {
     this.isFilterMode.set(false);
     this.filterValue.set('');
+    this.filterOperator.set('=');
   }
 
   protected clearFilter(): void {
@@ -213,6 +230,11 @@ export class EditableFieldComponent<T extends number | string | null> {
       event.preventDefault();
       this.cancelFilter();
     }
+  }
+
+  protected onFilterOperatorChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.filterOperator.set(target.value);
   }
 
   private getFilterType(): string {
