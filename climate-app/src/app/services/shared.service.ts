@@ -289,6 +289,7 @@ export class SharedService {
      * This allows both parent and child components to share filter state
      */
     private readonly clearedFilters = signal<Set<string>>(new Set());
+    private readonly clearedFromChild = signal<Set<string>>(new Set());
 
     /**
      * Get the set of fields that should have their filters cleared
@@ -296,10 +297,26 @@ export class SharedService {
     readonly getClearedFilters = computed(() => this.clearedFilters());
 
     /**
+     * Get the set of fields that were cleared from child components
+     */
+    readonly getClearedFromChild = computed(() => this.clearedFromChild());
+
+    /**
      * Clear a specific filter field - called by parent component
      */
     clearFilterForField(fieldName: string): void {
         this.clearedFilters.update(cleared => {
+            const newSet = new Set(cleared);
+            newSet.add(fieldName);
+            return newSet;
+        });
+    }
+
+    /**
+     * Clear a filter from child component - called by editable field
+     */
+    clearFilterFromChild(fieldName: string): void {
+        this.clearedFromChild.update(cleared => {
             const newSet = new Set(cleared);
             newSet.add(fieldName);
             return newSet;
@@ -318,9 +335,27 @@ export class SharedService {
     }
 
     /**
+     * Acknowledge that a filter cleared from child has been processed - called by parent
+     */
+    acknowledgeChildFilterCleared(fieldName: string): void {
+        this.clearedFromChild.update(cleared => {
+            const newSet = new Set(cleared);
+            newSet.delete(fieldName);
+            return newSet;
+        });
+    }
+
+    /**
      * Check if a specific field should clear its filter
      */
     shouldClearFilter(fieldName: string): boolean {
         return this.clearedFilters().has(fieldName);
+    }
+
+    /**
+     * Check if a specific field was cleared from child
+     */
+    wasFilterClearedFromChild(fieldName: string): boolean {
+        return this.clearedFromChild().has(fieldName);
     }
 }

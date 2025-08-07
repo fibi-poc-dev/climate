@@ -215,6 +215,9 @@ export class EditableFieldComponent<T extends number | string | null> {
   protected clearFilter(): void {
     this.activeFilter.set(null);
     this.filterChange.emit(null);
+    
+    // Notify shared service that this field cleared its filter
+    this.sharedService.clearFilterFromChild(this.fieldName());
   }
 
   // Method to clear filter state (now called internally via shared service)
@@ -223,6 +226,7 @@ export class EditableFieldComponent<T extends number | string | null> {
     this.filterValue.set('');
     this.filterOperator.set('=');
     this.activeFilter.set(null);
+    // Note: Don't emit filterChange here as this is called in response to parent clearing
   }
 
   protected onFilterInput(event: Event): void {

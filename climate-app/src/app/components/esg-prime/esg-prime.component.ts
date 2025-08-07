@@ -245,6 +245,22 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                 console.log('ESG Request Filters updated:', request.esgRequest.filter);
             }
         });
+
+        // Effect to listen for child filter clearing events
+        effect(() => {
+            const clearedFromChild = this.sharedService.getClearedFromChild();
+            clearedFromChild.forEach(fieldName => {
+                // Remove the filter from parent's filter states
+                this.filterStates.update(states => {
+                    const newStates = new Map(states);
+                    newStates.delete(fieldName);
+                    return newStates;
+                });
+                
+                // Acknowledge the clearing
+                this.sharedService.acknowledgeChildFilterCleared(fieldName);
+            });
+        });
     }    // Computed signals for filtered and processed data
     protected readonly esgMainReportData = computed(() => {
         const data = this.climateData();
@@ -674,10 +690,10 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                 value: filter.filterFieldValue,
                 operator: filter.filterType
             });
+            
+            this.filterStates.set(newStates);
         }
-        // Note: Filter removal is handled by the removeFilter method when clicking the X button
-        
-        this.filterStates.set(newStates);
+        // Note: Filter removal is handled by the shared service effect when child components clear their filters
     }
 
     protected startEdit(fieldKey: string, originalValue: number | null | undefined): void {
