@@ -209,19 +209,19 @@
 }
 
 .detail-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
     width: 100%;
 }
 
 .detail-item {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    align-items: center;
     gap: 1rem;
     padding: 0.25rem 0;
     border-bottom: 1px solid #f0f0f0;
-    align-items: start;
+    min-height: 2rem;
 }
 
 .detail-item label {
@@ -229,28 +229,31 @@
     color: rgba(24, 40, 95, 1);
     font-size: 0.875rem;
     text-align: right;
-    justify-self: start;
-    align-self: center;
+    flex: 0 0 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .detail-item span {
     color: #333;
     font-size: 0.875rem;
-    text-align: right;
-    justify-self: start;
-    align-self: center;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
 }
 
 .detail-item p-tag {
-    justify-self: start;
-    align-self: center;
+    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 /* Editable Field Styles */
 .editable-field {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     align-self: center;
 }
 
@@ -396,8 +399,8 @@
     min-height: 36px;
     display: flex;
     align-items: center;
-    width: 100%;
-    align-self: center;
+    flex: 1;
+    min-width: 0;
 }
 
 .inline-filter-field.filtering {
@@ -1014,22 +1017,27 @@
     }
 
     .detail-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
     }
 
     .detail-item {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
+        flex-direction: row;
+        gap: 0.5rem;
+        min-height: 1.8rem;
     }
 
     .detail-item label {
-        justify-self: start;
+        flex: 0 0 35%;
         text-align: right;
+        font-size: 0.8rem;
     }
 
     .detail-item span {
-        justify-self: start;
-        text-align: right;
+        text-align: left;
+        font-size: 0.8rem;
     }
 }
 
@@ -1060,27 +1068,33 @@
 
     .detail-item label {
         font-size: 0.8rem;
-        justify-self: start;
+        flex: 0 0 45%;
+        text-align: right;
     }
 
     .detail-item span {
         font-size: 0.8rem;
-        justify-self: start;
+        text-align: left;
     }
 }
 
 @media (max-width: 360px) {
     .detail-item {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 0.25rem;
+        align-items: flex-start;
     }
 
     .detail-item label {
-        justify-self: start;
+        flex: none;
+        text-align: right;
+        width: 100%;
     }
 
     .detail-item span {
-        justify-self: start;
+        flex: none;
+        text-align: left;
+        width: 100%;
     }
 }
 
