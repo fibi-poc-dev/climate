@@ -8,8 +8,8 @@
                 </span>
                 <div class="action-buttons">
                     <button class="edit-btn" (click)="startEdit()" title="ערוך ערך">✏️</button>
-                    <button *ngIf="showFilterIcon()" class="filter-btn" (click)="startFilter()" 
-                            [class.active]="hasActiveFilter()" title="סנן לפי ערך">🔍</button>
+                    <button *ngIf="showFilterIcon()" class="filter-btn pi pi-filter" (click)="startFilter()" 
+                            [class.active]="hasActiveFilter()" title="סנן לפי ערך"></button>
                 </div>
             </div>
             <div *ngIf="fieldState().isDirty" class="original-value-row">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="filter-hint">
-            <span class="info-icon">🔍</span>
+            <span class="info-icon pi pi-filter"></span>
             <span>סנן רשומות לפי ערך זה</span>
         </div>
 
