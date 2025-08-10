@@ -39,7 +39,7 @@
 
     <!-- Debug Display for Active Filters -->
     @if (esgRequestFilters().length > 0) {
-    <p-card header="מסננים פעילים" styleClass="active-filters-panel">
+    <p-card id="active-filters" header="מסננים פעילים" styleClass="active-filters-panel">
         <div class="active-filters-container">
             @for (filter of esgRequestFilters(); track filter.filterFieldName) {
             <div class="filter-chip">
@@ -58,7 +58,7 @@
         <!-- Table Section -->
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null">
-                <p-table id="masterESG" [value]="filteredData()" [paginator]="true" [rows]="10"
+                <p-table id="master-esg" [value]="filteredData()" [paginator]="true" [rows]="10"
                     [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
                     scrollHeight="calc(100vh - 250px)" styleClass="p-datatable-striped p-datatable-sm"
                     selectionMode="single" (onRowSelect)="onRowSelect($event)">
@@ -83,78 +83,7 @@
                             <th>סך סולו</th>
                             <th>סך סיכון אשראי באש"ח ללא משכנתאות</th>
                         </tr>
-                        <tr>
-                            <th>
-                                <!-- Bank Filter - Text Only -->
-                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('bank')"
-                                    [value]="getFilterValue('bank')"
-                                    (input)="updateFilterValue('bank', $any($event.target).value)"
-                                    class="filter-input">
-                            </th>
-                            <th>
-                                <!-- Branch Filter - Text Only -->
-                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('branch')"
-                                    [value]="getFilterValue('branch')"
-                                    (input)="updateFilterValue('branch', $any($event.target).value)"
-                                    class="filter-input">
-                            </th>
-                            <th>
-                                <!-- Account Filter - Text Only -->
-                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('account')"
-                                    [value]="getFilterValue('account')"
-                                    (input)="updateFilterValue('account', $any($event.target).value)"
-                                    class="filter-input">
-                            </th>
-                            <th>
-                                <!-- Account Name Filter - Text Only -->
-                                <input type="text" pInputText [placeholder]="getFilterPlaceholder('accountName')"
-                                    [value]="getFilterValue('accountName')"
-                                    (input)="updateFilterValue('accountName', $any($event.target).value)"
-                                    class="filter-input">
-                            </th>
-                            <th>
-                                <!-- Customer Rating Filter - Using Generic FilterFieldComponent -->
-                                <app-filter-field
-                                    fieldName="customerRating"
-                                    filterType="numeric"
-                                    [placeholder]="getFilterPlaceholder('customerRating')"
-                                    [value]="getFilterValue('customerRating')"
-                                    [operator]="getFilterOperatorForComponent('customerRating')"
-                                    (filterChange)="onFilterFieldChange($event)">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <!-- Current Credit Authority Filter - Using Generic FilterFieldComponent -->
-                                <app-filter-field
-                                    fieldName="currentCreditAuthority"
-                                    filterType="numeric"
-                                    [placeholder]="getFilterPlaceholder('currentCreditAuthority')"
-                                    [value]="getFilterValue('currentCreditAuthority')"
-                                    [operator]="getFilterOperatorForComponent('currentCreditAuthority')"
-                                    (filterChange)="onFilterFieldChange($event)">
-                                </app-filter-field>
-                            </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>
-                                <!-- Total Solo Filter - Using Generic FilterFieldComponent -->
-                                <app-filter-field
-                                    fieldName="totalSolo"
-                                    filterType="numeric"
-                                    [placeholder]="getFilterPlaceholder('totalSolo')"
-                                    [value]="getFilterValue('totalSolo')"
-                                    [operator]="getFilterOperatorForComponent('totalSolo')"
-                                    (filterChange)="onFilterFieldChange($event)">
-                                </app-filter-field>
-                            </th>
-                            <th></th>
-                        </tr>
+
                     </ng-template>
 
                     <ng-template pTemplate="body" let-row>
@@ -200,83 +129,62 @@
 
         <!-- Details Panel -->
         <div class="details-panel">
-            @if (selectedRow()) {                
+            @if (selectedRow()) {
             <p-panel header="{{selectedRow()?.accountName}}">
                 <div class="detail-sections-horizontal">
                     <div class="detail-grid">
                         <div class="detail-item">
                             <label>קלאסטר אשראי אדום:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.creditRedCluster ?? null"
-                                [fieldName]="'creditRedCluster'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
+                                [fieldName]="'creditRedCluster'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('creditRedCluster', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון פיזי שורשי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.rootPhysicalRisk ?? null"
-                                [fieldName]="'rootPhysicalRisk'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
+                                [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון מעבר שורשי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.rootTransferRisk ?? null"
-                                [fieldName]="'rootTransferRisk'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
+                                [fieldName]="'rootTransferRisk'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('rootTransferRisk', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>משקל סיכון פיזי שורשי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
-                                [fieldName]="'rootPhysicalRiskScale'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
+                                [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>משקל סיכון מעבר שורשי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.rootTransferRiskScale ?? null"
-                                [fieldName]="'rootTransferRiskScale'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
+                                [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>שקלול רמת הסיכון השורשי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.rootRiskLevelWeight ?? null"
-                                [fieldName]="'rootRiskLevelWeight'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
+                                [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון שיורי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.residualRisk ?? null"
-                                [fieldName]="'residualRisk'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.residualRisk ?? null"
+                                [fieldName]="'residualRisk'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('residualRisk', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
@@ -287,33 +195,24 @@
                         </div>
                         <div class="detail-item">
                             <label>איכות ניהול:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.qualityManagement ?? null"
-                                [fieldName]="'qualityManagement'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
+                                [fieldName]="'qualityManagement'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('qualityManagement', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>קלאסטר שחור:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.blackCluster ?? null"
-                                [fieldName]="'blackCluster'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.blackCluster ?? null"
+                                [fieldName]="'blackCluster'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('blackCluster', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>קלאסטר ירוק:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.greenCluster ?? null"
-                                [fieldName]="'greenCluster'"
-                                [fieldType]="'number'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.greenCluster ?? null"
+                                [fieldName]="'greenCluster'" [fieldType]="'number'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('greenCluster', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
@@ -326,60 +225,47 @@
                         </div>
                         <div class="detail-item">
                             <label>סך בטחונות:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.totalCollateral ?? null"
-                                [fieldName]="'totalCollateral'"
-                                [fieldType]="'currency'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"
+                                [fieldName]="'totalCollateral'" [fieldType]="'currency'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('totalCollateral', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סך סולו:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.totalSolo ?? null"
-                                [fieldName]="'totalSolo'"
-                                [fieldType]="'currency'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
+                                [fieldType]="'currency'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('totalSolo', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סיכון אשראי חוץ מאזני:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
-                                [fieldName]="'creditOffBalanceSheetRisk'"
-                                [fieldType]="'currency'"
-                                [enableFilter]="true"
+                            <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
+                                [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'" [enableFilter]="true"
                                 (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)"
                                 (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                         <div class="detail-item">
                             <label>סה"כ סיכון אשראי:</label>
-                            <app-editable-field
-                                [value]="selectedRow()?.totalCreditRisk ?? null"
-                                [fieldName]="'totalCreditRisk'"
-                                [fieldType]="'currency'"
-                                [enableFilter]="true"
-                                [disabled]="true"
-                                (filterChange)="onFieldFilterChange($event)">
+                            <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null"
+                                [fieldName]="'totalCreditRisk'" [fieldType]="'currency'" [enableFilter]="true"
+                                [disabled]="true" (filterChange)="onFieldFilterChange($event)">
                             </app-editable-field>
                         </div>
                     </div>
                 </div>
             </p-panel>
 
-        } @else {
+            } @else {
             <p-panel header="פרטי השורה">
                 <div class="no-selection">
                     <i class="pi pi-info-circle"></i>
                     <p>בחר שורה מהטבלה כדי לראות פרטים</p>
                 </div>
             </p-panel>
-        }
+            }
         </div>
     </div>
     }
