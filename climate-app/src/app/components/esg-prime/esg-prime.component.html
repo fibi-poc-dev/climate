@@ -246,192 +246,186 @@
 
 
         <!-- Details Panel -->
-        <div class="details-panel">
-            @if (selectedRow()) {
-            <p-panel header="{{selectedRow()?.accountName}}">
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>קלאסטר אשראי אדום:</label>
-                            <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
-                                [fieldName]="'creditRedCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('creditRedCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון פיזי שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
-                                [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון מעבר שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
-                                [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>משקל סיכון פיזי שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
-                                [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>משקל סיכון מעבר שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
-                                [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>שקלול רמת הסיכון השורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
-                                [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון שיורי:</label>
-                            <app-editable-field [value]="selectedRow()?.residualRisk ?? null"
-                                [fieldName]="'residualRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('residualRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>תאריך תוקף סיכון שיורי:</label>
-                            <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>איכות ניהול:</label>
-                            <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
-                                [fieldName]="'qualityManagement'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('qualityManagement', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>קלאסטר שחור:</label>
-                            <app-editable-field [value]="selectedRow()?.blackCluster ?? null"
-                                [fieldName]="'blackCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('blackCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>קלאסטר ירוק:</label>
-                            <app-editable-field [value]="selectedRow()?.greenCluster ?? null"
-                                [fieldName]="'greenCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('greenCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>צבע אקלים:</label>
-                            <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
-                                [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
-                            </p-tag>
-                        </div>
-                        <div class="detail-item">
-                            <label>סך בטחונות:</label>
-                            <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"
-                                [fieldName]="'totalCollateral'" [fieldType]="'currency'"
-                                (valueChange)="onFieldValueChange('totalCollateral', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סך סולו:</label>
-                            <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
-                                [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון אשראי חוץ מאזני:</label>
-                            <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
-                                [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
-                                (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סה"כ סיכון אשראי:</label>
-                            <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null"
-                                [fieldName]="'totalCreditRisk'" [fieldType]="'currency'" [disabled]="true">
-                            </app-editable-field>
-                        </div>
-                    </div>
+        @if (selectedRow()) {
+        <p-panel header="{{selectedRow()?.accountName}}">
+            <div>
+                <div class="detail-item">
+                    <label>קלאסטר אשראי אדום:</label>
+                    <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
+                        [fieldName]="'creditRedCluster'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('creditRedCluster', $event)">
+                    </app-editable-field>
                 </div>
-            </p-panel>
-
-            } @else {
-            <p-panel header="פרטי השורה">
-                <div class="no-selection">
-                    <i class="pi pi-info-circle"></i>
-                    <p>בחר שורה מהטבלה כדי לראות פרטים</p>
+                <div class="detail-item">
+                    <label>סיכון פיזי שורשי:</label>
+                    <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
+                        [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
+                    </app-editable-field>
                 </div>
-            </p-panel>
-            }
-        </div>
+                <div class="detail-item">
+                    <label>סיכון מעבר שורשי:</label>
+                    <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
+                        [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>משקל סיכון פיזי שורשי:</label>
+                    <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
+                        [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>משקל סיכון מעבר שורשי:</label>
+                    <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
+                        [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>שקלול רמת הסיכון השורשי:</label>
+                    <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
+                        [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>סיכון שיורי:</label>
+                    <app-editable-field [value]="selectedRow()?.residualRisk ?? null" [fieldName]="'residualRisk'"
+                        [fieldType]="'number'" (valueChange)="onFieldValueChange('residualRisk', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>תאריך תוקף סיכון שיורי:</label>
+                    <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
+                </div>
+                <div class="detail-item">
+                    <label>איכות ניהול:</label>
+                    <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
+                        [fieldName]="'qualityManagement'" [fieldType]="'number'"
+                        (valueChange)="onFieldValueChange('qualityManagement', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>קלאסטר שחור:</label>
+                    <app-editable-field [value]="selectedRow()?.blackCluster ?? null" [fieldName]="'blackCluster'"
+                        [fieldType]="'number'" (valueChange)="onFieldValueChange('blackCluster', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>קלאסטר ירוק:</label>
+                    <app-editable-field [value]="selectedRow()?.greenCluster ?? null" [fieldName]="'greenCluster'"
+                        [fieldType]="'number'" (valueChange)="onFieldValueChange('greenCluster', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>צבע אקלים:</label>
+                    <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
+                        [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                    </p-tag>
+                </div>
+                <div class="detail-item">
+                    <label>סך בטחונות:</label>
+                    <app-editable-field [value]="selectedRow()?.totalCollateral ?? null" [fieldName]="'totalCollateral'"
+                        [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalCollateral', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>סך סולו:</label>
+                    <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
+                        [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>סיכון אשראי חוץ מאזני:</label>
+                    <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
+                        [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
+                        (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
+                    </app-editable-field>
+                </div>
+                <div class="detail-item">
+                    <label>סה"כ סיכון אשראי:</label>
+                    <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null" [fieldName]="'totalCreditRisk'"
+                        [fieldType]="'currency'" [disabled]="true">
+                    </app-editable-field>
+                </div>
+            </div>
+        </p-panel>
+        
 
-
-        <p-accordion value="0">
-            <p-accordion-panel value="0">
-                <p-accordion-header>Header I</p-accordion-header>
-                <p-accordion-content>
-                    <p class="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                        ex
-                        ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat
-                        nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit
-                        anim id est
-                        laborum.
-                    </p>
-                </p-accordion-content>
-            </p-accordion-panel>
-
-            <p-accordion-panel value="1">
-                <p-accordion-header>Header II</p-accordion-header>
-                <p-accordion-content>
-                    <p class="m-0">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                        laudantium,
-                        totam rem
-                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                        explicabo. Nemo
-                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                        magni
-                        dolores eos
-                        qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
-                        modi.
-                    </p>
-                </p-accordion-content>
-            </p-accordion-panel>
-
-            <p-accordion-panel value="2">
-                <p-accordion-header>Header III</p-accordion-header>
-                <p-accordion-content>
-                    <p class="m-0">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                        laudantium,
-                        totam rem
-                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                        explicabo. Nemo
-                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                        magni
-                        dolores eos
-                        qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
-                        modi.
-                    </p>
-                </p-accordion-content>
-            </p-accordion-panel>
-        </p-accordion>
+        } @else {
+        <p-panel header="פרטי השורה">
+            <div class="no-selection">
+                <i class="pi pi-info-circle"></i>
+                <p>בחר שורה מהטבלה כדי לראות פרטים</p>
+            </div>
+        </p-panel>
+        }
     </div>
-    }
+
+
+    <p-accordion value="0">
+        <p-accordion-panel value="0">
+            <p-accordion-header>Header I</p-accordion-header>
+            <p-accordion-content>
+                <p class="m-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex
+                    ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat
+                    nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit
+                    anim id est
+                    laborum.
+                </p>
+            </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="1">
+            <p-accordion-header>Header II</p-accordion-header>
+            <p-accordion-content>
+                <p class="m-0">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                    laudantium,
+                    totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                    magni
+                    dolores eos
+                    qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                    modi.
+                </p>
+            </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="2">
+            <p-accordion-header>Header III</p-accordion-header>
+            <p-accordion-content>
+                <p class="m-0">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                    laudantium,
+                    totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                    magni
+                    dolores eos
+                    qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                    modi.
+                </p>
+            </p-accordion-content>
+        </p-accordion-panel>
+    </p-accordion>
+</div>
+}
 
 
 
@@ -453,16 +447,16 @@
 
 
 
-    <!-- No Data State -->
-    @if (!isLoading() && !climateData()) {
-    <p-card>
-        <div class="no-data-container">
-            <i class="pi pi-exclamation-triangle"></i>
-            <h3>אין נתונים זמינים</h3>
-            <p>לא נמצאו נתוני ESG להצגה</p>
-        </div>
-    </p-card>
-    }
+<!-- No Data State -->
+@if (!isLoading() && !climateData()) {
+<p-card>
+    <div class="no-data-container">
+        <i class="pi pi-exclamation-triangle"></i>
+        <h3>אין נתונים זמינים</h3>
+        <p>לא נמצאו נתוני ESG להצגה</p>
+    </div>
+</p-card>
+}
 
 
 
@@ -492,11 +486,11 @@
 
 
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top-btn" (click)="scrollToTop()" [class.visible]="showScrollToTop()" pTooltip="חזור למעלה"
-        tooltipPosition="left">
-        <i class="pi pi-angle-up"></i>
-    </button>
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top-btn" (click)="scrollToTop()" [class.visible]="showScrollToTop()" pTooltip="חזור למעלה"
+    tooltipPosition="left">
+    <i class="pi pi-angle-up"></i>
+</button>
 
 
 
