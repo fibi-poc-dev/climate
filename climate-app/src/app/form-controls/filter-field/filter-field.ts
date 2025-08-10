@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PopoverModule } from 'primeng/popover';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { Popover } from 'primeng/popover';
 
 export interface FilterChangeEvent {
@@ -19,7 +20,8 @@ export interface FilterChangeEvent {
     FormsModule,
     PopoverModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    InputNumberModule
   ],
   templateUrl: './filter-field.html',
   styleUrl: './filter-field.css'
@@ -41,6 +43,7 @@ export class FilterField {
 
   // Internal state
   protected readonly tempValue = signal<string>('');
+  protected readonly tempNumericValue = signal<number | null>(null);
   protected readonly tempOperator = signal<string>('=');
 
   constructor() {
@@ -48,6 +51,12 @@ export class FilterField {
     effect(() => {
       this.tempValue.set(this.value());
       this.tempOperator.set(this.operator());
+
+      // For numeric types, also set the numeric value
+      if (this.filterType() === 'numeric') {
+        const numValue = this.value() ? parseFloat(this.value()) : null;
+        this.tempNumericValue.set(isNaN(numValue!) ? null : numValue);
+      }
     });
   }
 
@@ -99,9 +108,14 @@ export class FilterField {
     this.tempOperator.set(operator);
   }
 
-  protected onValueInput(event: Event): void {
+  protected onTextInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.tempValue.set(target.value);
+  }
+
+  protected onNumericInput(value: number | null): void {
+    this.tempNumericValue.set(value);
+    this.tempValue.set(value?.toString() || '');
   }
 
   protected onKeydown(event: KeyboardEvent): void {

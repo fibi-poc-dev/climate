@@ -10,8 +10,16 @@
         <div class="filter-content">
             <div class="filter-field">
                 <label [for]="fieldName() + '-filter'">{{ displayName() }}:</label>
+                @if (filterType() === 'numeric') {
+                <p-inputNumber [id]="fieldName() + '-filter'" [(ngModel)]="tempNumericValue"
+                    (ngModelChange)="onNumericInput($event)" (keydown)="onKeydown($event)" placeholder="הזן ערך"
+                    [showButtons]="false" styleClass="filter-input" [locale]="'he-IL'" [minFractionDigits]="0"
+                    [maxFractionDigits]="2">
+                </p-inputNumber>
+                } @else {
                 <input [id]="fieldName() + '-filter'" type="text" pInputText [value]="tempValue()"
-                    (input)="onValueInput($event)" (keydown)="onKeydown($event)" placeholder="הזן ערך">
+                    (input)="onTextInput($event)" (keydown)="onKeydown($event)" placeholder="הזן ערך">
+                }
             </div>
 
             @if (shouldShowOperators()) {
