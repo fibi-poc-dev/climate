@@ -13,8 +13,9 @@
     <!-- Filters and Actions Toolbar -->
     <p-toolbar>
         <div class="p-toolbar-group-start">
-            <p-datepicker  [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" 
-            view="month" dateFormat="mm/yy" [readonlyInput]="false"  />
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" view="month"
+                dateFormat="mm/yy" [readonlyInput]="false" [(ngModel)]="selectedDate"
+                (onSelect)="onDateChange($event)" />
 
             <p-button label="נקה מסננים" icon="pi pi-filter-slash" severity="secondary" size="small"
                 (onClick)="clearFilters()">

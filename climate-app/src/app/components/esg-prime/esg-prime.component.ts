@@ -175,6 +175,11 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly scrollY = signal(0);
     protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
+    // Date picker signals
+    protected readonly selectedDate = signal<Date>(new Date());
+    protected readonly selectedMonth = computed(() => this.selectedDate().getMonth() + 1);
+    protected readonly selectedYear = computed(() => this.selectedDate().getFullYear());
+
     // Generic filter states - one signal for all filters
     protected readonly filterStates = signal<Map<string, FilterState>>(new Map());
 
@@ -233,8 +238,8 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     // Complete Climate Request computed signal
     protected readonly climateRequest = computed((): ClimateRequest => ({
-        month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
+        month: this.selectedMonth(),
+        year: this.selectedYear(),
         esgRequest: this.esgRequest(),
         carbonFootprintRequest: { page: 1, filter: [] },
         withoutProjects: { page: 1, filter: [] },
@@ -355,6 +360,13 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.removeScrollListener();
+    }
+
+    // Date picker event handler
+    onDateChange(date: Date): void {
+        if (date) {
+            this.selectedDate.set(date);
+        }
     }
 
     private setupScrollListener(): void {
