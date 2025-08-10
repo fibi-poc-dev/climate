@@ -12,7 +12,7 @@ export interface EditableFieldState {
 }
 
 @Component({
-  selector: 'app-editable-field',  
+  selector: 'app-editable-field',
   templateUrl: './editable-field.component.html',
   styleUrls: ['./editable-field.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,12 +42,7 @@ export class EditableFieldComponent<T extends number | string | null> {
   private readonly isDirty = signal(false);
   private readonly originalValue = signal<T>(null as T);
   private readonly tempEditValue = signal<string>('');
-  
-  // Filter state
-  protected readonly isFilterMode = signal(false);
-  protected readonly filterValue = signal<string>('');
-  protected readonly filterOperator = signal<string>('=');
-  protected readonly activeFilter = signal<Filter | null>(null);
+
 
   // Computed properties
   readonly fieldState = computed((): EditableFieldState => ({
@@ -72,45 +67,15 @@ export class EditableFieldComponent<T extends number | string | null> {
   readonly hasValidInput = computed(() => {
     const val = this.tempEditValue().trim();
     if (!val) return false;
-    
+
     if (this.fieldType() === 'text') return true;
-    
+
     // For number/currency fields, check if it's a valid number
     const numVal = this.parseNumber(val);
     return !isNaN(numVal);
   });
 
-  readonly hasValidFilterInput = computed(() => {
-    const val = this.filterValue().trim();
-    if (!val) return false;
-    
-    if (this.fieldType() === 'text') return true;
-    
-    // For number/currency fields, check if it's a valid number
-    const numVal = this.parseNumber(val);
-    return !isNaN(numVal);
-  });
 
-  readonly showFilterIcon = computed(() => {
-    return this.enableFilter() && !this.isEditing() && !this.isFilterMode();
-  });
-
-  readonly hasActiveFilter = computed(() => {
-    return this.activeFilter() !== null;
-  });
-
-  readonly availableOperators = computed(() => {
-    if (this.fieldType() === 'text') {
-      return ['='];
-    } else {
-      // For numeric fields (number and currency)
-      return ['=', '>', '<', '>=', '<='];
-    }
-  });
-
-  readonly shouldShowOperatorSelector = computed(() => {
-    return this.fieldType() !== 'text' && this.availableOperators().length > 1;
-  });
 
   constructor() {
     // Sync initial value
@@ -121,24 +86,16 @@ export class EditableFieldComponent<T extends number | string | null> {
         this.originalValue.set(newValue);
       }
     });
-
-    // Listen for filter clearing signals from shared service
-    effect(() => {
-      const fieldName = this.fieldName();
-      if (this.sharedService.shouldClearFilter(fieldName)) {
-        this.clearFilterState();
-        this.sharedService.acknowledgeFilterCleared(fieldName);
-      }
-    });
   }
+
 
   protected startEdit(): void {
     if (this.disabled()) return;
-    
+
     this.isEditing.set(true);
     this.tempEditValue.set(this.formatValueForEdit(this.internalValue()));
     this.editStart.emit(this.fieldName());
-    
+
     // Focus input after view update
     setTimeout(() => {
       const input = document.querySelector('.edit-input') as HTMLInputElement;
@@ -154,11 +111,11 @@ export class EditableFieldComponent<T extends number | string | null> {
 
     const oldValue = this.internalValue();
     const newValue = this.parseValue(this.tempEditValue().trim());
-    
+
     this.internalValue.set(newValue);
     this.isEditing.set(false);
     this.isDirty.set(newValue !== this.originalValue());
-    
+
     this.valueChange.emit(newValue);
     this.editEnd.emit({
       fieldName: this.fieldName(),
@@ -172,106 +129,6 @@ export class EditableFieldComponent<T extends number | string | null> {
     this.tempEditValue.set('');
   }
 
-  // Filter methods
-  protected startFilter(): void {
-    if (this.disabled()) return;
-    
-    this.isFilterMode.set(true);
-    this.filterValue.set('');
-    // Reset operator to default based on field type
-    this.filterOperator.set('=');
-    
-    // Focus filter input after view update
-    setTimeout(() => {
-      const input = document.querySelector('.filter-input') as HTMLInputElement;
-      if (input) {
-        input.focus();
-      }
-    }, 0);
-  }
-
-  protected applyFilter(): void {
-    if (!this.hasValidFilterInput()) return;
-
-    const filterValueStr = this.filterValue().trim();
-    
-    const filter: Filter = {
-      filterFieldName: this.fieldName(),
-      filterFieldValue: filterValueStr,
-      filterType: this.filterOperator() // Use the selected operator instead of getFilterType()
-    };
-
-    this.activeFilter.set(filter);
-    this.isFilterMode.set(false);
-    this.filterChange.emit(filter);
-  }
-
-  protected cancelFilter(): void {
-    this.isFilterMode.set(false);
-    this.filterValue.set('');
-    this.filterOperator.set('=');
-  }
-
-  protected clearFilter(): void {
-    this.activeFilter.set(null);
-    this.filterChange.emit(null);
-    
-    // Notify shared service that this field cleared its filter
-    this.sharedService.clearFilterFromChild(this.fieldName());
-  }
-
-  // Method to clear filter state (now called internally via shared service)
-  private clearFilterState(): void {
-    this.isFilterMode.set(false);
-    this.filterValue.set('');
-    this.filterOperator.set('=');
-    this.activeFilter.set(null);
-    // Note: Don't emit filterChange here as this is called in response to parent clearing
-  }
-
-  protected onFilterInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.filterValue.set(target.value);
-  }
-
-  protected onFilterKeypress(event: KeyboardEvent): void {
-    if (this.fieldType() === 'text') return;
-
-    // Allow numbers, decimal point, minus sign, and control keys for numeric filters
-    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'];
-    const controlKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight'];
-    
-    if (!allowedKeys.includes(event.key) && !controlKeys.includes(event.key)) {
-      event.preventDefault();
-    }
-  }
-
-  protected onFilterKeydown(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.applyFilter();
-    } else if (event.key === 'Escape') {
-      event.preventDefault();
-      this.cancelFilter();
-    }
-  }
-
-  protected onFilterOperatorChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    this.filterOperator.set(target.value);
-  }
-
-  private getFilterType(): string {
-    switch (this.fieldType()) {
-      case 'currency':
-      case 'number':
-        return 'number';
-      case 'text':
-        return 'string';
-      default:
-        return 'string';
-    }
-  }
 
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -284,7 +141,7 @@ export class EditableFieldComponent<T extends number | string | null> {
     // Allow numbers, decimal point, minus sign, and control keys
     const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-'];
     const controlKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight'];
-    
+
     if (!allowedKeys.includes(event.key) && !controlKeys.includes(event.key)) {
       event.preventDefault();
     }
@@ -302,7 +159,7 @@ export class EditableFieldComponent<T extends number | string | null> {
 
   protected formatValue(value: string | number | null): string {
     if (value === null || value === undefined) return '';
-    
+
     switch (this.fieldType()) {
       case 'currency':
         return this.formatCurrency(Number(value));
@@ -324,7 +181,7 @@ export class EditableFieldComponent<T extends number | string | null> {
     if (this.fieldType() === 'text') {
       return valueStr as T;
     }
-    
+
     const numValue = this.parseNumber(valueStr);
     return (isNaN(numValue) ? null : numValue) as T;
   }
