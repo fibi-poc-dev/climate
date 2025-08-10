@@ -131,6 +131,7 @@ import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DatePickerModule } from 'primeng/datepicker';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @Component({
@@ -150,7 +151,8 @@ import { DatePickerModule } from 'primeng/datepicker';
         FieldsetModule,
         EditableFieldComponent,
         FilterField,
-        DatePickerModule
+        DatePickerModule,
+        AccordionModule
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',

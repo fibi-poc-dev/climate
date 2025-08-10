@@ -45,6 +45,8 @@
         </div>
     </p-card>
     }
+
+
     <!-- Main Layout Container -->
     <div class="main-layout">
         <!-- Table Section -->
@@ -52,8 +54,8 @@
             <p-card [class.selected-card]="selectedRow() !== null">
                 <p-table id="master-esg" [value]="esgMainReportData()" [paginator]="true" [rows]="10"
                     [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
-                    scrollHeight="calc(100vh - 250px)" styleClass="p-datatable-striped p-datatable-sm"
-                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
+                    styleClass="p-datatable-striped p-datatable-sm" selectionMode="single"
+                    (onRowSelect)="onRowSelect($event)">
 
                     <ng-template pTemplate="header">
                         <tr>
@@ -368,8 +370,88 @@
             </p-panel>
             }
         </div>
+
+
+        <p-accordion value="0">
+            <p-accordion-panel value="0">
+                <p-accordion-header>Header I</p-accordion-header>
+                <p-accordion-content>
+                    <p class="m-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex
+                        ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat
+                        nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est
+                        laborum.
+                    </p>
+                </p-accordion-content>
+            </p-accordion-panel>
+
+            <p-accordion-panel value="1">
+                <p-accordion-header>Header II</p-accordion-header>
+                <p-accordion-content>
+                    <p class="m-0">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium,
+                        totam rem
+                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni
+                        dolores eos
+                        qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                        modi.
+                    </p>
+                </p-accordion-content>
+            </p-accordion-panel>
+
+            <p-accordion-panel value="2">
+                <p-accordion-header>Header III</p-accordion-header>
+                <p-accordion-content>
+                    <p class="m-0">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium,
+                        totam rem
+                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni
+                        dolores eos
+                        qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                        modi.
+                    </p>
+                </p-accordion-content>
+            </p-accordion-panel>
+        </p-accordion>
     </div>
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- No Data State -->
     @if (!isLoading() && !climateData()) {
@@ -382,9 +464,40 @@
     </p-card>
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top-btn" (click)="scrollToTop()" [class.visible]="showScrollToTop()" pTooltip="חזור למעלה"
         tooltipPosition="left">
         <i class="pi pi-angle-up"></i>
     </button>
+
+
+
 </div>

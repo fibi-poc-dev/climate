@@ -71,11 +71,10 @@
     font-family: Arial, sans-serif;
     padding: 0.5rem;
     max-width: 100%;
-    height: 100vh;
-    /* Full viewport height */
-    overflow-y: scroll;
+    min-height: 100vh;
+    /* Minimum viewport height to allow growth */
     overflow-x: auto;
-    /* Enable both vertical and horizontal scrolling - vertical always visible */
+    /* Enable horizontal scrolling when needed */
     box-sizing: border-box;
     scroll-behavior: smooth;
     /* Smooth scrolling */
@@ -86,23 +85,19 @@
 .main-layout {
     display: flex;
     gap: 1rem;
-    height: calc(100vh - 200px);
-    /* Adjust based on toolbar height */
-    overflow: auto;
-    /* Enable scrolling for the entire layout */
+    min-height: calc(100vh - 200px);
+    /* Minimum height based on viewport minus toolbar/padding */
     min-width: 1200px;
-    /* Increased from 1000px to accommodate wider table */
     /* Minimum width to ensure horizontal scrolling when needed */
+    margin-bottom: 1rem;
+    /* Add space before accordion */
 }
 
 .details-panel {
     flex: 0 0 25%;
     /* Fixed 25% width for details panel */
-    overflow-y: scroll;
-    overflow-x: auto;
-    /* Enable both vertical and horizontal scrolling - vertical always visible */
-    max-height: 100%;
-    /* Full height */
+    display: flex;
+    flex-direction: column;
     min-width: 300px;
     /* Minimum width to ensure horizontal scrolling when needed */
 }
@@ -110,14 +105,9 @@
 .table-section {
     flex: 0 0 75%;
     /* Fixed 75% width for table section (masterESG) */
-    overflow-y: scroll;
-    overflow-x: auto;
-    /* Enable both vertical and horizontal scrolling - vertical always visible */
-    /* Enable both vertical and horizontal scrolling */
     display: flex;
     flex-direction: column;
     min-width: 800px;
-    /* Increased from 600px to accommodate wider table */
     /* Minimum width to ensure horizontal scrolling when needed */
 }
 
@@ -125,30 +115,28 @@
 .table-section ::ng-deep .p-card {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
 }
 
 .table-section ::ng-deep .p-card .p-card-body {
     flex: 1;
-    overflow: auto;
-    /* Enable both scrollbars in card body */
     display: flex;
     flex-direction: column;
-    min-height: 0;
-    /* Allow flex item to shrink */
+    overflow: hidden;
+    /* Prevent overflow at this level */
 }
 
 .table-section ::ng-deep .p-datatable {
-    height: 100%;
-    overflow: auto;
-    /* Enable both vertical and horizontal scrolling */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-width: 800px;
     /* Minimum width to ensure table doesn't shrink too much */
 }
 
 .table-section ::ng-deep .p-datatable .p-datatable-wrapper {
-    max-height: calc(100vh - 300px);
+    flex: 1;
     overflow: auto;
     width: 100%;
 }
@@ -158,6 +146,7 @@
     overflow-x: auto;
     overflow-y: auto;
     width: 100%;
+    flex: 1;
 }
 
 .table-section ::ng-deep .p-datatable .p-datatable-scrollable-header {
@@ -167,7 +156,7 @@
 .table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
     overflow-x: auto;
     overflow-y: auto;
-    max-height: calc(100vh - 350px);
+    flex: 1;
 }
 
 .table-section ::ng-deep .p-datatable .p-datatable-scrollable-table {
@@ -1646,4 +1635,20 @@
 .table-section ::ng-deep .p-datatable::-webkit-scrollbar-corner,
 .table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar-corner {
     background: #f1f1f1;
+}
+
+/* Accordion Styling - Outside Main Layout */
+::ng-deep .p-accordion {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+::ng-deep .p-accordion .p-accordion-panel {
+    margin-bottom: 0.5rem;
+}
+
+/* Ensure accordion doesn't interfere with main layout scrolling */
+.esg-prime-container> ::ng-deep .p-accordion {
+    flex-shrink: 0;
+    /* Prevent accordion from shrinking */
 }
