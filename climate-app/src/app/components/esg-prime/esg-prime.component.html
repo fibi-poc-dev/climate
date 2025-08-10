@@ -113,15 +113,84 @@
                                     (filterClear)="onFilterFieldClear($event)">
                                 </app-filter-field>
                             </th>
-                            <th>יחידה מטפלת</th>
-                            <th>קוד מגזר פיקוחי</th>
-                            <th>תיאור מגזר פיקוחי</th>
-                            <th>קוד סיווג ענפי</th>
-                            <th>תיאור סיווג ענפי</th>
-                            <th>קוד תת סיווג ענפי</th>
-                            <th>תיאור תת סיווג ענפי</th>
-                            <th>תיאור בדוח האשראי</th>
-                            <th>סך בטחונות</th>
+                            <th>
+                                <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'יחידה מטפלת'"
+                                    [filterType]="'text'" [value]="getFilterFieldValue('handlingUnitCode')"
+                                    [operator]="getFilterFieldOperator('handlingUnitCode')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'regualatedSectorCode'" [displayName]="'קוד מגזר פיקוחי'"
+                                    [filterType]="'text'" [value]="getFilterFieldValue('regualatedSectorCode')"
+                                    [operator]="getFilterFieldOperator('regualatedSectorCode')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'regualatedSectorDescription'"
+                                    [displayName]="'תיאור מגזר פיקוחי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('regualatedSectorDescription')"
+                                    [operator]="getFilterFieldOperator('regualatedSectorDescription')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'branchClassificatonCode'"
+                                    [displayName]="'קוד סיווג ענפי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('branchClassificatonCode')"
+                                    [operator]="getFilterFieldOperator('branchClassificatonCode')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'branchClassificatonDescription'"
+                                    [displayName]="'תיאור סיווג ענפי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('branchClassificatonDescription')"
+                                    [operator]="getFilterFieldOperator('branchClassificatonDescription')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'subbranchClassificationCode'"
+                                    [displayName]="'קוד תת סיווג ענפי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('subbranchClassificationCode')"
+                                    [operator]="getFilterFieldOperator('subbranchClassificationCode')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'subbranchClassificationDescription'"
+                                    [displayName]="'תיאור תת סיווג ענפי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('subbranchClassificationDescription')"
+                                    [operator]="getFilterFieldOperator('subbranchClassificationDescription')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'creditReportDescription'"
+                                    [displayName]="'תיאור בדוח האשראי'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('creditReportDescription')"
+                                    [operator]="getFilterFieldOperator('creditReportDescription')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'totalCollateral'" [displayName]="'סך בטחונות'"
+                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalCollateral')"
+                                    [operator]="getFilterFieldOperator('totalCollateral')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
                             <th>
                                 <app-filter-field [fieldName]="'totalSolo'" [displayName]="'סך סולו'"
                                     [filterType]="'numeric'" [value]="getFilterFieldValue('totalSolo')"

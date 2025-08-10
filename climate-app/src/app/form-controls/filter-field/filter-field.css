@@ -24,10 +24,6 @@
 .filter-icon {
     opacity: 0.6;
     transition: all 0.3s ease;
-    width: 18px !important;
-    height: 18px !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
     padding: 0.125rem !important;
 }
 
