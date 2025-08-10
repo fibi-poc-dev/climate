@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { PopoverModule } from 'primeng/popover';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { TooltipModule } from 'primeng/tooltip';
 
 export interface FilterChangeEvent {
   fieldName: string;
@@ -19,8 +18,7 @@ export interface FilterChangeEvent {
     FormsModule,
     PopoverModule,
     ButtonModule,
-    InputTextModule,
-    TooltipModule
+    InputTextModule
   ],
   templateUrl: './filter-field.html',
   styleUrl: './filter-field.css'
@@ -61,10 +59,6 @@ export class FilterField {
 
   protected readonly filterIconClass = computed(() => {
     return this.hasActiveFilter() ? 'filter-icon filter-active' : 'filter-icon';
-  });
-
-  protected readonly tooltipText = computed(() => {
-    return this.hasActiveFilter() ? 'יש פילטר פעיל - לחץ לעריכה' : 'הוסף פילטר';
   });
 
   // Methods
