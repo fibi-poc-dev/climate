@@ -5,11 +5,11 @@
     line-height: 1.2;
 }
 
-::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
     padding: 0.25rem 0.5rem;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th {
+::ng-deep .p-datatable .p-datatable-thead>tr>th {
     padding: 0.25rem 0.5rem;
 }
 
@@ -90,7 +90,8 @@
     /* Adjust based on toolbar height */
     overflow: auto;
     /* Enable scrolling for the entire layout */
-    min-width: 1000px;
+    min-width: 1200px;
+    /* Increased from 1000px to accommodate wider table */
     /* Minimum width to ensure horizontal scrolling when needed */
 }
 
@@ -115,7 +116,8 @@
     /* Enable both vertical and horizontal scrolling */
     display: flex;
     flex-direction: column;
-    min-width: 600px;
+    min-width: 800px;
+    /* Increased from 600px to accommodate wider table */
     /* Minimum width to ensure horizontal scrolling when needed */
 }
 
@@ -410,7 +412,7 @@
 .inline-filter-field.filtering {
     background: #fff3cd;
     border-color: #ffeaa7;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Filter Display Mode */
@@ -433,13 +435,13 @@
 }
 
 .filter-value:hover {
-    background-color: rgba(0,123,255,0.1);
+    background-color: rgba(0, 123, 255, 0.1);
 }
 
 .filter-value.has-filter {
     color: #0056b3;
     font-weight: 500;
-    background-color: rgba(0,123,255,0.05);
+    background-color: rgba(0, 123, 255, 0.05);
 }
 
 .filter-operator-display {
@@ -462,8 +464,8 @@
 
 .filter-btn:hover {
     opacity: 1;
-    background-color: rgba(0,123,255,0.1);
-    border-color: rgba(0,123,255,0.3);
+    background-color: rgba(0, 123, 255, 0.1);
+    border-color: rgba(0, 123, 255, 0.3);
     transform: scale(1.05);
 }
 
@@ -506,7 +508,7 @@
 .filter-input:focus {
     outline: none;
     border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .filter-actions {
@@ -710,35 +712,84 @@
 ::ng-deep .p-datatable table {
     table-layout: auto;
     width: 100%;
-    min-width: 1200px;
+    min-width: 2200px;
+    /* Increased from 1200px to accommodate filter fields */
 }
 
-/* Specific Column Width Optimizations */
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(1), /* Bank */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(1) {
-    width: 60px;
-    min-width: 60px;
-    max-width: 60px;
+/* Specific Column Width Optimizations - Updated for filter fields */
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(1),
+/* Bank */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(1) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 120px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(2), /* Branch */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(2) {
-    width: 60px;
-    min-width: 60px;
-    max-width: 60px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(2),
+/* Branch */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(2) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 120px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(3), /* Account */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(3) {
-    width: 90px;
-    min-width: 90px;
-    max-width: 90px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
-    width: 150px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(3),
+/* Account */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(3) {
+    width: 120px;
     min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+/* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
+    width: 180px;
+    min-width: 160px;
+    max-width: 200px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(5),
+/* Customer Rating */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(5) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(6),
+/* Current Credit Authority */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(6) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(7),
+/* Handling Unit Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(7) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(8),
+/* Regulated Sector Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(8) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+/* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9) {
+    width: 160px;
+    min-width: 140px;
     max-width: 180px;
     word-break: break-word;
     word-wrap: break-word;
@@ -746,115 +797,84 @@
     overflow-wrap: break-word;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(5), /* Customer Rating */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(5) {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(6), /* Current Credit Authority */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(6) {
-    width: 110px;
-    min-width: 110px;
-    max-width: 110px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(7), /* Handling Unit Code */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(7) {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(8), /* Regulated Sector Code */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(8) {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9) {
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(10),
+/* Branch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(10) {
     width: 120px;
-    min-width: 100px;
-    max-width: 150px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+/* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
     word-break: break-word;
     word-wrap: break-word;
     hyphens: auto;
     overflow-wrap: break-word;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(10), /* Branch Classification Code */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(10) {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(12),
+/* Subbranch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(12) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11) {
-    width: 120px;
-    min-width: 100px;
-    max-width: 150px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+/* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
     word-break: break-word;
     word-wrap: break-word;
     hyphens: auto;
     overflow-wrap: break-word;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(12), /* Subbranch Classification Code */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(12) {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13) {
-    width: 120px;
-    min-width: 100px;
-    max-width: 150px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+/* Credit Report Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
     word-break: break-word;
     word-wrap: break-word;
     hyphens: auto;
     overflow-wrap: break-word;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
-    width: 120px;
-    min-width: 100px;
-    max-width: 150px;
-    word-break: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-    overflow-wrap: break-word;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(15),
+/* Total Collateral */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(15) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(15), /* Total Collateral */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(15) {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(16),
+/* Total Solo */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(16) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(16), /* Total Solo */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(16) {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
-}
-
-::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(17), /* Total Credit Risk */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(17) {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(17),
+/* Total Credit Risk */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(17) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
 }
 
 /* Text overflow handling for all table cells */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -863,11 +883,16 @@
 }
 
 /* Allow text wrapping for specific description columns */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4), /* Account Name */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9), /* Regulated Sector Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11), /* Branch Classification Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13), /* Subbranch Classification Description */
-::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) { /* Credit Report Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4),
+/* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+/* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+/* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+/* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+    /* Credit Report Description */
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
@@ -876,7 +901,7 @@
 }
 
 /* Header text optimization - always show full text with word wrapping */
-::ng-deep .p-datatable .p-datatable-thead > tr > th {
+::ng-deep .p-datatable .p-datatable-thead>tr>th {
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
@@ -889,7 +914,21 @@
     overflow-wrap: break-word;
     line-height: 1.2;
     height: auto;
-    min-height: 40px;
+    min-height: 60px;
+    /* Increased from 40px to accommodate filter fields */
+}
+
+/* Filter field styling within table headers */
+::ng-deep .p-datatable .p-datatable-thead>tr>th app-filter-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th app-filter-field .filter-icon {
+    font-size: 12px;
+    margin: 0;
+    padding: 2px;
 }
 
 /* Filter input optimization for compact layout */
@@ -928,7 +967,7 @@
 }
 
 /* Compact row height */
-::ng-deep .p-datatable .p-datatable-tbody > tr {
+::ng-deep .p-datatable .p-datatable-tbody>tr {
     height: auto;
     min-height: 32px;
 }
@@ -938,22 +977,27 @@
     ::ng-deep .p-datatable table {
         min-width: 1100px;
     }
-    
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+    /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
         width: 130px;
         min-width: 100px;
         max-width: 130px;
     }
-    
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+    /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+    /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+    /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+    /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
         width: 100px;
         min-width: 80px;
         max-width: 100px;
@@ -964,22 +1008,27 @@
     ::ng-deep .p-datatable table {
         min-width: 1000px;
     }
-    
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(4), /* Account Name */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+    /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
         width: 110px;
         min-width: 90px;
         max-width: 110px;
     }
-    
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(9), /* Regulated Sector Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(9),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(11), /* Branch Classification Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(11),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(13), /* Subbranch Classification Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(13),
-    ::ng-deep .p-datatable .p-datatable-thead > tr > th:nth-child(14), /* Credit Report Description */
-    ::ng-deep .p-datatable .p-datatable-tbody > tr > td:nth-child(14) {
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+    /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+    /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+    /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+    /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
         width: 85px;
         min-width: 70px;
         max-width: 85px;
