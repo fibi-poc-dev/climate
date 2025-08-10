@@ -16,23 +16,13 @@
             <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" view="month"
                 dateFormat="mm/yy" [readonlyInput]="false" [(ngModel)]="selectedDate"
                 (onSelect)="onDateChange($event)" />
-
+        </div>
+        <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
             <p-button label="נקה מסננים" icon="pi pi-filter-slash" severity="secondary" size="small"
                 (onClick)="clearFilters()">
             </p-button>
-            <p-button label="יצא לקובץ" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
+            <p-button label="יצא לאקסל" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
             </p-button>
-            @if (esgRequestFilters().length > 0) {
-            <p-button label="שלח מסננים לשרת" icon="pi pi-send" severity="success" size="small"
-                (onClick)="sendFiltersToServer()">
-            </p-button>
-            }
-            @if (selectedRow()) {
-            <p-button label="נקה בחירה" icon="pi pi-times" severity="danger" size="small" (onClick)="clearSelection()">
-            </p-button>
-            }
-        </div>
-        <div class="p-toolbar-group-end">
             <p-button label="שלוף נתונים" icon="pi pi-send" severity="success" size="small"
                 (onClick)="sendFiltersToServer()">
             </p-button>
