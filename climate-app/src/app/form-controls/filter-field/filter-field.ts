@@ -1,9 +1,10 @@
-import { Component, input, output, signal, computed } from '@angular/core';
+import { Component, input, output, signal, computed, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PopoverModule } from 'primeng/popover';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { Popover } from 'primeng/popover';
 
 export interface FilterChangeEvent {
   fieldName: string;
@@ -24,6 +25,9 @@ export interface FilterChangeEvent {
   styleUrl: './filter-field.css'
 })
 export class FilterField {
+  // Template references
+  protected readonly popover = viewChild.required<Popover>('popover');
+
   // Inputs
   readonly fieldName = input.required<string>();
   readonly displayName = input.required<string>();
@@ -38,6 +42,14 @@ export class FilterField {
   // Internal state
   protected readonly tempValue = signal<string>('');
   protected readonly tempOperator = signal<string>('=');
+
+  constructor() {
+    // Initialize temp values when value or operator inputs change
+    effect(() => {
+      this.tempValue.set(this.value());
+      this.tempOperator.set(this.operator());
+    });
+  }
 
   // Computed properties
   protected readonly hasActiveFilter = computed(() => {
@@ -62,12 +74,6 @@ export class FilterField {
   });
 
   // Methods
-  protected initializeTempValues(): void {
-    // Initialize temp values with current values when popover opens
-    this.tempValue.set(this.value());
-    this.tempOperator.set(this.operator());
-  }
-
   protected applyFilter(): void {
     const value = this.tempValue().trim();
     const operator = this.tempOperator();

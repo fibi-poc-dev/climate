@@ -1,12 +1,12 @@
 <div class="filter-field-container">
     <div class="field-header">
         <span class="field-name">{{ displayName() }}</span>
-        <button type="button" p-button [class]="filterIconClass()" icon="pi pi-filter" (click)="popover.toggle($event)"
+        <button type="button" p-button [class]="filterIconClass()" class="pi pi-filter" (click)="popover.toggle($event)"
             size="small" text="true">
         </button>
     </div>
 
-    <p-popover #popover [dismissable]="false" styleClass="filter-popover">
+    <p-popover #popover [dismissable]="true" styleClass="filter-popover">
         <div class="filter-content">
             <div class="filter-field">
                 <label [for]="fieldName() + '-filter'">{{ displayName() }}:</label>
@@ -29,16 +29,17 @@
             }
 
             <div class="filter-actions">
-                <button type="button" p-button icon="pi pi-check" (click)="applyFilter()" [disabled]="!hasValidInput()"
-                    size="small">
+                <button type="button" p-button icon="pi pi-check" (click)="applyFilter(); popover.hide()"
+                    [disabled]="!hasValidInput()" size="small">
                     החל
                 </button>
-                <button type="button" p-button icon="pi pi-times" (click)="cancelFilter()" text="true" size="small">
+                <button type="button" p-button icon="pi pi-times" (click)="cancelFilter(); popover.hide()" text="true"
+                    size="small">
                     בטל
                 </button>
                 @if (hasActiveFilter()) {
-                <button type="button" p-button icon="pi pi-trash" (click)="clearFilter()" severity="danger" text="true"
-                    size="small">
+                <button type="button" p-button icon="pi pi-trash" (click)="clearFilter(); popover.hide()"
+                    severity="danger" text="true" size="small">
                     נקה
                 </button>
                 }
