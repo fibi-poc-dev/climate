@@ -65,12 +65,54 @@
 
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>בנק</th>
-                            <th>סניף</th>
-                            <th>חשבון</th>
-                            <th>שם לקוח</th>
-                            <th>דירוג לקוח</th>
-                            <th>סמכות אשראי נוכחי</th>
+                            <th>
+                                <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('bank')" [operator]="getFilterFieldOperator('bank')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('branch')"
+                                    [operator]="getFilterFieldOperator('branch')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
+                                    [value]="getFilterFieldValue('account')"
+                                    [operator]="getFilterFieldOperator('account')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'accountName'" [displayName]="'שם לקוח'"
+                                    [filterType]="'text'" [value]="getFilterFieldValue('accountName')"
+                                    [operator]="getFilterFieldOperator('accountName')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'customerRating'" [displayName]="'דירוג לקוח'"
+                                    [filterType]="'numeric'" [value]="getFilterFieldValue('customerRating')"
+                                    [operator]="getFilterFieldOperator('customerRating')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'currentCreditAuthority'"
+                                    [displayName]="'סמכות אשראי נוכחי'" [filterType]="'numeric'"
+                                    [value]="getFilterFieldValue('currentCreditAuthority')"
+                                    [operator]="getFilterFieldOperator('currentCreditAuthority')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
                             <th>יחידה מטפלת</th>
                             <th>קוד מגזר פיקוחי</th>
                             <th>תיאור מגזר פיקוחי</th>
@@ -80,10 +122,23 @@
                             <th>תיאור תת סיווג ענפי</th>
                             <th>תיאור בדוח האשראי</th>
                             <th>סך בטחונות</th>
-                            <th>סך סולו</th>
-                            <th>סך סיכון אשראי באש"ח ללא משכנתאות</th>
+                            <th>
+                                <app-filter-field [fieldName]="'totalSolo'" [displayName]="'סך סולו'"
+                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalSolo')"
+                                    [operator]="getFilterFieldOperator('totalSolo')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
+                            <th>
+                                <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סך סיכון אשראי'"
+                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalCreditRisk')"
+                                    [operator]="getFilterFieldOperator('totalCreditRisk')"
+                                    (filterChange)="onFilterFieldChange($event)"
+                                    (filterClear)="onFilterFieldClear($event)">
+                                </app-filter-field>
+                            </th>
                         </tr>
-
                     </ng-template>
 
                     <ng-template pTemplate="body" let-row>

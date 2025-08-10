@@ -6,7 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
-import { FilterFieldComponent, FilterChangeEvent, FilterOperator } from '../../form-controls/filter-field.component';
+import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
 
 // Interface for editable fields
 interface EditableField {
@@ -132,6 +132,7 @@ import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 
+
 @Component({
     selector: 'app-esg-prime',
     imports: [
@@ -149,7 +150,7 @@ import { FieldsetModule } from 'primeng/fieldset';
         PanelModule,
         FieldsetModule,
         EditableFieldComponent,
-        FilterFieldComponent
+        FilterField
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
@@ -282,7 +283,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                     newStates.delete(fieldName);
                     return newStates;
                 });
-                
+
                 // Acknowledge the clearing
                 this.sharedService.acknowledgeChildFilterCleared(fieldName);
             });
@@ -428,7 +429,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected getAvailableOperators(fieldName: string): string[] {
         const fieldDef = FILTER_FIELDS.find(f => f.fieldName === fieldName);
         if (!fieldDef) return ['='];
-        
+
         // Use the generic helper method
         return this.getAvailableOperatorsForType(fieldDef.filterType);
     }
@@ -510,6 +511,20 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         }
     }
 
+    // Filter clear handler for FilterField component
+    protected onFilterFieldClear(fieldName: string): void {
+        this.removeFilter(fieldName);
+    }
+
+    // Helper methods for FilterField components
+    protected getFilterFieldValue(fieldName: string): string {
+        return this.filterStates().get(fieldName)?.value || '';
+    }
+
+    protected getFilterFieldOperator(fieldName: string): string {
+        return this.filterStates().get(fieldName)?.operator || '=';
+    }
+
     protected sendFiltersToServer(): void {
         const request = this.climateRequest();
         console.log('Sending filters to server:', request);
@@ -537,16 +552,16 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         }
     }
 
-    protected getFilterOperatorForComponent(fieldName: string): FilterOperator {
+    protected getFilterOperatorForComponent(fieldName: string): string {
         const operatorDisplay = this.getFilterOperatorDisplay(fieldName);
-        // Ensure type safety by casting to FilterOperator
-        return operatorDisplay as FilterOperator;
+        // Return the operator display value
+        return operatorDisplay;
     }
 
     // Inline filter methods
     private initializeInlineFilters(): void {
         const inlineFilters = new Map<string, InlineFilterState>();
-        
+
         // Initialize totalCreditRisk inline filter
         inlineFilters.set('totalCreditRisk', {
             fieldName: 'totalCreditRisk',
@@ -555,7 +570,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             operator: '=',
             displayName: 'סך סיכון אשראי'
         });
-        
+
         this.inlineFilterStates.set(inlineFilters);
     }
 
@@ -594,7 +609,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
                 operator: filter.operator
             });
             this.filterStates.set(currentFilters);
-            
+
             // Deactivate inline filter
             this.cancelInlineFilter(fieldName);
         }
@@ -718,7 +733,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected onFieldValueChange(fieldName: keyof EsgMainReportRow, value: number | string | null): void {
         const currentSelection = this.selectedRow();
         if (!currentSelection) return;
-        
+
         // Update the specific field dynamically (same pattern as updateFieldValue)
         (currentSelection as any)[fieldName] = value;
     }
@@ -727,14 +742,14 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected onFieldFilterChange(filter: Filter | null): void {
         const currentStates = this.filterStates();
         const newStates = new Map(currentStates);
-        
+
         if (filter) {
             // Add or update the filter state
             newStates.set(filter.filterFieldName, {
                 value: filter.filterFieldValue,
                 operator: filter.filterType
             });
-            
+
             this.filterStates.set(newStates);
         }
         // Note: Filter removal is handled by the shared service effect when child components clear their filters
@@ -1001,7 +1016,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }    
+    }
 
     protected getFilterDisplayName(fieldName: string): string {
         const field = FILTER_FIELDS.find((f: FilterFieldDefinition) => f.fieldName === fieldName);

@@ -1,0 +1,48 @@
+<div class="filter-field-container">
+    <div class="field-header">
+        <span class="field-name">{{ displayName() }}</span>
+        <button type="button" p-button [class]="filterIconClass()" icon="pi pi-filter" (click)="popover.toggle($event)"
+            [pTooltip]="tooltipText()" size="small" text="true">
+        </button>
+    </div>
+
+    <p-popover #popover [dismissable]="false" styleClass="filter-popover">
+        <div class="filter-content">
+            <div class="filter-field">
+                <label [for]="fieldName() + '-filter'">{{ displayName() }}:</label>
+                <input [id]="fieldName() + '-filter'" type="text" pInputText [value]="tempValue()"
+                    (input)="onValueInput($event)" (keydown)="onKeydown($event)" placeholder="הזן ערך">
+            </div>
+
+            @if (shouldShowOperators()) {
+            <div class="filter-operators">
+                <label>אופרטור:</label>
+                <div class="operator-buttons">
+                    @for (operator of availableOperators(); track operator) {
+                    <button type="button" p-button (click)="selectOperator(operator)" size="small"
+                        [class]="'operator-btn ' + (tempOperator() === operator ? 'selected' : '')">
+                        {{ operator }}
+                    </button>
+                    }
+                </div>
+            </div>
+            }
+
+            <div class="filter-actions">
+                <button type="button" p-button icon="pi pi-check" (click)="applyFilter()" [disabled]="!hasValidInput()"
+                    size="small">
+                    החל
+                </button>
+                <button type="button" p-button icon="pi pi-times" (click)="cancelFilter()" text="true" size="small">
+                    בטל
+                </button>
+                @if (hasActiveFilter()) {
+                <button type="button" p-button icon="pi pi-trash" (click)="clearFilter()" severity="danger" text="true"
+                    size="small">
+                    נקה
+                </button>
+                }
+            </div>
+        </div>
+    </p-popover>
+</div>
