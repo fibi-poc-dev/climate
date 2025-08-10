@@ -131,6 +131,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DividerModule } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
+import { DatePickerModule } from 'primeng/datepicker';
 
 
 @Component({
@@ -150,7 +151,8 @@ import { FieldsetModule } from 'primeng/fieldset';
         PanelModule,
         FieldsetModule,
         EditableFieldComponent,
-        FilterField
+        FilterField,
+        DatePickerModule
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
