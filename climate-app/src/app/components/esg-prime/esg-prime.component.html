@@ -33,11 +33,9 @@
             }
         </div>
         <div class="p-toolbar-group-end">
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input type="text" pInputText placeholder="חיפוש..." [value]="filterText()"
-                    (input)="filterText.set($any($event.target).value)">
-            </span>
+            <p-button label="שלוף נתונים" icon="pi pi-send" severity="success" size="small"
+                (onClick)="sendFiltersToServer()">
+            </p-button>
         </div>
     </p-toolbar>
 
@@ -62,7 +60,7 @@
         <!-- Table Section -->
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null">
-                <p-table id="master-esg" [value]="filteredData()" [paginator]="true" [rows]="10"
+                <p-table id="master-esg" [value]="esgMainReportData()" [paginator]="true" [rows]="10"
                     [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
                     scrollHeight="calc(100vh - 250px)" styleClass="p-datatable-striped p-datatable-sm"
                     selectionMode="single" (onRowSelect)="onRowSelect($event)">

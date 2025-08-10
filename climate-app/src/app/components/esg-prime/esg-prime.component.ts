@@ -124,7 +124,6 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -143,7 +142,6 @@ import { DatePickerModule } from 'primeng/datepicker';
         ButtonModule,
         CardModule,
         TagModule,
-        InputTextModule,
         ToolbarModule,
         TooltipModule,
         ProgressBarModule,
@@ -169,9 +167,6 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     // Signals for reactive state management
     protected readonly climateData = this.climateDataService.data;
     protected readonly isLoading = this.climateDataService.loading;
-    protected readonly filterText = signal('');
-    protected readonly selectedClimateColor = signal<number | null>(null);
-    protected readonly selectedCustomerRating = signal<number | null>(null);
     protected readonly scrollY = signal(0);
     protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
@@ -253,7 +248,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     constructor() {
         // Effect to auto-select first row when data changes
         effect(() => {
-            const data = this.filteredData();
+            const data = this.esgMainReportData();
             const currentSelection = this.selectedRow();
             const isLoading = this.isLoading();
 
@@ -301,38 +296,19 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         return data?.esg?.esgMainReport?.esgMainReportRows || [];
     });
 
-    protected readonly filteredData = computed(() => {
-        const data = this.esgMainReportData();
-        const filter = this.filterText().toLowerCase();
-        const colorFilter = this.selectedClimateColor();
-        const ratingFilter = this.selectedCustomerRating();
-
-        return data.filter((row: EsgMainReportRow) => {
-            const matchesText = !filter ||
-                (row.accountName?.toLowerCase().includes(filter) || false) ||
-                (row.regualatedSectorDescription?.toLowerCase().includes(filter) || false) ||
-                (row.branchClassificatonDescription?.toLowerCase().includes(filter) || false);
-
-            const matchesColor = colorFilter === null || row.climateColor === colorFilter;
-            const matchesRating = ratingFilter === null || row.customerRating === ratingFilter;
-
-            return matchesText && matchesColor && matchesRating;
-        });
-    });
-
     // Statistics computed signals
-    protected readonly totalRows = computed(() => this.filteredData().length);
+    protected readonly totalRows = computed(() => this.esgMainReportData().length);
     protected readonly totalCredit = computed(() =>
-        this.filteredData().reduce((sum: number, row: EsgMainReportRow) => sum + (row.totalCreditRisk || 0), 0)
+        this.esgMainReportData().reduce((sum: number, row: EsgMainReportRow) => sum + (row.totalCreditRisk || 0), 0)
     );
     protected readonly avgRisk = computed(() => {
-        const data = this.filteredData();
+        const data = this.esgMainReportData();
         if (data.length === 0) return 0;
         return data.reduce((sum: number, row: EsgMainReportRow) => sum + (row.rootRiskLevelWeight || 0), 0) / data.length;
     });
 
     protected readonly colorDistribution = computed(() => {
-        const data = this.filteredData();
+        const data = this.esgMainReportData();
         const distribution = { green: 0, yellow: 0, red: 0 };
 
         data.forEach((row: EsgMainReportRow) => {
@@ -399,9 +375,6 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     }
 
     protected clearFilters(): void {
-        this.filterText.set('');
-        this.selectedClimateColor.set(null);
-        this.selectedCustomerRating.set(null);
         // Clear all generic filters
         this.filterStates.set(new Map());
     }
@@ -917,7 +890,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
             event.preventDefault();
         }
     } protected exportData(): void {
-        const data = this.filteredData();
+        const data = this.esgMainReportData();
         const csv = this.convertToCSV(data);
         this.downloadCSV(csv, 'esg-main-report.csv');
     }
