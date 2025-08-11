@@ -247,108 +247,120 @@
         <!-- Details Panel -->
         @if (selectedRow()) {
         <p-panel header="{{selectedRow()?.accountName}}">
-            <div>
-                <div class="detail-item">
-                    <label>קלאסטר אשראי אדום:</label>
-                    <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
-                        [fieldName]="'creditRedCluster'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('creditRedCluster', $event)">
-                    </app-editable-field>
+            <div style="display: flex; gap: 20px; max-height: 200px;">
+                <div class="detail-sections-horizontal">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>קלאסטר אשראי אדום:</label>
+                            <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
+                                [fieldName]="'creditRedCluster'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('creditRedCluster', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סיכון פיזי שורשי:</label>
+                            <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
+                                [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סיכון מעבר שורשי:</label>
+                            <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
+                                [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
+                            </app-editable-field>
+                        </div>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <label>סיכון פיזי שורשי:</label>
-                    <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
-                        [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>סיכון מעבר שורשי:</label>
-                    <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
-                        [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>משקל סיכון פיזי שורשי:</label>
-                    <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
-                        [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>משקל סיכון מעבר שורשי:</label>
-                    <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
-                        [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>שקלול רמת הסיכון השורשי:</label>
-                    <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
-                        [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>סיכון שיורי:</label>
-                    <app-editable-field [value]="selectedRow()?.residualRisk ?? null" [fieldName]="'residualRisk'"
-                        [fieldType]="'number'" (valueChange)="onFieldValueChange('residualRisk', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>תאריך תוקף סיכון שיורי:</label>
-                    <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
-                </div>
-                <div class="detail-item">
-                    <label>איכות ניהול:</label>
-                    <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
-                        [fieldName]="'qualityManagement'" [fieldType]="'number'"
-                        (valueChange)="onFieldValueChange('qualityManagement', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>קלאסטר שחור:</label>
-                    <app-editable-field [value]="selectedRow()?.blackCluster ?? null" [fieldName]="'blackCluster'"
-                        [fieldType]="'number'" (valueChange)="onFieldValueChange('blackCluster', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>קלאסטר ירוק:</label>
-                    <app-editable-field [value]="selectedRow()?.greenCluster ?? null" [fieldName]="'greenCluster'"
-                        [fieldType]="'number'" (valueChange)="onFieldValueChange('greenCluster', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>צבע אקלים:</label>
-                    <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
-                        [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
-                    </p-tag>
-                </div>
-                <div class="detail-item">
-                    <label>סך בטחונות:</label>
-                    <app-editable-field [value]="selectedRow()?.totalCollateral ?? null" [fieldName]="'totalCollateral'"
-                        [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalCollateral', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>סך סולו:</label>
-                    <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
-                        [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>סיכון אשראי חוץ מאזני:</label>
-                    <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
-                        [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
-                        (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
-                    </app-editable-field>
-                </div>
-                <div class="detail-item">
-                    <label>סה"כ סיכון אשראי:</label>
-                    <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null" [fieldName]="'totalCreditRisk'"
-                        [fieldType]="'currency'" [disabled]="true">
-                    </app-editable-field>
+                <div class="detail-sections-horizontal">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>משקל סיכון פיזי שורשי:</label>
+                            <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
+                                [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>משקל סיכון מעבר שורשי:</label>
+                            <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
+                                [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>שקלול רמת הסיכון השורשי:</label>
+                            <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
+                                [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סיכון שיורי:</label>
+                            <app-editable-field [value]="selectedRow()?.residualRisk ?? null"
+                                [fieldName]="'residualRisk'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('residualRisk', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>תאריך תוקף סיכון שיורי:</label>
+                            <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <label>איכות ניהול:</label>
+                            <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
+                                [fieldName]="'qualityManagement'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('qualityManagement', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>קלאסטר שחור:</label>
+                            <app-editable-field [value]="selectedRow()?.blackCluster ?? null"
+                                [fieldName]="'blackCluster'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('blackCluster', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>קלאסטר ירוק:</label>
+                            <app-editable-field [value]="selectedRow()?.greenCluster ?? null"
+                                [fieldName]="'greenCluster'" [fieldType]="'number'"
+                                (valueChange)="onFieldValueChange('greenCluster', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>צבע אקלים:</label>
+                            <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
+                                [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                            </p-tag>
+                        </div>
+                        <div class="detail-item">
+                            <label>סך בטחונות:</label>
+                            <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"
+                                [fieldName]="'totalCollateral'" [fieldType]="'currency'"
+                                (valueChange)="onFieldValueChange('totalCollateral', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סך סולו:</label>
+                            <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
+                                [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סיכון אשראי חוץ מאזני:</label>
+                            <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
+                                [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
+                                (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
+                            </app-editable-field>
+                        </div>
+                        <div class="detail-item">
+                            <label>סה"כ סיכון אשראי:</label>
+                            <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null"
+                                [fieldName]="'totalCreditRisk'" [fieldType]="'currency'" [disabled]="true">
+                            </app-editable-field>
+                        </div>
+                    </div>
                 </div>
             </div>
         </p-panel>

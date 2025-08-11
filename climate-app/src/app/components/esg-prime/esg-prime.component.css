@@ -85,7 +85,7 @@
 .main-layout {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    /* gap: 1rem; */
     min-height: calc(100vh - 200px);
     /* Minimum height based on viewport minus toolbar/padding */
     min-width: 1200px;
@@ -1315,7 +1315,7 @@
 
     .detail-sections-horizontal {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1rem;        
     }
 
     .table-section {
