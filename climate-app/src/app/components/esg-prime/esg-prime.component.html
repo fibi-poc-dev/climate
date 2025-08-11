@@ -394,8 +394,8 @@
                 <p-accordion-panel value="0">
                     <p-accordion-header>מפת חום</p-accordion-header>
                     <p-accordion-content>
-                        <p-table id="master-esg" [value]="heatMapRows()" [paginator]="true" [rows]="10"
-                            [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <p-table [value]="heatMapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>קלאסטר אדום</th>
@@ -450,18 +450,48 @@
                 </p-accordion-panel>
 
                 <p-accordion-panel value="1">
-                    <p-accordion-header>Header II</p-accordion-header>
+                    <p-accordion-header>אשראי ירוק</p-accordion-header>
                     <p-accordion-content>
-                        <p class="m-0">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem
-                            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                            sunt explicabo. Nemo
-                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                            magni dolores eos
-                            qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
-                            eius modi.
-                        </p>
+                        <p-table [value]="greenCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>תיאור קלאסטר ירוק</th>
+                                    <th>סיכון פיזי שורשי</th>
+                                    <th>סיכון מעבר שורשי</th>
+                                    <th>משקל רמת סיכון שורשי</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-row>
+                                <tr>
+                                    <td>{{ row.greenClusterDescription }}</td>
+                                    <td>{{ row.creditBalanceSheetRisk }}</td>
+                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ row.totalCreditRisk }}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td colspan="1" class="text-center">סה"כ</td>
+                                    <td>{{ totalGreenCredit()?.creditBalanceSheetRisk }}</td>
+                                    <td>{{ totalGreenCredit()?.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ totalGreenCredit()?.totalCreditRisk }}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="11" class="text-center">
+                                        <div class="empty-message">
+                                            <i class="pi pi-info-circle"></i>
+                                            <p>לא נמצאו נתונים להצגה</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-accordion-content>
                 </p-accordion-panel>
 

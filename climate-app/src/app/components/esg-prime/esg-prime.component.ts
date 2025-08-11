@@ -337,12 +337,25 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly heatMapRows = computed(() =>
         this.climateDataService.heatMapData()?.heatMapRows || []
     );
-
     protected readonly totalHeatMap = computed(() =>
         this.climateDataService.heatMapData()?.totalHeatMap
+    );    
+
+
+    // Green Credit data
+    protected readonly greenCreditRows = computed(() =>
+        this.climateDataService.greenCreditData()?.greenCreditRows || []
+    );
+    protected readonly totalGreenCredit = computed(() =>
+        this.climateDataService.greenCreditData()?.totalGreenCredit
     );
 
-    protected readonly hasHeatMapData = computed(() => this.heatMapRows().length > 0);
+
+
+
+
+
+
 
 
     // Methods
