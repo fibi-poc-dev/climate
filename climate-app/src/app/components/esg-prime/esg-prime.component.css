@@ -84,6 +84,7 @@
 /* Main Layout - 75% Table, 25% Details */
 .main-layout {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
     min-height: calc(100vh - 200px);
     /* Minimum height based on viewport minus toolbar/padding */
@@ -99,7 +100,7 @@
 }
 
 .table-section {
-    flex: 0 0 75%;
+    /* flex: 0 0 75%; */
     /* Fixed 75% width for table section (masterESG) */
     display: flex;
     flex-direction: column;

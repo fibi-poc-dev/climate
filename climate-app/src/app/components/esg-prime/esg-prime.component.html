@@ -53,9 +53,8 @@
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null">
                 <p-table id="master-esg" [value]="esgMainReportData()" [paginator]="true" [rows]="10"
-                    [rowsPerPageOptions]="[10, 25, 50]" [scrollable]="true" scrollDirection="both"
-                    styleClass="p-datatable-striped p-datatable-sm" selectionMode="single"
-                    (onRowSelect)="onRowSelect($event)">
+                    [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm"
+                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
 
                     <ng-template pTemplate="header">
                         <tr>
