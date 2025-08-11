@@ -271,10 +271,6 @@
                                 (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
                             </app-editable-field>
                         </div>
-                    </div>
-                </div>
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
                         <div class="detail-item">
                             <label>משקל סיכון פיזי שורשי:</label>
                             <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
@@ -282,6 +278,11 @@
                                 (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
                             </app-editable-field>
                         </div>
+                    </div>
+                </div>
+
+                <div class="detail-sections-horizontal">
+                    <div class="detail-grid">
                         <div class="detail-item">
                             <label>משקל סיכון מעבר שורשי:</label>
                             <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
@@ -307,6 +308,11 @@
                             <label>תאריך תוקף סיכון שיורי:</label>
                             <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="detail-sections-horizontal">
+                    <div class="detail-grid">
                         <div class="detail-item">
                             <label>איכות ניהול:</label>
                             <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
@@ -334,6 +340,11 @@
                                 [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
                             </p-tag>
                         </div>
+                    </div>
+                </div>
+
+                <div class="detail-sections-horizontal">
+                    <div class="detail-grid">
                         <div class="detail-item">
                             <label>סך בטחונות:</label>
                             <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"

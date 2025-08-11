@@ -219,8 +219,8 @@
     text-align: right;
     flex: 0 0 40%;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
 }
 
 .detail-item span {
