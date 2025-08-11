@@ -332,6 +332,19 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         return distribution;
     });
 
+
+    // Heat Map data
+    protected readonly heatMapRows = computed(() =>
+        this.climateDataService.heatMapData()?.heatMapRows || []
+    );
+
+    protected readonly totalHeatMap = computed(() =>
+        this.climateDataService.heatMapData()?.totalHeatMap
+    );
+
+    protected readonly hasHeatMapData = computed(() => this.heatMapRows().length > 0);
+
+
     // Methods
     ngOnInit(): void {
         this.setupScrollListener();

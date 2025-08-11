@@ -392,19 +392,53 @@
         <p-panel>
             <p-accordion value="0">
                 <p-accordion-panel value="0">
-                    <p-accordion-header>Header I</p-accordion-header>
+                    <p-accordion-header>מפת חום</p-accordion-header>
                     <p-accordion-content>
-                        <p class="m-0">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                            aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est
-                            laborum.
-                        </p>
+                        <p-table id="master-esg" [value]="heatMapRows()" [paginator]="true" [rows]="10"
+                            [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                            <ng-template pTemplate="header">
+                                <tr>                                    
+                                    <th>קלאסטר אדום</th>
+                                    <th>תיאור קלאסטר אדום</th>
+                                    <th>סיכון פיזי שורשי</th>
+                                    <th>סיכון מעבר שורשי</th>
+                                    <th>משקל רמת סיכון שורשי</th>
+                                    <th>סיכון שיורי ממוצע</th>
+                                    <th>איכות ניהול</th>
+                                    <th>סיכון אשראי מאזני</th>
+                                    <th>סיכון אשראי חוץ מאזני</th>
+                                    <th>סה"כ סיכון אשראי</th>
+                                    <th>סה"כ סיכון אשראי (%)</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-row>
+                                <tr>
+                                    <td>{{ row.redCluster }}</td>
+                                    <td>{{ row.redClusterDescription }}</td>
+                                    <td>{{ row.rootPhysicalRisk }}</td>
+                                    <td>{{ row.rootTransferRisk }}</td>
+                                    <td>{{ row.rootRiskLevelWeight }}</td>
+                                    <td>{{ row.residualRiskAverage }}</td>
+                                    <td>{{ row.qualityManagement }}</td>
+                                    <td>{{ row.creditBalanceSheetRisk }}</td>
+                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ row.totalCreditRisk }}</td>
+                                    <td>{{ row.totalCreditRiskRate }}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <div class="empty-message">
+                                            <i class="pi pi-info-circle"></i>
+                                            <p>לא נמצאו נתונים להצגה</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-accordion-content>
                 </p-accordion-panel>
 
