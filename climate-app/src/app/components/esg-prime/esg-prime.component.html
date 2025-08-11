@@ -397,7 +397,7 @@
                         <p-table id="master-esg" [value]="heatMapRows()" [paginator]="true" [rows]="10"
                             [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
                             <ng-template pTemplate="header">
-                                <tr>                                    
+                                <tr>
                                     <th>קלאסטר אדום</th>
                                     <th>תיאור קלאסטר אדום</th>
                                     <th>סיכון פיזי שורשי</th>
@@ -428,9 +428,16 @@
                                 </tr>
                             </ng-template>
 
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td colspan="10" class="text-center">סה"כ</td>
+                                    <td>{{ totalHeatMap()?.totalCreditRiskRate }}</td>
+                                </tr>
+                            </ng-template>
+
                             <ng-template pTemplate="emptymessage">
                                 <tr>
-                                    <td colspan="2" class="text-center">
+                                    <td colspan="11" class="text-center">
                                         <div class="empty-message">
                                             <i class="pi pi-info-circle"></i>
                                             <p>לא נמצאו נתונים להצגה</p>
