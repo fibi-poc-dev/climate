@@ -132,6 +132,7 @@ import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DatePickerModule } from 'primeng/datepicker';
 import { AccordionModule } from 'primeng/accordion';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 
 @Component({
@@ -152,7 +153,8 @@ import { AccordionModule } from 'primeng/accordion';
         EditableFieldComponent,
         FilterField,
         DatePickerModule,
-        AccordionModule
+        AccordionModule,
+        ScrollPanelModule
     ],
     templateUrl: './esg-prime.component.html',
     styleUrl: './esg-prime.component.css',
