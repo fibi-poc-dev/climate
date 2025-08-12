@@ -156,11 +156,11 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
         AccordionModule,
         ScrollPanelModule
     ],
-    templateUrl: './esg-prime.component.html',
-    styleUrl: './esg-prime.component.css',
+    templateUrl: './esg.component.html',
+    styleUrl: './esg.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EsgPrimeComponent implements OnInit, OnDestroy {
+export class EsgComponent implements OnInit, OnDestroy {
     private climateDataService = inject(ClimateDataService);
     private sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
@@ -374,7 +374,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.climateDataService.highCreditRiskData()?.highCreditRiskRows || []
     );
 
-    
+
 
 
 
