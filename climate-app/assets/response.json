@@ -955,6 +955,34 @@
           "totalCreditRisk": 10,
           "totalColletral": 10,
           "totalSolo": 10
+        },
+        {
+          "dataCorrectnessDate": "2025-07-01T00:00:00",
+          "redCluster": 22,
+          "redClusterDescription": "תעשייה כבדה",
+          "descriptionInCreditReport": "דוח תעשייה",
+          "rootRisk": 20,
+          "companysNumber": 2,
+          "residualRisk": 20,
+          "creditBalanceSheetRisk": 20,
+          "creditOffBalanceSheetRisk": 20,
+          "totalCreditRisk": 20,
+          "totalColletral": 20,
+          "totalSolo": 20
+        },
+        {
+          "dataCorrectnessDate": "2025-08-10T00:00:00",
+          "redCluster": 30,
+          "redClusterDescription": "שירותים פיננסיים",
+          "descriptionInCreditReport": "דוח שירותים",
+          "rootRisk": 30,
+          "companysNumber": 3,
+          "residualRisk": 30,
+          "creditBalanceSheetRisk": 30,
+          "creditOffBalanceSheetRisk": 30,
+          "totalCreditRisk": 30,
+          "totalColletral": 30,
+          "totalSolo": 30
         }
       ]
     }
