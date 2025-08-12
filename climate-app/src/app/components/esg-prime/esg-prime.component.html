@@ -555,6 +555,51 @@
                         </p-table>
                     </p-accordion-content>
                 </p-accordion-panel>
+
+                <!-- ICAAP -->
+                <p-accordion-panel value="3">
+                    <p-accordion-header>ICAAP</p-accordion-header>
+                    <p-accordion-content>
+                        <p-table [value]="icaapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>שיעור סיכון מירבי</th>                                    
+                                    <th>סיכון אשראי מאזני שורשי</th>
+                                    <th>סיכון אשראי חוץ מאזני שורשי</th>
+                                    <th>סה"כ סיכון אשראי שורשי</th>
+                                    <th>סיכון אשראי מינימלי שורשי</th>
+                                    <th>סיכון אשראי חוץ מינימלי שורשי</th>
+                                    <th>סה"כ סיכון אשראי מינימלי שורשי</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-row>
+                                <tr>                                   
+                                   <td>{{ row.maxRiskRate }}</td>
+                                   <td>{{ row.rootCreditBalanceSheetRisk }}</td>
+                                   <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
+                                   <td>{{ row.rootTotalCreditRiskRate }}</td>
+                                   <td>{{ row.residualCreditBalanceSheetRisk }}</td>
+                                   <td>{{ row.residualCreditOffBalanceSheetRisk }}</td>
+                                   <td>{{ row.residualTotalCreditRiskRate }}</td>
+                                </tr>
+                            </ng-template>
+
+                            
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div class="empty-message">
+                                            <i class="pi pi-info-circle"></i>
+                                            <p>לא נמצאו נתונים להצגה</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-accordion-content>
+                </p-accordion-panel>
             </p-accordion>
         </p-panel>
 
