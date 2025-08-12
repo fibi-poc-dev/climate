@@ -379,6 +379,8 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
 
 
 
+
+
     // Methods
     ngOnInit(): void {
         this.setupScrollListener();

@@ -1,0 +1,539 @@
+{
+    "month": 0,
+    "year": 0,
+    "esg": {
+        "esgMainReport": {
+            "esgMainReportRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.130Z",
+                    "sourceData": 0,
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "accountType": 0,
+                    "customerRating": 0,
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorCode": 0,
+                    "regualatedSectorDescription": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "subClassification": 0,
+                    "creditReportDescription": "string",
+                    "creditRedCluster": 0,
+                    "rootPhysicalRisk": 0,
+                    "rootTransferRisk": 0,
+                    "rootPhysicalRiskScale": 0,
+                    "rootTransferRiskScale": 0,
+                    "rootRiskLevelWeight": 0,
+                    "residualRisk": 0,
+                    "residualRiskDate": "2025-08-12T07:54:33.130Z",
+                    "qualityManagement": 0,
+                    "blackCluster": 0,
+                    "greenCluster": 0,
+                    "climateColor": 0,
+                    "totalCollateral": 0,
+                    "totalSolo": 0,
+                    "loanBalance": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "statusRow": 0
+                }
+            ],
+            "totalCommercialCredit": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.130Z",
+                    "sourceData": 0,
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "accountType": 0,
+                    "customerRating": 0,
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorCode": 0,
+                    "regualatedSectorDescription": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "subClassification": 0,
+                    "creditReportDescription": "string",
+                    "creditRedCluster": 0,
+                    "rootPhysicalRisk": 0,
+                    "rootTransferRisk": 0,
+                    "rootPhysicalRiskScale": 0,
+                    "rootTransferRiskScale": 0,
+                    "rootRiskLevelWeight": 0,
+                    "residualRisk": 0,
+                    "residualRiskDate": "2025-08-12T07:54:33.130Z",
+                    "qualityManagement": 0,
+                    "blackCluster": 0,
+                    "greenCluster": 0,
+                    "climateColor": 0,
+                    "totalCollateral": 0,
+                    "totalSolo": 0,
+                    "loanBalance": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "statusRow": 0
+                }
+            ],
+            "totalFilterCommercialCredit": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.130Z",
+                    "sourceData": 0,
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "accountType": 0,
+                    "customerRating": 0,
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorCode": 0,
+                    "regualatedSectorDescription": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "subClassification": 0,
+                    "creditReportDescription": "string",
+                    "creditRedCluster": 0,
+                    "rootPhysicalRisk": 0,
+                    "rootTransferRisk": 0,
+                    "rootPhysicalRiskScale": 0,
+                    "rootTransferRiskScale": 0,
+                    "rootRiskLevelWeight": 0,
+                    "residualRisk": 0,
+                    "residualRiskDate": "2025-08-12T07:54:33.130Z",
+                    "qualityManagement": 0,
+                    "blackCluster": 0,
+                    "greenCluster": 0,
+                    "climateColor": 0,
+                    "totalCollateral": 0,
+                    "totalSolo": 0,
+                    "loanBalance": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "statusRow": 0
+                }
+            ],
+            "totalPublicCredit": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "sourceData": 0,
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "accountType": 0,
+                    "customerRating": 0,
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorCode": 0,
+                    "regualatedSectorDescription": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "subClassification": 0,
+                    "creditReportDescription": "string",
+                    "creditRedCluster": 0,
+                    "rootPhysicalRisk": 0,
+                    "rootTransferRisk": 0,
+                    "rootPhysicalRiskScale": 0,
+                    "rootTransferRiskScale": 0,
+                    "rootRiskLevelWeight": 0,
+                    "residualRisk": 0,
+                    "residualRiskDate": "2025-08-12T07:54:33.131Z",
+                    "qualityManagement": 0,
+                    "blackCluster": 0,
+                    "greenCluster": 0,
+                    "climateColor": 0,
+                    "totalCollateral": 0,
+                    "totalSolo": 0,
+                    "loanBalance": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "statusRow": 0
+                }
+            ]
+        },
+        "heatMap": {
+            "heatMapRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "redCluster": 0,
+                    "redClusterDescription": "string",
+                    "rootPhysicalRisk": 0,
+                    "rootTransferRisk": 0,
+                    "rootRiskLevelWeight": 0,
+                    "residualRiskAverage": 0,
+                    "qualityManagement": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "totalCreditRiskRate": 0
+                }
+            ],
+            "totalHeatMap": {
+                "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                "redCluster": 0,
+                "redClusterDescription": "string",
+                "rootPhysicalRisk": 0,
+                "rootTransferRisk": 0,
+                "rootRiskLevelWeight": 0,
+                "residualRiskAverage": 0,
+                "qualityManagement": 0,
+                "creditBalanceSheetRisk": 0,
+                "creditOffBalanceSheetRisk": 0,
+                "totalCreditRisk": 0,
+                "totalCreditRiskRate": 0
+            }
+        },
+        "blackCredit": {
+            "blackCreditRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "blackCluster": 0,
+                    "blackClusterDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0
+                }
+            ],
+            "totalRiskWeightedAssetsPercentage": {
+                "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                "blackCluster": 0,
+                "blackClusterDescription": "string",
+                "creditBalanceSheetRisk": 0,
+                "creditOffBalanceSheetRisk": 0,
+                "totalCreditRisk": 0
+            },
+            "totalCommericialRiskWeightedAssetsPercentage": {
+                "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                "blackCluster": 0,
+                "blackClusterDescription": "string",
+                "creditBalanceSheetRisk": 0,
+                "creditOffBalanceSheetRisk": 0,
+                "totalCreditRisk": 0
+            },
+            "totalBlackCredit": {
+                "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                "blackCluster": 0,
+                "blackClusterDescription": "string",
+                "creditBalanceSheetRisk": 0,
+                "creditOffBalanceSheetRisk": 0,
+                "totalCreditRisk": 0
+            }
+        },
+        "greenCredit": {
+            "greenCreditRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "greenCluster": 0,
+                    "greenClusterDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0
+                }
+            ],
+            "totalGreenCredit": {
+                "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                "greenCluster": 0,
+                "greenClusterDescription": "string",
+                "creditBalanceSheetRisk": 0,
+                "creditOffBalanceSheetRisk": 0,
+                "totalCreditRisk": 0
+            }
+        },
+        "icaap": {
+            "icaapRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "minRiskRate": 0,
+                    "maxRiskRate": 0,
+                    "rootCreditBalanceSheetRisk": 0,
+                    "rootCreditOffBalanceSheetRisk": 0,
+                    "rootTotalCreditRiskRate": 0,
+                    "residualCreditBalanceSheetRisk": 0,
+                    "residualCreditOffBalanceSheetRisk": 0,
+                    "residualTotalCreditRiskRate": 0
+                }
+            ]
+        },
+        "highCreditRisk": {
+            "highCreditRiskRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "redCluster": 0,
+                    "redClusterDescription": "string",
+                    "descriptionInCreditReport": "string",
+                    "rootRisk": 0,
+                    "companysNumber": 0,
+                    "residualRisk": 0,
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "totalColletral": 0,
+                    "totalSolo": 0
+                }
+            ]
+        }
+    },
+    "carbonFootprint": {
+        "carbonFootprintMainReport": {
+            "carbonFootprintMainReportRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "sourceData": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "creditReportDescription": "string",
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "companyType": 0,
+                    "publicCompanyMarketValue": 0,
+                    "companyName": "string",
+                    "companyNumber": 0,
+                    "reportType": 0,
+                    "endDate": "2025-08-12T07:54:33.131Z",
+                    "totalBalanceSheet": 0,
+                    "financialDebt": 0,
+                    "totalLeaseLiabilities": 0,
+                    "negativeEquity": 0,
+                    "cashAndCashEquivalents": 0,
+                    "revenueTurnover": 0,
+                    "capitalMarketFlag": 0,
+                    "totalProjectEquity": 0,
+                    "totalDebtAdditionalFinancier": 0,
+                    "totalBalanceSheetRiskDebt": 0,
+                    "ourFinancingShare": 0,
+                    "greenBuilding": 0,
+                    "projectStage": 0,
+                    "greenProject": 0,
+                    "greenCluster": 0,
+                    "remarks": "string",
+                    "officerName": "string",
+                    "statusRow": 0
+                }
+            ]
+        },
+        "projectConstructionFinancing": {
+            "projectConstructionFinancingRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "sourceData": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "creditReportDescription": "string",
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "companyType": 0,
+                    "publicCompanyMarketValue": 0,
+                    "companyName": "string",
+                    "companyNumber": 0,
+                    "reportType": 0,
+                    "endDate": "2025-08-12T07:54:33.131Z",
+                    "totalBalanceSheet": 0,
+                    "financialDebt": 0,
+                    "totalLeaseLiabilities": 0,
+                    "negativeEquity": 0,
+                    "cashAndCashEquivalents": 0,
+                    "revenueTurnover": 0,
+                    "capitalMarketFlag": 0,
+                    "totalProjectEquity": 0,
+                    "totalDebtAdditionalFinancier": 0,
+                    "totalBalanceSheetRiskDebt": 0,
+                    "ourFinancingShare": 0,
+                    "greenBuilding": 0,
+                    "projectStage": 0,
+                    "greenProject": 0,
+                    "greenCluster": 0,
+                    "remarks": "string",
+                    "officerName": "string",
+                    "statusRow": 0
+                }
+            ]
+        },
+        "projectInfrastructureFinancing": {
+            "projectInfrastructureFinancingRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "sourceData": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "creditReportDescription": "string",
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "companyType": 0,
+                    "publicCompanyMarketValue": 0,
+                    "companyName": "string",
+                    "companyNumber": 0,
+                    "reportType": 0,
+                    "endDate": "2025-08-12T07:54:33.131Z",
+                    "totalBalanceSheet": 0,
+                    "financialDebt": 0,
+                    "totalLeaseLiabilities": 0,
+                    "negativeEquity": 0,
+                    "cashAndCashEquivalents": 0,
+                    "revenueTurnover": 0,
+                    "capitalMarketFlag": 0,
+                    "totalProjectEquity": 0,
+                    "totalDebtAdditionalFinancier": 0,
+                    "totalBalanceSheetRiskDebt": 0,
+                    "ourFinancingShare": 0,
+                    "greenBuilding": 0,
+                    "projectStage": 0,
+                    "greenProject": 0,
+                    "greenCluster": 0,
+                    "remarks": "string",
+                    "officerName": "string",
+                    "statusRow": 0
+                }
+            ]
+        },
+        "withoutProjects": {
+            "withoutProjectsRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "sourceData": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "creditReportDescription": "string",
+                    "currentCreditAuthority": 0,
+                    "handlingUnitCode": "string",
+                    "regualatedSectorDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalCreditRisk": 0,
+                    "companyType": 0,
+                    "publicCompanyMarketValue": 0,
+                    "companyName": "string",
+                    "companyNumber": 0,
+                    "reportType": 0,
+                    "endDate": "2025-08-12T07:54:33.131Z",
+                    "totalBalanceSheet": 0,
+                    "financialDebt": 0,
+                    "totalLeaseLiabilities": 0,
+                    "negativeEquity": 0,
+                    "cashAndCashEquivalents": 0,
+                    "revenueTurnover": 0,
+                    "capitalMarketFlag": 0,
+                    "totalProjectEquity": 0,
+                    "totalDebtAdditionalFinancier": 0,
+                    "totalBalanceSheetRiskDebt": 0,
+                    "ourFinancingShare": 0,
+                    "greenBuilding": 0,
+                    "projectStage": 0,
+                    "greenProject": 0,
+                    "greenCluster": 0,
+                    "remarks": "string",
+                    "officerName": "string",
+                    "statusRow": 0
+                }
+            ]
+        }
+    },
+    "newGreenCredit": {
+        "newGreenCreditReport": {
+            "newGreenCreditReportRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.131Z",
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "originationDate": "2025-08-12T07:54:33.131Z",
+                    "displayReason": "string",
+                    "climateColor": 0,
+                    "climateColorDescription": "string",
+                    "greenCluster": 0,
+                    "greenClusterDescription": "string",
+                    "creditBalanceSheetRisk": 0,
+                    "creditOffBalanceSheetRisk": 0,
+                    "totalBalanceSheet": 0,
+                    "loanSystemUpdateFlag": 0
+                }
+            ]
+        }
+    },
+    "limitations": {
+        "limitationsReport": {
+            "limitationsReportRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.132Z",
+                    "massadCode": 0,
+                    "detailLevelCode": 0,
+                    "limitationCode": 0,
+                    "borrowerCharacteristics": "string",
+                    "limitationDescription": "string",
+                    "creditRiskAmount": 0,
+                    "creditRiskPercentage": 0,
+                    "limitationComplianceFlag": true
+                }
+            ]
+        }
+    },
+    "residualRiskQuestionnaire": {
+        "residualRiskPopulation": {
+            "residualRiskPopulationRows": [
+                {
+                    "dataCorrectnessDate": "2025-08-12T07:54:33.132Z",
+                    "typeRow": 0,
+                    "bank": 0,
+                    "branch": 0,
+                    "account": 0,
+                    "accountName": "string",
+                    "branchClassificationCode": 0,
+                    "branchClassificatonDescription": "string",
+                    "creditRedCluster": 0,
+                    "creditRedClusterDescription": "string",
+                    "residualRisk": 0,
+                    "rootRisk": 0,
+                    "questionnaireFillDate": "2025-08-12T07:54:33.132Z",
+                    "residualRiskDate": "2025-08-12T07:54:33.132Z",
+                    "handlingUnitCode": "string",
+                    "customerExcel": "string",
+                    "officerExcel": "string"
+                }
+            ]
+        }
+    }
+}
