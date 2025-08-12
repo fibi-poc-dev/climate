@@ -1,10 +1,18 @@
 .app-container {
-  height: 100vh; /* Fixed height instead of min-height */
+  height: 100vh;
+  /* Fixed height instead of min-height */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevent overflow on container */
+  overflow: hidden;
+  /* Prevent overflow on container */
   direction: rtl;
   font-family: 'Segoe UI', 'David', 'Narkisim', 'Arial Hebrew', Arial, sans-serif;
+}
+
+.app-title {
+  font-family: Arial;
+  font-size: x-large;   
+  color: rgba(24, 40, 95, 1);
 }
 
 /* Top Navigation Bar */
@@ -57,7 +65,9 @@
   color: white;
 }
 
-.date, .time, .user-id {
+.date,
+.time,
+.user-id {
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -141,7 +151,8 @@
   background-color: #f8fafc;
   border-bottom: 2px solid #e2e8f0;
   padding: 0 2rem;
-  flex-shrink: 0; /* Prevent tab navigation from shrinking */
+  flex-shrink: 0;
+  /* Prevent tab navigation from shrinking */
 }
 
 .tab-container {
@@ -185,7 +196,8 @@
 .main-content {
   flex: 1;
   background-color: #ffffff;
-  overflow: hidden; /* Prevent overflow, let children handle scrolling */
+  overflow: hidden;
+  /* Prevent overflow, let children handle scrolling */
   position: relative;
 }
 
@@ -230,57 +242,58 @@
 /* Responsive design for mobile */
 @media (max-width: 768px) {
   .app-container {
-    height: 100vh; /* Maintain full height on mobile */
+    height: 100vh;
+    /* Maintain full height on mobile */
   }
-  
+
   .top-navigation {
     padding: 0.5rem;
   }
-  
+
   .nav-container {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .nav-items {
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   .nav-item {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
-  
+
   .user-info {
     gap: 0.5rem;
     font-size: 0.7rem;
   }
-  
+
   .main-header {
     padding: 1rem;
   }
-  
+
   .header-content {
     flex-direction: column;
     gap: 1rem;
     align-items: flex-end;
   }
-  
+
   .page-title {
     font-size: 1.25rem;
   }
-  
+
   .tab-navigation {
     padding: 0 1rem;
   }
-  
+
   .tab-button {
     padding: 0.75rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   .main-content {
     /* Remove padding from main-content, let components handle their own padding */
     overflow: hidden;
@@ -292,11 +305,11 @@
   .nav-items {
     gap: 1.5rem;
   }
-  
+
   .nav-item {
     font-size: 0.8rem;
   }
-  
+
   .tab-button {
     padding: 1rem 1.5rem;
   }
