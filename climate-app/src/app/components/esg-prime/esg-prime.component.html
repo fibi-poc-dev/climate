@@ -564,6 +564,11 @@
                             scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
                             <ng-template pTemplate="header">
                                 <tr>
+                                    <th></th>
+                                    <th colspan="3" class="text-center">סיכון אשראי שורשי</th>
+                                    <th colspan="3" class="text-center">סיכון אקלים שיורי</th>
+                                </tr>
+                                <tr>
                                     <th>שיעור סיכון מירבי</th>                                    
                                     <th>סיכון אשראי מאזני שורשי</th>
                                     <th>סיכון אשראי חוץ מאזני שורשי</th>
@@ -576,7 +581,7 @@
 
                             <ng-template pTemplate="body" let-row>
                                 <tr>                                   
-                                   <td>{{ row.maxRiskRate }}</td>
+                                   <td>עד {{ row.maxRiskRate }}</td>
                                    <td>{{ row.rootCreditBalanceSheetRisk }}</td>
                                    <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
                                    <td>{{ row.rootTotalCreditRiskRate }}</td>
