@@ -30,6 +30,8 @@ export class ClimateDataService {
   readonly highCreditRiskData = computed(() => this.data()?.esg.highCreditRisk);
   readonly newGreenCreditData = computed(() => this.data()?.newGreenCredit);
 
+  // readonly ppData = computed(() => this.data()?.esg.);
+
   // Cache the HTTP call to avoid multiple requests
   private climateResponse$: Observable<ClimateResponse> | null = null;
 
