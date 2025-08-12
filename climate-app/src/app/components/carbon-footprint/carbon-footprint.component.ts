@@ -38,12 +38,9 @@ export class CarbonFootprintComponent {
   }
 
 
-  // Green Credit data
-  protected readonly greenCreditRows = computed(() =>
-    this.climateDataService.greenCreditData()?.greenCreditRows || []
-  );
-  protected readonly totalGreenCredit = computed(() =>
-    this.climateDataService.greenCreditData()?.totalGreenCredit
+  // Project Construction Financing 
+  protected readonly projectConstructionFinancingRows = computed(() =>
+    this.climateDataService.projectConstructionFinancingData()?.projectConstructionFinancingRows || []
   );
 
 

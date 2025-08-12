@@ -1,51 +1,38 @@
 <div class="tab-container">
-  
-        
-            <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true">
-              
-               <p-table [value]="greenCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>קלאסטר ירוק</th>
-                                    <th>סיכון פיזי שורשי</th>
-                                    <th>סיכון מעבר שורשי</th>
-                                    <th>משקל רמת סיכון שורשי</th>
-                                </tr>
-                            </ng-template>
 
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>{{ row.greenClusterDescription }}</td>
-                                    <td>{{ row.creditBalanceSheetRisk }}</td>
-                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
 
-                            <ng-template pTemplate="footer">
-                                <tr>
-                                    <td colspan="1" class="text-center">סה"כ</td>
-                                    <td>{{ totalGreenCredit()?.creditBalanceSheetRisk }}</td>
-                                    <td>{{ totalGreenCredit()?.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ totalGreenCredit()?.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
+  <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true">
 
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="4" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
+    <p-table [value]="projectConstructionFinancingRows()" [paginator]="true" [rows]="10"
+      styleClass="p-datatable-striped p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>בנק</th>          
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td>{{ row.bank }}</td>          
+        </tr>
+      </ng-template>
+
+      
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="text-center">
+            <div class="empty-message">
+              <i class="pi pi-info-circle"></i>
+              <p>לא נמצאו נתונים להצגה</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
 
 
 
-            </p-panel>
-        
+  </p-panel>
+
 </div>
