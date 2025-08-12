@@ -1,4 +1,29 @@
 /**
+ * High Credit Risk Row interface
+ */
+export interface HighCreditRiskRow {
+  dataCorrectnessDate: string;
+  redCluster: number;
+  redClusterDescription: string;
+  descriptionInCreditReport: string;
+  rootRisk: number;
+  companysNumber: number;
+  residualRisk: number;
+  creditBalanceSheetRisk: number;
+  creditOffBalanceSheetRisk: number;
+  totalCreditRisk: number;
+  totalColletral: number;
+  totalSolo: number;
+}
+
+/**
+ * High Credit Risk section interface
+ */
+export interface HighCreditRisk {
+  highCreditRiskRows: HighCreditRiskRow[];
+}
+
+/**
  * Climate Response model interfaces
  * Based on the ESG climate reporting system response structure
  */
@@ -192,12 +217,13 @@ export interface Esg {
   heatMap: HeatMap;
   blackCredit: BlackCredit;
   greenCredit: GreenCredit;
-  icaap: Icaap;
+  highCreditRisk: HighCreditRisk;
 }
 
 /**
  * Main Climate Response interface
  * Root interface for the entire climate reporting response
+
  */
 export interface ClimateResponse {
   esg: Esg;
