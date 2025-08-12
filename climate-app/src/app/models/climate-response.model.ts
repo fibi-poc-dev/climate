@@ -217,6 +217,7 @@ export interface Esg {
   heatMap: HeatMap;
   blackCredit: BlackCredit;
   greenCredit: GreenCredit;
+  icaap: Icaap;
   highCreditRisk: HighCreditRisk;
 }
 

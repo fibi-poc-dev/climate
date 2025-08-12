@@ -27,6 +27,7 @@ export class ClimateDataService {
   readonly blackCreditData = computed(() => this.data()?.esg.blackCredit);
   readonly greenCreditData = computed(() => this.data()?.esg.greenCredit);
   readonly icaapData = computed(() => this.data()?.esg.icaap);
+  readonly highCreditRiskData = computed(() => this.data()?.esg.highCreditRisk);
   readonly newGreenCreditData = computed(() => this.data()?.newGreenCredit);
 
   // Cache the HTTP call to avoid multiple requests
