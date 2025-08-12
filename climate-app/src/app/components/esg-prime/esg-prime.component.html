@@ -390,7 +390,8 @@
 
 
         <p-panel>
-            <p-accordion value="0">
+            <p-accordion>
+                <!-- מפת חום -->
                 <p-accordion-panel value="0">
                     <p-accordion-header>מפת חום</p-accordion-header>
                     <p-accordion-content>
@@ -399,7 +400,6 @@
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>קלאסטר אדום</th>
-                                    <th>תיאור קלאסטר אדום</th>
                                     <th>סיכון פיזי שורשי</th>
                                     <th>סיכון מעבר שורשי</th>
                                     <th>משקל רמת סיכון שורשי</th>
@@ -414,7 +414,6 @@
 
                             <ng-template pTemplate="body" let-row>
                                 <tr>
-                                    <td>{{ row.redCluster }}</td>
                                     <td>{{ row.redClusterDescription }}</td>
                                     <td>{{ row.rootPhysicalRisk }}</td>
                                     <td>{{ row.rootTransferRisk }}</td>
@@ -430,14 +429,14 @@
 
                             <ng-template pTemplate="footer">
                                 <tr>
-                                    <td colspan="10" class="text-center">סה"כ</td>
+                                    <td colspan="9" class="text-center">סה"כ</td>
                                     <td>{{ totalHeatMap()?.totalCreditRiskRate }}</td>
                                 </tr>
                             </ng-template>
 
                             <ng-template pTemplate="emptymessage">
                                 <tr>
-                                    <td colspan="11" class="text-center">
+                                    <td colspan="10" class="text-center">
                                         <div class="empty-message">
                                             <i class="pi pi-info-circle"></i>
                                             <p>לא נמצאו נתונים להצגה</p>
@@ -449,6 +448,7 @@
                     </p-accordion-content>
                 </p-accordion-panel>
 
+                <!-- אשראי ירוק -->
                 <p-accordion-panel value="1">
                     <p-accordion-header>אשראי ירוק</p-accordion-header>
                     <p-accordion-content>
@@ -456,7 +456,7 @@
                             scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>תיאור קלאסטר ירוק</th>
+                                    <th>קלאסטר ירוק</th>
                                     <th>סיכון פיזי שורשי</th>
                                     <th>סיכון מעבר שורשי</th>
                                     <th>משקל רמת סיכון שורשי</th>
@@ -483,7 +483,7 @@
 
                             <ng-template pTemplate="emptymessage">
                                 <tr>
-                                    <td colspan="11" class="text-center">
+                                    <td colspan="4" class="text-center">
                                         <div class="empty-message">
                                             <i class="pi pi-info-circle"></i>
                                             <p>לא נמצאו נתונים להצגה</p>
@@ -495,19 +495,64 @@
                     </p-accordion-content>
                 </p-accordion-panel>
 
+                <!-- אשראי שחור -->
                 <p-accordion-panel value="2">
-                    <p-accordion-header>Header III</p-accordion-header>
+                    <p-accordion-header>אשראי שחור</p-accordion-header>
                     <p-accordion-content>
-                        <p class="m-0">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem
-                            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                            sunt explicabo. Nemo
-                            enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                            magni dolores eos
-                            qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
-                            eius modi.
-                        </p>
+                        <p-table [value]="blackCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>קלאסטר שחור</th>
+                                    <th>יתרת סיכון אשראי מאזני ללא משכנתאות באש"ח</th>
+                                    <th>יתרת סיכון אשראי חוץ מאזני ללא משכנתאות באש"ח</th>
+                                    <th>יתרת סיכון אשראי כולל ללא משכנתאות באש"ח</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-row>
+                                <tr>
+                                    <td>{{ row.blackClusterDescription }}</td>
+                                    <td>{{ row.creditBalanceSheetRisk }}</td>
+                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ row.totalCreditRisk }}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td colspan="1" class="text-center">סה"כ</td>
+                                    <td>{{ totalBlackCredit()?.creditBalanceSheetRisk }}</td>
+                                    <td>{{ totalBlackCredit()?.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ totalBlackCredit()?.totalCreditRisk }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="text-center">סה"כ</td>
+                                    <td>{{ totalRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}</td>
+                                    <td>{{ totalRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk }}</td>
+                                    <td>{{ totalRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="1" class="text-center">סה"כ</td>
+                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}
+                                    </td>
+                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk }}
+                                    </td>
+                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        <div class="empty-message">
+                                            <i class="pi pi-info-circle"></i>
+                                            <p>לא נמצאו נתונים להצגה</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-accordion-content>
                 </p-accordion-panel>
             </p-accordion>

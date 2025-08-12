@@ -339,7 +339,7 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     );
     protected readonly totalHeatMap = computed(() =>
         this.climateDataService.heatMapData()?.totalHeatMap
-    );    
+    );
 
 
     // Green Credit data
@@ -349,6 +349,22 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
     protected readonly totalGreenCredit = computed(() =>
         this.climateDataService.greenCreditData()?.totalGreenCredit
     );
+
+    // Black Credit data
+    protected readonly blackCreditRows = computed(() =>
+        this.climateDataService.blackCreditData()?.blackCreditRows || []
+    );
+    protected readonly totalBlackCredit = computed(() =>
+        this.climateDataService.blackCreditData()?.totalBlackCredit
+    );
+    protected readonly totalCommericialRiskWeightedAssetsPercentage = computed(() =>
+        this.climateDataService.blackCreditData()?.totalCommericialRiskWeightedAssetsPercentage
+    );
+    protected readonly totalRiskWeightedAssetsPercentage = computed(() =>
+        this.climateDataService.blackCreditData()?.totalRiskWeightedAssetsPercentage
+    );
+
+
 
 
 
