@@ -569,7 +569,7 @@
                                     <th colspan="3" class="text-center">סיכון אקלים שיורי</th>
                                 </tr>
                                 <tr>
-                                    <th>שיעור סיכון מירבי</th>                                    
+                                    <th>שיעור סיכון מירבי</th>
                                     <th>סיכון אשראי מאזני שורשי</th>
                                     <th>סיכון אשראי חוץ מאזני שורשי</th>
                                     <th>סה"כ סיכון אשראי שורשי</th>
@@ -580,21 +580,72 @@
                             </ng-template>
 
                             <ng-template pTemplate="body" let-row>
-                                <tr>                                   
-                                   <td>עד {{ row.maxRiskRate }}</td>
-                                   <td>{{ row.rootCreditBalanceSheetRisk }}</td>
-                                   <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
-                                   <td>{{ row.rootTotalCreditRiskRate }}</td>
-                                   <td>{{ row.residualCreditBalanceSheetRisk }}</td>
-                                   <td>{{ row.residualCreditOffBalanceSheetRisk }}</td>
-                                   <td>{{ row.residualTotalCreditRiskRate }}</td>
+                                <tr>
+                                    <td>עד {{ row.maxRiskRate }}</td>
+                                    <td>{{ row.rootCreditBalanceSheetRisk }}</td>
+                                    <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
+                                    <td>{{ row.rootTotalCreditRiskRate }}</td>
+                                    <td>{{ row.residualCreditBalanceSheetRisk }}</td>
+                                    <td>{{ row.residualCreditOffBalanceSheetRisk }}</td>
+                                    <td>{{ row.residualTotalCreditRiskRate }}</td>
                                 </tr>
                             </ng-template>
 
-                            
+
                             <ng-template pTemplate="emptymessage">
                                 <tr>
                                     <td colspan="7" class="text-center">
+                                        <div class="empty-message">
+                                            <i class="pi pi-info-circle"></i>
+                                            <p>לא נמצאו נתונים להצגה</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-accordion-content>
+                </p-accordion-panel>
+
+
+                <!-- אשראי בסיכון אקלימי מוגבר -->
+                <p-accordion-panel value="4">
+                    <p-accordion-header>אשראי בסיכון אקלימי מוגבר</p-accordion-header>
+                    <p-accordion-content>
+                        <p-table [value]="highCreditRiskRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>תיאור קלאסטר אדום</th>
+                                    <th>שקלול רמת הסיכון השורשי</th>
+                                    <th>מספר חברות</th>
+                                    <th>רמת הסיכון השיורי ממוצע משוקלל</th>
+                                    <th>סיכון אשראי מאזני באש"ח</th>
+                                    <th>סיכון אשראי חוץ מאזני באש"ח</th>
+                                    <th>סה"כ סיכון אשראי באש"ח</th>
+                                    <th>סה"כ בטחונות באש"ח</th>
+                                    <th>סה"כ סולו באש"ח משכנתאות</th>
+                                    <th></th>   
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-row>
+                                <tr>
+                                    <td>{{row.redClusterDescription}}</td>
+                                    <td>{{row.rootRisk}}</td>
+                                    <td>{{row.companysNumber}}</td>
+                                    <td>{{row.residualRisk}}</td>
+                                    <td>{{row.creditBalanceSheetRisk}}</td>
+                                    <td>{{row.creditOffBalanceSheetRisk}}</td>
+                                    <td>{{row.totalCreditRisk}}</td>
+                                    <td>{{row.totalCollateral}}</td>
+                                    <td>{{row.totalSolo}}</td>
+                                    <td></td>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="9" class="text-center">
                                         <div class="empty-message">
                                             <i class="pi pi-info-circle"></i>
                                             <p>לא נמצאו נתונים להצגה</p>

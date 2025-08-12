@@ -369,6 +369,11 @@ export class EsgPrimeComponent implements OnInit, OnDestroy {
         this.climateDataService.icaapData()?.icaapRows || []
     );
 
+    // ICAAP data
+    protected readonly highCreditRiskRows = computed(() =>
+        this.climateDataService.highCreditRiskData()?.highCreditRiskRows || []
+    );
+
     
 
 
