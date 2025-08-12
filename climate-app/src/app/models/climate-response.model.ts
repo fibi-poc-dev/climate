@@ -1,4 +1,55 @@
 /**
+ * Project Construction Financing Row interface
+ */
+export interface ProjectConstructionFinancingRow {
+  dataCorrectnessDate: string;
+  sourceData: number;
+  bank: number;
+  branch: number;
+  account: number;
+  accountName: string;
+  branchClassificationCode: number;
+  branchClassificatonDescription: string;
+  creditReportDescription: string;
+  currentCreditAuthority: number;
+  handlingUnitCode: string;
+  regualatedSectorDescription: string;
+  creditBalanceSheetRisk: number;
+  creditOffBalanceSheetRisk: number;
+  totalCreditRisk: number;
+  companyType: number;
+  publicCompanyMarketValue: number;
+  companyName: string;
+  companyNumber: number;
+  reportType: number;
+  endDate: string;
+  totalBalanceSheet: number;
+  financialDebt: number;
+  totalLeaseLiabilities: number;
+  negativeEquity: number;
+  cashAndCashEquivalents: number;
+  revenueTurnover: number;
+  capitalMarketFlag: number;
+  totalProjectEquity: number;
+  totalDebtAdditionalFinancier: number;
+  totalBalanceSheetRiskDebt: number;
+  ourFinancingShare: number;
+  greenBuilding: number;
+  projectStage: number;
+  greenProject: number;
+  greenCluster: number;
+  remarks: string;
+  officerName: string;
+  statusRow: number;
+}
+
+/**
+ * Project Construction Financing section interface
+ */
+export interface ProjectConstructionFinancing {
+  projectConstructionFinancingRows: ProjectConstructionFinancingRow[];
+}
+/**
  * High Credit Risk Row interface
  */
 export interface HighCreditRiskRow {
@@ -229,6 +280,7 @@ export interface Esg {
 export interface ClimateResponse {
   esg: Esg;
   newGreenCredit: NewGreenCredit;
+  projectConstructionFinancing: ProjectConstructionFinancing;
 }
 
 /**
