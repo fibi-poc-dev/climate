@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { SharedService } from '../../services/shared.service';
-import { EsgMainReportRow, ClimateColor, CustomerRating } from '../../models/climate-response.model';
+import { ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
@@ -133,6 +133,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DatePickerModule } from 'primeng/datepicker';
 import { AccordionModule } from 'primeng/accordion';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { EsgMainReportRow } from '../../models/esg.model';
 
 
 @Component({
