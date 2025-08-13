@@ -2,7 +2,8 @@ import { Component, computed, signal, inject, OnInit, OnDestroy } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
-import { NewGreenCreditRow } from '../../models/climate-response.model';
+import { NewGreenCreditRow } from '../../models/new-green-credit.model';
+
 
 @Component({
     selector: 'app-green-credit',
