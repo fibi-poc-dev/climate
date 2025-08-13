@@ -2,6 +2,7 @@ import { CarbonFootprint } from "./carbon-footprint.model";
 import { Esg } from "./esg.model";
 import { Limitations } from "./limitations.model";
 import { NewGreenCredit } from "./new-green-credit.model";
+import { ResidualRiskQuestionnaire } from "./residual-risk-questionnaire.model";
 
 
 /******************************************************************************************************
@@ -15,6 +16,7 @@ export interface ClimateResponse {
   carbonFootprint: CarbonFootprint;
   newGreenCredit: NewGreenCredit;
   limitations: Limitations;
+  residualRiskQuestionnaire: ResidualRiskQuestionnaire;
 }
 
 
