@@ -1,29 +1,19 @@
 <div class="app-container" dir="rtl">
-  <!-- <div class="main-header">
-    <div class="header-content">
-      <div class="title-section">
-        <h1 class="page-title">מערכת אקלים</h1>
-      </div>
-      <div class="header-actions">
-        <button class="action-btn print-btn">🖨</button>
-        <button class="action-btn settings-btn">⚙</button>
-        <button class="action-btn add-btn">+</button>
-      </div>
-    </div>
-  </div> -->
 
-  <nav class="tab-navigation" style="display: flex; align-items: center;">
-    <span class="app-title">מערכת אקלים</span>
-    <div class="tab-container">
-      @for (tab of tabs; track tab.id) {
-      <button class="tab-button" [class.active]="activeTab() === tab.id" (click)="selectTab(tab.id)">
-        {{ tab.label }}
-      </button>
-      }
-    </div>
-  </nav>
+  <div>
+    <nav class="tab-navigation" style="display: flex; align-items: center;">
+      <span class="app-title">מערכת אקלים</span>
+      <div class="tab-container">
+        @for (tab of tabs; track tab.id) {
+        <button class="tab-button" [class.active]="activeTab() === tab.id" (click)="selectTab(tab.id)">
+          {{ tab.label }}
+        </button>
+        }
+      </div>
+    </nav>
+  </div>
 
-  <main class="main-content">
+  <main class="main-content" style="height: 90vh; max-height: 90vh; overflow: auto;">
     <router-outlet></router-outlet>
   </main>
 </div>
