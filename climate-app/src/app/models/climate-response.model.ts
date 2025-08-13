@@ -1,11 +1,15 @@
+import { CarbonFootprint } from "./carbon-footprint.model";
 import { Esg } from "./esg.model";
 
 /******************************************************************************************************
  * Main Climate Response interface
  * Root interface for the entire climate reporting response
- ******************************************************************************************************/ 
+ ******************************************************************************************************/
 export interface ClimateResponse {
+  month: number;
+  year: number;
   esg: Esg;
+  carbonFootprint: CarbonFootprint;
   newGreenCredit: NewGreenCredit;
   projectConstructionFinancing: ProjectConstructionFinancing;
 }
