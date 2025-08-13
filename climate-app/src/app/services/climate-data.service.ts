@@ -29,7 +29,7 @@ export class ClimateDataService {
   readonly icaapData = computed(() => this.data()?.esg.icaap);
   readonly highCreditRiskData = computed(() => this.data()?.esg.highCreditRisk);
   readonly newGreenCreditData = computed(() => this.data()?.newGreenCredit);
-  readonly projectConstructionFinancingData = computed(() => this.data()?.projectConstructionFinancing);
+  readonly limitationsData = computed(() => this.data()?.limitations);
 
   // readonly ppData = computed(() => this.data()?.esg.);
 

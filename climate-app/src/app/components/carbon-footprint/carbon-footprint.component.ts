@@ -38,10 +38,7 @@ export class CarbonFootprintComponent {
   }
 
 
-  // Project Construction Financing 
-  protected readonly projectConstructionFinancingRows = computed(() =>
-    this.climateDataService.projectConstructionFinancingData()?.projectConstructionFinancingRows || []
-  );
+  
 
 
 
