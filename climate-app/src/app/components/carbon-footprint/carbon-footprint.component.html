@@ -1,7 +1,7 @@
 <div class="tab-container">
 
   <!-- Project Construction Financing -->
-  <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true">
+  <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true" collapsed="true">
     <p-table [value]="projectConstructionFinancingRows()" [paginator]="true" [rows]="10"
       styleClass="p-datatable-striped p-datatable-sm">
       <ng-template pTemplate="header">
@@ -103,7 +103,7 @@
 
 
   <!-- Project Infrastructure Financing -->
-  <p-panel header="ליווי פרוייקטים תשתיות" class="p-panel-sm" [toggleable]="true">
+  <p-panel header="ליווי פרוייקטים תשתיות" class="p-panel-sm" [toggleable]="true" collapsed="true">
     <p-table [value]="projectInfrastructureFinancingRows()" [paginator]="true" [rows]="10"
       styleClass="p-datatable-striped p-datatable-sm">
       <ng-template pTemplate="header">

@@ -12,7 +12,7 @@
 .app-title {
   font-family: Arial;
   font-size: x-large;   
-  color: rgba(24, 40, 95, 1);
+  color: var(--blue)
 }
 
 /* Top Navigation Bar */
