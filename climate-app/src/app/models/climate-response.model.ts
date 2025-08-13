@@ -1,5 +1,6 @@
 import { CarbonFootprint } from "./carbon-footprint.model";
 import { Esg } from "./esg.model";
+import { Limitations } from "./limitations.model";
 import { NewGreenCredit } from "./new-green-credit.model";
 
 
@@ -13,6 +14,7 @@ export interface ClimateResponse {
   esg: Esg;
   carbonFootprint: CarbonFootprint;
   newGreenCredit: NewGreenCredit;
+  limitations: Limitations;
   projectConstructionFinancing: ProjectConstructionFinancing;
 }
 
