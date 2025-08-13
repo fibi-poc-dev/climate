@@ -20,14 +20,14 @@ import { TableModule } from 'primeng/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarbonFootprintComponent {
-  protected readonly climateDataService = inject(ClimateDataService);
+  protected readonly dataService = inject(ClimateDataService);
 
   protected readonly hasData = computed(() =>
-    this.climateDataService.hasData()
+    this.dataService.hasData()
   );
 
   protected retryDataLoad(): void {
-    this.climateDataService.refreshClimateData().subscribe({
+    this.dataService.refreshClimateData().subscribe({
       next: () => {
         console.log('Data refreshed successfully');
       },
@@ -37,6 +37,10 @@ export class CarbonFootprintComponent {
     });
   }
 
+  // Project Construction Financing data
+  protected readonly projectConstructionFinancingRows = computed(() =>
+      this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || []
+  );
 
   
 

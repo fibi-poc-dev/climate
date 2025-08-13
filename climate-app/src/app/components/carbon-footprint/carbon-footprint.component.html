@@ -3,7 +3,103 @@
 
   <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true">
 
+    <p-table [value]="projectConstructionFinancingRows()" [paginator]="true" [rows]="10"
+      styleClass="p-datatable-striped p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>בנק</th>
+          <th>סניף</th>
+          <th>מספר חשבון</th>
+          <th>שם חשבון</th>
+          <th>קוד סיווג סניף</th>
+          <th>תיאור סיווג סניף</th>
+          <th>תיאור דוח אשראי</th>
+          <th>סמכות אשראי נוכחית</th>
+          <th>קוד יחידת טיפול</th>
+          <th>תיאור מגזר מוסדר</th>
+          <th>סיכון אשראי מאזן</th>
+          <th>סיכון אשראי מחוץ למאזן</th>
+          <th>סיכון אשראי כולל</th>
+          <th>סוג חברה</th>
+          <th>שווי שוק חברה ציבורית</th>
+          <th>שם חברה</th>
+          <th>מספר חברה</th>
+          <th>סוג דוח</th>
+          <th>תאריך סיום</th>
+          <th>סך מאזן</th>
+          <th>חוב פיננסי</th>
+          <th>סך התחייבויות שכירות</th>
+          <th>הון שלילי</th>
+          <th>מזומן ושווי מזומן</th>
+          <th>הכנסות</th>
+          <th>דגל שוק ההון</th>
+          <th>סך הון פרויקט</th>
+          <th>סך חוב מממן נוסף</th>
+          <th>סך סיכון מאזן חוב</th>
+          <th>נתח המימון שלנו</th>
+          <th>בניין ירוק</th>
+          <th>שלב פרויקט</th>
+          <th>פרויקט ירוק</th>
+          <th>קלאסטר ירוק</th>
+          <th>הערות</th>
+          <th>שם איש קשר</th>
+          <th>סטטוס שורה</th>
+        </tr>
+      </ng-template>
 
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td>{{ row.bank }}</td>
+          <td>{{ row.branch }}</td>
+          <td>{{ row.account }}</td>
+          <td>{{ row.accountName }}</td>
+          <td>{{ row.branchClassificationCode }}</td>
+          <td>{{ row.branchClassificatonDescription }}</td>
+          <td>{{ row.creditReportDescription }}</td>
+          <td>{{ row.currentCreditAuthority }}</td>
+          <td>{{ row.handlingUnitCode }}</td>
+          <td>{{ row.regualatedSectorDescription }}</td>
+          <td>{{ row.creditBalanceSheetRisk }}</td>
+          <td>{{ row.creditOffBalanceSheetRisk }}</td>
+          <td>{{ row.totalCreditRisk }}</td>
+          <td>{{ row.companyType }}</td>
+          <td>{{ row.publicCompanyMarketValue }}</td>
+          <td>{{ row.companyName }}</td>
+          <td>{{ row.companyNumber }}</td>
+          <td>{{ row.reportType }}</td>
+          <td>{{ row.endDate }}</td>
+          <td>{{ row.totalBalanceSheet }}</td>
+          <td>{{ row.financialDebt }}</td>
+          <td>{{ row.totalLeaseLiabilities }}</td>
+          <td>{{ row.negativeEquity }}</td>
+          <td>{{ row.cashAndCashEquivalents }}</td>
+          <td>{{ row.revenueTurnover }}</td>
+          <td>{{ row.capitalMarketFlag }}</td>
+          <td>{{ row.totalProjectEquity }}</td>
+          <td>{{ row.totalDebtAdditionalFinancier }}</td>
+          <td>{{ row.totalBalanceSheetRiskDebt }}</td>
+          <td>{{ row.ourFinancingShare }}</td>
+          <td>{{ row.greenBuilding }}</td>
+          <td>{{ row.projectStage }}</td>
+          <td>{{ row.greenProject }}</td>
+          <td>{{ row.greenCluster }}</td>
+          <td>{{ row.remarks }}</td>
+          <td>{{ row.officerName }}</td>
+          <td>{{ row.statusRow }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="text-center">
+            <div class="empty-message">
+              <i class="pi pi-info-circle"></i>
+              <p>לא נמצאו נתונים להצגה</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
 
 
 

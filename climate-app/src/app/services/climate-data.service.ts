@@ -30,6 +30,7 @@ export class ClimateDataService {
   readonly highCreditRiskData = computed(() => this.data()?.esg.highCreditRisk);
   readonly newGreenCreditData = computed(() => this.data()?.newGreenCredit);
   readonly limitationsData = computed(() => this.data()?.limitations);
+  readonly carbonFootprintData = computed(() => this.data()?.carbonFootprint);
 
   // readonly ppData = computed(() => this.data()?.esg.);
 
