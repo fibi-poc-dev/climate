@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 // PrimeNG imports
 import { PanelModule } from 'primeng/panel';
-import { TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';;
 
 
 @Component({
@@ -20,6 +20,7 @@ import { TableModule } from 'primeng/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarbonFootprintComponent {
+  // Inject the ClimateDataService
   protected readonly dataService = inject(ClimateDataService);
 
   protected readonly hasData = computed(() =>
@@ -39,10 +40,15 @@ export class CarbonFootprintComponent {
 
   // Project Construction Financing data
   protected readonly projectConstructionFinancingRows = computed(() =>
-      this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || []
+    this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || []
   );
 
-  
+  // Project Infrastructure Financing data
+  protected readonly projectInfrastructureFinancingRows = computed(() =>
+    this.dataService.carbonFootprintData()?.projectInfrastructureFinancing.projectInfrastructureFinancingRows || []
+  );
+
+
 
 
 
