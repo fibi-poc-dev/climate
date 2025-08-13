@@ -1,5 +1,7 @@
 import { CarbonFootprint } from "./carbon-footprint.model";
 import { Esg } from "./esg.model";
+import { NewGreenCredit } from "./new-green-credit.model";
+
 
 /******************************************************************************************************
  * Main Climate Response interface
@@ -181,40 +183,4 @@ export function getCustomerRatingString(customerRating: number | null): string {
   return CustomerRatingMap[customerRating as CustomerRating] || 'Unknown';
 }
 
-/**
- * New Green Credit Row interface
- */
-export interface NewGreenCreditRow {
-  dataCorrectnessDate: string;
-  typeRow: number;
-  bank: number;
-  branch: number;
-  account: number;
-  accountName: string;
-  branchClassificationCode: number;
-  branchClassificatonDescription: string;
-  originationDate: string;
-  displayReason: string;
-  climateColor: number;
-  climateColorDescription: string;
-  greenCluster: number | null;
-  greenClusterDescription: string | null;
-  creditBalanceSheetRisk: number;
-  creditOffBalanceSheetRisk: number;
-  totalBalanceSheet: number;
-  loanSystemUpdateFlag: number | null;
-}
 
-/**
- * New Green Credit Report interface
- */
-export interface NewGreenCreditReport {
-  newGreenCreditReportRows: NewGreenCreditRow[];
-}
-
-/**
- * New Green Credit interface
- */
-export interface NewGreenCredit {
-  newGreenCreditReport: NewGreenCreditReport;
-}
