@@ -1,210 +1,106 @@
-<div class="green-credit-dashboard">
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-progress" [style.height.%]="getScrollProgress()"></div>
-    </div>
+<div class="tab-data-container">
 
-    @if (isLoading()) {
-    <!-- Loading State -->
-    <div class="loading-container">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">טוען נתוני אשראי ירוק חדש...</p>
-    </div>
-    } @else if (error()) {
-    <!-- Error State -->
-    <div class="error-container">
-        <div class="error-icon">❌</div>
-        <p class="error-text">שגיאה בטעינת הנתונים: {{ error() }}</p>
-    </div>
-    } @else if (!hasData()) {
-    <!-- No Data State -->
-    <div class="no-data-container">
-        <div class="no-data-icon">📊</div>
-        <p class="error-text">אין נתוני אשראי ירוק חדש להצגה</p>
-    </div>
-    } @else {
-    <!-- Main Content -->
+  <!-- Carbon Footprint Main Report -->
+  <p-panel header="אשראי ירוק חדש" class="p-panel-sm">
+    <p-table [value]="newGreenCreditReportRows()" [paginator]="true" [rows]="10"
+      styleClass="p-datatable-striped p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>בנק</th>
+          <th>סניף</th>
+          <th>מספר חשבון</th>
+          <th>שם חשבון</th>
+          <th>קוד סיווג סניף</th>
+          <th>תיאור סיווג סניף</th>
+          <th>תיאור דוח אשראי</th>
+          <th>סמכות אשראי נוכחית</th>
+          <th>קוד יחידת טיפול</th>
+          <th>תיאור מגזר מוסדר</th>
+          <th>סיכון אשראי מאזן</th>
+          <th>סיכון אשראי מחוץ למאזן</th>
+          <th>סיכון אשראי כולל</th>
+          <th>סוג חברה</th>
+          <th>שווי שוק חברה ציבורית</th>
+          <th>שם חברה</th>
+          <th>מספר חברה</th>
+          <th>סוג דוח</th>
+          <th>תאריך סיום</th>
+          <th>סך מאזן</th>
+          <th>חוב פיננסי</th>
+          <th>סך התחייבויות שכירות</th>
+          <th>הון שלילי</th>
+          <th>מזומן ושווי מזומן</th>
+          <th>הכנסות</th>
+          <th>דגל שוק ההון</th>
+          <th>סך הון פרויקט</th>
+          <th>סך חוב מממן נוסף</th>
+          <th>סך סיכון מאזן חוב</th>
+          <th>נתח המימון שלנו</th>
+          <th>בניין ירוק</th>
+          <th>שלב פרויקט</th>
+          <th>פרויקט ירוק</th>
+          <th>קלאסטר ירוק</th>
+          <th>הערות</th>
+          <th>שם איש קשר</th>
+          <th>סטטוס שורה</th>
+        </tr>
+      </ng-template>
 
-    <!-- Statistics Section -->
-    <div class="statistics-section">
-        <div class="statistics-grid">
-            <div class="stat-card">
-                <div class="stat-icon">📈</div>
-                <div class="stat-content">
-                    <h4 class="stat-title">סה"כ חשבונות</h4>
-                    <p class="stat-value">{{ formatNumber(totalAccounts()) }}</p>
-                </div>
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td>{{ row.bank }}</td>
+          <td>{{ row.branch }}</td>
+          <td>{{ row.account }}</td>
+          <td>{{ row.accountName }}</td>
+          <td>{{ row.branchClassificationCode }}</td>
+          <td>{{ row.branchClassificatonDescription }}</td>
+          <td>{{ row.creditReportDescription }}</td>
+          <td>{{ row.currentCreditAuthority }}</td>
+          <td>{{ row.handlingUnitCode }}</td>
+          <td>{{ row.regualatedSectorDescription }}</td>
+          <td>{{ row.creditBalanceSheetRisk }}</td>
+          <td>{{ row.creditOffBalanceSheetRisk }}</td>
+          <td>{{ row.totalCreditRisk }}</td>
+          <td>{{ row.companyType }}</td>
+          <td>{{ row.publicCompanyMarketValue }}</td>
+          <td>{{ row.companyName }}</td>
+          <td>{{ row.companyNumber }}</td>
+          <td>{{ row.reportType }}</td>
+          <td>{{ row.endDate }}</td>
+          <td>{{ row.totalBalanceSheet }}</td>
+          <td>{{ row.financialDebt }}</td>
+          <td>{{ row.totalLeaseLiabilities }}</td>
+          <td>{{ row.negativeEquity }}</td>
+          <td>{{ row.cashAndCashEquivalents }}</td>
+          <td>{{ row.revenueTurnover }}</td>
+          <td>{{ row.capitalMarketFlag }}</td>
+          <td>{{ row.totalProjectEquity }}</td>
+          <td>{{ row.totalDebtAdditionalFinancier }}</td>
+          <td>{{ row.totalBalanceSheetRiskDebt }}</td>
+          <td>{{ row.ourFinancingShare }}</td>
+          <td>{{ row.greenBuilding }}</td>
+          <td>{{ row.projectStage }}</td>
+          <td>{{ row.greenProject }}</td>
+          <td>{{ row.greenCluster }}</td>
+          <td>{{ row.remarks }}</td>
+          <td>{{ row.officerName }}</td>
+          <td>{{ row.statusRow }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="text-center">
+            <div class="empty-message">
+              <i class="pi pi-info-circle"></i>
+              <p>לא נמצאו נתונים להצגה</p>
             </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
 
-            <div class="stat-card">
-                <div class="stat-icon">💰</div>
-                <div class="stat-content">
-                    <h4 class="stat-title">סה"כ סיכון מאזני</h4>
-                    <p class="stat-value">{{ formatNumber(totalBalanceSheetRisk()) }}</p>
-                </div>
-            </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">🏦</div>
-                <div class="stat-content">
-                    <h4 class="stat-title">סה"כ סיכון חוץ מאזני</h4>
-                    <p class="stat-value">{{ formatNumber(totalOffBalanceSheetRisk()) }}</p>
-                </div>
-            </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">💎</div>
-                <div class="stat-content">
-                    <h4 class="stat-title">סה"כ מאזן</h4>
-                    <p class="stat-value">{{ formatNumber(totalBalance()) }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Filters Section -->
-    <div class="filters-section">
-        <div class="filters-header">
-            <h3>סינון וחיפוש</h3>
-            <button class="btn btn-secondary" (click)="clearFilters()">
-                נקה סינונים
-            </button>
-        </div>
-
-        <div class="filters-grid">
-            <div class="filter-group">
-                <label for="search">חיפוש כללי</label>
-                <input id="search" type="text" placeholder="חיפוש לפי שם, תיאור או אשכול..." class="form-control"
-                    [value]="searchTerm()" (input)="onSearchChange($event)">
-            </div>
-
-            <div class="filter-group">
-                <label for="cluster">אשכול ירוק</label>
-                <select id="cluster" class="form-select" [value]="selectedCluster() ?? 'null'"
-                    (change)="onClusterChange($event)">
-                    <option value="null">כל האשכולות</option>
-                    @for (cluster of uniqueClusters(); track cluster.id) {
-                    <option [value]="cluster.id">{{ cluster.desc }}</option>
-                    }
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label for="branch">סניף</label>
-                <select id="branch" class="form-select" [value]="selectedBranch() ?? 'null'"
-                    (change)="onBranchChange($event)">
-                    <option value="null">כל הסניפים</option>
-                    @for (branch of uniqueBranches(); track branch) {
-                    <option [value]="branch">סניף {{ branch }}</option>
-                    }
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <button class="btn btn-primary" (click)="exportToCSV()">
-                    📊 ייצוא לאקסל
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Data Table Section -->
-    <div class="table-section">
-        <div class="table-header">
-            <h3>נתוני אשראי ירוק חדש</h3>
-            <div class="results-count">
-                {{ formatNumber(totalAccounts()) }} תוצאות
-            </div>
-        </div>
-
-        <div class="table-container">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th class="sortable" (click)="sort('dataCorrectnessDate')">
-                            תאריך נכונות {{ getSortIcon('dataCorrectnessDate') }}
-                        </th>
-                        <th class="sortable" (click)="sort('branch')">
-                            סניף {{ getSortIcon('branch') }}
-                        </th>
-                        <th class="sortable" (click)="sort('account')">
-                            חשבון {{ getSortIcon('account') }}
-                        </th>
-                        <th class="sortable" (click)="sort('accountName')">
-                            שם חשבון {{ getSortIcon('accountName') }}
-                        </th>
-                        <th class="sortable" (click)="sort('branchClassificatonDescription')">
-                            תיאור ענף {{ getSortIcon('branchClassificatonDescription') }}
-                        </th>
-                        <th class="sortable" (click)="sort('originationDate')">
-                            תאריך מתן {{ getSortIcon('originationDate') }}
-                        </th>
-                        <th>סיבת תצוגה</th>
-                        <th class="sortable" (click)="sort('climateColor')">
-                            צבע אקלים {{ getSortIcon('climateColor') }}
-                        </th>
-                        <th>אשכול ירוק</th>
-                        <th class="sortable" (click)="sort('creditBalanceSheetRisk')">
-                            סיכון מאזני {{ getSortIcon('creditBalanceSheetRisk') }}
-                        </th>
-                        <th class="sortable" (click)="sort('creditOffBalanceSheetRisk')">
-                            סיכון חוץ מאזני {{ getSortIcon('creditOffBalanceSheetRisk') }}
-                        </th>
-                        <th class="sortable" (click)="sort('totalBalanceSheet')">
-                            סה"כ מאזן {{ getSortIcon('totalBalanceSheet') }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (row of filteredData(); track row.account + '-' + row.branch) {
-                    <tr class="data-row">
-                        <td class="date">{{ formatDate(row.dataCorrectnessDate) }}</td>
-                        <td class="branch">{{ row.branch }}</td>
-                        <td class="account-number">{{ formatNumber(row.account) }}</td>
-                        <td class="account-info">
-                            <strong>{{ row.accountName }}</strong>
-                        </td>
-                        <td class="reason-text" [title]="row.branchClassificatonDescription">
-                            {{ row.branchClassificatonDescription }}
-                        </td>
-                        <td class="date">{{ formatDate(row.originationDate) }}</td>
-                        <td class="reason-text" [title]="row.displayReason">
-                            {{ row.displayReason }}
-                        </td>
-                        <td>
-                            <span class="status-badge" [class]="getClimateColorClass(row.climateColor)">
-                                {{ row.climateColorDescription }}
-                            </span>
-                        </td>
-                        <td class="cluster-info">
-                            @if (row.greenCluster && row.greenClusterDescription) {
-                            <div class="cluster-id">{{ row.greenCluster }}</div>
-                            <div class="cluster-desc">{{ row.greenClusterDescription }}</div>
-                            } @else {
-                            <span class="no-cluster">ללא אשכול</span>
-                            }
-                        </td>
-                        <td class="balance">{{ formatNumber(row.creditBalanceSheetRisk) }}</td>
-                        <td class="risk">{{ formatNumber(row.creditOffBalanceSheetRisk) }}</td>
-                        <td class="balance">{{ formatNumber(row.totalBalanceSheet) }}</td>
-                    </tr>
-                    } @empty {
-                    <tr>
-                        <td colspan="12" class="no-data">
-                            לא נמצאו תוצאות התואמות לקריטריונים שנבחרו
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    }
-
-    <!-- Scroll to Top Button -->
-    @if (isScrollToTopVisible()) {
-    <button class="scroll-to-top visible" (click)="scrollToTop()" title="חזור למעלה">
-        ↑
-    </button>
-    }
 </div>

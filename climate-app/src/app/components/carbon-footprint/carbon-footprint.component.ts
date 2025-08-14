@@ -22,21 +22,7 @@ import { TableModule } from 'primeng/table';;
 export class CarbonFootprintComponent {
   // Inject the ClimateDataService
   protected readonly dataService = inject(ClimateDataService);
-
-  protected readonly hasData = computed(() =>
-    this.dataService.hasData()
-  );
-
-  protected retryDataLoad(): void {
-    this.dataService.refreshClimateData().subscribe({
-      next: () => {
-        console.log('Data refreshed successfully');
-      },
-      error: (error) => {
-        console.error('Failed to refresh data:', error);
-      }
-    });
-  }
+  
 
   // Project Construction Financing data
   protected readonly projectConstructionFinancingRows = computed(() =>

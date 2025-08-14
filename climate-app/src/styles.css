@@ -63,3 +63,10 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
+
+.tab-data-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
