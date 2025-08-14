@@ -48,6 +48,16 @@ export class CarbonFootprintComponent {
     this.dataService.carbonFootprintData()?.projectInfrastructureFinancing.projectInfrastructureFinancingRows || []
   );
 
+  // Without Projects data
+  protected readonly withoutProjectsRows = computed(() =>
+    this.dataService.carbonFootprintData()?.withoutProjects.withoutProjectsRows || []
+  );
+
+  // Carbon Footprint Main Report data
+  protected readonly carbonFootprintMainReportRows = computed(() =>
+    this.dataService.carbonFootprintData()?.carbonFootprintMainReport.carbonFootprintMainReportRows || []
+  );
+
 
 
 
