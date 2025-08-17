@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ClimateDataService } from '../../services/climate-data.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ClimateDataService } from '../../services/climate-data.service';
 
 
 // PrimeNG imports
 import { PanelModule } from 'primeng/panel';
-import { TableModule } from 'primeng/table';;
+import { TableModule } from 'primeng/table';
+import { InputNumberModule } from 'primeng/inputnumber';
+
 
 
 @Component({
@@ -14,8 +17,10 @@ import { TableModule } from 'primeng/table';;
   styleUrl: './carbon-footprint.component.css',
   imports: [
     CommonModule,
+    FormsModule,
     PanelModule,
-    TableModule
+    TableModule,
+    InputNumberModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

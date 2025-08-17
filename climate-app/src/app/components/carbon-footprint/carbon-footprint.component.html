@@ -1,8 +1,8 @@
 <div class="tab-data-container">
 
   <!-- Project Construction Financing -->
-  <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true" collapsed="true">
-    <p-table [value]="projectConstructionFinancingRows()" [paginator]="true" [rows]="10"
+  <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true" collapsed="false">
+    <p-table [value]="projectConstructionFinancingRows()" dataKey="account" [paginator]="true" [rows]="10"
       styleClass="p-datatable-striped p-datatable-sm">
       <ng-template pTemplate="header">
         <tr>
@@ -41,8 +41,7 @@
           <th>פרויקט ירוק</th>
           <th>קלאסטר ירוק</th>
           <th>הערות</th>
-          <th>שם איש קשר</th>
-          <th>סטטוס שורה</th>
+          <th>שם איש קשר</th>          
         </tr>
       </ng-template>
 
@@ -74,17 +73,72 @@
           <td>{{ row.cashAndCashEquivalents }}</td>
           <td>{{ row.revenueTurnover }}</td>
           <td>{{ row.capitalMarketFlag }}</td>
-          <td>{{ row.totalProjectEquity }}</td>
-          <td>{{ row.totalDebtAdditionalFinancier }}</td>
-          <td>{{ row.totalBalanceSheetRiskDebt }}</td>
-          <td>{{ row.ourFinancingShare }}</td>
-          <td>{{ row.greenBuilding }}</td>
-          <td>{{ row.projectStage }}</td>
-          <td>{{ row.greenProject }}</td>
-          <td>{{ row.greenCluster }}</td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalDebtAdditionalFinancier" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalBalanceSheetRiskDebt" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.ourFinancingShare" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.greenBuilding" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.projectStage" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.greenProject" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.greenCluster" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" />
+              </ng-template>
+            </p-cellEditor>
+          </td>          
           <td>{{ row.remarks }}</td>
-          <td>{{ row.officerName }}</td>
-          <td>{{ row.statusRow }}</td>
+          <td>{{ row.officerName }}</td>          
         </tr>
       </ng-template>
 
