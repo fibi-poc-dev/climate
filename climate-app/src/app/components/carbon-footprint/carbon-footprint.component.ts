@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
+import { StatusRow, SourceData } from '../../models/enums';
 
 
 // PrimeNG imports
@@ -29,10 +30,14 @@ export class CarbonFootprintComponent {
   protected readonly dataService = inject(ClimateDataService);
   
 
-  // Project Construction Financing data
-  protected readonly projectConstructionFinancingRows = computed(() =>
-    this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || []
-  );
+  // Project Construction Financing data - filtered to exclude deleted and original rows
+  protected readonly projectConstructionFinancingRows = computed(() => {
+    const allRows = this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || [];
+    return allRows.filter(row => 
+      row.statusRow !== StatusRow.Deleted && 
+      row.sourceData !== SourceData.Original
+    );
+  });
 
   // Project Infrastructure Financing data
   protected readonly projectInfrastructureFinancingRows = computed(() =>
