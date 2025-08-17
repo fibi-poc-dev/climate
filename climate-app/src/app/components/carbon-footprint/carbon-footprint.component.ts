@@ -9,6 +9,8 @@ import { StatusRow, SourceData } from '../../models/enums';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -21,7 +23,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     FormsModule,
     PanelModule,
     TableModule,
-    InputNumberModule
+    InputNumberModule,
+    ButtonModule,
+    TooltipModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +57,15 @@ export class CarbonFootprintComponent {
   protected readonly carbonFootprintMainReportRows = computed(() =>
     this.dataService.carbonFootprintData()?.carbonFootprintMainReport.carbonFootprintMainReportRows || []
   );
+
+  // Delete row method for project construction financing
+  protected deleteProjectConstructionRow(row: any): void {
+    if (row) {
+      // Set the statusRow to Deleted (2)
+      row.statusRow = StatusRow.Deleted;
+      console.log('Row marked as deleted:', row);
+    }
+  }
 
 
 

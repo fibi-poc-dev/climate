@@ -41,7 +41,8 @@
           <th>פרויקט ירוק</th>
           <th>קלאסטר ירוק</th>
           <th>הערות</th>
-          <th>שם איש קשר</th>          
+          <th>שם איש קשר</th>
+          <th>פעולות</th>          
         </tr>
       </ng-template>
 
@@ -138,13 +139,24 @@
             </p-cellEditor>
           </td>          
           <td>{{ row.remarks }}</td>
-          <td>{{ row.officerName }}</td>          
+          <td>{{ row.officerName }}</td>
+          <td>
+            <p-button 
+              icon="pi pi-trash" 
+              severity="danger" 
+              size="small"
+              [outlined]="true"
+              (onClick)="deleteProjectConstructionRow(row)"
+              pTooltip="מחק שורה"
+              tooltipPosition="top">
+            </p-button>
+          </td>          
         </tr>
       </ng-template>
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="4" class="text-center">
+          <td colspan="37" class="text-center">
             <div class="empty-message">
               <i class="pi pi-info-circle"></i>
               <p>לא נמצאו נתונים להצגה</p>
