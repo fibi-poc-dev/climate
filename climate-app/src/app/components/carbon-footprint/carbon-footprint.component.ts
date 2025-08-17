@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
@@ -32,10 +32,13 @@ import { TooltipModule } from 'primeng/tooltip';
 export class CarbonFootprintComponent {
   // Inject the ClimateDataService
   protected readonly dataService = inject(ClimateDataService);
-  
+
+  // Simple trigger to force re-evaluation when rows are deleted
+  private readonly filterTrigger = signal(0);
 
   // Project Construction Financing data - filtered to exclude deleted and original rows
   protected readonly projectConstructionFinancingRows = computed(() => {
+    this.filterTrigger(); // Subscribe to trigger for reactivity
     const allRows = this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || [];
     return allRows.filter(row => 
       row.statusRow !== StatusRow.Deleted && 
@@ -63,6 +66,10 @@ export class CarbonFootprintComponent {
     if (row) {
       // Set the statusRow to Deleted (2)
       row.statusRow = StatusRow.Deleted;
+      
+      // Trigger filter re-evaluation
+      this.filterTrigger.update(val => val + 1);
+      
       console.log('Row marked as deleted:', row);
     }
   }
