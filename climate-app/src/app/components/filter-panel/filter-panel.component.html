@@ -1,0 +1,77 @@
+<div class="filter-panel-container" dir="rtl">
+    <!-- Toolbar -->
+    @if (showToolbar()) {
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <!-- Custom start content can be projected here -->
+            <ng-content select="[slot=toolbar-start]"></ng-content>
+        </div>
+        <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
+            @if (showClearButton()) {
+            <p-button 
+                label="נקה מסננים" 
+                icon="pi pi-filter-slash" 
+                severity="secondary" 
+                size="small"
+                (onClick)="onClearFiltersClick()">
+            </p-button>
+            }
+            @if (showExportButton()) {
+            <p-button 
+                label="יצא לאקסל" 
+                icon="pi pi-download" 
+                severity="info" 
+                size="small" 
+                (onClick)="onExportClick()">
+            </p-button>
+            }
+            @if (showDataFetchButton()) {
+            <p-button 
+                label="שלוף נתונים" 
+                icon="pi pi-send" 
+                severity="success" 
+                size="small"
+                (onClick)="onFetchDataClick()">
+            </p-button>
+            }
+            <!-- Custom actions -->
+            @for (action of customActions(); track action.id) {
+            <p-button 
+                [label]="action.label"
+                [icon]="action.icon"
+                [severity]="action.severity || 'secondary'"
+                size="small"
+                (onClick)="onCustomActionClick(action.id, action.data)">
+            </p-button>
+            }
+            <!-- Custom end content can be projected here -->
+            <ng-content select="[slot=toolbar-end]"></ng-content>
+        </div>
+    </p-toolbar>
+    }
+
+    <!-- Active Filters Display -->
+    @if (showActiveFilters() && hasActiveFilters()) {
+    <p-card id="active-filters" header="מסננים פעילים" styleClass="active-filters-panel">
+        <div class="active-filters-container">
+            @for (filter of activeFilters(); track filter.filterFieldName) {
+            <div class="filter-chip">
+                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
+                <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
+                <button 
+                    class="remove-filter-btn" 
+                    (click)="removeFilter(filter.filterFieldName)"
+                    title="הסר מסנן">✕
+                </button>
+            </div>
+            }
+        </div>
+    </p-card>
+    }
+
+    <!-- Custom content area for filters or other components -->
+    <div class="filter-content">
+        <ng-content></ng-content>
+    </div>
+</div>

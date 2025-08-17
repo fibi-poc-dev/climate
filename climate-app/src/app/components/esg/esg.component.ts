@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
@@ -7,6 +7,7 @@ import { ClimateColor, CustomerRating } from '../../models/climate-response.mode
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
+import { FilterPanelComponent, FilterFieldDefinition, FilterState, FilterChangeEvent as FilterPanelChangeEvent } from '../filter-panel/filter-panel.component';
 
 // Interface for editable fields
 interface EditableField {
@@ -14,20 +15,6 @@ interface EditableField {
     currentValue: number | null;
     isEditing: boolean;
     isDirty: boolean;
-}
-
-// Interface for filter field definition
-interface FilterFieldDefinition {
-    fieldName: string;
-    displayName: string;
-    filterType: 'text' | 'numeric';
-    defaultOperator: string;
-}
-
-// Interface for filter state
-interface FilterState {
-    value: string;
-    operator: string;
 }
 
 // Interface for inline filter (edit-field like filter)
@@ -153,6 +140,7 @@ import { EsgMainReportRow } from '../../models/esg.model';
         FieldsetModule,
         EditableFieldComponent,
         FilterField,
+        FilterPanelComponent,
         DatePickerModule,
         AccordionModule,
         ScrollPanelModule
@@ -165,6 +153,9 @@ export class EsgComponent implements OnInit, OnDestroy {
     private climateDataService = inject(ClimateDataService);
     private sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
+
+    // Access to filter panel component
+    @ViewChild(FilterPanelComponent) filterPanel!: FilterPanelComponent;
 
     // Editable fields map
     private readonly editableFields = signal(new Map<string, EditableField>());
@@ -179,6 +170,9 @@ export class EsgComponent implements OnInit, OnDestroy {
     protected readonly selectedDate = signal<Date>(new Date());
     protected readonly selectedMonth = computed(() => this.selectedDate().getMonth() + 1);
     protected readonly selectedYear = computed(() => this.selectedDate().getFullYear());
+
+    // Filter panel configuration
+    protected readonly filterFields: FilterFieldDefinition[] = FILTER_FIELDS;
 
     // Generic filter states - one signal for all filters
     protected readonly filterStates = signal<Map<string, FilterState>>(new Map());
@@ -211,7 +205,7 @@ export class EsgComponent implements OnInit, OnDestroy {
         }
     });
 
-    // ESG Request filter array computed signal - now generic
+    // ESG Request filter array computed signal - now works with filter panel
     protected readonly esgRequestFilters = computed(() => {
         const filters: Filter[] = [];
         const filterStates = this.filterStates();
@@ -435,8 +429,58 @@ export class EsgComponent implements OnInit, OnDestroy {
         }
     }
 
+    // Filter panel event handlers
+    protected onFilterPanelFiltersChange(filters: Filter[]): void {
+        // Update local filter states to match the filter panel
+        const newStates = new Map<string, FilterState>();
+        
+        filters.forEach(filter => {
+            newStates.set(filter.filterFieldName, {
+                value: filter.filterFieldValue,
+                operator: filter.filterType
+            });
+        });
+        
+        this.filterStates.set(newStates);
+        console.log('Filter panel filters updated:', filters);
+    }
+
+    protected onFilterPanelClearAll(): void {
+        // Clear local filter states
+        this.filterStates.set(new Map());
+        // Clear any additional filter states if needed
+        this.inlineFilterStates.set(new Map());
+        console.log('All filters cleared');
+    }
+
+    protected onFilterPanelExportData(): void {
+        this.exportData();
+    }
+
+    protected onFilterPanelFetchData(): void {
+        this.sendFiltersToServer();
+    }
+
+    protected onFilterPanelFilterChange(event: FilterPanelChangeEvent): void {
+        // Handle individual filter changes
+        this.filterStates.update(states => {
+            const newStates = new Map(states);
+            if (event.value.trim()) {
+                newStates.set(event.fieldName, {
+                    value: event.value,
+                    operator: event.operator
+                });
+            } else {
+                newStates.delete(event.fieldName);
+            }
+            return newStates;
+        });
+        console.log('Individual filter changed:', event);
+    }
+
     protected clearFilters(): void {
-        // Clear all generic filters
+        // This method is now handled by the filter panel
+        // Keep for backward compatibility or direct calls
         this.filterStates.set(new Map());
     }
 
@@ -551,17 +595,39 @@ export class EsgComponent implements OnInit, OnDestroy {
         this.onFilterOperatorChange('totalSolo', value);
     }
 
-    // Filter change handler for FilterFieldComponent
+    // Filter change handler for FilterFieldComponent - now syncs with filter panel
     protected onFilterFieldChange(event: FilterChangeEvent): void {
-        this.updateFilterValue(event.fieldName, event.value);
-        if (event.operator !== '=') {
-            this.updateFilterOperator(event.fieldName, event.operator);
+        // Update both local state and filter panel
+        this.filterStates.update(states => {
+            const newStates = new Map(states);
+            if (event.value.trim()) {
+                newStates.set(event.fieldName, {
+                    value: event.value,
+                    operator: event.operator
+                });
+            } else {
+                newStates.delete(event.fieldName);
+            }
+            return newStates;
+        });
+
+        // Also update the filter panel if it exists
+        if (this.filterPanel) {
+            this.filterPanel.updateFilterValue(event.fieldName, event.value);
+            if (event.operator !== '=') {
+                this.filterPanel.updateFilterOperator(event.fieldName, event.operator);
+            }
         }
     }
 
-    // Filter clear handler for FilterField component
+    // Filter clear handler for FilterField component - now syncs with filter panel
     protected onFilterFieldClear(fieldName: string): void {
         this.removeFilter(fieldName);
+        
+        // Also clear from filter panel if it exists
+        if (this.filterPanel) {
+            this.filterPanel.removeFilter(fieldName);
+        }
     }
 
     // Helper methods for FilterField components

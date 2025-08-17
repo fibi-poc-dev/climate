@@ -10,45 +10,30 @@
     }
     <!-- Main Content -->
     @if (!isLoading() && climateData()) {
-    <!-- Filters and Actions Toolbar -->
-    <p-toolbar>
-        <div class="p-toolbar-group-start">
+    
+    <!-- Filter Panel -->
+    <app-filter-panel
+        [filterFields]="filterFields"
+        [showToolbar]="true"
+        [showActiveFilters]="true"
+        [showClearButton]="true"
+        [showExportButton]="true"
+        [showDataFetchButton]="true"
+        (filtersChange)="onFilterPanelFiltersChange($event)"
+        (clearAllFilters)="onFilterPanelClearAll()"
+        (exportData)="onFilterPanelExportData()"
+        (fetchData)="onFilterPanelFetchData()"
+        (filterChange)="onFilterPanelFilterChange($event)">
+        
+        <!-- Date picker in toolbar start -->
+        <div slot="toolbar-start">
             <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" view="month"
                 dateFormat="mm/yy" [readonlyInput]="false" [(ngModel)]="selectedDate"
                 (onSelect)="onDateChange($event)" />
         </div>
-        <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
-            <p-button label="נקה מסננים" icon="pi pi-filter-slash" severity="secondary" size="small"
-                (onClick)="clearFilters()">
-            </p-button>
-            <p-button label="יצא לאקסל" icon="pi pi-download" severity="info" size="small" (onClick)="exportData()">
-            </p-button>
-            <p-button label="שלוף נתונים" icon="pi pi-send" severity="success" size="small"
-                (onClick)="sendFiltersToServer()">
-            </p-button>
-        </div>
-    </p-toolbar>
 
-    <!-- Debug Display for Active Filters -->
-    @if (esgRequestFilters().length > 0) {
-    <p-card id="active-filters" header="מסננים פעילים" styleClass="active-filters-panel">
-        <div class="active-filters-container">
-            @for (filter of esgRequestFilters(); track filter.filterFieldName) {
-            <div class="filter-chip">
-                <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName) }}:</span>
-                <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                <span class="filter-operator">({{ getOperatorSymbol(filter.filterType) }})</span>
-                <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)"
-                    title="הסר מסנן">✕</button>
-            </div>
-            }
-        </div>
-    </p-card>
-    }
-
-
-    <!-- Main Layout Container -->
-    <p-scrollpanel [style]="{ width: '100%', height: '80vh' }">
+        <!-- Main Layout Container -->
+        <p-scrollpanel [style]="{ width: '100%', height: '80vh' }">
 
         <!-- <div class="main-layout"> -->
         <!-- Table Section -->
@@ -662,6 +647,7 @@
 
 
     </p-scrollpanel>
+    </app-filter-panel>
     <!-- </div> -->
     }
 
@@ -684,7 +670,5 @@
         tooltipPosition="left">
         <i class="pi pi-angle-up"></i>
     </button>
-
-
 
 </div>
