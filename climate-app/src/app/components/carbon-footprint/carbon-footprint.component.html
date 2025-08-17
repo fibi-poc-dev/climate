@@ -6,6 +6,7 @@
       styleClass="p-datatable-striped p-datatable-sm" showGridlines>
       <ng-template pTemplate="header">
         <tr>
+          <th></th>
           <th>בנק</th>
           <th>סניף</th>
           <th>מספר חשבון</th>
@@ -42,12 +43,16 @@
           <th>קלאסטר ירוק</th>
           <th>הערות</th>
           <th>שם איש קשר</th>
-          <th>פעולות</th>          
         </tr>
       </ng-template>
 
       <ng-template pTemplate="body" let-row>
         <tr>
+          <td>
+            <p-button icon="pi pi-trash" severity="danger" size="small" [outlined]="true"
+              (onClick)="deleteProjectConstructionRow(row)" pTooltip="מחק שורה" tooltipPosition="top">
+            </p-button>
+          </td>
           <td>{{ row.bank }}</td>
           <td>{{ row.branch }}</td>
           <td>{{ row.account }}</td>
@@ -137,20 +142,9 @@
                   [maxFractionDigits]="5" />
               </ng-template>
             </p-cellEditor>
-          </td>          
+          </td>
           <td>{{ row.remarks }}</td>
           <td>{{ row.officerName }}</td>
-          <td>
-            <p-button 
-              icon="pi pi-trash" 
-              severity="danger" 
-              size="small"
-              [outlined]="true"
-              (onClick)="deleteProjectConstructionRow(row)"
-              pTooltip="מחק שורה"
-              tooltipPosition="top">
-            </p-button>
-          </td>          
         </tr>
       </ng-template>
 
