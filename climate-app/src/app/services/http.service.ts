@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ClimateResponse } from '../models/climate-response.model';
 
@@ -24,4 +24,8 @@ export class HttpService {
     // Future implementation for actual API:
     // return this.http.get<ClimateResponse>(this.apiUrl);
   }
+
+
+  
+  
 }

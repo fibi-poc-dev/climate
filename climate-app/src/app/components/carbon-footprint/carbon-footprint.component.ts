@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClimateDataService } from '../../services/climate-data.service';
 import { StatusRow, SourceData } from '../../models/enums';
+import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 
 
 // PrimeNG imports
@@ -11,7 +12,9 @@ import { TableModule } from 'primeng/table';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
+import { CardModule } from 'primeng/card';
+import { ToolbarModule } from 'primeng/toolbar';
+
 
 
 
@@ -26,7 +29,9 @@ import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
     TableModule,
     InputNumberModule,
     ButtonModule,
-    TooltipModule
+    TooltipModule,
+    CardModule,
+    ToolbarModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -80,5 +85,8 @@ export class CarbonFootprintComponent {
     }
   }
 
+  climateDataCalcAndSave(): void {
+    // Implement the calculation and saving logic here
+  }
 
 }

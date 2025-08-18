@@ -1,5 +1,20 @@
 <div class="tab-data-container">
 
+
+  <p-toolbar>
+    <div class="p-toolbar-group-start">
+      <ng-content select="[slot=toolbar-start]"></ng-content>
+    </div>
+    <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
+      <p-button label="שמירה" icon="pi pi-save" severity="success" size="small" (onClick)="climateDataCalcAndSave()">
+      </p-button>
+    </div>
+  </p-toolbar>
+
+
+
+
+
   <!-- Project Construction Financing -->
   <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true" collapsed="false">
     <p-table [value]="projectConstructionFinancingRows()" dataKey="account" [paginator]="true" [rows]="10"
@@ -83,7 +98,7 @@
             <p-cellEditor>
               <ng-template #output>
                 <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)"/>
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
               </ng-template>
             </p-cellEditor>
           </td>
