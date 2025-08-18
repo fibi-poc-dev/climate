@@ -83,7 +83,7 @@
             <p-cellEditor>
               <ng-template #output>
                 <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)"/>
               </ng-template>
             </p-cellEditor>
           </td>

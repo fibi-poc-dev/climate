@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 
 
 
@@ -62,7 +63,7 @@ export class CarbonFootprintComponent {
   );
 
   // Delete row method for project construction financing
-  protected deleteProjectConstructionRow(row: any): void {
+  protected deleteProjectConstructionRow(row: CarbonFootprintRow): void {
     // Set the statusRow to Deleted (2)
     row.statusRow = StatusRow.Deleted;
 
@@ -70,9 +71,14 @@ export class CarbonFootprintComponent {
     this.statusRowChange.update(val => StatusRow.Deleted);
   }
 
+  protected onValueChanged(row: CarbonFootprintRow): void {
+    if (row.statusRow !== StatusRow.Deleted && row.statusRow !== StatusRow.New) {
+      row.statusRow = StatusRow.Updated;
 
-
-
+      // Trigger filter re-evaluation
+      this.statusRowChange.update(val => StatusRow.Updated);
+    }
+  }
 
 
 }
