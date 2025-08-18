@@ -320,3 +320,16 @@
   direction: rtl;
   text-align: right;
 }
+
+
+::ng-deep .p-panel {
+  border: 2px solid rgba(24, 40, 95, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+::ng-deep .p-toolbar {
+  border: 2px solid rgba(24, 40, 95, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
