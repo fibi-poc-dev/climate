@@ -34,14 +34,14 @@ export class CarbonFootprintComponent {
   protected readonly dataService = inject(ClimateDataService);
 
   // Simple trigger to force re-evaluation when rows are deleted
-  private readonly changeTrigger = signal(0);
+  private readonly statusRowChange = signal(StatusRow.Unchanged);
 
   // Project Construction Financing data - filtered to exclude deleted and original rows
   protected readonly projectConstructionFinancingRows = computed(() => {
-    this.changeTrigger(); // Subscribe to trigger for reactivity
+    this.statusRowChange(); // Subscribe to trigger for reactivity
     const allRows = this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || [];
-    return allRows.filter(row => 
-      row.statusRow !== StatusRow.Deleted && 
+    return allRows.filter(row =>
+      row.statusRow !== StatusRow.Deleted &&
       row.sourceData !== SourceData.Original
     );
   });
@@ -63,15 +63,11 @@ export class CarbonFootprintComponent {
 
   // Delete row method for project construction financing
   protected deleteProjectConstructionRow(row: any): void {
-    if (row) {
-      // Set the statusRow to Deleted (2)
-      row.statusRow = StatusRow.Deleted;
-      
-      // Trigger filter re-evaluation
-      this.changeTrigger.update(val => val + 1);
-      
-      console.log('Row marked as deleted:', row);
-    }
+    // Set the statusRow to Deleted (2)
+    row.statusRow = StatusRow.Deleted;
+
+    // Trigger filter re-evaluation
+    this.statusRowChange.update(val => StatusRow.Deleted);
   }
 
 

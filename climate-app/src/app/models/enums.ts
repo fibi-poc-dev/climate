@@ -7,5 +7,6 @@ export enum SourceData {
 export enum StatusRow {
   Updated = 0,  
   New = 1,
-  Deleted = 2
+  Deleted = 2,
+  Unchanged = 3
 }
