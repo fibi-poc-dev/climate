@@ -150,8 +150,8 @@ import { EsgMainReportRow } from '../../models/esg.model';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EsgComponent implements OnInit, OnDestroy {
-    private dataService = inject(DataService);
-    private sharedService = inject(SharedService);
+    protected dataService = inject(DataService);
+    protected sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
 
     // Access to filter panel component
