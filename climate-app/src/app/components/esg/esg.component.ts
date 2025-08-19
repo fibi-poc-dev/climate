@@ -7,7 +7,7 @@ import { ClimateColor, CustomerRating } from '../../models/climate-response.mode
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
 import { EditableFieldComponent } from '../../form-controls/editable-field.component';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
-import { FilterPanelComponent, FilterFieldDefinition, FilterState, FilterChangeEvent as FilterPanelChangeEvent } from '../filter-panel/filter-panel.component';
+import { FilterFieldDefinition, FilterState, FilterChangeEvent as FilterPanelChangeEvent } from '../filter-panel/filter-panel.component';
 
 // Interface for editable fields
 interface EditableField {
@@ -139,8 +139,7 @@ import { EsgMainReportRow } from '../../models/esg.model';
         PanelModule,
         FieldsetModule,
         EditableFieldComponent,
-        FilterField,
-        FilterPanelComponent,
+        FilterField,        
         DatePickerModule,
         AccordionModule,
         ScrollPanelModule
@@ -153,9 +152,7 @@ export class EsgComponent implements OnInit, OnDestroy {
     protected dataService = inject(DataService);
     protected sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
-
-    // Access to filter panel component
-    @ViewChild(FilterPanelComponent) filterPanel!: FilterPanelComponent;
+    
 
     // Editable fields map
     private readonly editableFields = signal(new Map<string, EditableField>());
@@ -206,22 +203,26 @@ export class EsgComponent implements OnInit, OnDestroy {
     });
 
     // ESG Request filter array computed signal - now works with filter panel
+    // protected readonly esgRequestFilters = computed(() => {
+    //     const filters: Filter[] = [];
+    //     const filterStates = this.filterStates();
+
+    //     // Iterate through all filter states and create Filter objects
+    //     filterStates.forEach((state, fieldName) => {
+    //         if (state.value.trim()) {
+    //             filters.push({
+    //                 filterFieldName: fieldName,
+    //                 filterFieldValue: state.value.trim(),
+    //                 filterType: state.operator
+    //             });
+    //         }
+    //     });
+
+    //     return filters;
+    // });
+
     protected readonly esgRequestFilters = computed(() => {
-        const filters: Filter[] = [];
-        const filterStates = this.filterStates();
-
-        // Iterate through all filter states and create Filter objects
-        filterStates.forEach((state, fieldName) => {
-            if (state.value.trim()) {
-                filters.push({
-                    filterFieldName: fieldName,
-                    filterFieldValue: state.value.trim(),
-                    filterType: state.operator
-                });
-            }
-        });
-
-        return filters;
+        return this.dataService.request()?.esgRequest.filter || [];
     });
 
     // ESG Request section computed signal
@@ -622,25 +623,12 @@ export class EsgComponent implements OnInit, OnDestroy {
                 newStates.delete(event.fieldName);
             }
             return newStates;
-        });
-
-        // Also update the filter panel if it exists
-        if (this.filterPanel) {
-            this.filterPanel.updateFilterValue(event.fieldName, event.value);
-            if (event.operator !== '=') {
-                this.filterPanel.updateFilterOperator(event.fieldName, event.operator);
-            }
-        }
+        });        
     }
 
     // Filter clear handler for FilterField component - now syncs with filter panel
     protected onFilterFieldClear(fieldName: string): void {
-        this.removeFilter(fieldName);
-
-        // Also clear from filter panel if it exists
-        if (this.filterPanel) {
-            this.filterPanel.removeFilter(fieldName);
-        }
+        this.removeFilter(fieldName);        
     }
 
     // Helper methods for FilterField components

@@ -71,40 +71,35 @@
                             <th>
                                 <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('bank')" [operator]="getFilterFieldOperator('bank')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('branch')"
                                     [operator]="getFilterFieldOperator('branch')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('account')"
                                     [operator]="getFilterFieldOperator('account')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'accountName'" [displayName]="'שם לקוח'"
                                     [filterType]="'text'" [value]="getFilterFieldValue('accountName')"
                                     [operator]="getFilterFieldOperator('accountName')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'customerRating'" [displayName]="'דירוג לקוח'"
                                     [filterType]="'numeric'" [value]="getFilterFieldValue('customerRating')"
                                     [operator]="getFilterFieldOperator('customerRating')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -112,24 +107,21 @@
                                     [displayName]="'סמכות אשראי נוכחי'" [filterType]="'numeric'"
                                     [value]="getFilterFieldValue('currentCreditAuthority')"
                                     [operator]="getFilterFieldOperator('currentCreditAuthority')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'יחידה מטפלת'"
                                     [filterType]="'text'" [value]="getFilterFieldValue('handlingUnitCode')"
                                     [operator]="getFilterFieldOperator('handlingUnitCode')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'regualatedSectorCode'" [displayName]="'קוד מגזר פיקוחי'"
                                     [filterType]="'text'" [value]="getFilterFieldValue('regualatedSectorCode')"
                                     [operator]="getFilterFieldOperator('regualatedSectorCode')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -137,8 +129,7 @@
                                     [displayName]="'תיאור מגזר פיקוחי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('regualatedSectorDescription')"
                                     [operator]="getFilterFieldOperator('regualatedSectorDescription')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -146,8 +137,7 @@
                                     [displayName]="'קוד סיווג ענפי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('branchClassificatonCode')"
                                     [operator]="getFilterFieldOperator('branchClassificatonCode')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -155,8 +145,7 @@
                                     [displayName]="'תיאור סיווג ענפי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('branchClassificatonDescription')"
                                     [operator]="getFilterFieldOperator('branchClassificatonDescription')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -164,8 +153,7 @@
                                     [displayName]="'קוד תת סיווג ענפי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('subbranchClassificationCode')"
                                     [operator]="getFilterFieldOperator('subbranchClassificationCode')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -173,8 +161,7 @@
                                     [displayName]="'תיאור תת סיווג ענפי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('subbranchClassificationDescription')"
                                     [operator]="getFilterFieldOperator('subbranchClassificationDescription')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
@@ -182,32 +169,28 @@
                                     [displayName]="'תיאור בדוח האשראי'" [filterType]="'text'"
                                     [value]="getFilterFieldValue('creditReportDescription')"
                                     [operator]="getFilterFieldOperator('creditReportDescription')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'totalCollateral'" [displayName]="'סך בטחונות'"
                                     [filterType]="'numeric'" [value]="getFilterFieldValue('totalCollateral')"
                                     [operator]="getFilterFieldOperator('totalCollateral')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'totalSolo'" [displayName]="'סך סולו'"
                                     [filterType]="'numeric'" [value]="getFilterFieldValue('totalSolo')"
                                     [operator]="getFilterFieldOperator('totalSolo')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                             <th>
                                 <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סך סיכון אשראי'"
                                     [filterType]="'numeric'" [value]="getFilterFieldValue('totalCreditRisk')"
                                     [operator]="getFilterFieldOperator('totalCreditRisk')"
-                                    (filterChange)="onFilterFieldChange($event)"
-                                    (filterClear)="onFilterFieldClear($event)">
+                                    [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>
                         </tr>

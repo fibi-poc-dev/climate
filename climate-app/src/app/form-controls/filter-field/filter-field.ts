@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Popover } from 'primeng/popover';
+import { RequestSection } from '../../models/climate-request.model';
 
 export interface FilterChangeEvent {
   fieldName: string;
@@ -36,10 +37,7 @@ export class FilterField {
   readonly filterType = input<'text' | 'numeric'>('text');
   readonly value = input<string>('');
   readonly operator = input<string>('=');
-
-  // Outputs
-  readonly filterChange = output<FilterChangeEvent>();
-  readonly filterClear = output<string>();
+  readonly requestSection = input.required<RequestSection | undefined>();
 
   // Internal state
   protected readonly tempValue = signal<string>('');
@@ -87,11 +85,14 @@ export class FilterField {
     const value = this.tempValue().trim();
     const operator = this.tempOperator();
 
-    this.filterChange.emit({
-      fieldName: this.fieldName(),
-      value: value,
-      operator: operator
-    });
+    const section = this.requestSection();
+    if (section && Array.isArray(section.filter)) {
+      section.filter.push({
+        filterFieldName: this.fieldName(),
+        filterFieldValue: value,
+        filterType: operator
+      });
+    }
   }
 
   protected cancelFilter(): void {
@@ -101,7 +102,10 @@ export class FilterField {
   }
 
   protected clearFilter(): void {
-    this.filterClear.emit(this.fieldName());
+    const section = this.requestSection();
+    if (section && Array.isArray(section.filter)) {
+      section.filter = section.filter.filter(f => f.filterFieldName !== this.fieldName());
+    }
   }
 
   protected selectOperator(operator: string): void {
