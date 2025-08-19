@@ -1647,13 +1647,6 @@
 }
 
 /* Table Caption Styles */
-.table-caption {
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    border-radius: 6px 6px 0 0;
-}
-
 .caption-header {
     display: flex;
     justify-content: space-between;
@@ -1677,14 +1670,6 @@
 }
 
 /* Active Filters Section */
-.active-filters-section {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    background-color: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-radius: 6px;
-}
-
 .active-filters-section h4 {
     margin: 0 0 0.5rem 0;
     color: #856404;

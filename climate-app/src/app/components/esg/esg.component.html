@@ -45,8 +45,7 @@
 
                                 <!-- Active Filters Display -->
                                 @if (esgRequestFilters().length > 0) {
-                                <div class="active-filters-section">
-                                    <h4>מסננים פעילים:</h4>
+                                <div class="active-filters-section">                                    
                                     <div class="filters-container">
                                         @for (filter of esgRequestFilters(); track filter.filterFieldName) {
                                         <div class="filter-chip">
@@ -62,20 +61,7 @@
                                         }
                                     </div>
                                 </div>
-                                }
-
-                                <!-- Filter Fields Row -->
-                                <div class="filter-fields-row">
-                                    @for (filterField of filterFields; track filterField.fieldName) {
-                                    <app-filter-field [fieldName]="filterField.fieldName"
-                                        [displayName]="filterField.displayName" [filterType]="filterField.filterType"
-                                        [value]="getFilterFieldValue(filterField.fieldName)"
-                                        [operator]="getFilterFieldOperator(filterField.fieldName)"
-                                        (filterChange)="onFilterFieldChange($event)"
-                                        (filterClear)="onFilterFieldClear($event)">
-                                    </app-filter-field>
-                                    }
-                                </div>
+                                }                                
                             </div>
                         </ng-template>
 
