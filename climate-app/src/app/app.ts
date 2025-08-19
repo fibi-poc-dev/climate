@@ -13,7 +13,7 @@ import { DataService } from './services/data.service';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  protected title = 'דוחות ESG ואקלים';
+  protected title = 'מערכת אקלים';
 
   protected activeTab = signal(0);
 
@@ -26,7 +26,7 @@ export class App implements OnInit {
   ];
 
   private router = inject(Router);
-  private climateDataService = inject(DataService);
+  private dataService = inject(DataService);
 
   ngOnInit(): void {
     // Initialize climate data when the app starts
@@ -59,9 +59,12 @@ export class App implements OnInit {
   }
 
   private initializeData(): void {
+    // first initialize the climate request
+    this.dataService.initClimateRequest();
+
     // Load climate data on app initialization
     // This ensures data is available for all tabs without additional HTTP calls
-    this.climateDataService.loadClimateData().subscribe({
+    this.dataService.loadClimateData().subscribe({
       next: () => {
         console.log('Climate data loaded successfully');
       },
@@ -70,4 +73,6 @@ export class App implements OnInit {
       }
     });
   }
+
+  
 }

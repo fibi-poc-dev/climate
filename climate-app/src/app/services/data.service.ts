@@ -4,7 +4,7 @@ import { tap, catchError, shareReplay } from 'rxjs/operators';
 import { ClimateResponse } from '../models/climate-response.model';
 import { HttpService } from './http.service';
 import { ClimateRequest } from '../models/climate-request.model';
-// import { RequestSection } from '../models/request-section.model';
+import { RequestSection } from '../models/climate-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,35 @@ import { ClimateRequest } from '../models/climate-request.model';
 export class DataService {
 
 
-  // initClimateRequest() {
-  //   this._request.set({
-  //     // Initialize with default values or empty state
-  //     year: new Date().getFullYear(),
-  //     month: new Date().getMonth() + 1, // Months are 0-indexed in JS
-  //     esgRequest: new RequestSection(), // ESG request parameters
-  //     carbonFootprintRequest: new RequestSection(), // Carbon footprint request parameters
-  //     withoutProjects: new RequestSection(), // Without projects request parameters
-  //     projectInfrastructureFinancing: new RequestSection(), // Project infrastructure financing request parameters
-  //     projectConstructionFinancing: new RequestSection() // Project construction financing request parameters
-  //   });
-  // }
+  public initClimateRequest() {
+    const req: ClimateRequest = {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1, // Months are 0-indexed in JS
+      esgRequest: {
+        page: 1,
+        filter: []
+      },
+      carbonFootprintRequest: {
+        page: 1,
+        filter: []
+      },
+      withoutProjects: {
+        page: 1,
+        filter: []
+      },
+      projectInfrastructureFinancing: {
+        page: 1,
+        filter: []
+      },
+      projectConstructionFinancing: {
+        page: 1,
+        filter: []
+      }
+    };
+
+    this._request.set(req);
+  }
+
 
   private readonly httpService = inject(HttpService);
 
@@ -51,71 +68,71 @@ export class DataService {
   readonly limitationsData = computed(() => this.data()?.limitations);
   readonly carbonFootprintData = computed(() => this.data()?.carbonFootprint);
   readonly riskData = computed(() => this.data()?.residualRiskQuestionnaire);
-    
+
 
   // Cache the HTTP call to avoid multiple requests
   private climateResponse$: Observable<ClimateResponse> | null = null;
 
-  /**
-   * Loads climate data if not already loaded
-   * Returns the cached observable if already exists
-   */
-  loadClimateData(): Observable<ClimateResponse> {
-    if (this.climateResponse$) {
-      return this.climateResponse$;
-    }
+/**
+ * Loads climate data if not already loaded
+ * Returns the cached observable if already exists
+ */
+loadClimateData(): Observable < ClimateResponse > {
+  if(this.climateResponse$) {
+  return this.climateResponse$;
+}
 
-    this._loading.set(true);
-    this._error.set(null);
+this._loading.set(true);
+this._error.set(null);
 
-    this.climateResponse$ = this.httpService.getClimateData(this.request()).pipe(
-      tap(data => {
-        this._data.set(data);
-        this._loading.set(false);
-      }),
-      catchError(error => {
-        this._error.set(error.message || 'Failed to load climate data');
-        this._loading.set(false);
-        return EMPTY;
-      }),
-      shareReplay(1) // Cache the result for all subscribers
-    );
-
-    return this.climateResponse$;
-  }
-
-  /**
-   * Forces a refresh of the climate data
-   * Clears the cache and makes a new HTTP request
-   */
-  refreshClimateData(): Observable<ClimateResponse> {
-    this.climateResponse$ = null;
-    this._data.set(null);
-    return this.loadClimateData();
-  }
-
-  /**
-   * Gets the current data synchronously
-   * Returns null if data hasn't been loaded yet
-   */
-  getCurrentData(): ClimateResponse | null {
-    return this._data();
-  }
-
-  /**
-   * Checks if data is currently available
-   */
-  hasData(): boolean {
-    return this._data() !== null;
-  }
-
-  /**
-   * Clears all cached data and resets the service state
-   */
-  clearData(): void {
-    this.climateResponse$ = null;
-    this._data.set(null);
+this.climateResponse$ = this.httpService.getClimateData(this.request()).pipe(
+  tap(data => {
+    this._data.set(data);
     this._loading.set(false);
-    this._error.set(null);
+  }),
+  catchError(error => {
+    this._error.set(error.message || 'Failed to load climate data');
+    this._loading.set(false);
+    return EMPTY;
+  }),
+  shareReplay(1) // Cache the result for all subscribers
+);
+
+return this.climateResponse$;
   }
+
+/**
+ * Forces a refresh of the climate data
+ * Clears the cache and makes a new HTTP request
+ */
+refreshClimateData(): Observable < ClimateResponse > {
+  this.climateResponse$ = null;
+  this._data.set(null);
+  return this.loadClimateData();
+}
+
+/**
+ * Gets the current data synchronously
+ * Returns null if data hasn't been loaded yet
+ */
+getCurrentData(): ClimateResponse | null {
+  return this._data();
+}
+
+/**
+ * Checks if data is currently available
+ */
+hasData(): boolean {
+  return this._data() !== null;
+}
+
+/**
+ * Clears all cached data and resets the service state
+ */
+clearData(): void {
+  this.climateResponse$ = null;
+  this._data.set(null);
+  this._loading.set(false);
+  this._error.set(null);
+}
 }
