@@ -2,7 +2,7 @@ import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
-import { ClimateDataService } from './services/climate-data.service';
+import { DataService } from './services/data.service';
 
 
 
@@ -20,13 +20,13 @@ export class App implements OnInit {
   protected tabs = [
     { id: 0, label: 'דוח ESG ראשי', route: '/esg' },
     { id: 1, label: 'טביעת רגל פחמנית', route: '/carbon-footprint' },
-    { id: 2, label: 'אשראי ירוק חדש', route: '/green-credit' },    
+    { id: 2, label: 'אשראי ירוק חדש', route: '/green-credit' },
     { id: 3, label: 'מגבלות', route: '/limitations' },
     { id: 4, label: 'שאלוני סיכון שיורי', route: '/risk' }
   ];
 
   private router = inject(Router);
-  private climateDataService = inject(ClimateDataService);
+  private climateDataService = inject(DataService);
 
   ngOnInit(): void {
     // Initialize climate data when the app starts

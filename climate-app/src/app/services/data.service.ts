@@ -3,20 +3,39 @@ import { Observable, BehaviorSubject, EMPTY } from 'rxjs';
 import { tap, catchError, shareReplay } from 'rxjs/operators';
 import { ClimateResponse } from '../models/climate-response.model';
 import { HttpService } from './http.service';
+import { ClimateRequest } from '../models/climate-request.model';
+// import { RequestSection } from '../models/request-section.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClimateDataService {
+export class DataService {
+
+
+  // initClimateRequest() {
+  //   this._request.set({
+  //     // Initialize with default values or empty state
+  //     year: new Date().getFullYear(),
+  //     month: new Date().getMonth() + 1, // Months are 0-indexed in JS
+  //     esgRequest: new RequestSection(), // ESG request parameters
+  //     carbonFootprintRequest: new RequestSection(), // Carbon footprint request parameters
+  //     withoutProjects: new RequestSection(), // Without projects request parameters
+  //     projectInfrastructureFinancing: new RequestSection(), // Project infrastructure financing request parameters
+  //     projectConstructionFinancing: new RequestSection() // Project construction financing request parameters
+  //   });
+  // }
+
   private readonly httpService = inject(HttpService);
 
   // Signals for reactive state management
   private readonly _data = signal<ClimateResponse | null>(null);
+  private readonly _request = signal<ClimateRequest | null>(null);
   private readonly _loading = signal<boolean>(false);
   private readonly _error = signal<string | null>(null);
 
   // Public readonly signals
   readonly data = this._data.asReadonly();
+  readonly request = this._request.asReadonly();
   readonly loading = this._loading.asReadonly();
   readonly error = this._error.asReadonly();
 
@@ -32,9 +51,7 @@ export class ClimateDataService {
   readonly limitationsData = computed(() => this.data()?.limitations);
   readonly carbonFootprintData = computed(() => this.data()?.carbonFootprint);
   readonly riskData = computed(() => this.data()?.residualRiskQuestionnaire);
-  
-
-  // readonly ppData = computed(() => this.data()?.esg.);
+    
 
   // Cache the HTTP call to avoid multiple requests
   private climateResponse$: Observable<ClimateResponse> | null = null;
@@ -51,7 +68,7 @@ export class ClimateDataService {
     this._loading.set(true);
     this._error.set(null);
 
-    this.climateResponse$ = this.httpService.getClimateResponse().pipe(
+    this.climateResponse$ = this.httpService.getClimateData(this.request()).pipe(
       tap(data => {
         this._data.set(data);
         this._loading.set(false);

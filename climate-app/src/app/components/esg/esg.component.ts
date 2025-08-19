@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, OnDestroy, ElementRef, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClimateDataService } from '../../services/climate-data.service';
+import { DataService } from '../../services/data.service';
 import { SharedService } from '../../services/shared.service';
 import { ClimateColor, CustomerRating } from '../../models/climate-response.model';
 import { ClimateRequest, RequestSection, Filter } from '../../models/climate-request.model';
@@ -150,7 +150,7 @@ import { EsgMainReportRow } from '../../models/esg.model';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EsgComponent implements OnInit, OnDestroy {
-    private climateDataService = inject(ClimateDataService);
+    private dataService = inject(DataService);
     private sharedService = inject(SharedService);
     private elementRef = inject(ElementRef);
 
@@ -161,8 +161,8 @@ export class EsgComponent implements OnInit, OnDestroy {
     private readonly editableFields = signal(new Map<string, EditableField>());
 
     // Signals for reactive state management
-    protected readonly climateData = this.climateDataService.data;
-    protected readonly isLoading = this.climateDataService.loading;
+    protected readonly climateData = this.dataService.data;
+    protected readonly isLoading = this.dataService.loading;
     protected readonly scrollY = signal(0);
     protected readonly selectedRow = signal<EsgMainReportRow | null>(null);
 
@@ -330,43 +330,43 @@ export class EsgComponent implements OnInit, OnDestroy {
 
     // Heat Map data
     protected readonly heatMapRows = computed(() =>
-        this.climateDataService.heatMapData()?.heatMapRows || []
+        this.dataService.heatMapData()?.heatMapRows || []
     );
     protected readonly totalHeatMap = computed(() =>
-        this.climateDataService.heatMapData()?.totalHeatMap
+        this.dataService.heatMapData()?.totalHeatMap
     );
 
 
     // Green Credit data
     protected readonly greenCreditRows = computed(() =>
-        this.climateDataService.greenCreditData()?.greenCreditRows || []
+        this.dataService.greenCreditData()?.greenCreditRows || []
     );
     protected readonly totalGreenCredit = computed(() =>
-        this.climateDataService.greenCreditData()?.totalGreenCredit
+        this.dataService.greenCreditData()?.totalGreenCredit
     );
 
     // Black Credit data
     protected readonly blackCreditRows = computed(() =>
-        this.climateDataService.blackCreditData()?.blackCreditRows || []
+        this.dataService.blackCreditData()?.blackCreditRows || []
     );
     protected readonly totalBlackCredit = computed(() =>
-        this.climateDataService.blackCreditData()?.totalBlackCredit
+        this.dataService.blackCreditData()?.totalBlackCredit
     );
     protected readonly totalCommericialRiskWeightedAssetsPercentage = computed(() =>
-        this.climateDataService.blackCreditData()?.totalCommericialRiskWeightedAssetsPercentage
+        this.dataService.blackCreditData()?.totalCommericialRiskWeightedAssetsPercentage
     );
     protected readonly totalRiskWeightedAssetsPercentage = computed(() =>
-        this.climateDataService.blackCreditData()?.totalRiskWeightedAssetsPercentage
+        this.dataService.blackCreditData()?.totalRiskWeightedAssetsPercentage
     );
 
     // ICAAP data
     protected readonly icaapRows = computed(() =>
-        this.climateDataService.icaapData()?.icaapRows || []
+        this.dataService.icaapData()?.icaapRows || []
     );
 
     // ICAAP data
     protected readonly highCreditRiskRows = computed(() =>
-        this.climateDataService.highCreditRiskData()?.highCreditRiskRows || []
+        this.dataService.highCreditRiskData()?.highCreditRiskRows || []
     );
 
 
@@ -433,14 +433,14 @@ export class EsgComponent implements OnInit, OnDestroy {
     protected onFilterPanelFiltersChange(filters: Filter[]): void {
         // Update local filter states to match the filter panel
         const newStates = new Map<string, FilterState>();
-        
+
         filters.forEach(filter => {
             newStates.set(filter.filterFieldName, {
                 value: filter.filterFieldValue,
                 operator: filter.filterType
             });
         });
-        
+
         this.filterStates.set(newStates);
         console.log('Filter panel filters updated:', filters);
     }
@@ -623,7 +623,7 @@ export class EsgComponent implements OnInit, OnDestroy {
     // Filter clear handler for FilterField component - now syncs with filter panel
     protected onFilterFieldClear(fieldName: string): void {
         this.removeFilter(fieldName);
-        
+
         // Also clear from filter panel if it exists
         if (this.filterPanel) {
             this.filterPanel.removeFilter(fieldName);

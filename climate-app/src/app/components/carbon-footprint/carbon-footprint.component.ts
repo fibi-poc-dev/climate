@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClimateDataService } from '../../services/climate-data.service';
+import { DataService } from '../../services/data.service';
 import { StatusRow, SourceData } from '../../models/enums';
 import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 
@@ -37,7 +37,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 })
 export class CarbonFootprintComponent {
   // Inject the ClimateDataService
-  protected readonly dataService = inject(ClimateDataService);
+  protected readonly dataService = inject(DataService);
 
   // Simple trigger to force re-evaluation when rows are deleted
   private readonly statusRowChange = signal(StatusRow.Unchanged);

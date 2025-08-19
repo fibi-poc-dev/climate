@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ClimateDataService } from '../../services/climate-data.service';
+import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
 
 
@@ -21,15 +21,15 @@ import { TableModule } from 'primeng/table';;
 })
 export class GreenCreditComponent {
   // Inject the ClimateDataService
-  protected readonly dataService = inject(ClimateDataService);
-  
+  protected readonly dataService = inject(DataService);
+
 
   // New Green Credit Report data
   protected readonly newGreenCreditReportRows = computed(() =>
     this.dataService.newGreenCreditData()?.newGreenCreditReport.newGreenCreditReportRows || []
   );
 
-  
+
 
 
 
