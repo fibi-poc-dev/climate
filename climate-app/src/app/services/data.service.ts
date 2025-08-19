@@ -137,5 +137,34 @@ export class DataService {
     this._request.set(req);
   }
 
+  /**
+   * Updates the ESG request section with new filters
+   */
+  public updateEsgRequest(esgRequest: RequestSection): void {
+    const currentRequest = this._request();
+    if (currentRequest) {
+      const updatedRequest: ClimateRequest = {
+        ...currentRequest,
+        esgRequest: esgRequest
+      };
+      this._request.set(updatedRequest);
+    }
+  }
+
+  /**
+   * Updates the month and year in the climate request
+   */
+  public updateClimateRequestDate(year: number, month: number): void {
+    const currentRequest = this._request();
+    if (currentRequest) {
+      const updatedRequest: ClimateRequest = {
+        ...currentRequest,
+        year: year,
+        month: month
+      };
+      this._request.set(updatedRequest);
+    }
+  }
+
 
 }

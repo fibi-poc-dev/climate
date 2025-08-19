@@ -36,6 +36,49 @@
                         [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm"
                         selectionMode="single" (onRowSelect)="onRowSelect($event)">
 
+                        <ng-template pTemplate="caption">
+                            <div class="table-caption">
+                                <div class="caption-header">
+                                    <h3>דוח ESG ראשי</h3>
+                                    <span class="record-count">{{ totalRows() }} רשומות</span>
+                                </div>
+
+                                <!-- Active Filters Display -->
+                                @if (esgRequestFilters().length > 0) {
+                                <div class="active-filters-section">
+                                    <h4>מסננים פעילים:</h4>
+                                    <div class="filters-container">
+                                        @for (filter of esgRequestFilters(); track filter.filterFieldName) {
+                                        <div class="filter-chip">
+                                            <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName)
+                                                }}:</span>
+                                            <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                                            <span class="filter-operator">({{ getOperatorSymbol(filter.filterType)
+                                                }})</span>
+                                            <button class="remove-filter-btn"
+                                                (click)="removeFilter(filter.filterFieldName)" title="הסר מסנן">✕
+                                            </button>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                                }
+
+                                <!-- Filter Fields Row -->
+                                <div class="filter-fields-row">
+                                    @for (filterField of filterFields; track filterField.fieldName) {
+                                    <app-filter-field [fieldName]="filterField.fieldName"
+                                        [displayName]="filterField.displayName" [filterType]="filterField.filterType"
+                                        [value]="getFilterFieldValue(filterField.fieldName)"
+                                        [operator]="getFilterFieldOperator(filterField.fieldName)"
+                                        (filterChange)="onFilterFieldChange($event)"
+                                        (filterClear)="onFilterFieldClear($event)">
+                                    </app-filter-field>
+                                    }
+                                </div>
+                            </div>
+                        </ng-template>
+
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>

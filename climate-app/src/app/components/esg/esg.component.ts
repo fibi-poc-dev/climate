@@ -266,6 +266,19 @@ export class EsgComponent implements OnInit, OnDestroy {
             }
         });
 
+        // Effect to update data service when filters change
+        // effect(() => {
+        //     const esgRequest = this.esgRequest();
+        //     this.dataService.updateEsgRequest(esgRequest);
+        // });
+
+        // // Effect to update data service when date changes
+        // effect(() => {
+        //     const year = this.selectedYear();
+        //     const month = this.selectedMonth();
+        //     this.dataService.updateClimateRequestDate(year, month);
+        // });
+
         // Effect to log filter changes for debugging
         effect(() => {
             const request = this.climateRequest();
