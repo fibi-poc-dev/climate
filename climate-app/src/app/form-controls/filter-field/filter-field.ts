@@ -87,11 +87,20 @@ export class FilterField {
 
     const section = this.requestSection();
     if (section && Array.isArray(section.filter)) {
-      section.filter.push({
-        filterFieldName: this.fieldName(),
-        filterFieldValue: value,
-        filterType: operator
-      });
+      // If the filter already exists, update its value
+      const existingFilter = section.filter.find(f => f.filterFieldName === this.fieldName());
+      if (existingFilter) {
+        existingFilter.filterFieldValue = value;
+        existingFilter.filterType = operator;
+      }
+      else {
+        // If the filter doesn't exist, add a new one
+        section.filter.push({
+          filterFieldName: this.fieldName(),
+          filterFieldValue: value,
+          filterType: operator
+        });
+      }
     }
   }
 
