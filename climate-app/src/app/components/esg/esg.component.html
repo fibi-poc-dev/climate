@@ -1,4 +1,4 @@
-<div class="esg-prime-container" dir="rtl">
+<div class="tab-data-container">
     <!-- Loading State -->
     @if (isLoading()) {
     <p-card>
@@ -30,10 +30,6 @@
 
 
 
-    <!-- Main Layout Container -->
-    <p-scrollpanel [style]="{ width: '100%', height: '80vh' }">
-
-        <!-- <div class="main-layout"> -->
         <!-- Table Section -->
         <div class="table-section">
             <p-card [class.selected-card]="selectedRow() !== null">
@@ -671,11 +667,6 @@
                 </p-accordion-panel>
             </p-accordion>
         </p-panel>
-
-
-
-    </p-scrollpanel>
-
     }
 
 
