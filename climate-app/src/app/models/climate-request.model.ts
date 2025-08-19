@@ -17,4 +17,5 @@ export interface Filter {
     filterFieldName: string; // Name of the field to filter
     filterFieldValue: string; // Value to filter by
     filterType: string; // Type of the field (e.g., 'string', 'number', etc.)
+    displayName: string; // Display name for the filter used for UI only
 }

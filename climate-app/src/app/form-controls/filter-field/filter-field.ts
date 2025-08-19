@@ -98,7 +98,8 @@ export class FilterField {
         section.filter.push({
           filterFieldName: this.fieldName(),
           filterFieldValue: value,
-          filterType: operator
+          filterType: operator,
+          displayName: this.displayName()
         });
       }
     }

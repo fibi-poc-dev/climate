@@ -8,7 +8,8 @@
     <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
       <p-button label="עדכן" icon="pi pi-save" severity="success" size="small" (onClick)="climateDataCalcAndSave()">
       </p-button>
-      <p-button label="סנן" icon="pi pi-filter" severity="success" size="small" (onClick)="dataService.refreshClimateData()">
+      <p-button label="סנן" icon="pi pi-filter" severity="success" size="small"
+        (onClick)="dataService.refreshClimateData()">
       </p-button>
     </div>
   </p-toolbar>
@@ -21,6 +22,37 @@
   <p-panel header="ליווי פרוייקטים בניה" class="p-panel-sm" [toggleable]="true" collapsed="false">
     <p-table [value]="projectConstructionFinancingRows()" dataKey="account" [paginator]="true" [rows]="10"
       styleClass="p-datatable-striped p-datatable-sm" showGridlines>
+
+      <ng-template pTemplate="caption">
+        <div class="table-caption">
+          <div class="caption-header">
+            <h3>ליווי פרוייקטים בניה</h3>
+            <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
+          </div>
+
+          <!-- Active Filters Display -->
+          @if (projectConstructionFinancingFilters().length > 0) {
+          <div class="active-filters-section">
+            <div class="filters-container">
+              @for (filter of projectConstructionFinancingFilters(); track filter.filterFieldName) {
+              <div class="filter-chip">
+                <span class="filter-label">{{ filter.displayName }}:</span>
+                <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                <span class="filter-operator">({{ filter.filterType }})</span>
+                <!-- <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)" title="הסר מסנן">✕
+                </button> -->
+              </div>
+              }
+            </div>
+          </div>
+          }
+        </div>
+      </ng-template>
+
+
+
+
+
       <ng-template pTemplate="header">
         <tr>
           <th></th>

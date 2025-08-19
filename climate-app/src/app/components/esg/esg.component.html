@@ -50,11 +50,9 @@
                                 <div class="filters-container">
                                     @for (filter of esgRequestFilters(); track filter.filterFieldName) {
                                     <div class="filter-chip">
-                                        <span class="filter-label">{{ getFilterDisplayName(filter.filterFieldName)
-                                            }}:</span>
+                                        <span class="filter-label">{{ filter.displayName }}:</span>
                                         <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                                        <span class="filter-operator">({{ getOperatorSymbol(filter.filterType)
-                                            }})</span>
+                                        <span class="filter-operator">({{ filter.filterType }})</span>
                                         <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)"
                                             title="הסר מסנן">✕
                                         </button>

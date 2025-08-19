@@ -81,7 +81,8 @@ export class FilterPanelComponent {
                 filters.push({
                     filterFieldName: fieldName,
                     filterFieldValue: state.value.trim(),
-                    filterType: state.operator
+                    filterType: state.operator,
+                    displayName: this.getFilterDisplayName(fieldName)
                 });
             }
         });

@@ -39,6 +39,15 @@ export class CarbonFootprintComponent {
   // Inject the ClimateDataService
   protected readonly dataService = inject(DataService);
 
+
+  protected readonly projectConstructionFinancingFilters = computed(() => {
+    return this.dataService.request()?.projectConstructionFinancing.filter || [];
+  });
+
+
+
+
+
   // Simple trigger to force re-evaluation when rows are deleted
   private readonly statusRowChange = signal(StatusRow.Unchanged);
 

@@ -200,26 +200,7 @@ export class EsgComponent implements OnInit, OnDestroy {
             case '<=': return 'lte';
             default: return '=';
         }
-    });
-
-    // ESG Request filter array computed signal - now works with filter panel
-    // protected readonly esgRequestFilters = computed(() => {
-    //     const filters: Filter[] = [];
-    //     const filterStates = this.filterStates();
-
-    //     // Iterate through all filter states and create Filter objects
-    //     filterStates.forEach((state, fieldName) => {
-    //         if (state.value.trim()) {
-    //             filters.push({
-    //                 filterFieldName: fieldName,
-    //                 filterFieldValue: state.value.trim(),
-    //                 filterType: state.operator
-    //             });
-    //         }
-    //     });
-
-    //     return filters;
-    // });
+    });    
 
     protected readonly esgRequestFilters = computed(() => {
         return this.dataService.request()?.esgRequest.filter || [];
@@ -1138,16 +1119,16 @@ export class EsgComponent implements OnInit, OnDestroy {
         return field?.displayName || fieldName;
     }
 
-    protected getOperatorSymbol(filterType: string): string {
-        switch (filterType) {
-            case '=': return '=';
-            case '>': return '>';
-            case '<': return '<';
-            case '>=': return '>=';
-            case '<=': return '<=';
-            default: return filterType;
-        }
-    }
+    // protected getOperatorSymbol(filterType: string): string {
+    //     switch (filterType) {
+    //         case '=': return '=';
+    //         case '>': return '>';
+    //         case '<': return '<';
+    //         case '>=': return '>=';
+    //         case '<=': return '<=';
+    //         default: return filterType;
+    //     }
+    // }
 
     protected removeFilter(fieldName: string): void {
         this.filterStates.update(states => {
