@@ -33,7 +33,7 @@
                 [removable]="true" (onRemove)="removeProjectConstructionFinancingFilter(filter.filterFieldName)" />
               }
             </div>
-            <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
+            <p-chip label="{{ projectConstructionFinancingRows().length }} רשומות" />
           </div>
         </div>
       </ng-template>
