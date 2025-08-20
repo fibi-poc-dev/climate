@@ -5,6 +5,7 @@ import { DataService } from '../../services/data.service';
 import { StatusRow, SourceData } from '../../models/enums';
 import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
+import { SharedService } from '../../services/shared.service';
 
 
 // PrimeNG imports
@@ -15,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
-import { SharedService } from '../../services/shared.service';
+import { ChipModule } from 'primeng/chip';
 
 
 
@@ -34,6 +35,7 @@ import { SharedService } from '../../services/shared.service';
     TooltipModule,
     CardModule,
     ToolbarModule,
+    ChipModule,
     FilterField
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

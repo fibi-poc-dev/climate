@@ -29,15 +29,8 @@
             <!-- Active Filters Display -->
             <div style="display: flex; gap: 0.5rem;">
               @for (filter of projectConstructionFinancingFilters(); track filter.filterFieldName) {
-              <div class="filter-chip">
-                <span class="filter-label">{{ filter.displayName }}:</span>
-                <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                <span class="filter-operator">({{ filter.filterType }})</span>
-                <button class="remove-filter-btn"
-                  (click)="removeProjectConstructionFinancingFilter(filter.filterFieldName)"
-                  title="הסר מסנן">✕
-                </button>
-              </div>
+              <p-chip label="{{ filter.displayName }}: {{ filter.filterFieldValue }} ({{ filter.filterType }})"
+                [removable]="true" (onRemove)="removeProjectConstructionFinancingFilter(filter.filterFieldName)" />
               }
             </div>
             <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
