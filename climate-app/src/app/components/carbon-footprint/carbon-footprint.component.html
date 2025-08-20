@@ -33,13 +33,15 @@
                 <span class="filter-label">{{ filter.displayName }}:</span>
                 <span class="filter-value">{{ filter.filterFieldValue }}</span>
                 <span class="filter-operator">({{ filter.filterType }})</span>
-                <!-- <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)" title="הסר מסנן">✕
-                </button> -->
+                <button class="remove-filter-btn"
+                  (click)="removeProjectConstructionFinancingFilter(filter.filterFieldName)"
+                  title="הסר מסנן">✕
+                </button>
               </div>
               }
             </div>
             <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
-          </div>          
+          </div>
         </div>
       </ng-template>
 
@@ -51,17 +53,17 @@
         <tr>
           <th></th>
           <th>
-            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"              
+            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"              
+            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"              
+            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>

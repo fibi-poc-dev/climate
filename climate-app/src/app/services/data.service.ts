@@ -152,6 +152,21 @@ export class DataService {
   }
 
   /**
+   * Updates the ESG request section with new filters
+   */
+  public updateProjectConstructionFinancing(projectConstructionFinancing: RequestSection): void {
+    const currentRequest = this._request();
+    if (currentRequest) {
+      const updatedRequest: ClimateRequest = {
+        ...currentRequest,
+        projectConstructionFinancing: projectConstructionFinancing
+      };
+      this._request.set(updatedRequest);
+    }
+  }
+
+
+  /**
    * Updates the month and year in the climate request
    */
   public updateClimateRequestDate(year: number, month: number): void {

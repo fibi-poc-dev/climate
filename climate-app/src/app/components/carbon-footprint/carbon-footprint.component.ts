@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
+import { SharedService } from '../../services/shared.service';
 
 
 
@@ -40,11 +41,20 @@ import { ToolbarModule } from 'primeng/toolbar';
 export class CarbonFootprintComponent {
   // Inject the ClimateDataService
   protected readonly dataService = inject(DataService);
+  protected readonly sharedService = inject(SharedService);
 
 
   protected readonly projectConstructionFinancingFilters = computed(() => {
     return this.dataService.request()?.projectConstructionFinancing.filter || [];
   });
+
+  public removeProjectConstructionFinancingFilter(filterFieldName: string) {
+    const requestSection = this.dataService.request()?.projectConstructionFinancing;
+    if (requestSection && requestSection.filter) {
+      requestSection.filter = requestSection.filter.filter(x => x.filterFieldName !== filterFieldName);
+      this.dataService.updateProjectConstructionFinancing(requestSection);
+    }
+  }
 
 
 

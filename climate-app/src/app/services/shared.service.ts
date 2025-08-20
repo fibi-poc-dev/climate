@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Filter } from '../models/climate-request.model';
+import { Filter, RequestSection } from '../models/climate-request.model';
 
 export interface EditableField {
     originalValue: number | null;
@@ -14,12 +14,9 @@ export interface EditableField {
 export class SharedService {
 
 
+
+
     
-
-
-
-
-
 
     // ===== NUMBER FORMATTING UTILITIES =====
 
