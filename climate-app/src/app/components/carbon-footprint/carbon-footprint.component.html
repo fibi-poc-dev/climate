@@ -29,7 +29,7 @@
             <!-- Active Filters Display -->
             <div style="display: flex; gap: 0.5rem;">
               @for (filter of projectConstructionFinancingFilters(); track filter.filterFieldName) {
-              <p-chip label="{{ filter.displayName }}: {{ filter.filterFieldValue }} ({{ filter.filterType }})"
+              <p-chip label="{{ filter.displayName }} {{ filter.filterType }} {{ filter.filterFieldValue }}"
                 [removable]="true" (onRemove)="removeProjectConstructionFinancingFilter(filter.filterFieldName)" />
               }
             </div>

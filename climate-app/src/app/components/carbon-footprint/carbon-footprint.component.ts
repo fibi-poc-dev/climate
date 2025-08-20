@@ -62,8 +62,8 @@ export class CarbonFootprintComponent {
 
 
 
-  // Simple trigger to force re-evaluation when rows are deleted
-  private readonly statusRowChange = signal(StatusRow.Unchanged);
+  // Simple trigger to force re-evaluation when status row is changed
+  private readonly statusRowChange = signal(0);
 
   // Project Construction Financing data - filtered to exclude deleted and original rows
   protected readonly projectConstructionFinancingRows = computed(() => {
@@ -96,7 +96,7 @@ export class CarbonFootprintComponent {
     row.statusRow = StatusRow.Deleted;
 
     // Trigger filter re-evaluation
-    this.statusRowChange.update(val => StatusRow.Deleted);
+    this.statusRowChange.update(val => val + 1);
   }
 
   protected onValueChanged(row: CarbonFootprintRow): void {
@@ -104,7 +104,7 @@ export class CarbonFootprintComponent {
       row.statusRow = StatusRow.Updated;
 
       // Trigger filter re-evaluation
-      this.statusRowChange.update(val => StatusRow.Updated);
+      this.statusRowChange.update(val => val + 1);
     }
   }
 
