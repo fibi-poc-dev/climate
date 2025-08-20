@@ -24,16 +24,10 @@
       styleClass="p-datatable-striped p-datatable-sm" showGridlines>
 
       <ng-template pTemplate="caption">
-        <div class="table-caption">
-          <div class="caption-header">
-            <h3>ליווי פרוייקטים בניה</h3>
-            <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
-          </div>
-
-          <!-- Active Filters Display -->
-          @if (projectConstructionFinancingFilters().length > 0) {
-          <div class="active-filters-section">
-            <div class="filters-container">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Active Filters Display -->
+            <div style="display: flex; gap: 0.5rem;">
               @for (filter of projectConstructionFinancingFilters(); track filter.filterFieldName) {
               <div class="filter-chip">
                 <span class="filter-label">{{ filter.displayName }}:</span>
@@ -44,8 +38,8 @@
               </div>
               }
             </div>
-          </div>
-          }
+            <span class="record-count">{{ projectConstructionFinancingRows().length }} רשומות</span>
+          </div>          
         </div>
       </ng-template>
 
@@ -56,9 +50,21 @@
       <ng-template pTemplate="header">
         <tr>
           <th></th>
-          <th>בנק</th>
-          <th>סניף</th>
-          <th>מספר חשבון</th>
+          <th>
+            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"              
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"              
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"              
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
           <th>שם חשבון</th>
           <th>קוד סיווג סניף</th>
           <th>תיאור סיווג סניף</th>

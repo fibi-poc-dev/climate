@@ -38,7 +38,7 @@
                     selectionMode="single" (onRowSelect)="onRowSelect($event)">
 
                     <ng-template pTemplate="caption">
-                        <div class="table-caption">
+                        <div>
                             <div class="caption-header">
                                 <h3>דוח ESG ראשי</h3>
                                 <span class="record-count">{{ totalRows() }} רשומות</span>
@@ -68,7 +68,7 @@
                         <tr>
                             <th>
                                 <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('bank')" [operator]="getFilterFieldOperator('bank')"
+                                    [value]="'123'" [operator]="'<'"
                                     [requestSection]="dataService.request()?.esgRequest">
                                 </app-filter-field>
                             </th>

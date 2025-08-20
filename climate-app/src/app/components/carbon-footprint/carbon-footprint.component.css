@@ -1,1 +1,19 @@
+.record-count {
+    color: #6c757d;
+    font-size: 0.9rem;
+    background-color: #e9ecef;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+}
 
+.filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: rgba(255, 193, 14, 0.1);
+    border: 1px solid rgba(255, 193, 14, 0.3);
+    border-radius: 16px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    color: #856404;
+}

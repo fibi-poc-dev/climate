@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { StatusRow, SourceData } from '../../models/enums';
 import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
+import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
 
 
 // PrimeNG imports
@@ -31,7 +32,8 @@ import { ToolbarModule } from 'primeng/toolbar';
     ButtonModule,
     TooltipModule,
     CardModule,
-    ToolbarModule
+    ToolbarModule,
+    FilterField
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
