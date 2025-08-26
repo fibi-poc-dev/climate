@@ -35,6 +35,29 @@ export class HttpService {
     // return this.http.post<ClimateResponse>(this.apiUrl + 'climateData', JSON.stringify(params), httpOptions);
   }
 
+  climateDataCalcAndSave(climateResponse: ClimateResponse | null): Observable<ClimateResponse> {
+    // Mock implementation - simulate a successful save and return the response
+    if (climateResponse) {
+      return of(climateResponse).pipe(
+        delay(1000) // Simulate network delay for save operation
+      );
+    }
+
+    // Return empty response if no data provided
+    return of({} as ClimateResponse).pipe(
+      delay(1000)
+    );
+
+    // TODO: real implementation
+    // let params = {
+    //   "ClimateDataResponse": climateResponse
+    // }
+    // return this.http.post<ClimateResponse>(this.apiUrl + 'climateDataCalcAndSave', JSON.stringify(params), httpOptions);
+  }
+
+
+
+
 
 
 
