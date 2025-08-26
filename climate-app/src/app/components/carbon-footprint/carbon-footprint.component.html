@@ -76,8 +76,138 @@
             </app-filter-field>
           </th>
           <th>
+            <app-filter-field [fieldName]="'branchClassificatonDescription'" [displayName]="'תיאור סיווג ענפי'"
+              [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
             <app-filter-field [fieldName]="'creditReportDescription'" [displayName]="'תיאור בדוח אשראי'"
               [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'currentCreditAuthority'" [displayName]="'סמכות אשראי נוכחית'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'קוד יחידת טיפול'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'regualatedSectorDescription'" [displayName]="'תיאור מגזר מוסדר'"
+              [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'creditBalanceSheetRisk'" [displayName]="'סיכון אשראי מאזן'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'creditOffBalanceSheetRisk'" [displayName]="'סיכון אשראי מחוץ למאזן'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סיכון אשראי כולל'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'companyType'" [displayName]="'סוג חברה'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'companyNumber'" [displayName]="'מספר חברה'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'companyName'" [displayName]="'שם חברה'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'reportType'" [displayName]="'סוג דוח'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'endDate'" [displayName]="'תאריך סיום'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalBalanceSheet'" [displayName]="'סך מאזן'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'financialDebt'" [displayName]="'חוב פיננסי'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalLeaseLiabilities'" [displayName]="'סך התחייבויות שכירות'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'negativeEquity'" [displayName]="'הון שלילי'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'cashAndCashEquivalents'" [displayName]="'מזומן ושווי מזומן'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'revenueTurnover'" [displayName]="'הכנסות'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'capitalMarketFlag'" [displayName]="'דגל שוק ההון'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalProjectEquity'" [displayName]="'סך הון פרויקט'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalDebtAdditionalFinancier'" [displayName]="'סך חוב מממן נוסף'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalBalanceSheetRiskDebt'" [displayName]="'סך סיכון מאזן חוב'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'ourFinancingShare'" [displayName]="'נתח המימון שלנו'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'greenBuilding'" [displayName]="'בניין ירוק'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'remarks'" [displayName]="'הערות'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'officerName'" [displayName]="'שם איש קשר'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
         </tr>
@@ -96,28 +226,39 @@
           <td>{{ row.account }}</td>
           <td>{{ row.accountName }}</td>
           <td>{{ row.branchClassificationCode }}</td>
+          <td>{{ row.branchClassificatonDescription }}</td>
           <td>{{ row.creditReportDescription }}</td>
-
-
-          <!-- <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
-              </ng-template>
-            </p-cellEditor>
-          </td> -->
-
-
-
-
-
+          <td>{{ row.currentCreditAuthority }}</td>
+          <td>{{ row.handlingUnitCode }}</td>
+          <td>{{ row.regualatedSectorDescription }}</td>
+          <td>{{ row.creditBalanceSheetRisk }}</td>
+          <td>{{ row.creditOffBalanceSheetRisk }}</td>
+          <td>{{ row.totalCreditRisk }}</td>
+          <td>{{ row.companyType }}</td>
+          <td>{{ row.companyNumber }}</td>
+          <td>{{ row.companyName }}</td>
+          <td>{{ row.reportType }}</td>
+          <td>{{ row.endDate }}</td>
+          <td>{{ row.totalBalanceSheet }}</td>
+          <td>{{ row.financialDebt }}</td>
+          <td>{{ row.totalLeaseLiabilities }}</td>
+          <td>{{ row.negativeEquity }}</td>
+          <td>{{ row.cashAndCashEquivalents }}</td>
+          <td>{{ row.revenueTurnover }}</td>
+          <td>{{ row.capitalMarketFlag }}</td>
+          <td>{{ row.totalProjectEquity }}</td>
+          <td>{{ row.totalDebtAdditionalFinancier }}</td>
+          <td>{{ row.totalBalanceSheetRiskDebt }}</td>
+          <td>{{ row.ourFinancingShare }}</td>
+          <td>{{ row.greenBuilding }}</td>
+          <td>{{ row.remarks }}</td>
+          <td>{{ row.officerName }}</td>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="37" class="text-center">
+          <td colspan="34" class="text-center">
             <div class="empty-message">
               <i class="pi pi-info-circle"></i>
               <p>לא נמצאו נתונים להצגה</p>
