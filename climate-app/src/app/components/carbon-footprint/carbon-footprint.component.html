@@ -46,53 +46,40 @@
         <tr>
           <th></th>
           <th>
-            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'accountType'" [displayName]="'סוג חשבון'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
-          <th>שם חשבון</th>
-          <th>קוד סיווג סניף</th>
-          <th>תיאור סיווג סניף</th>
-          <th>תיאור דוח אשראי</th>
-          <th>סמכות אשראי נוכחית</th>
-          <th>קוד יחידת טיפול</th>
-          <th>תיאור מגזר מוסדר</th>
-          <th>סיכון אשראי מאזן</th>
-          <th>סיכון אשראי מחוץ למאזן</th>
-          <th>סיכון אשראי כולל</th>
-          <th>סוג חברה</th>
-          <th>שווי שוק חברה ציבורית</th>
-          <th>שם חברה</th>
-          <th>מספר חברה</th>
-          <th>סוג דוח</th>
-          <th>תאריך סיום</th>
-          <th>סך מאזן</th>
-          <th>חוב פיננסי</th>
-          <th>סך התחייבויות שכירות</th>
-          <th>הון שלילי</th>
-          <th>מזומן ושווי מזומן</th>
-          <th>הכנסות</th>
-          <th>דגל שוק ההון</th>
-          <th>סך הון פרויקט</th>
-          <th>סך חוב מממן נוסף</th>
-          <th>סך סיכון מאזן חוב</th>
-          <th>נתח המימון שלנו</th>
-          <th>בניין ירוק</th>
-          <th>שלב פרויקט</th>
-          <th>פרויקט ירוק</th>
-          <th>קלאסטר ירוק</th>
-          <th>הערות</th>
-          <th>שם איש קשר</th>
+          <th>
+            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'integer'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'accountName'" [displayName]="'שם לקוח'" [filterType]="'text'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'branchClassificationCode'" [displayName]="'קוד סיווג ענפי'"
+              [filterType]="'integer'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'creditReportDescription'" [displayName]="'תיאור בדוח אשראי'"
+              [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
         </tr>
       </ng-template>
 
@@ -105,96 +92,26 @@
           </td>
           <td>{{ row.bank }}</td>
           <td>{{ row.branch }}</td>
+          <td>{{ row.accountType }}</td>
           <td>{{ row.account }}</td>
           <td>{{ row.accountName }}</td>
           <td>{{ row.branchClassificationCode }}</td>
-          <td>{{ row.branchClassificatonDescription }}</td>
           <td>{{ row.creditReportDescription }}</td>
-          <td>{{ row.currentCreditAuthority }}</td>
-          <td>{{ row.handlingUnitCode }}</td>
-          <td>{{ row.regualatedSectorDescription }}</td>
-          <td>{{ row.creditBalanceSheetRisk }}</td>
-          <td>{{ row.creditOffBalanceSheetRisk }}</td>
-          <td>{{ row.totalCreditRisk }}</td>
-          <td>{{ row.companyType }}</td>
-          <td>{{ row.publicCompanyMarketValue }}</td>
-          <td>{{ row.companyName }}</td>
-          <td>{{ row.companyNumber }}</td>
-          <td>{{ row.reportType }}</td>
-          <td>{{ row.endDate }}</td>
-          <td>{{ row.totalBalanceSheet }}</td>
-          <td>{{ row.financialDebt }}</td>
-          <td>{{ row.totalLeaseLiabilities }}</td>
-          <td>{{ row.negativeEquity }}</td>
-          <td>{{ row.cashAndCashEquivalents }}</td>
-          <td>{{ row.revenueTurnover }}</td>
-          <td>{{ row.capitalMarketFlag }}</td>
-          <td>
+
+
+          <!-- <td>
             <p-cellEditor>
               <ng-template #output>
                 <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
                   [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
               </ng-template>
             </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.totalDebtAdditionalFinancier" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.totalBalanceSheetRiskDebt" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.ourFinancingShare" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.greenBuilding" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.projectStage" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.greenProject" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template #output>
-                <p-inputnumber [(ngModel)]="row.greenCluster" mode="decimal" [minFractionDigits]="0"
-                  [maxFractionDigits]="5" />
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td>{{ row.remarks }}</td>
-          <td>{{ row.officerName }}</td>
+          </td> -->
+
+
+
+
+
         </tr>
       </ng-template>
 

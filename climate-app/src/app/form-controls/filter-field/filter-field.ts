@@ -34,7 +34,7 @@ export class FilterField {
   // Inputs
   readonly fieldName = input.required<string>();
   readonly displayName = input.required<string>();
-  readonly filterType = input<'text' | 'numeric'>('text');
+  readonly filterType = input<'text' | 'numeric' | 'integer'>('text');
   readonly value = input<string>('');
   readonly operator = input<string>('=');
   readonly requestSection = input.required<RequestSection | undefined>();
@@ -54,6 +54,9 @@ export class FilterField {
       if (this.filterType() === 'numeric') {
         const numValue = this.value() ? parseFloat(this.value()) : null;
         this.tempNumericValue.set(isNaN(numValue!) ? null : numValue);
+      } else if (this.filterType() === 'integer') {
+        const intValue = this.value() ? parseInt(this.value(), 10) : null;
+        this.tempNumericValue.set(isNaN(intValue!) ? null : intValue);
       }
     });
   }
@@ -64,10 +67,10 @@ export class FilterField {
   });
 
   protected readonly availableOperators = computed(() => {
-    if (this.filterType() === 'text') {
+    if (this.filterType() === 'text' || this.filterType() === 'integer') {
       return ['='];
     } else {
-      // For numeric fields
+      // For numeric fields only
       return ['=', '>', '<', '>=', '<='];
     }
   });
@@ -127,6 +130,18 @@ export class FilterField {
     this.tempValue.set(target.value);
   }
 
+  protected onIntegerInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    // Only allow digits and empty string
+    const value = target.value.replace(/[^0-9]/g, '');
+    target.value = value;
+    this.tempValue.set(value);
+
+    // Update numeric value for consistency
+    const intValue = value ? parseInt(value, 10) : null;
+    this.tempNumericValue.set(intValue);
+  }
+
   protected onNumericInput(value: number | null): void {
     this.tempNumericValue.set(value);
     this.tempValue.set(value?.toString() || '');
@@ -147,6 +162,12 @@ export class FilterField {
     if (!value) return false;
 
     if (this.filterType() === 'text') return true;
+
+    if (this.filterType() === 'integer') {
+      // For integer fields, check if it's a valid integer
+      const intValue = parseInt(value, 10);
+      return !isNaN(intValue) && intValue.toString() === value;
+    }
 
     // For numeric fields, check if it's a valid number
     const numValue = parseFloat(value.replace(/[^0-9.-]/g, ''));

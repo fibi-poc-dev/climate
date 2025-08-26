@@ -16,6 +16,9 @@
                     [showButtons]="false" styleClass="filter-input" [locale]="'he-IL'" [minFractionDigits]="0"
                     [maxFractionDigits]="2">
                 </p-inputNumber>
+                } @else if (filterType() === 'integer') {
+                <input [id]="fieldName() + '-filter'" type="text" pInputText [value]="tempValue()"
+                    (input)="onIntegerInput($event)" (keydown)="onKeydown($event)" placeholder="הזן מספר שלם">
                 } @else {
                 <input [id]="fieldName() + '-filter'" type="text" pInputText [value]="tempValue()"
                     (input)="onTextInput($event)" (keydown)="onKeydown($event)" placeholder="הזן ערך">
