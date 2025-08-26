@@ -6,6 +6,7 @@ import { StatusRow, SourceData } from '../../models/enums';
 import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
 import { SharedService } from '../../services/shared.service';
+import { HttpService } from '../../services/http.service';
 
 
 // PrimeNG imports
@@ -48,6 +49,10 @@ export class CarbonFootprintComponent {
   // Inject the ClimateDataService
   protected readonly dataService = inject(DataService);
   protected readonly sharedService = inject(SharedService);
+  protected readonly httpService = inject(HttpService);
+
+  // Loading state for save operation
+  protected readonly isSaving = signal(false);
 
 
   protected readonly projectConstructionFinancingFilters = computed(() => {
@@ -112,8 +117,29 @@ export class CarbonFootprintComponent {
     }
   }
 
-  climateDataCalcAndSave(): void {
-    // Implement the calculation and saving logic here
+  // Save method that calls the climateDataCalcAndSave service
+  protected saveClimateData(): void {
+    if (this.isSaving()) return; // Prevent multiple simultaneous saves
+
+    this.isSaving.set(true);
+
+    const currentData = this.dataService.getCurrentData();
+
+    this.httpService.climateDataCalcAndSave(currentData).subscribe({
+      next: (response) => {
+        // Update the data service with the saved response
+        this.dataService.updateData(response);
+        this.isSaving.set(false);
+        console.log('Climate data saved successfully', response);
+      },
+      error: (error) => {
+        this.isSaving.set(false);
+        console.error('Error saving climate data:', error);
+        // TODO: Add proper error handling/notification
+      }
+    });
   }
+
+
 
 }

@@ -89,6 +89,13 @@ export class DataService {
   }
 
   /**
+   * Updates the current data with new climate response
+   */
+  updateData(data: ClimateResponse): void {
+    this._data.set(data);
+  }
+
+  /**
    * Checks if data is currently available
    */
   hasData(): boolean {
