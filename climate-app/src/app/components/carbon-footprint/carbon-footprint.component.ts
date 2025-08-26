@@ -17,6 +17,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ChipModule } from 'primeng/chip';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
 
 
 
@@ -36,6 +38,8 @@ import { ChipModule } from 'primeng/chip';
     CardModule,
     ToolbarModule,
     ChipModule,
+    InputTextModule,
+    TextareaModule,
     FilterField
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

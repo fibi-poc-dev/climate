@@ -247,13 +247,61 @@
           <td>{{ row.cashAndCashEquivalents }}</td>
           <td>{{ row.revenueTurnover }}</td>
           <td>{{ row.capitalMarketFlag }}</td>
-          <td>{{ row.totalProjectEquity }}</td>
-          <td>{{ row.totalDebtAdditionalFinancier }}</td>
-          <td>{{ row.totalBalanceSheetRiskDebt }}</td>
-          <td>{{ row.ourFinancingShare }}</td>
-          <td>{{ row.greenBuilding }}</td>
-          <td>{{ row.remarks }}</td>
-          <td>{{ row.officerName }}</td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalProjectEquity" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalDebtAdditionalFinancier" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.totalBalanceSheetRiskDebt" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.ourFinancingShare" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <p-inputnumber [(ngModel)]="row.greenBuilding" mode="decimal" [minFractionDigits]="0"
+                  [maxFractionDigits]="5" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <textarea rows="1" cols="30" pTextarea [(ngModel)]="row.remarks"
+                  (ngModelChange)="onValueChanged(row)"></textarea>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template #output>
+                <input type="text" pInputText [(ngModel)]="row.officerName" (ngModelChange)="onValueChanged(row)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
         </tr>
       </ng-template>
 
