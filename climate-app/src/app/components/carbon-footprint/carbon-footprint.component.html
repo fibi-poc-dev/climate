@@ -81,7 +81,7 @@
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'creditReportDescription'" [displayName]="'תיאור בדוח אשראי'"
+            <app-filter-field [fieldName]="'creditReportDescription'" [displayName]="'תיאור דוח אשראי'"
               [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
@@ -91,52 +91,54 @@
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'קוד יחידת טיפול'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'קוד יחידה'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'regualatedSectorDescription'" [displayName]="'תיאור מגזר מוסדר'"
+            <app-filter-field [fieldName]="'regualatedSectorDescription'" [displayName]="'תיאור מגזר רגול וסדור'"
               [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'creditBalanceSheetRisk'" [displayName]="'סיכון אשראי מאזן'"
+            <app-filter-field [fieldName]="'creditBalanceSheetRisk'"
+              [displayName]="'סיכון אשראי במאזן כספ״ע, ללא הפרשות'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'creditOffBalanceSheetRisk'"
+              [displayName]="'סיכון אשראי מחוץ למאזן כספ״ע, ללא הפרשות'" [filterType]="'numeric'"
+              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סכ״ו סיכון אשראי כספ״ע, ללא הפרשות'"
               [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'creditOffBalanceSheetRisk'" [displayName]="'סיכון אשראי מחוץ למאזן'"
-              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
-            </app-filter-field>
-          </th>
-          <th>
-            <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סיכון אשראי כולל'"
-              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
-            </app-filter-field>
-          </th>
-          <th>
-            <app-filter-field [fieldName]="'companyType'" [displayName]="'סוג חברה'" [filterType]="'integer'"
+            <app-filter-field [fieldName]="'companyType'" [displayName]="'סוג חברה/ קבוצת'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'companyNumber'" [displayName]="'מספר חברה'" [filterType]="'integer'"
+            <app-filter-field [fieldName]="'companyNumber'" [displayName]="'מספר חברה ציבורית'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'companyName'" [displayName]="'שם חברה'" [filterType]="'text'"
-              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            <app-filter-field [fieldName]="'companyName'" [displayName]="'שם חברה בדוח חברה ציבורית'"
+              [filterType]="'text'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'reportType'" [displayName]="'סוג דוח'" [filterType]="'integer'"
-              [requestSection]="dataService.request()?.projectConstructionFinancing">
+            <app-filter-field [fieldName]="'reportType'" [displayName]="'סוג דוח (שורה או חברה)'"
+              [filterType]="'integer'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'endDate'" [displayName]="'תאריך סיום'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'endDate'" [displayName]="'תאריך סיום דוח (מחצית שנה)'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
@@ -151,52 +153,54 @@
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'totalLeaseLiabilities'" [displayName]="'סך התחייבויות שכירות'"
+            <app-filter-field [fieldName]="'totalLeaseLiabilities'" [displayName]="'סך התחייבויות חכירה'"
               [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'negativeEquity'" [displayName]="'הון שלילי'" [filterType]="'numeric'"
+            <app-filter-field [fieldName]="'negativeEquity'" [displayName]="'הון (לרבות) שלילי'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'cashAndCashEquivalents'" [displayName]="'מזומנים ושווי מזומנים'"
+              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'revenueTurnover'" [displayName]="'הכנסות מכירות'" [filterType]="'numeric'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'cashAndCashEquivalents'" [displayName]="'מזומן ושווי מזומן'"
+            <app-filter-field [fieldName]="'capitalMarketFlag'" [displayName]="'דגלול חברות שוק הון'"
+              [filterType]="'integer'" [requestSection]="dataService.request()?.projectConstructionFinancing">
+            </app-filter-field>
+          </th>
+          <th>
+            <app-filter-field [fieldName]="'totalProjectEquity'" [displayName]="'סך הון עצמי פרויקט ובעלות אקילטי ציוד'"
               [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'revenueTurnover'" [displayName]="'הכנסות'" [filterType]="'numeric'"
+            <app-filter-field [fieldName]="'totalDebtAdditionalFinancier'"
+              [displayName]="'סך חוב נוסף ממן אחר בפרויקט (בחלקו עלול לא היות)'" [filterType]="'numeric'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'capitalMarketFlag'" [displayName]="'דגל שוק ההון'" [filterType]="'integer'"
+            <app-filter-field [fieldName]="'totalBalanceSheetRiskDebt'"
+              [displayName]="'סך סיכון במאזן חוב פרויקט על מאזנית בנק'" [filterType]="'numeric'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'totalProjectEquity'" [displayName]="'סך הון פרויקט'"
+            <app-filter-field [fieldName]="'ourFinancingShare'" [displayName]="'נתחה במימון שלנו'"
               [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'totalDebtAdditionalFinancier'" [displayName]="'סך חוב מממן נוסף'"
-              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
-            </app-filter-field>
-          </th>
-          <th>
-            <app-filter-field [fieldName]="'totalBalanceSheetRiskDebt'" [displayName]="'סך סיכון מאזן חוב'"
-              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
-            </app-filter-field>
-          </th>
-          <th>
-            <app-filter-field [fieldName]="'ourFinancingShare'" [displayName]="'נתח המימון שלנו'"
-              [filterType]="'numeric'" [requestSection]="dataService.request()?.projectConstructionFinancing">
-            </app-filter-field>
-          </th>
-          <th>
-            <app-filter-field [fieldName]="'greenBuilding'" [displayName]="'בניין ירוק'" [filterType]="'integer'"
+            <app-filter-field [fieldName]="'greenBuilding'" [displayName]="'בנין ירוק'" [filterType]="'integer'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
@@ -206,7 +210,7 @@
             </app-filter-field>
           </th>
           <th>
-            <app-filter-field [fieldName]="'officerName'" [displayName]="'שם איש קשר'" [filterType]="'text'"
+            <app-filter-field [fieldName]="'officerName'" [displayName]="'שם איש מקור ביסוד'" [filterType]="'text'"
               [requestSection]="dataService.request()?.projectConstructionFinancing">
             </app-filter-field>
           </th>
