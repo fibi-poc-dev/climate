@@ -1,0 +1,35 @@
+טקסט לתצוגה/ עמודה בטבלה,תצוגה בלבד,סוג,סוג השדה (check box וכו),שם במבנה
+בנק,כן,number,,bank
+סניף,כן,number,,branch
+סוג חשבון ,כן,number,,accountType
+חשבון,כן,number,,account
+שם לקוח,כן,string,,accountName
+קוד סיווג ענפי,כן,number,,branchClassificationCode
+תיאור סיווג ענפי ,כן,string,,branchClassificatonDescription
+תיאור בדוח אשראי,כן,string,,creditReportDescription
+סמכות אשראי נוכחית,כן,number,,currentCreditAuthority
+יחידה מטפלת ,כן,string,,handlingUnitCode
+תיאור קוד מגזר פיקוחי,כן,string,,regualatedSectorDescription
+"סיכון אשראי מאזני באש""ח, ללא משכנתאות ",כן,number,,creditBalanceSheetRisk
+"סיכון אשראי חוץ מאזני באש""ח, ללא משכנתאות",כן,number,,creditOffBalanceSheetRisk
+"סה""כ סיכון אשראי באש""ח, ללא משכנתאות",כן,number,,totalCreditRisk
+חברה פרטית/ ציבורית,כן,number,,"companyType , יש להציג את התיאור מערכים לקומבו CompanyType"
+שווי חברה ציבורית,כן,number,,companyNumber
+שם החברה בעלת הדוח הכספי,כן,string,,companyName
+ח.פ. בעל הדוח הכספי,כן,number,,companyNumber
+סוג דוח (סולו או מאוחד),כן,number,,reportType יש להציג את התיאור מערכים לקומבו ReportType
+תאריך דוח כספי (שנתי בלבד),כן,date,,endDate
+סך המאזן ,כן,number,,totalBalanceSheet
+חוב פיננסי ,כן,number ,,financialDebt
+סך התחייבויות חכירה,כן,number,,totalLeaseLiabilities
+הון (גרעון) עצמי,כן,number,,negativeEquity
+מזומנים ושווי מזומנים,כן,number,,cashAndCashEquivalents
+מחזור הכנסות,כן,number,,revenueTurnover
+שייך לסיווגי שוק ההון,כן,number,,capitalMarketFlag יש להציג את התיאור מערכים לקומבו CapitalMarket
+סך ההון העצמי שהושקע בפרויקט ליום,לא,number,input,totalProjectEquity
+סך החוב אצל מממן נוסף ליום (מדרגה שניה או אחר),לא,number,input,totalDebtAdditionalFinancier
+סך החוב המאזני וחוץ מאזני של הפרויקט ליום,לא,number,input,totalBalanceSheetRiskDebt
+חלקנו במימון ליום,לא,number,input,ourFinancingShare
+בניה ירוקה,לא,number,combobox,"greenBuilding, יש להציג את התיאור מערכים לקומבו GreenBuilding"
+הערות,לא,string,textara,"Remarks , להגביל ל100 תווים"
+שם רפרנט מזין,לא,string,input,"officerName , להגביל ל20 תווים"
