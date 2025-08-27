@@ -36,7 +36,7 @@
           "creditBalanceSheetRisk": 46465456456,
           "creditOffBalanceSheetRisk": 456465465,
           "totalCreditRisk": 46921921921,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -72,7 +72,7 @@
           "creditBalanceSheetRisk": 45645646546,
           "creditOffBalanceSheetRisk": 46456456,
           "totalCreditRisk": 45692103002,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -108,7 +108,7 @@
           "creditBalanceSheetRisk": 4546345645,
           "creditOffBalanceSheetRisk": 3453,
           "totalCreditRisk": 4546349098,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -144,7 +144,7 @@
           "creditBalanceSheetRisk": 456456456,
           "creditOffBalanceSheetRisk": 435,
           "totalCreditRisk": 456456891,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -180,7 +180,7 @@
           "creditBalanceSheetRisk": 45645645645,
           "creditOffBalanceSheetRisk": 45645645,
           "totalCreditRisk": 45691291290,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -216,7 +216,7 @@
           "creditBalanceSheetRisk": 46456456,
           "creditOffBalanceSheetRisk": 4664466464,
           "totalCreditRisk": 4710922920,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -252,7 +252,7 @@
           "creditBalanceSheetRisk": null,
           "creditOffBalanceSheetRisk": null,
           "totalCreditRisk": 1000050,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -288,7 +288,7 @@
           "creditBalanceSheetRisk": 4645664564,
           "creditOffBalanceSheetRisk": 4666645645645,
           "totalCreditRisk": 4671291310209,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -324,7 +324,7 @@
           "creditBalanceSheetRisk": null,
           "creditOffBalanceSheetRisk": null,
           "totalCreditRisk": 1000050,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -360,7 +360,7 @@
           "creditBalanceSheetRisk": 46545645,
           "creditOffBalanceSheetRisk": 534534,
           "totalCreditRisk": 47080179,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -396,7 +396,7 @@
           "creditBalanceSheetRisk": 65000000,
           "creditOffBalanceSheetRisk": 15000000,
           "totalCreditRisk": 80000000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -432,7 +432,7 @@
           "creditBalanceSheetRisk": 135000000,
           "creditOffBalanceSheetRisk": 25000000,
           "totalCreditRisk": 160000000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -468,7 +468,7 @@
           "creditBalanceSheetRisk": 275000000,
           "creditOffBalanceSheetRisk": 45000000,
           "totalCreditRisk": 320000000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -504,7 +504,7 @@
           "creditBalanceSheetRisk": 450000000,
           "creditOffBalanceSheetRisk": 75000000,
           "totalCreditRisk": 525000000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -540,7 +540,7 @@
           "creditBalanceSheetRisk": 453453,
           "creditOffBalanceSheetRisk": 453453,
           "totalCreditRisk": 906906,
-          "statusRow": 0
+          "statusRow": 3
         }
       ],
       "totalCommercialCredit": [
@@ -578,7 +578,7 @@
           "creditBalanceSheetRisk": 3000,
           "creditOffBalanceSheetRisk": 4000,
           "totalCreditRisk": 7000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -614,7 +614,7 @@
           "creditBalanceSheetRisk": 1,
           "creditOffBalanceSheetRisk": 233,
           "totalCreditRisk": 234,
-          "statusRow": 0
+          "statusRow": 3
         }
       ],
       "totalPublicCredit": [
@@ -652,7 +652,7 @@
           "creditBalanceSheetRisk": 1000,
           "creditOffBalanceSheetRisk": 2000,
           "totalCreditRisk": 3000,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -688,7 +688,7 @@
           "creditBalanceSheetRisk": 2000,
           "creditOffBalanceSheetRisk": 200,
           "totalCreditRisk": 2200,
-          "statusRow": 0
+          "statusRow": 3
         }
       ]
     },
@@ -1029,7 +1029,7 @@
           "greenCluster": 26,
           "remarks": "חברה מובילה בתחום הטכנולוגיה הירוקה",
           "officerName": "רחל כהן",
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1070,7 +1070,7 @@
           "greenCluster": 5,
           "remarks": "חברה בתחום התעשייה הכבדה",
           "officerName": "דוד לוי",
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1111,7 +1111,7 @@
           "greenCluster": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1152,7 +1152,7 @@
           "greenCluster": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         }
       ]
     },
@@ -1194,7 +1194,7 @@
           "greenBuilding": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 2
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1232,7 +1232,7 @@
           "greenBuilding": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1270,7 +1270,7 @@
           "greenBuilding": true,
           "remarks": "פרויקט בינוי ירוק",
           "officerName": "משה כהן",
-          "statusRow": 1
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1308,7 +1308,7 @@
           "greenBuilding": false,
           "remarks": "פרויקט מגורים סטנדרטי",
           "officerName": "שרה אברהם",
-          "statusRow": 1
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1346,7 +1346,7 @@
           "greenBuilding": true,
           "remarks": "מגדל משרדים ירוק",
           "officerName": "יוסף רוזן",
-          "statusRow": 1
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1384,7 +1384,7 @@
           "greenBuilding": true,
           "remarks": "פרויקט תשתית חכמה",
           "officerName": "אבי מרום",
-          "statusRow": 1
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1422,7 +1422,7 @@
           "greenBuilding": false,
           "remarks": "פרויקט כביש מהיר",
           "officerName": "רינה גרוס",
-          "statusRow": 1
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1460,7 +1460,7 @@
           "greenBuilding": true,
           "remarks": "פרויקט טיפול בשפכים ירוק",
           "officerName": "חנה דגן",
-          "statusRow": 1
+          "statusRow": 3
         }
       ]
     },
@@ -1504,7 +1504,7 @@
           "greenCluster": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1544,7 +1544,7 @@
           "greenCluster": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         }
       ]
     },
@@ -1585,7 +1585,7 @@
           "ourFinancingShare": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1622,7 +1622,7 @@
           "ourFinancingShare": null,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1659,7 +1659,7 @@
           "ourFinancingShare": 5,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         },
         {
           "dataCorrectnessDate": "2025-06-15T00:00:00",
@@ -1696,7 +1696,7 @@
           "ourFinancingShare": 5,
           "remarks": null,
           "officerName": null,
-          "statusRow": 0
+          "statusRow": 3
         }
       ]
     }

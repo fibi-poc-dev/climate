@@ -56,6 +56,7 @@ export class CarbonFootprintComponent {
 
   // Computed signal for changed rows count across all sections
   protected readonly changedRowsCount = computed(() => this.dataService.changedRowsCount());
+  
 
 
   protected readonly projectConstructionFinancingFilters = computed(() => {
@@ -84,6 +85,17 @@ export class CarbonFootprintComponent {
     return allRows.filter(row =>
       row.statusRow !== StatusRow.Deleted &&
       row.sourceData !== SourceData.Original
+    );
+  });
+
+  // Project Construction Financing data - filtered to exclude deleted and original rows
+  protected readonly projectConstructionFinancingRowsChanged = computed(() => {
+    this.statusRowChange(); // Subscribe to trigger for reactivity
+    const allRows = this.dataService.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || [];
+    return allRows.filter(row =>
+      row.statusRow == StatusRow.Deleted ||
+      row.statusRow == StatusRow.Updated ||
+      row.statusRow == StatusRow.New
     );
   });
 
