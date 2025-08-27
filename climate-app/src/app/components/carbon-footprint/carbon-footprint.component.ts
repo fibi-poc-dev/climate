@@ -54,6 +54,9 @@ export class CarbonFootprintComponent {
   // Loading state for save operation
   protected readonly isSaving = signal(false);
 
+  // Computed signal for changed rows count across all sections
+  protected readonly changedRowsCount = computed(() => this.dataService.changedRowsCount());
+
 
   protected readonly projectConstructionFinancingFilters = computed(() => {
     return this.dataService.request()?.projectConstructionFinancing.filter || [];
@@ -123,9 +126,14 @@ export class CarbonFootprintComponent {
 
     this.isSaving.set(true);
 
-    const currentData = this.dataService.getCurrentData();
+    // Use the data service method to get only changed rows
+    const filteredData = this.dataService.getChangedDataOnly();
+    const changedRowsCount = this.dataService.changedRowsCount();
 
-    this.httpService.climateDataCalcAndSave(currentData).subscribe({
+    // Log the number of changed rows being sent
+    console.log(`Sending ${changedRowsCount} changed rows to server`);
+
+    this.httpService.climateDataCalcAndSave(filteredData).subscribe({
       next: (response) => {
         // Update the data service with the saved response
         this.dataService.updateData(response);

@@ -6,8 +6,8 @@
       <ng-content select="[slot=toolbar-start]"></ng-content>
     </div>
     <div class="p-toolbar-group-end" style="display: flex; gap: 10px">
-      <p-button label="עדכן" icon="pi pi-save" severity="success" size="small" (onClick)="saveClimateData()"
-        [loading]="isSaving()">
+      <p-button [label]="'עדכן (' + changedRowsCount() + ')'" icon="pi pi-save" severity="success" size="small"
+        (onClick)="saveClimateData()" [loading]="isSaving()" [disabled]="changedRowsCount() === 0">
       </p-button>
       <p-button label="סנן" icon="pi pi-filter" severity="success" size="small"
         (onClick)="dataService.refreshClimateData()">

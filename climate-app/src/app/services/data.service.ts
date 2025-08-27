@@ -5,6 +5,8 @@ import { ClimateResponse } from '../models/climate-response.model';
 import { HttpService } from './http.service';
 import { ClimateRequest } from '../models/climate-request.model';
 import { RequestSection } from '../models/climate-request.model';
+import { StatusRow } from '../models/enums';
+import { CarbonFootprintRow } from '../models/carbon-footprint.model';
 
 @Injectable({
   providedIn: 'root'
@@ -186,6 +188,123 @@ export class DataService {
       };
       this._request.set(updatedRequest);
     }
+  }
+
+  // =================================================================================
+  // GENERIC FILTERING METHODS FOR CHANGED ROWS
+  // =================================================================================
+
+  /**
+   * Generic helper function to filter rows based on statusRow
+   * Returns only rows with Updated, New, or Deleted status
+   */
+  private filterChangedRows<T extends { statusRow: number }>(rows: T[]): T[] {
+    return rows.filter(row =>
+      row.statusRow === StatusRow.Updated ||
+      row.statusRow === StatusRow.New ||
+      row.statusRow === StatusRow.Deleted
+    );
+  }
+
+  /**
+   * Computed signal that returns only changed carbon footprint main report rows
+   */
+  readonly changedCarbonFootprintMainReportRows = computed(() => {
+    const rows = this.carbonFootprintData()?.carbonFootprintMainReport.carbonFootprintMainReportRows || [];
+    return this.filterChangedRows(rows);
+  });
+
+  /**
+   * Computed signal that returns only changed project construction financing rows
+   */
+  readonly changedProjectConstructionFinancingRows = computed(() => {
+    const rows = this.carbonFootprintData()?.projectConstructionFinancing.projectConstructionFinancingRows || [];
+    return this.filterChangedRows(rows);
+  });
+
+  /**
+   * Computed signal that returns only changed project infrastructure financing rows
+   */
+  readonly changedProjectInfrastructureFinancingRows = computed(() => {
+    const rows = this.carbonFootprintData()?.projectInfrastructureFinancing.projectInfrastructureFinancingRows || [];
+    return this.filterChangedRows(rows);
+  });
+
+  /**
+   * Computed signal that returns only changed without projects rows
+   */
+  readonly changedWithoutProjectsRows = computed(() => {
+    const rows = this.carbonFootprintData()?.withoutProjects.withoutProjectsRows || [];
+    return this.filterChangedRows(rows);
+  });
+
+  /**
+   * Computed signal that returns the total count of all changed rows across all carbon footprint sections
+   */
+  readonly changedRowsCount = computed(() => {
+    return (
+      this.changedCarbonFootprintMainReportRows().length +
+      this.changedProjectConstructionFinancingRows().length +
+      this.changedProjectInfrastructureFinancingRows().length +
+      this.changedWithoutProjectsRows().length
+    );
+  });
+
+  /**
+   * Returns a filtered ClimateResponse containing only changed rows
+   * This method creates a new ClimateResponse object with only the changed data
+   */
+  getChangedDataOnly(): ClimateResponse | null {
+    const currentData = this.getCurrentData();
+    if (!currentData) return null;
+
+    // Create a deep copy of the data with filtered rows
+    const filteredData: ClimateResponse = {
+      ...currentData,
+      carbonFootprint: {
+        ...currentData.carbonFootprint,
+        carbonFootprintMainReport: {
+          ...currentData.carbonFootprint.carbonFootprintMainReport,
+          carbonFootprintMainReportRows: this.changedCarbonFootprintMainReportRows()
+        },
+        projectConstructionFinancing: {
+          ...currentData.carbonFootprint.projectConstructionFinancing,
+          projectConstructionFinancingRows: this.changedProjectConstructionFinancingRows()
+        },
+        projectInfrastructureFinancing: {
+          ...currentData.carbonFootprint.projectInfrastructureFinancing,
+          projectInfrastructureFinancingRows: this.changedProjectInfrastructureFinancingRows()
+        },
+        withoutProjects: {
+          ...currentData.carbonFootprint.withoutProjects,
+          withoutProjectsRows: this.changedWithoutProjectsRows()
+        }
+      }
+    };
+
+    return filteredData;
+  }
+
+  /**
+   * Generic method to get changed rows from any array of objects with statusRow property
+   * This can be used for future arrays in other sections (ESG, etc.)
+   * 
+   * Example usage for ESG data:
+   * 
+   * // For ESG Main Report rows (if they have statusRow property):
+   * readonly changedEsgMainReportRows = computed(() => {
+   *   const rows = this.esgMainReport()?.someRowsArray || [];
+   *   return this.getChangedRowsFromArray(rows);
+   * });
+   * 
+   * // For any other section with rows:
+   * readonly changedSomeOtherSectionRows = computed(() => {
+   *   const rows = this.someOtherData()?.rowsArray || [];
+   *   return this.getChangedRowsFromArray(rows);
+   * });
+   */
+  getChangedRowsFromArray<T extends { statusRow: number }>(rows: T[]): T[] {
+    return this.filterChangedRows(rows);
   }
 
 
