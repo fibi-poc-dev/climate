@@ -1,0 +1,1742 @@
+/* ESG Prime Component Styles */
+
+/* Global spacing reductions */
+::ng-deep .p-component {
+    line-height: 1.2;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+    padding: 0.25rem 0.5rem;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th {
+    padding: 0.25rem 0.5rem;
+}
+
+::ng-deep .p-card .p-card-body {
+    padding: 0.5rem;
+}
+
+::ng-deep .p-toolbar {
+    padding: 0.25rem 0.5rem;
+}
+
+::ng-deep .p-button {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Panel Header Styling */
+.details-panel ::ng-deep .p-panel .p-panel-header {
+    background-color: #f0f8ff;
+    /* Light pastel blue */
+    border-bottom: 1px solid #e0e6ed;
+    padding: 0.5rem;
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+}
+
+.table-section ::ng-deep .p-card .p-card-header {
+    background-color: #f0f8ff !important;
+    /* Light pastel blue */
+    border-bottom: 1px solid #e0e6ed;
+    padding: 0.5rem;
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1) !important;
+    transition: background-color 0.3s ease;
+}
+
+/* Selected/Active Card Header Styling */
+.table-section ::ng-deep .p-card.selected-card .p-card-header,
+.table-section ::ng-deep .p-card:hover .p-card-header {
+    background-color: rgba(24, 40, 95, 0.1) !important;    
+    border-bottom: 2px solid rgba(24, 40, 95, 0.3);
+}
+
+/* Specific styling for the card header title */
+.table-section ::ng-deep .p-card .p-card-header .p-card-title {
+    color: rgba(24, 40, 95, 1) !important;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Ensure header text is properly styled */
+.details-panel ::ng-deep .p-panel .p-panel-header .p-panel-title,
+.table-section ::ng-deep .p-card .p-card-header .p-card-title {
+    color: rgba(24, 40, 95, 1);
+    font-weight: 600;
+}
+
+.esg-prime-container {
+    font-family: Arial, sans-serif;
+    padding: 0.5rem;
+    max-width: 100%;
+    min-height: 100vh;
+    /* Minimum viewport height to allow growth */
+    overflow-x: auto;
+    /* Enable horizontal scrolling when needed */
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    /* Smooth scrolling */
+    position: relative;
+}
+
+/* Main Layout - 75% Table, 25% Details */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+    min-height: calc(100vh - 200px);
+    /* Minimum height based on viewport minus toolbar/padding */
+    min-width: 1200px;
+    /* Minimum width to ensure horizontal scrolling when needed */
+    margin-bottom: 1rem;
+    /* Add space before accordion */
+}
+
+.details-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-section {
+    /* flex: 0 0 75%; */
+    /* Fixed 75% width for table section (masterESG) */
+    display: flex;
+    flex-direction: column;
+    min-width: 800px;
+    /* Minimum width to ensure horizontal scrolling when needed */
+}
+
+/* Table Container Scrolling */
+.table-section ::ng-deep .p-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.table-section ::ng-deep .p-card .p-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent overflow at this level */
+}
+
+.table-section ::ng-deep .p-datatable {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 800px;
+    /* Minimum width to ensure table doesn't shrink too much */
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-wrapper {
+    flex: 1;
+    overflow: auto;
+    width: 100%;
+}
+
+/* Enhanced Horizontal Scrolling */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%;
+    flex: 1;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-header {
+    overflow: hidden;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
+    overflow-x: auto;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-table {
+    min-width: max-content;
+}
+
+/* Ensure table maintains minimum width for all columns */
+.table-section ::ng-deep .p-datatable table {
+    min-width: 1800px;
+    /* Minimum width to force horizontal scroll */
+    width: max-content;
+}
+
+/* Details Panel Styles */
+.detail-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+
+.detail-column {
+    flex: 1;
+    min-width: 0;
+    /* Prevents flex items from overflowing */
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: rgba(248, 249, 250, 0.5);
+    border: 1px solid rgba(24, 40, 95, 0.1);
+}
+
+.column-title {
+    margin: 0 0 0.5rem 0;
+    padding: 0.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+    border-bottom: 2px solid rgba(24, 40, 95, 0.2);
+    text-align: center;
+}
+
+.detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 2rem;
+}
+
+.detail-item label {
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+    font-size: 0.875rem;
+    text-align: right;
+    flex: 0 0 40%;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+}
+
+.detail-item span {
+    color: #333;
+    font-size: 0.875rem;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+}
+
+.detail-item p-tag {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Editable Field Styles */
+.editable-field {
+    flex: 1;
+    min-width: 0;
+    align-self: center;
+}
+
+.editable-field.editing {
+    background-color: rgba(255, 243, 205, 0.3);
+    border-radius: 4px;
+    padding: 0.25rem;
+}
+
+.display-mode {
+    width: 100%;
+}
+
+.value-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.current-value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.original-value-row {
+    display: flex;
+    align-items: center;
+}
+
+.current-value {
+    flex: 1;
+}
+
+.current-value.modified {
+    color: rgba(24, 40, 95, 1);
+    font-weight: 600;
+}
+
+.original-indicator {
+    font-size: 0.75rem;
+    color: #666;
+    font-style: italic;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.current-value-row:hover .edit-btn,
+.editable-field:hover .edit-btn {
+    opacity: 0.7;
+}
+
+.edit-btn:hover {
+    opacity: 1 !important;
+    background-color: rgba(24, 40, 95, 0.1);
+}
+
+.edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid rgba(24, 40, 95, 0.3);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: Arial, sans-serif;
+    text-align: right;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: rgba(24, 40, 95, 1);
+    box-shadow: 0 0 0 0.2rem rgba(24, 40, 95, 0.25);
+}
+
+.original-value-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.info-icon {
+    font-size: 0.875rem;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.action-btn.save {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn.save:hover {
+    background-color: #218838;
+}
+
+.action-btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn.cancel:hover {
+    background-color: #c82333;
+}
+
+/* Inline Filter Styles */
+.inline-filter-field {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    transition: all 0.2s ease;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.inline-filter-field.filtering {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Filter Display Mode */
+.filter-display-mode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.filter-value {
+    flex: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+    color: #666;
+    font-size: 0.875rem;
+    text-align: right;
+}
+
+.filter-value:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.filter-value.has-filter {
+    color: #0056b3;
+    font-weight: 500;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.filter-operator-display {
+    font-size: 0.85em;
+    color: #666;
+    margin-right: 4px;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+}
+
+.filter-btn:hover {
+    opacity: 1;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-color: rgba(0, 123, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Filter Edit Mode */
+.filter-edit-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.filter-inputs {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    direction: rtl;
+}
+
+.operator-select {
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    min-width: 50px;
+    background: white;
+    text-align: center;
+}
+
+.filter-input {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    min-width: 0;
+    text-align: right;
+    direction: rtl;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    direction: ltr;
+}
+
+.action-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    min-width: 28px;
+}
+
+.action-btn.save {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn.save:hover {
+    background-color: #218838;
+}
+
+.action-btn.cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn.cancel:hover {
+    background-color: #c82333;
+}
+
+/* Active Filters Display */
+.active-filters-panel {
+    margin-bottom: 1rem;
+}
+
+.active-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.filter-chip {
+    display: flex;
+    align-items: center;
+    background-color: rgba(24, 40, 95, 0.1);
+    border: 1px solid rgba(24, 40, 95, 0.3);
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    gap: 4px;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: rgba(24, 40, 95, 1);
+}
+
+.filter-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.filter-operator {
+    color: #666;
+    font-size: 0.8em;
+}
+
+.remove-filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 0 2px;
+    margin-left: 4px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remove-filter-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.no-selection {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+}
+
+.no-selection i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #ddd;
+}
+
+.no-selection p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Selected Row Styling */
+.selected-row {
+    background-color: rgba(24, 40, 95, 0.1) !important;
+    border-left: 4px solid rgba(24, 40, 95, 1) !important;
+}
+
+/* Panel and Fieldset Customization */
+.p-panel .p-panel-header {
+    background-color: rgba(24, 40, 95, 0.05);
+    color: rgba(24, 40, 95, 1);
+    border-bottom: 1px solid rgba(24, 40, 95, 0.2);
+}
+
+.p-fieldset .p-fieldset-legend {
+    background-color: rgba(24, 40, 95, 1);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.p-fieldset .p-fieldset-content {
+    padding: 0.5rem;
+}
+
+/* Scroll fade indicators */
+.esg-prime-container::before {
+    content: '';
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.esg-prime-container::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Custom Scrollbar Styling */
+.esg-prime-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.esg-prime-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+.esg-prime-container::-webkit-scrollbar-thumb {
+    background: rgba(24, 40, 95, 0.6);
+    border-radius: 6px;
+    border: 2px solid #f1f1f1;
+}
+
+.esg-prime-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(24, 40, 95, 0.8);
+}
+
+/* For Firefox */
+.esg-prime-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(24, 40, 95, 0.6) #f1f1f1;
+}
+
+/* Table Styling */
+.p-datatable {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Responsive Table Layout - Column Width Optimization */
+::ng-deep .p-datatable table {
+    table-layout: auto;
+    width: 100%;
+    min-width: 2200px;
+    /* Increased from 1200px to accommodate filter fields */
+}
+
+/* Specific Column Width Optimizations - Updated for filter fields */
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(1),
+/* Bank */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(1) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 120px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(2),
+/* Branch */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(2) {
+    width: 100px;
+    min-width: 100px;
+    max-width: 120px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(3),
+/* Account */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(3) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+/* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
+    width: 180px;
+    min-width: 160px;
+    max-width: 200px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(5),
+/* Customer Rating */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(5) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(6),
+/* Current Credit Authority */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(6) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(7),
+/* Handling Unit Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(7) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(8),
+/* Regulated Sector Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(8) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+/* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(10),
+/* Branch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(10) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+/* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(12),
+/* Subbranch Classification Code */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(12) {
+    width: 120px;
+    min-width: 120px;
+    max-width: 140px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+/* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+/* Credit Report Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+    width: 160px;
+    min-width: 140px;
+    max-width: 180px;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(15),
+/* Total Collateral */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(15) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(16),
+/* Total Solo */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(16) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(17),
+/* Total Credit Risk */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(17) {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+}
+
+/* Text overflow handling for all table cells */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    position: relative;
+}
+
+/* Allow text wrapping for specific description columns */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4),
+/* Account Name */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+/* Regulated Sector Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+/* Branch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+/* Subbranch Classification Description */
+::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+    /* Credit Report Description */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.2;
+    padding: 0.25rem 0.4rem;
+}
+
+/* Header text optimization - always show full text with word wrapping */
+::ng-deep .p-datatable .p-datatable-thead>tr>th {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.4rem;
+    vertical-align: top;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    line-height: 1.2;
+    height: auto;
+    min-height: 60px;
+    /* Increased from 40px to accommodate filter fields */
+}
+
+/* Filter field styling within table headers */
+::ng-deep .p-datatable .p-datatable-thead>tr>th app-filter-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+::ng-deep .p-datatable .p-datatable-thead>tr>th app-filter-field .filter-icon {
+    font-size: 12px;
+    margin: 0;
+    padding: 2px;
+}
+
+/* Filter input optimization for compact layout */
+::ng-deep .p-datatable .filter-input {
+    width: 100%;
+    font-size: 11px;
+    padding: 0.2rem 0.3rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+::ng-deep .p-datatable .filter-controls {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    width: 100%;
+}
+
+::ng-deep .p-datatable .filter-type-select {
+    font-size: 10px;
+    padding: 0.2rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    min-width: 35px;
+    flex-shrink: 0;
+}
+
+::ng-deep .p-datatable .filter-amount {
+    flex: 1;
+    min-width: 40px;
+}
+
+/* Compact row height */
+::ng-deep .p-datatable .p-datatable-tbody>tr {
+    height: auto;
+    min-height: 32px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1400px) {
+    ::ng-deep .p-datatable table {
+        min-width: 1100px;
+    }
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+    /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
+        width: 130px;
+        min-width: 100px;
+        max-width: 130px;
+    }
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+    /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+    /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+    /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+    /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+        width: 100px;
+        min-width: 80px;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 1200px) {
+    ::ng-deep .p-datatable table {
+        min-width: 1000px;
+    }
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(4),
+    /* Account Name */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(4) {
+        width: 110px;
+        min-width: 90px;
+        max-width: 110px;
+    }
+
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(9),
+    /* Regulated Sector Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(9),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(11),
+    /* Branch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(11),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(13),
+    /* Subbranch Classification Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(13),
+    ::ng-deep .p-datatable .p-datatable-thead>tr>th:nth-child(14),
+    /* Credit Report Description */
+    ::ng-deep .p-datatable .p-datatable-tbody>tr>td:nth-child(14) {
+        width: 85px;
+        min-width: 70px;
+        max-width: 85px;
+    }
+}
+
+/* Table Scrolling Enhancement */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body {
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+/* Custom Scrollbar for Table */
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    background: rgba(24, 40, 95, 0.6);
+    border-radius: 4px;
+}
+
+.table-section ::ng-deep .p-datatable .p-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(24, 40, 95, 0.8);
+}
+
+.p-datatable .p-datatable-header {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    line-height: 1.3;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Responsive Design */
+
+/* Scroll to Top Button */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(24, 40, 95, 1);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 1000;
+}
+
+.scroll-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top-btn:hover {
+    background-color: rgba(24, 40, 95, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading State */
+.loading-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading-container p {
+    margin-top: 1rem;
+    color: #666;
+}
+
+.p-panel {
+    border: 2px solid rgba(24, 40, 95, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Toolbar Customization */
+.p-toolbar {
+    margin-bottom: 1rem;
+    border: 2px solid rgba(24, 40, 95, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.p-toolbar-group-start {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.p-toolbar-group-end .p-input-icon-left {
+    position: relative;
+}
+
+.p-toolbar-group-end .p-input-icon-left i {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    margin-top: -0.5rem;
+    color: #666;
+    z-index: 1;
+}
+
+.p-toolbar-group-end input {
+    padding-left: 2.5rem;
+    width: 250px;
+}
+
+/* Empty Message */
+.empty-message {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.empty-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.empty-message p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* No Data State */
+.no-data-container {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.no-data-container i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 193, 14, 1);
+}
+
+.no-data-container h3 {
+    color: rgba(24, 40, 95, 1);
+    margin-bottom: 0.5rem;
+}
+
+.no-data-container p {
+    margin: 0;
+}
+
+/* Card Customization */
+.p-card {
+    border: 2px solid rgba(24, 40, 95, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.p-card .p-card-header {
+    background-color: rgba(24, 40, 95, 0.05);
+    color: rgba(24, 40, 95, 1);
+    font-weight: 600;
+    border-bottom: 2px solid rgba(24, 40, 95, 0.15);
+    border-radius: 6px 6px 0 0;
+}
+
+/* Button Customization */
+.p-button {
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+}
+
+.p-button.p-button-info {
+    background-color: rgba(24, 40, 95, 1);
+    border-color: rgba(24, 40, 95, 1);
+}
+
+.p-button.p-button-info:hover {
+    background-color: rgba(24, 40, 95, 0.9);
+    border-color: rgba(24, 40, 95, 0.9);
+}
+
+.p-button.p-button-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.p-button.p-button-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Tag Customization */
+.p-tag.p-tag-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.p-tag.p-tag-warning {
+    background-color: rgba(255, 193, 14, 1);
+    color: rgba(24, 40, 95, 1);
+}
+
+.p-tag.p-tag-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.p-tag.p-tag-info {
+    background-color: rgba(24, 40, 95, 1);
+    color: white;
+}
+
+/* Progress Bar */
+.p-progressbar {
+    height: 1rem;
+    background-color: #e9ecef;
+    border-radius: 0.5rem;
+}
+
+.p-progressbar .p-progressbar-value {
+    background-color: rgba(24, 40, 95, 1);
+    border-radius: 0.5rem;
+}
+
+/* Divider */
+.p-divider {
+    margin: 2rem 0;
+}
+
+/* Input Text */
+.p-inputtext {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.p-inputtext:focus {
+    border-color: rgba(24, 40, 95, 1);
+    box-shadow: 0 0 0 0.2rem rgba(24, 40, 95, 0.25);
+    outline: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+
+    /* Medium screens - maintain proportions but allow slight flexibility */
+    .table-section {
+        flex: 0 1 73%;
+        /* Slightly more flexible for medium screens */
+    }
+
+    .details-panel {
+        flex: 0 1 27%;
+        /* Slightly more flexible for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .esg-prime-container {
+        padding: 0.5rem;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .details-panel {
+        flex: none;
+        order: 2;
+        max-height: 400px;
+    }
+
+    .detail-sections-horizontal {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .table-section {
+        flex: none;
+        order: 1;
+    }
+
+    .p-toolbar-group-end input {
+        width: 200px;
+    }
+
+    .p-datatable {
+        font-size: 0.75rem;
+    }
+
+    .detail-item {
+        flex-direction: row;
+        gap: 0.5rem;
+        min-height: 1.8rem;
+    }
+
+    .detail-item label {
+        flex: 0 0 35%;
+        text-align: right;
+        font-size: 0.8rem;
+    }
+
+    .detail-item span {
+        text-align: left;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .p-toolbar-group-start {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .p-toolbar-group-end {
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .p-toolbar-group-end input {
+        width: 100%;
+    }
+
+    .details-panel {
+        flex: none;
+        max-height: 300px;
+    }
+
+    .detail-sections-horizontal {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .detail-item label {
+        font-size: 0.8rem;
+        flex: 0 0 45%;
+        text-align: right;
+    }
+
+    .detail-item span {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 360px) {
+    .detail-item {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
+    }
+
+    .detail-item label {
+        flex: none;
+        text-align: right;
+        width: 100%;
+    }
+
+    .detail-item span {
+        flex: none;
+        text-align: left;
+        width: 100%;
+    }
+}
+
+/* Filter Input Styling */
+.filter-input {
+    width: 100%;
+    font-size: 12px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: rgba(24, 40, 95, 0.5);
+    background-color: white;
+    box-shadow: 0 0 4px rgba(24, 40, 95, 0.3);
+}
+
+.filter-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Filter Controls Container */
+.filter-controls {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    width: 100%;
+}
+
+/* New Button-based Filter Controls */
+.filter-controls-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    position: relative;
+}
+
+.operator-buttons {
+    display: flex;
+    gap: 1px;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 3px;
+    padding: 1px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.operator-buttons.visible,
+.filter-controls-buttons:hover .operator-buttons {
+    opacity: 1;
+    visibility: visible;
+}
+
+.operator-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 2px 4px;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1;
+}
+
+.operator-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.operator-btn.active {
+    background: rgba(24, 40, 95, 1);
+    color: white;
+    border-color: rgba(24, 40, 95, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.operator-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(24, 40, 95, 0.25);
+}
+
+.filter-type-select {
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.filter-amount {
+    flex: 1;
+    min-width: 80px;
+}
+
+/* Responsive design for filter controls */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .filter-type-select {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .filter-amount {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* Filter Type Select Styling */
+.filter-type-select {
+    font-size: 12px;
+    padding: 0.4rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.filter-type-select:focus {
+    outline: none;
+    border-color: rgba(24, 40, 95, 0.5);
+    background-color: white;
+    box-shadow: 0 0 4px rgba(24, 40, 95, 0.3);
+}
+
+.filter-type-select:hover {
+    border-color: rgba(24, 40, 95, 0.5);
+}
+
+/* Debug Filter Display */
+.filter-debug-display {
+    margin-bottom: 1rem;
+}
+
+.debug-content {
+    font-size: 14px;
+}
+
+.debug-content h5 {
+    margin: 0 0 0.5rem 0;
+    color: rgba(24, 40, 95, 1);
+}
+
+.filter-item {
+    background-color: #f0f8ff;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    border: 1px solid rgba(24, 40, 95, 0.2);
+}
+
+.filter-item strong {
+    color: rgba(24, 40, 95, 1);
+}
+
+/* Enhanced Scrollbar Styling */
+.esg-prime-container::-webkit-scrollbar,
+.table-section::-webkit-scrollbar,
+.details-panel::-webkit-scrollbar,
+.table-section ::ng-deep .p-datatable::-webkit-scrollbar,
+.table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.esg-prime-container::-webkit-scrollbar-track,
+.table-section::-webkit-scrollbar-track,
+.details-panel::-webkit-scrollbar-track,
+.table-section ::ng-deep .p-datatable::-webkit-scrollbar-track,
+.table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+.esg-prime-container::-webkit-scrollbar-thumb,
+.table-section::-webkit-scrollbar-thumb,
+.details-panel::-webkit-scrollbar-thumb,
+.table-section ::ng-deep .p-datatable::-webkit-scrollbar-thumb,
+.table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(24, 40, 95, 0.4);
+    border-radius: 6px;
+    border: 2px solid #f1f1f1;
+}
+
+.esg-prime-container::-webkit-scrollbar-thumb:hover,
+.table-section::-webkit-scrollbar-thumb:hover,
+.details-panel::-webkit-scrollbar-thumb:hover,
+.table-section ::ng-deep .p-datatable::-webkit-scrollbar-thumb:hover,
+.table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(24, 40, 95, 0.6);
+}
+
+.esg-prime-container::-webkit-scrollbar-corner,
+.table-section::-webkit-scrollbar-corner,
+.details-panel::-webkit-scrollbar-corner,
+.table-section ::ng-deep .p-datatable::-webkit-scrollbar-corner,
+.table-section ::ng-deep .p-datatable-wrapper::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+/* Accordion Styling - Outside Main Layout */
+::ng-deep .p-accordion {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+::ng-deep .p-accordion .p-accordion-panel {
+    margin-bottom: 0.5rem;
+}
+
+/* Ensure accordion doesn't interfere with main layout scrolling */
+.esg-prime-container> ::ng-deep .p-accordion {
+    flex-shrink: 0;
+    /* Prevent accordion from shrinking */
+}
+
+/* Table Caption Styles */
+.caption-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.caption-header h3 {
+    margin: 0;
+    color: rgba(24, 40, 95, 1);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.record-count {
+    color: #6c757d;
+    font-size: 0.9rem;
+    background-color: #e9ecef;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+}
+
+/* Active Filters Section */
+.active-filters-section h4 {
+    margin: 0 0 0.5rem 0;
+    color: #856404;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: rgba(255, 193, 14, 0.1);
+    border: 1px solid rgba(255, 193, 14, 0.3);
+    border-radius: 16px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    color: #856404;
+}
+
+.filter-label {
+    font-weight: 600;
+}
+
+.filter-value {
+    background-color: rgba(255, 193, 14, 0.2);
+    padding: 0.1rem 0.3rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.filter-operator {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.remove-filter-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.1rem 0.3rem;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.remove-filter-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Filter Fields Row */
+.filter-fields-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+}
+
+.filter-fields-row app-filter-field {
+    min-width: 200px;
+    flex: 1;
+}
