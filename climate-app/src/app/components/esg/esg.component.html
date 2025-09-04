@@ -30,624 +30,615 @@
 
 
 
-        <!-- Table Section -->
-        <div class="table-section">
-            <p-card [class.selected-card]="selectedRow() !== null">
-                <p-table id="master-esg" [value]="esgMainReportData()" [paginator]="true" [rows]="10"
-                    [scrollable]="true" scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm"
-                    selectionMode="single" (onRowSelect)="onRowSelect($event)">
+    <!-- Table Section -->
+    <div class="table-section">
+        <p-card [class.selected-card]="selectedRow() !== null">
+            <p-table id="master-esg" [value]="esgMainReportData()" [paginator]="true" [rows]="10" [scrollable]="true"
+                scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm" selectionMode="single"
+                (onRowSelect)="onRowSelect($event)">
 
-                    <ng-template pTemplate="caption">
-                        <div>
-                            <div class="caption-header">
-                                <h3>דוח ESG ראשי</h3>
-                                <span class="record-count">{{ totalRows() }} רשומות</span>
-                            </div>
-
-                            <!-- Active Filters Display -->
-                            @if (esgRequestFilters().length > 0) {
-                            <div class="active-filters-section">
-                                <div class="filters-container">
-                                    @for (filter of esgRequestFilters(); track filter.filterFieldName) {
-                                    <div class="filter-chip">
-                                        <span class="filter-label">{{ filter.displayName }}:</span>
-                                        <span class="filter-value">{{ filter.filterFieldValue }}</span>
-                                        <span class="filter-operator">({{ filter.filterType }})</span>
-                                        <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)"
-                                            title="הסר מסנן">✕
-                                        </button>
-                                    </div>
-                                    }
-                                </div>
-                            </div>
-                            }
+                <ng-template pTemplate="caption">
+                    <div>
+                        <div class="caption-header">
+                            <h3>דוח ESG ראשי</h3>
+                            <span class="record-count">{{ totalRows() }} רשומות</span>
                         </div>
-                    </ng-template>
 
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>
-                                <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'text'"
-                                    [value]="'123'" [operator]="'<'"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('branch')"
-                                    [operator]="getFilterFieldOperator('branch')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('account')"
-                                    [operator]="getFilterFieldOperator('account')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'accountName'" [displayName]="'שם לקוח'"
-                                    [filterType]="'text'" [value]="getFilterFieldValue('accountName')"
-                                    [operator]="getFilterFieldOperator('accountName')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'customerRating'" [displayName]="'דירוג לקוח'"
-                                    [filterType]="'numeric'" [value]="getFilterFieldValue('customerRating')"
-                                    [operator]="getFilterFieldOperator('customerRating')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'currentCreditAuthority'"
-                                    [displayName]="'סמכות אשראי נוכחי'" [filterType]="'numeric'"
-                                    [value]="getFilterFieldValue('currentCreditAuthority')"
-                                    [operator]="getFilterFieldOperator('currentCreditAuthority')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'יחידה מטפלת'"
-                                    [filterType]="'text'" [value]="getFilterFieldValue('handlingUnitCode')"
-                                    [operator]="getFilterFieldOperator('handlingUnitCode')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'regualatedSectorCode'" [displayName]="'קוד מגזר פיקוחי'"
-                                    [filterType]="'text'" [value]="getFilterFieldValue('regualatedSectorCode')"
-                                    [operator]="getFilterFieldOperator('regualatedSectorCode')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'regualatedSectorDescription'"
-                                    [displayName]="'תיאור מגזר פיקוחי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('regualatedSectorDescription')"
-                                    [operator]="getFilterFieldOperator('regualatedSectorDescription')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'branchClassificatonCode'"
-                                    [displayName]="'קוד סיווג ענפי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('branchClassificatonCode')"
-                                    [operator]="getFilterFieldOperator('branchClassificatonCode')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'branchClassificatonDescription'"
-                                    [displayName]="'תיאור סיווג ענפי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('branchClassificatonDescription')"
-                                    [operator]="getFilterFieldOperator('branchClassificatonDescription')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'subbranchClassificationCode'"
-                                    [displayName]="'קוד תת סיווג ענפי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('subbranchClassificationCode')"
-                                    [operator]="getFilterFieldOperator('subbranchClassificationCode')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'subbranchClassificationDescription'"
-                                    [displayName]="'תיאור תת סיווג ענפי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('subbranchClassificationDescription')"
-                                    [operator]="getFilterFieldOperator('subbranchClassificationDescription')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'creditReportDescription'"
-                                    [displayName]="'תיאור בדוח האשראי'" [filterType]="'text'"
-                                    [value]="getFilterFieldValue('creditReportDescription')"
-                                    [operator]="getFilterFieldOperator('creditReportDescription')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'totalCollateral'" [displayName]="'סך בטחונות'"
-                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalCollateral')"
-                                    [operator]="getFilterFieldOperator('totalCollateral')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'totalSolo'" [displayName]="'סך סולו'"
-                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalSolo')"
-                                    [operator]="getFilterFieldOperator('totalSolo')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                            <th>
-                                <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סך סיכון אשראי'"
-                                    [filterType]="'numeric'" [value]="getFilterFieldValue('totalCreditRisk')"
-                                    [operator]="getFilterFieldOperator('totalCreditRisk')"
-                                    [requestSection]="dataService.request()?.esgRequest">
-                                </app-filter-field>
-                            </th>
-                        </tr>
-                    </ng-template>
+                        <!-- Active Filters Display -->
+                        @if (esgRequestFilters().length > 0) {
+                        <div class="active-filters-section">
+                            <div class="filters-container">
+                                @for (filter of esgRequestFilters(); track filter.filterFieldName) {
+                                <div class="filter-chip">
+                                    <span class="filter-label">{{ filter.displayName }}:</span>
+                                    <span class="filter-value">{{ filter.filterFieldValue }}</span>
+                                    <span class="filter-operator">({{ filter.filterType }})</span>
+                                    <button class="remove-filter-btn" (click)="removeFilter(filter.filterFieldName)"
+                                        title="הסר מסנן">✕
+                                    </button>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </ng-template>
 
-                    <ng-template pTemplate="body" let-row>
-                        <tr [class.selected-row]="selectedRow() === row" (click)="selectRow(row)">
-                            <td>{{ row.bank }}</td>
-                            <td>{{ row.branch }}</td>
-                            <td>{{ row.account }}</td>
-                            <td>{{ row.accountName || '' }}</td>
-                            <td>{{ row.customerRating }}</td>
-                            <!-- <td>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <app-filter-field [fieldName]="'bank'" [displayName]="'בנק'" [filterType]="'integer'"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'branch'" [displayName]="'סניף'" [filterType]="'integer'"                                
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'account'" [displayName]="'חשבון'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('account')" [operator]="getFilterFieldOperator('account')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'accountName'" [displayName]="'שם לקוח'"
+                                [filterType]="'text'" [value]="getFilterFieldValue('accountName')"
+                                [operator]="getFilterFieldOperator('accountName')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'customerRating'" [displayName]="'דירוג לקוח'"
+                                [filterType]="'numeric'" [value]="getFilterFieldValue('customerRating')"
+                                [operator]="getFilterFieldOperator('customerRating')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'currentCreditAuthority'" [displayName]="'סמכות אשראי נוכחי'"
+                                [filterType]="'numeric'" [value]="getFilterFieldValue('currentCreditAuthority')"
+                                [operator]="getFilterFieldOperator('currentCreditAuthority')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'handlingUnitCode'" [displayName]="'יחידה מטפלת'"
+                                [filterType]="'text'" [value]="getFilterFieldValue('handlingUnitCode')"
+                                [operator]="getFilterFieldOperator('handlingUnitCode')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'regualatedSectorCode'" [displayName]="'קוד מגזר פיקוחי'"
+                                [filterType]="'text'" [value]="getFilterFieldValue('regualatedSectorCode')"
+                                [operator]="getFilterFieldOperator('regualatedSectorCode')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'regualatedSectorDescription'"
+                                [displayName]="'תיאור מגזר פיקוחי'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('regualatedSectorDescription')"
+                                [operator]="getFilterFieldOperator('regualatedSectorDescription')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'branchClassificatonCode'" [displayName]="'קוד סיווג ענפי'"
+                                [filterType]="'text'" [value]="getFilterFieldValue('branchClassificatonCode')"
+                                [operator]="getFilterFieldOperator('branchClassificatonCode')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'branchClassificatonDescription'"
+                                [displayName]="'תיאור סיווג ענפי'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('branchClassificatonDescription')"
+                                [operator]="getFilterFieldOperator('branchClassificatonDescription')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'subbranchClassificationCode'"
+                                [displayName]="'קוד תת סיווג ענפי'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('subbranchClassificationCode')"
+                                [operator]="getFilterFieldOperator('subbranchClassificationCode')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'subbranchClassificationDescription'"
+                                [displayName]="'תיאור תת סיווג ענפי'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('subbranchClassificationDescription')"
+                                [operator]="getFilterFieldOperator('subbranchClassificationDescription')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'creditReportDescription'"
+                                [displayName]="'תיאור בדוח האשראי'" [filterType]="'text'"
+                                [value]="getFilterFieldValue('creditReportDescription')"
+                                [operator]="getFilterFieldOperator('creditReportDescription')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'totalCollateral'" [displayName]="'סך בטחונות'"
+                                [filterType]="'numeric'" [value]="getFilterFieldValue('totalCollateral')"
+                                [operator]="getFilterFieldOperator('totalCollateral')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'totalSolo'" [displayName]="'סך סולו'"
+                                [filterType]="'numeric'" [value]="getFilterFieldValue('totalSolo')"
+                                [operator]="getFilterFieldOperator('totalSolo')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                        <th>
+                            <app-filter-field [fieldName]="'totalCreditRisk'" [displayName]="'סך סיכון אשראי'"
+                                [filterType]="'numeric'" [value]="getFilterFieldValue('totalCreditRisk')"
+                                [operator]="getFilterFieldOperator('totalCreditRisk')"
+                                [requestSection]="dataService.request()?.esgRequest">
+                            </app-filter-field>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-row>
+                    <tr [class.selected-row]="selectedRow() === row" (click)="selectRow(row)">
+                        <td>{{ row.bank }}</td>
+                        <td>{{ row.branch }}</td>
+                        <td>{{ row.account }}</td>
+                        <td>{{ row.accountName || '' }}</td>
+                        <td>{{ row.customerRating }}</td>
+                        <!-- <td>
                                 <p-tag [value]="getCustomerRatingLabel(row.customerRating)" severity="info">
                                 </p-tag>
                             </td> -->
-                            <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
-                            <td>{{ row.handlingUnitCode || '' }}</td>
-                            <td>{{ row.regualatedSectorCode || '' }}</td>
-                            <td>{{ row.regualatedSectorDescription || '' }}</td>
-                            <td>{{ row.branchClassificatonCode || '' }}</td>
-                            <td>{{ row.branchClassificatonDescription || '' }}</td>
-                            <td>{{ row.subbranchClassificationCode || '' }}</td>
-                            <td>{{ row.subbranchClassificationDescription || '' }}</td>
-                            <td>{{ row.creditReportDescription || '' }}</td>
-                            <td>{{ formatCurrency(row.totalCollateral) }}</td>
-                            <td>{{ formatCurrency(row.totalSolo) }}</td>
-                            <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
-                        </tr>
-                    </ng-template>
+                        <td>{{ formatCurrency(row.currentCreditAuthority) }}</td>
+                        <td>{{ row.handlingUnitCode || '' }}</td>
+                        <td>{{ row.regualatedSectorCode || '' }}</td>
+                        <td>{{ row.regualatedSectorDescription || '' }}</td>
+                        <td>{{ row.branchClassificatonCode || '' }}</td>
+                        <td>{{ row.branchClassificatonDescription || '' }}</td>
+                        <td>{{ row.subbranchClassificationCode || '' }}</td>
+                        <td>{{ row.subbranchClassificationDescription || '' }}</td>
+                        <td>{{ row.creditReportDescription || '' }}</td>
+                        <td>{{ formatCurrency(row.totalCollateral) }}</td>
+                        <td>{{ formatCurrency(row.totalSolo) }}</td>
+                        <td>{{ formatCurrency(row.totalCreditRisk) }}</td>
+                    </tr>
+                </ng-template>
 
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="14" class="text-center">
-                                <div class="empty-message">
-                                    <i class="pi pi-info-circle"></i>
-                                    <p>לא נמצאו נתונים להצגה</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </p-card>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="14" class="text-center">
+                            <div class="empty-message">
+                                <i class="pi pi-info-circle"></i>
+                                <p>לא נמצאו נתונים להצגה</p>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-card>
+    </div>
+
+
+    <!-- Details Panel -->
+    @if (selectedRow()) {
+    <p-panel header="{{selectedRow()?.accountName}}">
+        <div style="display: flex; gap: 20px; height: 150px; max-height: 150px; justify-content: space-between;">
+            <div class="detail-sections-horizontal">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>קלאסטר אשראי אדום:</label>
+                        <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
+                            [fieldName]="'creditRedCluster'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('creditRedCluster', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סיכון פיזי שורשי:</label>
+                        <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
+                            [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סיכון מעבר שורשי:</label>
+                        <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
+                            [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>משקל סיכון פיזי שורשי:</label>
+                        <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
+                            [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
+                        </app-editable-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-sections-horizontal">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>משקל סיכון מעבר שורשי:</label>
+                        <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
+                            [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>שקלול רמת הסיכון השורשי:</label>
+                        <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
+                            [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סיכון שיורי:</label>
+                        <app-editable-field [value]="selectedRow()?.residualRisk ?? null" [fieldName]="'residualRisk'"
+                            [fieldType]="'number'" (valueChange)="onFieldValueChange('residualRisk', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>תאריך תוקף סיכון שיורי:</label>
+                        <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-sections-horizontal">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>איכות ניהול:</label>
+                        <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
+                            [fieldName]="'qualityManagement'" [fieldType]="'number'"
+                            (valueChange)="onFieldValueChange('qualityManagement', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>קלאסטר שחור:</label>
+                        <app-editable-field [value]="selectedRow()?.blackCluster ?? null" [fieldName]="'blackCluster'"
+                            [fieldType]="'number'" (valueChange)="onFieldValueChange('blackCluster', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>קלאסטר ירוק:</label>
+                        <app-editable-field [value]="selectedRow()?.greenCluster ?? null" [fieldName]="'greenCluster'"
+                            [fieldType]="'number'" (valueChange)="onFieldValueChange('greenCluster', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>צבע אקלים:</label>
+                        <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
+                            [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-sections-horizontal">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <label>סך בטחונות:</label>
+                        <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"
+                            [fieldName]="'totalCollateral'" [fieldType]="'currency'"
+                            (valueChange)="onFieldValueChange('totalCollateral', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סך סולו:</label>
+                        <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
+                            [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סיכון אשראי חוץ מאזני:</label>
+                        <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
+                            [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
+                            (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
+                        </app-editable-field>
+                    </div>
+                    <div class="detail-item">
+                        <label>סה"כ סיכון אשראי:</label>
+                        <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null"
+                            [fieldName]="'totalCreditRisk'" [fieldType]="'currency'" [disabled]="true">
+                        </app-editable-field>
+                    </div>
+                </div>
+            </div>
         </div>
+    </p-panel>
 
 
-        <!-- Details Panel -->
-        @if (selectedRow()) {
-        <p-panel header="{{selectedRow()?.accountName}}">
-            <div style="display: flex; gap: 20px; height: 150px; max-height: 150px; justify-content: space-between;">
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>קלאסטר אשראי אדום:</label>
-                            <app-editable-field [value]="selectedRow()?.creditRedCluster ?? null"
-                                [fieldName]="'creditRedCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('creditRedCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון פיזי שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootPhysicalRisk ?? null"
-                                [fieldName]="'rootPhysicalRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootPhysicalRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון מעבר שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootTransferRisk ?? null"
-                                [fieldName]="'rootTransferRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootTransferRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>משקל סיכון פיזי שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootPhysicalRiskScale ?? null"
-                                [fieldName]="'rootPhysicalRiskScale'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootPhysicalRiskScale', $event)">
-                            </app-editable-field>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>משקל סיכון מעבר שורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootTransferRiskScale ?? null"
-                                [fieldName]="'rootTransferRiskScale'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootTransferRiskScale', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>שקלול רמת הסיכון השורשי:</label>
-                            <app-editable-field [value]="selectedRow()?.rootRiskLevelWeight ?? null"
-                                [fieldName]="'rootRiskLevelWeight'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('rootRiskLevelWeight', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון שיורי:</label>
-                            <app-editable-field [value]="selectedRow()?.residualRisk ?? null"
-                                [fieldName]="'residualRisk'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('residualRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>תאריך תוקף סיכון שיורי:</label>
-                            <span>{{ formatDate(selectedRow()?.residualRiskDate) }}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>איכות ניהול:</label>
-                            <app-editable-field [value]="selectedRow()?.qualityManagement ?? null"
-                                [fieldName]="'qualityManagement'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('qualityManagement', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>קלאסטר שחור:</label>
-                            <app-editable-field [value]="selectedRow()?.blackCluster ?? null"
-                                [fieldName]="'blackCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('blackCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>קלאסטר ירוק:</label>
-                            <app-editable-field [value]="selectedRow()?.greenCluster ?? null"
-                                [fieldName]="'greenCluster'" [fieldType]="'number'"
-                                (valueChange)="onFieldValueChange('greenCluster', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>צבע אקלים:</label>
-                            <p-tag [value]="getClimateColorLabel(selectedRow()?.climateColor)"
-                                [severity]="getClimateColorSeverity(selectedRow()?.climateColor)">
-                            </p-tag>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-sections-horizontal">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>סך בטחונות:</label>
-                            <app-editable-field [value]="selectedRow()?.totalCollateral ?? null"
-                                [fieldName]="'totalCollateral'" [fieldType]="'currency'"
-                                (valueChange)="onFieldValueChange('totalCollateral', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סך סולו:</label>
-                            <app-editable-field [value]="selectedRow()?.totalSolo ?? null" [fieldName]="'totalSolo'"
-                                [fieldType]="'currency'" (valueChange)="onFieldValueChange('totalSolo', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סיכון אשראי חוץ מאזני:</label>
-                            <app-editable-field [value]="selectedRow()?.creditOffBalanceSheetRisk ?? null"
-                                [fieldName]="'creditOffBalanceSheetRisk'" [fieldType]="'currency'"
-                                (valueChange)="onFieldValueChange('creditOffBalanceSheetRisk', $event)">
-                            </app-editable-field>
-                        </div>
-                        <div class="detail-item">
-                            <label>סה"כ סיכון אשראי:</label>
-                            <app-editable-field [value]="selectedRow()?.totalCreditRisk ?? null"
-                                [fieldName]="'totalCreditRisk'" [fieldType]="'currency'" [disabled]="true">
-                            </app-editable-field>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </p-panel>
+    } @else {
+    <p-panel header="פרטי השורה">
+        <div class="no-selection">
+            <i class="pi pi-info-circle"></i>
+            <p>בחר שורה מהטבלה כדי לראות פרטים</p>
+        </div>
+    </p-panel>
+    }
 
 
-        } @else {
-        <p-panel header="פרטי השורה">
-            <div class="no-selection">
-                <i class="pi pi-info-circle"></i>
-                <p>בחר שורה מהטבלה כדי לראות פרטים</p>
-            </div>
-        </p-panel>
-        }
+    <p-panel>
+        <p-accordion>
+            <!-- מפת חום -->
+            <p-accordion-panel value="0">
+                <p-accordion-header>מפת חום</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="heatMapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                        scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>קלאסטר אדום</th>
+                                <th>סיכון פיזי שורשי</th>
+                                <th>סיכון מעבר שורשי</th>
+                                <th>משקל רמת סיכון שורשי</th>
+                                <th>סיכון שיורי ממוצע</th>
+                                <th>איכות ניהול</th>
+                                <th>סיכון אשראי מאזני</th>
+                                <th>סיכון אשראי חוץ מאזני</th>
+                                <th>סה"כ סיכון אשראי</th>
+                                <th>סה"כ סיכון אשראי (%)</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>{{ row.redClusterDescription }}</td>
+                                <td>{{ row.rootPhysicalRisk }}</td>
+                                <td>{{ row.rootTransferRisk }}</td>
+                                <td>{{ row.rootRiskLevelWeight }}</td>
+                                <td>{{ row.residualRiskAverage }}</td>
+                                <td>{{ row.qualityManagement }}</td>
+                                <td>{{ row.creditBalanceSheetRisk }}</td>
+                                <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ row.totalCreditRisk }}</td>
+                                <td>{{ row.totalCreditRiskRate }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="9" class="text-center">סה"כ</td>
+                                <td>{{ totalHeatMap()?.totalCreditRiskRate }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    <div class="empty-message">
+                                        <i class="pi pi-info-circle"></i>
+                                        <p>לא נמצאו נתונים להצגה</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-accordion-content>
+            </p-accordion-panel>
+
+            <!-- אשראי ירוק -->
+            <p-accordion-panel value="1">
+                <p-accordion-header>אשראי ירוק</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="greenCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                        scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>קלאסטר ירוק</th>
+                                <th>סיכון פיזי שורשי</th>
+                                <th>סיכון מעבר שורשי</th>
+                                <th>משקל רמת סיכון שורשי</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>{{ row.greenClusterDescription }}</td>
+                                <td>{{ row.creditBalanceSheetRisk }}</td>
+                                <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ row.totalCreditRisk }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="1" class="text-center">סה"כ</td>
+                                <td>{{ totalGreenCredit()?.creditBalanceSheetRisk }}</td>
+                                <td>{{ totalGreenCredit()?.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ totalGreenCredit()?.totalCreditRisk }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <div class="empty-message">
+                                        <i class="pi pi-info-circle"></i>
+                                        <p>לא נמצאו נתונים להצגה</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-accordion-content>
+            </p-accordion-panel>
+
+            <!-- אשראי שחור -->
+            <p-accordion-panel value="2">
+                <p-accordion-header>אשראי שחור</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="blackCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                        scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>קלאסטר שחור</th>
+                                <th>יתרת סיכון אשראי מאזני ללא משכנתאות באש"ח</th>
+                                <th>יתרת סיכון אשראי חוץ מאזני ללא משכנתאות באש"ח</th>
+                                <th>יתרת סיכון אשראי כולל ללא משכנתאות באש"ח</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>{{ row.blackClusterDescription }}</td>
+                                <td>{{ row.creditBalanceSheetRisk }}</td>
+                                <td>{{ row.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ row.totalCreditRisk }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="1" class="text-center">סה"כ</td>
+                                <td>{{ totalBlackCredit()?.creditBalanceSheetRisk }}</td>
+                                <td>{{ totalBlackCredit()?.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ totalBlackCredit()?.totalCreditRisk }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" class="text-center">סה"כ</td>
+                                <td>{{ totalRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}</td>
+                                <td>{{ totalRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk }}</td>
+                                <td>{{ totalRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" class="text-center">סה"כ</td>
+                                <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}
+                                </td>
+                                <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk
+                                    }}
+                                </td>
+                                <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <div class="empty-message">
+                                        <i class="pi pi-info-circle"></i>
+                                        <p>לא נמצאו נתונים להצגה</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-accordion-content>
+            </p-accordion-panel>
+
+            <!-- ICAAP -->
+            <p-accordion-panel value="3">
+                <p-accordion-header>ICAAP</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="icaapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                        scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th colspan="3" class="text-center">סיכון אשראי שורשי</th>
+                                <th colspan="3" class="text-center">סיכון אקלים שיורי</th>
+                            </tr>
+                            <tr>
+                                <th>שיעור סיכון מירבי</th>
+                                <th>סיכון אשראי מאזני שורשי</th>
+                                <th>סיכון אשראי חוץ מאזני שורשי</th>
+                                <th>סה"כ סיכון אשראי שורשי</th>
+                                <th>סיכון אשראי מינימלי שורשי</th>
+                                <th>סיכון אשראי חוץ מינימלי שורשי</th>
+                                <th>סה"כ סיכון אשראי מינימלי שורשי</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>עד {{ row.maxRiskRate }}</td>
+                                <td>{{ row.rootCreditBalanceSheetRisk }}</td>
+                                <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
+                                <td>{{ row.rootTotalCreditRiskRate }}</td>
+                                <td>{{ row.residualCreditBalanceSheetRisk }}</td>
+                                <td>{{ row.residualCreditOffBalanceSheetRisk }}</td>
+                                <td>{{ row.residualTotalCreditRiskRate }}</td>
+                            </tr>
+                        </ng-template>
 
 
-        <p-panel>
-            <p-accordion>
-                <!-- מפת חום -->
-                <p-accordion-panel value="0">
-                    <p-accordion-header>מפת חום</p-accordion-header>
-                    <p-accordion-content>
-                        <p-table [value]="heatMapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>קלאסטר אדום</th>
-                                    <th>סיכון פיזי שורשי</th>
-                                    <th>סיכון מעבר שורשי</th>
-                                    <th>משקל רמת סיכון שורשי</th>
-                                    <th>סיכון שיורי ממוצע</th>
-                                    <th>איכות ניהול</th>
-                                    <th>סיכון אשראי מאזני</th>
-                                    <th>סיכון אשראי חוץ מאזני</th>
-                                    <th>סה"כ סיכון אשראי</th>
-                                    <th>סה"כ סיכון אשראי (%)</th>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>{{ row.redClusterDescription }}</td>
-                                    <td>{{ row.rootPhysicalRisk }}</td>
-                                    <td>{{ row.rootTransferRisk }}</td>
-                                    <td>{{ row.rootRiskLevelWeight }}</td>
-                                    <td>{{ row.residualRiskAverage }}</td>
-                                    <td>{{ row.qualityManagement }}</td>
-                                    <td>{{ row.creditBalanceSheetRisk }}</td>
-                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.totalCreditRisk }}</td>
-                                    <td>{{ row.totalCreditRiskRate }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="footer">
-                                <tr>
-                                    <td colspan="9" class="text-center">סה"כ</td>
-                                    <td>{{ totalHeatMap()?.totalCreditRiskRate }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="10" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </p-accordion-content>
-                </p-accordion-panel>
-
-                <!-- אשראי ירוק -->
-                <p-accordion-panel value="1">
-                    <p-accordion-header>אשראי ירוק</p-accordion-header>
-                    <p-accordion-content>
-                        <p-table [value]="greenCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>קלאסטר ירוק</th>
-                                    <th>סיכון פיזי שורשי</th>
-                                    <th>סיכון מעבר שורשי</th>
-                                    <th>משקל רמת סיכון שורשי</th>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>{{ row.greenClusterDescription }}</td>
-                                    <td>{{ row.creditBalanceSheetRisk }}</td>
-                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="footer">
-                                <tr>
-                                    <td colspan="1" class="text-center">סה"כ</td>
-                                    <td>{{ totalGreenCredit()?.creditBalanceSheetRisk }}</td>
-                                    <td>{{ totalGreenCredit()?.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ totalGreenCredit()?.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="4" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </p-accordion-content>
-                </p-accordion-panel>
-
-                <!-- אשראי שחור -->
-                <p-accordion-panel value="2">
-                    <p-accordion-header>אשראי שחור</p-accordion-header>
-                    <p-accordion-content>
-                        <p-table [value]="blackCreditRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>קלאסטר שחור</th>
-                                    <th>יתרת סיכון אשראי מאזני ללא משכנתאות באש"ח</th>
-                                    <th>יתרת סיכון אשראי חוץ מאזני ללא משכנתאות באש"ח</th>
-                                    <th>יתרת סיכון אשראי כולל ללא משכנתאות באש"ח</th>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>{{ row.blackClusterDescription }}</td>
-                                    <td>{{ row.creditBalanceSheetRisk }}</td>
-                                    <td>{{ row.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="footer">
-                                <tr>
-                                    <td colspan="1" class="text-center">סה"כ</td>
-                                    <td>{{ totalBlackCredit()?.creditBalanceSheetRisk }}</td>
-                                    <td>{{ totalBlackCredit()?.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ totalBlackCredit()?.totalCreditRisk }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1" class="text-center">סה"כ</td>
-                                    <td>{{ totalRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}</td>
-                                    <td>{{ totalRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk }}</td>
-                                    <td>{{ totalRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="1" class="text-center">סה"כ</td>
-                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditBalanceSheetRisk }}
-                                    </td>
-                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.creditOffBalanceSheetRisk
-                                        }}
-                                    </td>
-                                    <td>{{ totalCommericialRiskWeightedAssetsPercentage()?.totalCreditRisk }}</td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="4" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </p-accordion-content>
-                </p-accordion-panel>
-
-                <!-- ICAAP -->
-                <p-accordion-panel value="3">
-                    <p-accordion-header>ICAAP</p-accordion-header>
-                    <p-accordion-content>
-                        <p-table [value]="icaapRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th></th>
-                                    <th colspan="3" class="text-center">סיכון אשראי שורשי</th>
-                                    <th colspan="3" class="text-center">סיכון אקלים שיורי</th>
-                                </tr>
-                                <tr>
-                                    <th>שיעור סיכון מירבי</th>
-                                    <th>סיכון אשראי מאזני שורשי</th>
-                                    <th>סיכון אשראי חוץ מאזני שורשי</th>
-                                    <th>סה"כ סיכון אשראי שורשי</th>
-                                    <th>סיכון אשראי מינימלי שורשי</th>
-                                    <th>סיכון אשראי חוץ מינימלי שורשי</th>
-                                    <th>סה"כ סיכון אשראי מינימלי שורשי</th>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>עד {{ row.maxRiskRate }}</td>
-                                    <td>{{ row.rootCreditBalanceSheetRisk }}</td>
-                                    <td>{{ row.rootCreditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.rootTotalCreditRiskRate }}</td>
-                                    <td>{{ row.residualCreditBalanceSheetRisk }}</td>
-                                    <td>{{ row.residualCreditOffBalanceSheetRisk }}</td>
-                                    <td>{{ row.residualTotalCreditRiskRate }}</td>
-                                </tr>
-                            </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <div class="empty-message">
+                                        <i class="pi pi-info-circle"></i>
+                                        <p>לא נמצאו נתונים להצגה</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-accordion-content>
+            </p-accordion-panel>
 
 
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </p-accordion-content>
-                </p-accordion-panel>
+            <!-- אשראי בסיכון אקלימי מוגבר -->
+            <p-accordion-panel value="4">
+                <p-accordion-header>אשראי בסיכון אקלימי מוגבר</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="highCreditRiskRows()" [paginator]="true" [rows]="10" [scrollable]="true"
+                        scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>תיאור קלאסטר אדום</th>
+                                <th>שקלול רמת הסיכון השורשי</th>
+                                <th>מספר חברות</th>
+                                <th>רמת הסיכון השיורי ממוצע משוקלל</th>
+                                <th>סיכון אשראי מאזני באש"ח</th>
+                                <th>סיכון אשראי חוץ מאזני באש"ח</th>
+                                <th>סה"כ סיכון אשראי באש"ח</th>
+                                <th>סה"כ בטחונות באש"ח</th>
+                                <th>סה"כ סולו באש"ח משכנתאות</th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
 
+                        <ng-template pTemplate="body" let-row>
+                            <tr>
+                                <td>{{row.redClusterDescription}}</td>
+                                <td>{{row.rootRisk}}</td>
+                                <td>{{row.companysNumber}}</td>
+                                <td>{{row.residualRisk}}</td>
+                                <td>{{row.creditBalanceSheetRisk}}</td>
+                                <td>{{row.creditOffBalanceSheetRisk}}</td>
+                                <td>{{row.totalCreditRisk}}</td>
+                                <td>{{row.totalCollateral}}</td>
+                                <td>{{row.totalSolo}}</td>
+                                <td></td>
+                            </tr>
+                        </ng-template>
 
-                <!-- אשראי בסיכון אקלימי מוגבר -->
-                <p-accordion-panel value="4">
-                    <p-accordion-header>אשראי בסיכון אקלימי מוגבר</p-accordion-header>
-                    <p-accordion-content>
-                        <p-table [value]="highCreditRiskRows()" [paginator]="true" [rows]="10" [scrollable]="true"
-                            scrollDirection="both" styleClass="p-datatable-striped p-datatable-sm">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>תיאור קלאסטר אדום</th>
-                                    <th>שקלול רמת הסיכון השורשי</th>
-                                    <th>מספר חברות</th>
-                                    <th>רמת הסיכון השיורי ממוצע משוקלל</th>
-                                    <th>סיכון אשראי מאזני באש"ח</th>
-                                    <th>סיכון אשראי חוץ מאזני באש"ח</th>
-                                    <th>סה"כ סיכון אשראי באש"ח</th>
-                                    <th>סה"כ בטחונות באש"ח</th>
-                                    <th>סה"כ סולו באש"ח משכנתאות</th>
-                                    <th></th>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="body" let-row>
-                                <tr>
-                                    <td>{{row.redClusterDescription}}</td>
-                                    <td>{{row.rootRisk}}</td>
-                                    <td>{{row.companysNumber}}</td>
-                                    <td>{{row.residualRisk}}</td>
-                                    <td>{{row.creditBalanceSheetRisk}}</td>
-                                    <td>{{row.creditOffBalanceSheetRisk}}</td>
-                                    <td>{{row.totalCreditRisk}}</td>
-                                    <td>{{row.totalCollateral}}</td>
-                                    <td>{{row.totalSolo}}</td>
-                                    <td></td>
-                                </tr>
-                            </ng-template>
-
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="9" class="text-center">
-                                        <div class="empty-message">
-                                            <i class="pi pi-info-circle"></i>
-                                            <p>לא נמצאו נתונים להצגה</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </p-accordion-content>
-                </p-accordion-panel>
-            </p-accordion>
-        </p-panel>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="9" class="text-center">
+                                    <div class="empty-message">
+                                        <i class="pi pi-info-circle"></i>
+                                        <p>לא נמצאו נתונים להצגה</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-accordion-content>
+            </p-accordion-panel>
+        </p-accordion>
+    </p-panel>
     }
 
 
