@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { StatusRow, SourceData } from '../../models/enums';
-import { CarbonFootprintRow } from '../../models/carbon-footprint.model';
 import { FilterField, FilterChangeEvent } from '../../form-controls/filter-field/filter-field';
 import { SharedService } from '../../services/shared.service';
 import { HttpService } from '../../services/http.service';
@@ -20,6 +19,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ChipModule } from 'primeng/chip';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
+import { EsgMainReportRow } from '../../models/esg.model';
 
 
 
@@ -79,7 +79,7 @@ export class EsgComponent {
   // Simple trigger to force re-evaluation when status row is changed
   private readonly statusRowChange = signal(0);
 
-  // Project Construction Financing data - filtered to exclude deleted and original rows
+  // ESG main report data - filtered to exclude deleted and original rows
   protected readonly esgMainReportRows = computed(() => {
     this.statusRowChange(); // Subscribe to trigger for reactivity
     const allRows = this.dataService.esgMainReport()?.esgMainReportRows || [];
@@ -89,7 +89,7 @@ export class EsgComponent {
     );
   });
 
-  // ESG main report data - filtered to exclude deleted and original rows
+  // ESG main report data - filtered to include changed rows
   protected readonly esgMainReportRowsChanged = computed(() => {
     this.statusRowChange(); // Subscribe to trigger for reactivity
     const allRows = this.dataService.esgMainReport()?.esgMainReportRows || [];
@@ -104,16 +104,16 @@ export class EsgComponent {
 
   
 
-  // Delete row method for project construction financing
-  protected deleteProjectConstructionRow(row: CarbonFootprintRow): void {
-    // Set the statusRow to Deleted (2)
+  // Delete row method for ESG main report
+  protected deleteEsgRow(row: EsgMainReportRow): void {
+    // Set the statusRow to Deleted
     row.statusRow = StatusRow.Deleted;
 
     // Trigger filter re-evaluation
     this.statusRowChange.update(val => val + 1);
   }
 
-  protected onValueChanged(row: CarbonFootprintRow): void {
+  protected onValueChanged(row: EsgMainReportRow): void {
     if (row.statusRow !== StatusRow.Deleted && row.statusRow !== StatusRow.New) {
       row.statusRow = StatusRow.Updated;
 
